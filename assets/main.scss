@@ -1,10 +1,13 @@
 ---
 ---
 
+@import "{{ site.theme }}";
+
 $color-slate: #4a5c66;
 $color-ocean: #00b8e6;
+$color-silver: #CCC;
 
-@import "{{ site.theme }}";
+@import "code";
 
 body {
   background-color: $color-slate;

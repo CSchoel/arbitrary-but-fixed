@@ -1,0 +1,108 @@
+/**
+ * Syntax highlighting styles, copied from minima
+ */
+$color-midnight: #334;
+$color-gravel: #777;
+$color-ketchup: #cf0202;
+$color-salmon: #ff7777;
+$color-beach: #eeeed4;
+$color-rust: #544;
+$color-nougat: #522;
+$color-red: #e00;
+$color-gray: #999;
+$color-silverback : #AAA;
+$color-concrete: #EEE;
+$color-mountain-lake: #68D;
+$color-deep-sea: #0aa;
+$color-ice: #00f0f0;
+$color-crimson: #dd1144;
+$color-lilac: #b070ff;
+$color-lavender: #dc00d9;
+$color-coral-red: #ff4141;
+$color-hyacinth-blue: #9c9cff;
+$color-steel: #BBB;
+$color-malachite: #00ea3d;
+$color-telecom: #EA00B0;
+
+pre,
+code {
+  @include relative-font-size(0.87);
+  font-family: "Roboto Mono", monospace;
+  border: 1px solid $color-gravel;
+  border-radius: 3px;
+  background-color: $color-midnight;
+}
+code {
+  padding-bottom:1px;
+  padding-top: 1px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.highlight {
+  background: transparent;
+  border: none;
+  .highlighter-rouge & {
+    background: $color-midnight;
+  }
+
+  .c     { color: $color-gravel; font-style: italic } // Comment
+  .err   { color: $color-ketchup; background-color: $color-salmon } // Error
+  .k     { font-weight: bold } // Keyword
+  .o     { font-weight: bold } // Operator
+  .cm    { color: $color-beach; font-style: italic } // Comment.Multiline
+  .cp    { color: $color-gravel; font-weight: bold } // Comment.Preproc
+  .c1    { color: $color-beach; font-style: italic } // Comment.Single
+  .cs    { color: $color-gravel; font-weight: bold; font-style: italic } // Comment.Special
+  .gd    { color: $color-silver; background-color: $color-rust } // Generic.Deleted
+  .gd .x { color: $color-silver; background-color: $color-nougat } // Generic.Deleted.Specific
+  .ge    { font-style: italic } // Generic.Emph
+  .gr    { color: $color-red } // Generic.Error
+  .gh    { color: $color-gravel } // Generic.Heading
+  .gi    { color: $color-silver; background-color: #dfd } // Generic.Inserted
+  .gi .x { color: $color-silver; background-color: #afa } // Generic.Inserted.Specific
+  .go    { color: $color-gray } // Generic.Output
+  .gp    { color: $color-silverback } // Generic.Prompt
+  .gs    { font-weight: bold } // Generic.Strong
+  .gu    { color: $color-concrete } // Generic.Subheading
+  .gt    { color: $color-red } // Generic.Traceback
+  .kc    { font-weight: bold } // Keyword.Constant
+  .kd    { font-weight: bold } // Keyword.Declaration
+  .kp    { font-weight: bold } // Keyword.Pseudo
+  .kr    { font-weight: bold } // Keyword.Reserved
+  .kt    { color: $color-mountain-lake; font-weight: bold } // Keyword.Type
+  .m     { color: $color-ocean } // Literal.Number
+  .s     { color: $color-crimson } // Literal.String
+  .na    { color: $color-ice } // Name.Attribute
+  .nb    { color: $color-lilac } // Name.Builtin
+  .nc    { color: $color-mountain-lake; font-weight: bold } // Name.Class
+  .no    { color: $color-ice } // Name.Constant
+  .ni    { color: $color-lavender } // Name.Entity
+  .ne    { color: $color-coral-red; font-weight: bold } // Name.Exception
+  .nf    { color: $color-coral-red; font-weight: bold } // Name.Function
+  .nn    { color: $color-silverback } // Name.Namespace
+  .nt    { color: $color-hyacinth-blue } // Name.Tag
+  .nv    { color: $color-ice } // Name.Variable
+  .ow    { font-weight: bold } // Operator.Word
+  .w     { color: $color-steel } // Text.Whitespace
+  .mf    { color: $color-ocean } // Literal.Number.Float
+  .mh    { color: $color-ocean } // Literal.Number.Hex
+  .mi    { color: $color-ocean } // Literal.Number.Integer
+  .mo    { color: $color-ocean } // Literal.Number.Oct
+  .sb    { color: $color-crimson } // Literal.String.Backtick
+  .sc    { color: $color-crimson } // Literal.String.Char
+  .sd    { color: $color-crimson } // Literal.String.Doc
+  .s2    { color: $color-crimson } // Literal.String.Double
+  .se    { color: $color-crimson } // Literal.String.Escape
+  .sh    { color: $color-crimson } // Literal.String.Heredoc
+  .si    { color: $color-crimson } // Literal.String.Interpol
+  .sx    { color: $color-crimson } // Literal.String.Other
+  .sr    { color: $color-malachite } // Literal.String.Regex
+  .s1    { color: $color-crimson } // Literal.String.Single
+  .ss    { color: $color-telecom } // Literal.String.Symbol
+  .bp    { color: $color-gravel } // Name.Builtin.Pseudo
+  .vc    { color: $color-ice } // Name.Variable.Class
+  .vg    { color: $color-ice } // Name.Variable.Global
+  .vi    { color: $color-ice } // Name.Variable.Instance
+  .il    { color: $color-ocean } // Literal.Number.Integer.Long
+}
