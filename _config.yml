@@ -24,6 +24,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  CSchoel
 
+googlefonts: Caveat|Noto+Sans:400,400i,700|Quicksand:300,400&amp;subset=greek,greek-ext,latin-ext
+
 # Build settings
 markdown: kramdown
 theme: minima
