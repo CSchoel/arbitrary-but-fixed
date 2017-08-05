@@ -5,9 +5,20 @@ date:   2017-08-03 16:51:28 +0200
 categories: jekyll update
 ---
 
+## A bit of background
+
+The first problem that I want to discuss in this blog deals with the implementation of mathematical models in the language [Modelica](http://modelica.org).
+
+For my PhD thesis I reimplemented a mathematical model of the human heart in Modelica.
+The main pacemaker of the heart is the sinus node.
+It will trigger a contraction at a certain base frequency which can be increased or decreased by signals from the autonomic nervous system.
+However, there is a threshold to this frequency which is given by the refractory period that has to pass after each signal until a new signal can be generated.
+
+Since the strength of a heart beat is (in part) determined by the amount of time that passed since the previous heart beat, I needed some kind of variable that stores the timestamp of the last beat.
+
 ## The Problem
 
-When you compile the following model, the OMC will fail with the message `Sorry - Support for Discrete Equation Systems is not yet implemented`.
+My first attempt to implement this variable was something along the lines of the following example.
 
 ```modelica
 model DiscreteEqMinimal
@@ -18,6 +29,8 @@ equation
   end when;
 end DiscreteEqMinimal;
 ```
+
+When you compile this model with the [OpenModelica](http://openmodelica.org) compiler, it fails with the message `Sorry - Support for Discrete Equation Systems is not yet implemented`.
 
 The context in which I originally encountered this error was the introduction of a refractory period. I needed a way to express that a signal would only be passed along if a certain amount of time had passed since the last signal.
 
