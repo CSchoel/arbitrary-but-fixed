@@ -25,6 +25,23 @@ body {
   font-family: Caveat, sans-serif;
   font-size: 50px;
 }
+.site-nav .page-link {
+  color: $color-ocean;
+}
+
+.footer-col-wrapper, .post-meta {
+  color: $color-silverback;
+}
+
+a {
+  color: $color-ocean;
+}
+a:hover {
+  color: lighten($color-ocean, 20%);
+}
+a:visited {
+  color: darken($color-ocean, 10%);
+}
 
 h1,h2,h3,h4,h5 {
   color: $color-ocean;
