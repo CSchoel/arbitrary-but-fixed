@@ -12,12 +12,17 @@ So if you have a question, or a better solution, or just want to chat with someo
 
 ## Myself
 
-I am a teacher and PhD student at the [Technische Hochschule Mittelhessen](http://thm.de) - a university of applied sciences in Germany.
-I study the benefits of the language [Modelica](http://modelica.org/) for the modeling of complex biological systems (but I usually have a quite large pile of side projects in my spare time).
 I got my Master's degree in computer science from the Technical University Kaiserslautern with a focus on machine learning.
+Currently, I am a teacher and PhD student at the [Technische Hochschule Mittelhessen](http://thm.de) - a university of applied sciences in Gießen (Germany) - where I study the benefits of the language [Modelica](http://modelica.org/) for the modeling of complex biological systems.
+
+For me, a good day is a day where I learned something new.
+Therefore I tend to have a quite large pile of side projects both related to my work and my personal interests.
+
+In this blog you may read stories from both my research and my spare time.
 
 {% comment %}
 TODO:
 - pretty interesting?
 - teacher?
+- challenge myself?
 {% endcomment %}
