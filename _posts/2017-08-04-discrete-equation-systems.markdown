@@ -10,7 +10,7 @@ categories: jekyll update
 The first problem that I want to discuss in this blog deals with the implementation of mathematical models in the language [Modelica](http://modelica.org).
 
 For my PhD thesis I reimplemented a mathematical model of the human heart in Modelica.
-The problem occured in the sinus node, the main pacemaker of the heart.
+The problem occurred in the sinus node, the main pacemaker of the heart.
 The sinus node triggers a contraction at a certain base frequency which can be increased or decreased by signals from the autonomic nervous system.
 However, there is a threshold to this frequency which is given by the refractory period that has to pass before a new signal can be generated.
 
@@ -63,8 +63,8 @@ That is it. The simple use of `pre()` solves the ambiguous contradictory state b
 
 ## Lesson learned
 
-As always, you have to thing like a mathematician when building modelica models, not as a computer scientist.
-Events that are triggered by `when` can íntroduce discontinuities, but they do not invalidate the mathematical rules that a variable cannot have two values at the same time.
+As always, you have to thing like a mathematician when building Modelica models, not as a computer scientist.
+Events that are triggered by `when` can introduce discontinuities, but they do not invalidate the mathematical rules that a variable cannot have two values at the same time.
 At an event there are always two states: The current state, right at the time of the event; and the previous state, an infinitesimal amount of time *before* the event.
 
 So, if anything goes wrong in a `when`-equation, and especially if you encounter the aforementioned error message, ask yourself for each of your variables: Do you mean `x` or should it actually be `pre(x)`.
