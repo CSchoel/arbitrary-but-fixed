@@ -14,6 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Arbitrary but fixed
+logo: assets/Logo2.png
 author: Chirstopher Schölzel
 email: christopher.schoelzel@mni.thm.de
 description: > # this means to ignore newlines until "baseurl:"
@@ -27,7 +28,7 @@ github_username:  CSchoel
 
 highlighter: pygments
 
-googlefonts: Caveat|Noto+Sans|Roboto+Mono:400,400i,700|Quicksand:300,400&amp;subset=greek,greek-ext,latin-ext
+googlefonts: Noto+Sans|Roboto+Mono:400,400i,700|Quicksand:300,400&amp;subset=greek,greek-ext,latin-ext
 
 # Build settings
 markdown: redcarpet
@@ -35,6 +36,8 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-email-protect
+exclude:
+  - resources
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
