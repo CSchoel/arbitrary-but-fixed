@@ -19,7 +19,7 @@ author: Chirstopher Schölzel
 email: christopher.schoelzel@mni.thm.de
 description: > # this means to ignore newlines until "baseurl:"
   I share fixes to problems that I encounter on the way to my PhD.
-  Topics may seem arbitrary, but are somewhat centered around computer science
+  Topics are arbitrary, but somewhat centered around computer science
   and systems biology.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
