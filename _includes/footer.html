@@ -33,6 +33,12 @@
             {% include icon-twitter.html username=site.twitter_username %}
           </li>
           {% endif %}
+
+          {% if site.rg_username %}
+          <li>
+            {% include icon-rg.html username=site.rg_username displayname=site.rg_displayname %}
+          </li>
+          {% endif %}
         </ul>
       </div>
 
