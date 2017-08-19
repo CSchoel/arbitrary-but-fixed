@@ -27,6 +27,12 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  CSchoel
 rg_username: Christopher_Schoelzel2
 rg_displayname: C. Schölzel
+lang: en_US
+social:
+  name: Christopher Schölzel
+  links:
+    - https://github.com/CSchoel
+    - https://www.researchgate.net/profile/Christopher_Schoelzel2
 
 highlighter: pygments
 
@@ -38,6 +44,8 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-email-protect
+  - jekyll-sitemap
+  - jekyll-seo-tag
 exclude:
   - resources
 
