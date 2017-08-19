@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Arbitrary but fixed
-logo: assets/Logo2.png
+logo: assets/arbitrary_but_fixed.png
 author: Chirstopher Schölzel
 email: christopher.schoelzel@mni.thm.de
 description: > # this means to ignore newlines until "baseurl:"
