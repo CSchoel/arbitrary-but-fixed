@@ -3,7 +3,7 @@ layout: post
 title:  "Discrete equation systems in OpenModelica"
 description: >
     When OpenModelica complains that "Support for Discrete Equation Systems is not yet implemented", your problem may have actually be that you don't distinguish properly between variable values before and after an event.
-date:   2017-08-03 16:51:28 +0200
+date:   2017-08-20 21:16:00 +0200
 categories: jekyll update
 ---
 
