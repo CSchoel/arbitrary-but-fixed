@@ -65,7 +65,7 @@ That is it. The simple use of `pre()` solves the ambiguous contradictory state b
 
 ## Lesson learned
 
-As always, you have to thing like a mathematician when building Modelica models, not as a computer scientist.
+As always, you have to think like a mathematician when building Modelica models, not as a computer scientist.
 Events that are triggered by `when` can introduce discontinuities, but they do not invalidate the mathematical rules that a variable cannot have two values at the same time.
 At an event there are always two states: The current state, right at the time of the event; and the previous state, an infinitesimal amount of time *before* the event.
 
