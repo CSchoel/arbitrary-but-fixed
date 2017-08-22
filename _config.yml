@@ -34,12 +34,12 @@ social:
     - https://github.com/CSchoel
     - https://www.researchgate.net/profile/Christopher_Schoelzel2
 
-highlighter: pygments
+highlighter: rouge
 
 googlefonts: Noto+Sans|Roboto+Mono:400,400i,700|Quicksand:300,400&amp;subset=greek,greek-ext,latin-ext
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
