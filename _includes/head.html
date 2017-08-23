@@ -22,7 +22,7 @@ may need to be updated when you update the theme.
 
   {% comment %} add google fonts {% endcomment %}
   {% if site.googlefonts %}
-  <link href="https://fonts.googleapis.com/css?family={{ site.googlefonts }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family={{ site.googlefonts | uri_escape }}" rel="stylesheet">
   {% endif %}
 
   {% if jekyll.environment == 'production' and site.google_analytics %}
