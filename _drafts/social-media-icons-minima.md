@@ -1,14 +1,14 @@
 ---
 layout: post
-title:  "Spurious extra space after social media icons in Minima theme"
+title:  "Spurious extra space after social media icons in Jekyll's Minima theme"
 description: >
-    The current version of the minima theme for jekyll has some additional space between the social media icons and the account name that is not specified in the stylesheet. The reason for this is simple, but not obvious.
+    The current version of the Minima theme for Jekyll has some additional space between the social media icons and the account name that is not specified in the stylesheet. The reason for this is simple, but not obvious.
 date:   2017-08-20 21:16:00 +0200
 categories:
     - web design
 ---
 
-When I created this blog, I wanted to add some small changes to the default theme called Minima.
+When I created this blog, I wanted to add some small changes to the default Jekyll theme called Minima.
 One of these changes was that I added an additional social media link for my ResearchGate account.
 I created a small image for the logo and added it to the template with the same markup as the other icons.
 
@@ -28,7 +28,7 @@ And this is my template for integrating a ResearchGate account:
 ```
 {% endraw %}
 
-Should work out OK, right? We have the CSS-class `icon` for padding and positioning relative to the account name and the image is 16x16 pixels, just as the SVG for the Github icon.
+The only difference is the use of an `<ìmg>` tag instead of the `<span>` that surrounds the SVG file. We have the CSS-class `icon` for padding and positioning relative to the account name and the image is 16x16 pixels, just as the SVG for the Github icon. So this should work out fine, right?
 
 However, the result actually looked like this:
 
@@ -38,7 +38,7 @@ However, the result actually looked like this:
     </span><span class="username">CSchoel</span></a>
   </li>
   <li>
-    <a href="https://www.researchgate.net/profile/Christopher_Schoelzel2"><img class="icon icon--rg" src="/arbitrary-but-fixed/assets/rg.png" alt="Research gate"/><span class="username">C. Schölzel</span></a>
+    <a href="https://www.researchgate.net/profile/Christopher_Schoelzel2"><img class="icon icon--rg" src="{{ "/assets/rg.png" | relative_url }}" alt="Research gate"/><span class="username">C. Schölzel</span></a>
   </li>  
 </ul>
 
@@ -48,13 +48,13 @@ There is more space after the Github icon than after the ResearchGate icon.
 
 Where does this additional space come from? It has to be some margin or padding of one of the elements, right?
 Wrong again.
-The `<svg>`-element is 16x16 pixel wide as it should be and the only margin or padding involved are 10 pixels of padding to the right of the `<span>` element surrounding the Github icon and the `<img>` element for the ResearchGate icon.
+The `<svg>` element is 16x16 pixel wide as it should be and the only margin or padding involved are 10 pixels of padding to the right of the `<span>` element surrounding the Github icon and the `<img>` element for the ResearchGate icon.
 The problem is that somehow the actual *content width* of the `<span>` element is about 4 pixels larger than it should be (depending on the Browser).
 
 ## Newlines don't matter in HTML - except when they do
 
 The reason for the spurious space is an innocent newline character at the end of the SVG file for the Github icon.
-We are trained to ignore newline characters when it comes to HTML, but they can matter in a horizontal context.
+We conditioned ourselves to ignore newline characters when it comes to HTML, but they can matter in a horizontal context.
 
 This
 
