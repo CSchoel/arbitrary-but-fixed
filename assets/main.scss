@@ -61,3 +61,14 @@ h1,h2,h3,h4,h5 {
 .icon svg {
   vertical-align: baseline;
 }
+
+.skip-main {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+.skip-main:focus {
+  opacity: 1;
+}

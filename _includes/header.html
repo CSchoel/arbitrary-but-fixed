@@ -1,6 +1,7 @@
 <header class="site-header">
 
   <div class="wrapper">
+      <a class="skip-main" href="#main">Skip to main content</a>
     {% assign default_paths = site.pages | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
     {% if site.logo %}
