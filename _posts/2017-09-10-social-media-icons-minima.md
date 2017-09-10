@@ -3,7 +3,7 @@ layout: post
 title:  "Spurious extra space after social media icons in Jekyll's Minima theme"
 description: >
     The current version of the Minima theme for Jekyll has some additional space between the social media icons and the account name that is not specified in the stylesheet. The reason for this is simple, but not obvious.
-date:   2017-08-20 21:16:00 +0200
+date:   2017-09-10 21:33:00 +0200
 categories:
     - web design
 ---
