@@ -21,8 +21,8 @@ description: > # this means to ignore newlines until "baseurl:"
   I share fixes to problems that I encounter on the way to my PhD.
   Topics are arbitrary, but somewhat centered around computer science
   and systems biology.
-baseurl: "/arbitrary-but-fixed" # the subpath of your site, e.g. /blog
-url: "https://cschoel.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://www.arbitrary-but-fixed.net" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  CSchoel
 rg_username: Christopher_Schoelzel2
