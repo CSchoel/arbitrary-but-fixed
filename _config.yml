@@ -46,6 +46,7 @@ plugins:
   - jekyll-email-protect
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jemoji
 exclude:
   - resources
   - Gemfile
