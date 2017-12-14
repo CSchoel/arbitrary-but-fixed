@@ -175,11 +175,57 @@ On the other hand, this behavior can hide errors.
 Consider the following example file `test.java`:
 
 ```java
-void foo() {
+float foo() {
     int x = 10;
-    y += x;
+    return f(x);
+}
+float bar() {
+    int x;
+    return f(x);
 }
 ```
 
+```
+jshell> /open test.java
+|  Error:
+|  cannot find symbol
+|    symbol:   method f(int)
+|      return f(x);
+|             ^
+|  Error:
+|  variable x might not have been initialized
+|      return f(x);
+|               ^
+```
+
+This is a nice example, because I confused myself when writing it.
+It looks like the first function definition fails because of the `cannot find symbol` error and the second one fails because of the uninitialized variable `x`.
+However, if you paste the code directly in the JShell, you will see that actually the first function definition works but remains incomplete and both errors belong ot the second definition.
+
+```
+jshell> float foo() {
+   ...>     int x = 10;
+   ...>     return f(x);
+   ...> }
+|  created method foo(), however, it cannot be invoked until method f(int) is de
+clared
+
+jshell> float bar() {
+   ...>     int x;
+   ...>     return f(x);
+   ...> }
+|  Error:
+|  cannot find symbol
+|    symbol:   method f(int)
+|      return f(x);
+|             ^
+|  Error:
+|  variable x might not have been initialized
+|      return f(x);
+|               ^
+```
+
+The JShell swallows all information about a file except for the actual errors and print commands.
+Since the semantics of opening a file is that of subsequently typing all the snippets in the file in the JShell, ...
 
 ## One final oddness: Class names
