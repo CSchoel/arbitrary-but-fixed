@@ -12,3 +12,370 @@ categories:
     - instruction
     - german
 ---
+
+For my course in algorithms and datastructures in summer semester 2017 I knew that I would not have the time to create both a completely fresh set of slides and a sufficient amount of mandatory exercises - let alone enough bonus exercises for the gamification concept that I had in mind.
+
+My solution was to hire a lot of tutors and let *them* create the exercises.
+I knew they could do it, since they were among the best students that I met in my previous semesters, but the task remains quite hard.
+Especially since it is not so easy to define what makes one exercise good and another exercise bad.
+
+For this purpose I chose to invest the time to write a tutorial.
+I would like to share the result with you here.
+The original version was of course in german, but I did my best to translate it to english.
+
+
+## 0. Introduction
+
+The creation of good exercise descriptions is among the hardest tasks of a teacher.
+To be able to *create* an exercise, you need to have a much deeper understanding of the content than what is required to *solve* the exercise.
+Usually you will achieve such a deep understanding only at the end of your studies, when you can look back at the topic with the knowledge that you have gained of all the surrounding areas.
+Yet there are some rules and techniques that may help.
+
+With this document I want to give you my best shot at creating a "tutorial" on how to create good exercises.
+It is based on my own experience and ideals, which certainly are not universally valid for everybody.
+I still hope that they may serve as an impulse for tutors and teachers that have no or only little experience in this regard.
+
+***
+
+## 1. Preliminary thoughts
+
+### 1.1. What is a *good* exercise?
+
+A good exercise...
+
+* ... helps to understand the content instead of being just a check for correct understanding.
+* ... clarifies the current lecture segment and prepares the student for the next segment.
+* ... is formulated precisely without any ambiguities.
+* ... is easy to comprehend.
+* ... uses the same terms and definitions as the lecture.
+* ... requires an understanding of the fundamental concepts, but not a replication of exact formulations, anecdotal knowledge, or individual opinions of the creator.
+* ... is fun.
+* ... is challenging, but not beyond the capabilities of students.
+* ... is always only *good* for a certain group of students.
+
+### 1.2. What should be the exercise type?
+
+In general, we distinguish three types of exercises in teaching:
+
+* **Reproduction exercises** only require to recall memorized knowledge.
+* **application exercises** require the application of acquired techniques to a concrete sample case.
+  It is not required to customize the technique.
+  It simply suffices to act according to the memorized instructions.
+* **transfer exercises** require to combine multiple techniques or to customize a technique so that it is applicable in the given situation.
+
+This is an extremely simplified classification that is based on much more complicated models of human thinking and understanding from psychology.
+It helps to coarsely determine in which area the exercise should be located.
+A good exercise sheet usually begins with some few reproduction exercises, consists mainly of application exercises and also contains at least one transfer exercise.
+
+### 1.3. What are the skills that the exercise should convey?
+
+When creating an exercise, you should first ask yourself: "Why do I want my students to solve this exercise?"
+If you do not know what you want to convey with the exercise it is hard to transport this unknown skills just by gut feeling.
+
+Each lecture has it's learning goals and/or a list of skills that the students should acquire.
+A good exercise is directly connected to at least one of these learning goals.
+This does not mean that you have to slavishly constrict yourself to one slide that you try to turn in an exercise.
+Most of the time it is even better if you can create an exercise that connects the knowledge from previous weeks with the knowledge that is currently covered in the lecture.
+This is of course only possible if the exercise does not become too large or too confusing that way.
+
+In any case you should just shortly note (with paper and pencil or in a text file) in bullet points what the exercise is about, before you start writing it.
+
+### 1.4. What level of knowledge can be assumed?
+
+If you think about what you want to teach your students you often already have beautiful ideas in mind that can showcase the application of these concepts.
+However, these ideas are often not practical, because you cannot assume your own level of knowledge, but only that of your students.
+
+Again it helps to actively think and take notes about the skills that your students (should) already possess.
+You first assemble the tools that are available and *then* you start thinking about what you, or your students, can build with them.
+
+Sometimes it is perfectly reasonable to introduce a new tool in the exercise description.
+You should be able to explain this tool well enough with only a few sentences (and preferably with an example), so that your students can really understand and use it without any further help.
+Alternatively it is also possible to split such an exercise in two parts:
+"Research technique X and then apply it to problem Y."
+
+### 1.5. How much time is the exercise allowed to take?
+
+Even if you constrict yourself to concepts that are already known to your students, most of the "beautiful" exercises are still not "good" exercises, because they are simply too large.
+It is very hard to guess, how much time an exercise will take for someone, who has little to no experience with the required concepts.
+
+A *good* exercise therefore has been solved at least once by it's creator or by another test person.
+The time needed by this person can be used as approximation for the time that a student will need.
+If the test person is a student in the same field of study, who has taken the lecture already a few semesters ago, you can assume twice the original time.
+As teacher or assistant with a bachelor's or master's degree you should rather multiply by three or even four.
+
+It is often possible to reduce the size of an exercise by shortening it to a core task, that can be completed much faster than the original version.
+Exercises also often become clearer that way, because unimportant and distracting side tasks are removed.
+Sometimes, however, you have to realize that you simply misjudged the difficulty of an exercise and discard it - as nice as it may have sounded.
+
+## 2. Draft
+
+### 2.1. Brainstorming
+
+The arguments mentioned above are reason enough to assume that most spontaneous ideas sadly will not lead to good exercise descriptions.
+Therefore it is even more important to collect multiple ideas to begin with.
+Most of all this prevents you from holding on too closely to a bad idea, just because you already invested so much time coming up with that idea.
+
+My personal suggestion is therefore just to start with a list of bullet points that can lead to good exercise types and contents.
+Additionally it always helps to ask somebody else for ideas, who is available.
+
+### 2.2. Elaboration
+
+When you have a list of possible exercise ideas, you can follow this pattern:
+
+1. Take the most promising idea from your list.
+2. Turn that idea into an exercise.
+3. If new ideas arise, note them down, but continue with the current exercise for now.
+4. If you get stuck, because the ideas does not work out so well, put it aside and start anew with step 1.
+5. If the exercise is finished: Rinse and repeat. :wink:
+
+In this description "to turn an idea into an exercise" means to put down the exercise text coarsely with bullet points and to flesh out code examples, interface specifications, and the like in the process.
+
+## 3. Evaluation and Testing
+
+### 3.1. Create a sample solution and estimate expenditure of time
+
+Meistens hat man selbst nach Schritt zwei noch nur eine eher vage Vorstellung, wie die Lösungen von Studierenden aussehen könnten.
+Das bedeutet auch, dass man noch gar nicht wissen kann, auf was für Missverständnisse man bei der Ausformulierung des Textes achten muss oder wo man vielleicht doch etwas Inhalt wegkürzen muss.
+
+Daher bietet es sich an, *vorher* schon eine Musterlösung zu schreiben.
+Das ist natürlich zeitlich nicht immer möglich, aber ich lehne mich einmal so weit aus dem Fenster zu sagen, dass Aufgaben, zu denen eine Musterlösung existiert, immer besser werden als Aufgaben ohne Musterlösung - egal ob die Studierenden diese Musterlösung je zu Gesicht bekommen.
+
+Tipp am Rande: Wenn man schon eine Musterlösung erstellt, dann kann man auch gleich die Zeit dafür stoppen, um abzuschätzen, wie viel Zeit die Studierenden für ihre Lösung brauchen werden (siehe Abschnitt 1.5.).
+
+### 3.2. Bewertungsschema erstellen
+
+Selbst die beste Aufgabe ist nichts wert, wenn man kein klares Bewertungsschema anlegen kann.
+Gehen die Lösungen von Studierenden zu weit auseinander, wird es schwer, faire Noten zu geben.
+Zu den Vorüberlegungen zu einer Aufgabe gehört also immer auch die Frage, was einem wichtig ist.
+Wofür gibt es Punkte?
+Wofür gibt es Punktabzug?
+Welche Lösungswege akzeptiere ich und welche nicht?
+
+Es macht also durchaus Sinn, sich auch im Vorhinein schon eine Liste von Bewertungskriterien mit deren Gewichtung zu erstellen. Dies wird durch eine eigene Musterlösung deutlich erleichtert, auch wenn dann beachtet werden muss, dass es oft auch andere Lösungswege geben kann.
+Diese so erstellte Liste kann man später sogar der Aufgabe beilegen, damit auch für die Studierenden transparent ist, was bewertet wird.
+
+### 3.3. Form des Feedbacks festlegen
+
+Eine letzte Frage, die man sich stellen kann und muss, ist die, welche Art von Feedback die Studierenden auf ihre Lösung erhalten werden.
+Wenn es möglich und vom Zeitaufwand her machbar ist, längere Bewertungstexte zu schreiben, kann die Aufgabenstellung auch freier sein und mehr Kreativität zulassen.
+Wenn es nur um "bestanden" oder "nicht bestanden" geht, sollte man der Aufgabe vielleicht lieber engere und eindeutigere Grenzen geben.
+An diesem Punkt sollte reflektiert werden, ob der bisherige Aufgaben- und der geplante Feedbackumfang zusammenpassen und bei Bedarf eines davon anpassen.
+
+## 4. Ausformulieren
+
+### 4.1. Eindeutig
+
+Auch wenn man durchaus argumentieren kann, dass Aufgabenstellungen in der realen Arbeitswelt auch nicht absolut präzise formuliert sein werden, lässt eine *gute* Aufgabenstellung trotzdem keine Zweifel daran, was man von Studierenden verlangt.
+Das Interpretieren von Kundenwünschen ist ein wichtiger Social-Skill, steht in der Regel aber nicht im Vordergrund der Vorlesung.
+Vor allem ist es auch nicht zu erwarten, dass jede legitime Interpretation der Aufgabenstellung am Ende wirklich die Fähigkeiten abverlangt, die in der Aufgabe gefragt sein sollten.
+
+Unterm Strich heißt das also, man sollte darauf achten, sich präzise auszudrücken und Missverständnissen sowie alternativen, nicht erwünschten Lösungswegen vorzubeugen.
+
+Es gibt ein paar grundlegende Tipps, die dabei helfen können:
+
+* *Verwende die richtigen Fachbegriffe.* Das ganze Fachchinesisch ist ja dazu da, damit beide Seiten genau wissen, wovon die Rede ist.
+* *Vermeide unbedingt falsche oder alternative Verwendungen von Fachbegriffen.* Fachbegriffe sind wie gesagt klar definiert. Diese Definition darf man auch in Aufgabenstellungen nicht verwässern.
+* *Vermeide die Verwendung unterschiedlicher Formulierungen für die gleiche Sache.* Auch wenn es nicht um Fachbegriffe geht, kann es verwirren, wenn eine Liste z.B. einmal eine "Liste" ist, dann wieder ein "Array" und dann vielleicht noch ein "Vektor". Reden wir von Array-Listen, sind alle drei Bezeichnungen zutreffend, aber dass mit allen dreien das gleiche gemeint ist, ist dadurch nicht automatisch sicher. Hierbei sei an die Aufgabenoperatoren aus dem Abitur erinnert: Der gleiche Arbeitsauftrag sollte auch durch den gleichen Operator ausgedrückt werden (nachzuschlagen etwa [hier als Liste vom Hessischen Kultusministerium](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf)) 
+
+### 4.2. Verständlich
+
+Das Problem an eindeutigen und präzisen Formulierungen ist, dass dabei oft eher verklausulierte Sätze herauskommen, die man auch wirklich nur entschlüsseln kann, wenn man ein tiefes Verständnis der Fachsprache hat.
+Es hilft nichts, wenn eine Aufgabenstellung für den Ersteller eindeutig ist, aber für einen Studierenden völlig unverständlich.
+
+Es gilt daher einen schwierigen Balanceakt zu vollführen zwischen Präzision und Verständlichkeit. Dabei können die folgenden Tipps helfen:
+
+* *Verwende nur die zentralen Fachbegriffe.* Was in der Vorlesung und Übung explizit besprochen wurde, kann vorausgesetzt werden. Alles andere sollte mit Vorsicht eingeführt werden.
+* *Erkläre seltener verwendete Fachbegriffe mit Nebensätzen.* Oft reichen schon ein oder zwei zusätzliche Wörter, um eine Formulierung deutlich verständlicher zu machen.
+* *Wenn du Zweifel hast, gib den Text jemand anderem zu lesen.* Für dich selbst ist alles, was du schreibst, verständlich. Die Frage ist, ob andere das auch so sehen.
+
+### 4.3. Korrekt
+
+Es erklärt sich von selbst, dass für Texte in Aufgabenstellungen die gleichen Korrektheitsansprüche gelten, wie für Texte auf Folien oder im Skript.
+Trotzdem kommt man immer wieder einmal in Versuchung, einen Sachverhalt vereinfachend darzustellen, um Platz zu sparen.
+Das ist in gewissem Umfang in Ordnung und sogar unvermeidlich - man kann Studierende nicht mit jeder Ausnahme der Ausnahme der Ausnahme konfrontieren - aber man muss damit sehr vorsichtig sein.
+
+Die folgenden Tipps können dabei helfen:
+
+* *Kein Satz in einer Aufgabenstellung sollte einem Satz auf einer Folie widersprechen.*
+* *Ausnahmen kann man auch in einer Hinweis-Box separat zum Aufgabentext abhandeln.* Dadurch kann man trotzdem die einfachere und verständlichere Formulierung verwenden, aber verwirrt den Studierenden nicht. Beispiel: "Hinweis: Sie dürfen XYZ ignorieren."
+* *Man sollte immer eine kleine Stimme im Hinterkopf haben, die versucht einen selbst zu widerlegen oder auszutricksen.* Klingt schizophren, ist aber hilfreich. :wink: :water_buffalo:
+
+### 4.4. Erklärend
+
+Wie schon einmal erwähnt, sind gute Aufgabentexte selbst Teil der Erklärung eines Sachverhalts und nicht bloße Aufforderungen.
+Nicht jeder Aufgabentext muss noch einmal die verwendeten Begriffe und Konzepte erklären, aber eine Erklärung kann auch z.B. einfach eine sehr gute Anknüpfung an bekanntes Wissen geben und den Einstieg in eine Aufgabe erleichtern.
+
+Auch hier ein paar konkretere Tipps dazu:
+
+* *"In der Vorlesung haben sie gelernt, dass..."* ist eine super Einleitung für eine Frage. Durch die Wiederholung der Erklärung aus der Vorlesung aktiviert man die Erinnerung des Studierenden und kann dann weiterführende Fragen stellen - z.B. zu Sachverhalten, die im scheinbaren Widerspruch mit so einer Erklärung stehen.
+* *Multiple-Choice-Antworten mit Erklärung setzen ein gutes Beispiel.* Studierende geben sich oft bei ihrer eigenen Antwort auf Freitextfragen mit dem Sachverhalt zufrieden, ohne eine Begründung anzugeben. Daher ist es nützlich, wenn man gleich mit gutem Beispiel vorangeht und die Antwortmöglichkeiten entsprechend so ausformuliert, wie man sie auch von den Studierenden gerne sehen würde.
+
+## 5. Verfeinern
+
+Kaum eine Aufgabe ist nach ihrer ersten Ausarbeitung perfekt. Entweder braucht sie zu viel Zeit, oder sie ist noch etwas verwirrend, oder es fehlt noch ein Teil dessen, was sie eigentlich beinhalten soll.
+Das ist normal und in Ordnung.
+Die meisten richtig guten Übungen entstehen dadurch, dass einem später einfällt wie man eine mittelprächtige Übung noch kürzen oder erweitern kann oder wie man in das gleiche Aufgabenschema eine andere Aufgabe einfügen kann.
+
+Daher macht es auch immer Sinn, bei der Suche nach neuen Aufgaben erst einmal in Altbewährtem nachzusehen, ob man vielleicht eine Anregung findet.
+
+***
+
+## Checkliste
+
+Ich gehe davon aus, dass niemand den Nerv hat, dieses Dokument mehr als einmal ganz durchzulesen. Daher versuche ich den Inhalt hier noch einmal in einer TLDR-Variante als Checkliste zusammenzufassen:
+
+- [ ] Entscheidung: Reproduktion, Anwendung oder Transfer?
+- [ ] Lernziele aufschreiben
+- [ ] Vorhandene Vorkenntnisse aufschreiben
+- [ ] Zeitlichen Soll-Aufwand bestimmen
+- [ ] In alten Aufgaben nach Ideen suchen
+- [ ] Brainstorming nach neuen Ideen
+- [ ] Musterlösung erstellen (zeitlichen Ist-Aufwand festhalten)
+- [ ] Grobe Ausarbeitung
+- [ ] Bewertungskriterien und Feedbackform festlegen
+- [ ] Ausformulierung: eindeutig, verständlich, korrekt und erklärend
+- [ ] Korrigieren, reduzieren, verbessern
+
+***
+
+## Beispiele
+
+### Allgemeiner Hinweis
+
+Die folgenden Beispiele sind alle aus echten Aufgaben entnommen. Meistens handelt es sich dabei um meine eigenen Formulierungen, manchmal aber auch um die von anderen Lehrenden. Natürlich sind meine immer nur die Positivbeispiele. :stuck_out_tongue:
+
+### Beispiel 1: Der Begriff *Literal*
+
+>Nenne 4 der 8 primitiven Typen von Java. Gib jeweils ein Beispiel an, wie ein Literal des entsprechenden Typs in korrekter Java-Syntax aussehen könnte.
+
+Wichtig ist hier, dass tatsächlich der korrekte Begriff *Literal* verwendet wird. In einer älteren Version lautete die Aufgabe in etwa wie folgt:
+
+> Nenne die 8 primitiven Typen von Java und gib für jeden Typ ein Beispiel für einen legalen Wert an.
+
+Wenn nur nach dem Wert gefragt wird, ist nicht klar, *wie* dieser Wert aufgeschrieben werden soll. Für `float` wäre also `0,5` genau so korrekt gewesen wie `0.5` oder (was als einziges dem entspricht, was *gemeint* war) `0.5f`.
+
+### Beispiel 2: Eindeutigkeit in diesem Text
+
+Dieser Text hatte in seiner ersten Version ein Problem mit der Eindeutigkeit. 
+
+># Wie schreibt man eine gute Übungsaufgabe?
+>
+>Das Formulieren von guten Übungsaufgaben gehört zu den schwierigsten Aufgaben eines Dozenten oder Tutoren. [...]
+>
+>Mit diesem Dokument möchte ich versuchen eine "Anleitung" zum Erstellen von guten Übungsaufgaben zusammenzustellen [...].
+
+Was fällt bei dieser Textpassage auf? Ich rede einmal vom *Schreiben*, dann vom *Formulieren* und dann wieder vom *Erstellen* von Übungsaufgaben.
+Ich könnte mich damit herausreden, dass ich das gemacht habe, um die Formulierungen im Text abwechslungsreicher zu gestalten, aber das war nicht der Fall.
+Ich habe schlicht und ergreifend nicht darauf geachtet.
+Das Problem ist noch nicht so schlimm, aber trotzdem habe ich versucht, es in dieser Version zu beheben - zumal das *Formulieren* wirklich missverständlich einmal als Teilbegriff und einmal für das gesamte Erstellen von Übungsaufgaben verwendet wurde.
+
+### Beispiel 3: Uneindeutige Aufgabenstellung
+
+>Gegeben seien die folgenden Java-Klassen:
+>
+>```java
+>public class Mensch implements Benannt { [...] }
+>public class Haustier implements Benannt { [...] } 
+>```
+>
+>Implementieren Sie das Interface Benannt in Java, das die Gemeinsamkeiten aller benannten Objekte zusammenfasst.
+
+Diese Aufgabe tauchte so (natürlich mit ein wenig mehr Inhalt in den Klassen) in einer OOP-Klausur auf.
+Wir mussten die Aufgabe streichen, weil die Formulierung "Implementieren Sie das Interface" missverständlich war.
+Gemeint war natürlich den Inhalt der Datei `Benannt.java` anzugeben, die eine entsprechende Interface-Deklaration enthalten sollte.
+Man hätte die Aufgabe aber auch so interpretieren können (und manche Studierenden haben das getan), dass man noch eine *Klasse* schreiben sollte, die ebenfalls `Benannt` implementiert.
+
+### Beispiel 4: Komplizierter als gedacht - Regex
+
+>Geben Sie einen regulären Ausdruck an, der E-Mail-Adressen erkennen kann.
+
+Klingt unschuldig als Aufgabe, oder? Diese Aufgabe hat aber [keine korrekte Lösung](http://www.regular-expressions.info/email.html) und die bestmögliche Lösung sieht so aus:
+
+```
+\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*
+ |  "(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]
+      |  \\[\x01-\x09\x0b\x0c\x0e-\x7f])*")
+@ (?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
+  |  \[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}
+       (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:
+          (?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]
+          |  \\[\x01-\x09\x0b\x0c\x0e-\x7f])+)
+     \])\z
+```
+
+### Beispiel 5: Komplizierter als gedacht - Java
+
+Ein beliebtes Minimalbeispiel für Threads in Java ist ein Chatserver.
+Es sollte doch nicht sehr viel mehr Aufwand sein, einen Server zu schreiben, der statt Chatnachrichten Pixelkoordinaten an den Server schickt, sodass der Server diesen Pixel auf seinem Display-Fenster mit einer dem Client zugewiesenen Farbe füllt, oder?
+
+Wieder einmal falsch gedacht: Wie man es auch dreht und wendet, selbst der einfachste (single-threaded) Java-Client braucht dazu mehr als 100 Zeilen Code und, wenn man den Server mit weiteren 500 Zeilen nicht zur Aufgabe mit dazu nimmt, kann man mit der Aufgabe die Grundkonzepte des Threading nicht sinnvoll vermitteln.
+
+### Beispiel 6: Klarheit durch Einschränkung
+
+>Schreiben Sie ein Java-Programmfragment, das alle Teiler einer ganzen Zahl ausgibt.
+>Die Zahl darf dabei direkt als Literal im Code angegeben werden.
+
+Der zweite Satz ist entscheidend – insbesondere wenn es sich um eine Klausur handelt. Ansonsten könnten Studierende auf die Idee kommen, sie müssten mit einer `Scanner`-Klasse oder Kommandozeilenparametern hantieren.
+
+### Beispiel 7: Einführung eines neuen Konzepts in einer Aufgabenstellung
+
+>## Aufgabe 6: Experimente mit Varargs
+>Ein Varargs-Parameter stellt eine Möglichkeit dar, eine Funktion mit beliebig vielen Parametern zu definieren.
+>Als Benutzer der Funktion kann man einfach normal mit Komma getrennt so viele Argumente übergeben wie man möchte. Als Entwickler der Funktion geht man mit dem Varargs-Parameter um wie mit einem normalen Array.
+>Das folgende Beispiel zeigt eine Funktion, die die Summe von beliebig vielen Integer-Werten bildet:
+>
+>```
+>// Code-Beispiel
+>```
+>
+>### 6.1 Min+Max
+>Schreiben Sie nun selbst zwei Funktionen `max` und `min` mit Varargs-Parameter, die das Maximum und das Minimum von beliebig vielen ganzen Zahlen bestimmen können.
+
+Dank der vorherigen Erklärung sind Studierende (hoffentlich) in der Lage, die Aufgabe 6.1 zu lösen, indem sie ihr bisheriges Wissen über Arrays und Schleifen auf das für sie neue Konzept *Varargs* transferieren.
+
+### Beispiel 8: Versteckte Rechercheaufgabe
+
+>### Continue
+>Vervollständigen Sie die Methode safeSum, die die Werte eines Arrays vom Typ double aufsummiert, so dass Einträge mit dem Wert NaN ignoriert werden.
+>Verwenden Sie dazu eine `continue`-Anweisung;
+>
+>```
+>double safeSum(double[] ar) {
+>  double sum = 0;
+>  for(int i = 0; i < ar.length; i++) {
+>    
+>    sum += ar[i];
+>  }
+>}
+>```
+
+Das Besondere an dieser Aufgabe ist, dass sie ein neues Konzept beibringt, ohne es zu erklären, indem Sie die Studierenden zuerst einmal verwirrt.
+Das Einfügen von `if (ar[i] == Double.NaN) continue;` löst das Problem nämlich nicht.
+Nur wer durch gutes Testen oder Nachfragen die Ursache für den Fehler sucht, wird erfahren, dass Vergleiche mit `NaN` *immer* `false` ergeben - selbst bei `Double.NaN == Double.NaN`.
+Deshalb braucht man die Methode `Double.isNaN` - ein Fakt an den die Studierenden sich hoffentlich erinnern, weil die Aufgabe sie genau vor dieses Problem gestoßen hat.
+
+### Beispiel 9: Begriffsverwirrung
+
+>Die zu testende Methode bekommt als Parameter ein String-Array übergeben. Mit welchen Parametern testen Sie die Methode ?
+>
+>- [ ] Mit einem deklarierten String-Array
+>- [ ] Mit einem initialisierten String-Array
+>- [ ] Mit einem initialisierten String-Array, welches null-Werte besitzt
+>- [ ] Mit einem deklarierten char-Array
+>- [ ] Mit einem initialisierten Character-Array
+
+Diese Frage ist nicht per se schlecht.
+Die Idee ist gut, aber es ist fragwürdig, ob sofort jeder Studierende versteht, was ein "initialisiertes Array" ist oder versteht, dass "deklariert" in diesem Fall mit "nicht-initialisiert" gleichzusetzen ist.
+
+Man könnte die Aufgabe verbessern, indem man konkrete Codezeilen angibt und fragt, ob es sich bei diesen Aufrufen um sinnvolle Testfälle handelt.
+
+Außerdem ist bei dieser Frage zweifelhaft, ob wirklich die richtige Botschaft bei den Studierenden ankommt.
+Die Frage sollte vermutlich als Ziel haben, sinnvolle von weniger sinnvollen Testfällen zu unterscheiden.
+Da hätte man auf jeden Fall noch auf andere Randfälle bzw. eben auf unnötige Variationen gleicher Fälle oder ähnliches eingehen können und müssen.
+
+### Beispiel 10: Zu freie Aufgabe
+
+>Simuliere einen Aufzug in einem Hochhaus. Der Benutzer soll in jedem Stockwerk auf einen Knopf drücken können, um den Aufzug zu rufen. Was macht der Aufzug, wenn er zu mehreren Stockwerken gleichzeitig gerufen wird?
+
+Diese Aufgabe stammt aus der aktuellen Aufgabensammlung für den Brückenkurs. Sie ist eigentlich keine fertige Aufgabe, sondern mehr eine Anregung - eine grobe Idee, was für ein Programm man schreiben könnte.
+Würde diese Aufgabe so auf einem tatsächlichen Übungsblatt auftauchen, wäre eine Bewertung fast unmöglich, weil es keinerlei klare Rahmenbedingungen gibt (Wie viele Stockwerke? Wie lange darf ein Benutzer maximal warten? ...).
