@@ -134,55 +134,59 @@ In this description "to turn an idea into an exercise" means to put down the exe
 
 ### 3.1. Create a sample solution and estimate expenditure of time
 
-Meistens hat man selbst nach Schritt zwei noch nur eine eher vage Vorstellung, wie die Lösungen von Studierenden aussehen könnten.
-Das bedeutet auch, dass man noch gar nicht wissen kann, auf was für Missverständnisse man bei der Ausformulierung des Textes achten muss oder wo man vielleicht doch etwas Inhalt wegkürzen muss.
+Usually after step 2 you will still only have a vague idea how the solution of a student may actually look.
+This means that you also cannot yet know what kind of misunderstandings you have to watch out for when formulating the exercise text and whether there may be some parts of the exercise where you have to reduce the complexity.
 
-Daher bietet es sich an, *vorher* schon eine Musterlösung zu schreiben.
-Das ist natürlich zeitlich nicht immer möglich, aber ich lehne mich einmal so weit aus dem Fenster zu sagen, dass Aufgaben, zu denen eine Musterlösung existiert, immer besser werden als Aufgaben ohne Musterlösung - egal ob die Studierenden diese Musterlösung je zu Gesicht bekommen.
+It is therefore a very good idea to write a sample solution *beforehand*.
+Of course you will not always have the time for this, but I daresay that exercises that have a sample solution will always be better than exercises without sample solution - regardless of whether the students ever get to see this solution.
 
-Tipp am Rande: Wenn man schon eine Musterlösung erstellt, dann kann man auch gleich die Zeit dafür stoppen, um abzuschätzen, wie viel Zeit die Studierenden für ihre Lösung brauchen werden (siehe Abschnitt 1.5.).
+Additional tip: If you create a sample solution, you can stop the time it takes to create this solution to be able to estimate the time that the exercise will take for a student (see section 1.5.).
 
-### 3.2. Bewertungsschema erstellen
+### 3.2. Create a scoring scheme
 
-Selbst die beste Aufgabe ist nichts wert, wenn man kein klares Bewertungsschema anlegen kann.
-Gehen die Lösungen von Studierenden zu weit auseinander, wird es schwer, faire Noten zu geben.
-Zu den Vorüberlegungen zu einer Aufgabe gehört also immer auch die Frage, was einem wichtig ist.
-Wofür gibt es Punkte?
-Wofür gibt es Punktabzug?
-Welche Lösungswege akzeptiere ich und welche nicht?
+Even the best exercise is worthless if you cannot use a clear scoring scheme for it.
+If the solutions of students differ too much it will be hard to give fair marks.
+Therefore it is always important to ask yourself what is important about the exercise.
+What exactly earns a point?
+Which mistakes leads to penalties?
+Which solutions will be accepted, and which won't?
 
-Es macht also durchaus Sinn, sich auch im Vorhinein schon eine Liste von Bewertungskriterien mit deren Gewichtung zu erstellen. Dies wird durch eine eigene Musterlösung deutlich erleichtert, auch wenn dann beachtet werden muss, dass es oft auch andere Lösungswege geben kann.
-Diese so erstellte Liste kann man später sogar der Aufgabe beilegen, damit auch für die Studierenden transparent ist, was bewertet wird.
+It makes sense to have a weighted list of scoring criteria before handing out the exercise.
+You will find this much easier if you have a sample solution, even if you still have to consider that there might be more than one path to a solution that a student may take.
+You can even hand out the list of criteria to your students to make it transparent for them on what basis they are actually scored.
 
-### 3.3. Form des Feedbacks festlegen
+### 3.3. Determine the type of feedback
 
-Eine letzte Frage, die man sich stellen kann und muss, ist die, welche Art von Feedback die Studierenden auf ihre Lösung erhalten werden.
-Wenn es möglich und vom Zeitaufwand her machbar ist, längere Bewertungstexte zu schreiben, kann die Aufgabenstellung auch freier sein und mehr Kreativität zulassen.
-Wenn es nur um "bestanden" oder "nicht bestanden" geht, sollte man der Aufgabe vielleicht lieber engere und eindeutigere Grenzen geben.
-An diesem Punkt sollte reflektiert werden, ob der bisherige Aufgaben- und der geplante Feedbackumfang zusammenpassen und bei Bedarf eines davon anpassen.
+One last question you can and have to ask is which kind of feedback you want and can give to your students for their solutions.
+If it is possible and you have the time to write long feedback texts, the exercise may be formulated more freely to allow for more creativity in the solutions.
+If there will only be a decision about "passed" or "not passed", you should choose tighter bounds for the exercise and avoid any ambiguities in the text.
+At this point you should assess if the extent of the exercise and feedback are matching up and adjust one of them if needed.
 
-## 4. Ausformulieren
+## 4. Wording
 
-### 4.1. Eindeutig
+### 4.1. Unambiguous
 
-Auch wenn man durchaus argumentieren kann, dass Aufgabenstellungen in der realen Arbeitswelt auch nicht absolut präzise formuliert sein werden, lässt eine *gute* Aufgabenstellung trotzdem keine Zweifel daran, was man von Studierenden verlangt.
-Das Interpretieren von Kundenwünschen ist ein wichtiger Social-Skill, steht in der Regel aber nicht im Vordergrund der Vorlesung.
-Vor allem ist es auch nicht zu erwarten, dass jede legitime Interpretation der Aufgabenstellung am Ende wirklich die Fähigkeiten abverlangt, die in der Aufgabe gefragt sein sollten.
+You can very well argue that tasks in a real world jobs are probably not worded in a perfectly precise manner, but still a *good* exercise text does not leave any doubts about what is actually required from the student.
+The ability to interpret the wishes of a client is an important social skill, but most lectures will focus on other learning goals.
+Additionally it is not to be expected that every legitimate interpretation of an ambiguous exercise text will really require all the skills that should be tested.
 
-Unterm Strich heißt das also, man sollte darauf achten, sich präzise auszudrücken und Missverständnissen sowie alternativen, nicht erwünschten Lösungswegen vorzubeugen.
+Summing up, this means that you should take care to choose a precise wording and take precautions to avoid misunderstandings as well as alternative but undesired solutions.
 
-Es gibt ein paar grundlegende Tipps, die dabei helfen können:
+There are a few basic tips that may help with this task:
 
-* *Verwende die richtigen Fachbegriffe.* Das ganze Fachchinesisch ist ja dazu da, damit beide Seiten genau wissen, wovon die Rede ist.
-* *Vermeide unbedingt falsche oder alternative Verwendungen von Fachbegriffen.* Fachbegriffe sind wie gesagt klar definiert. Diese Definition darf man auch in Aufgabenstellungen nicht verwässern.
-* *Vermeide die Verwendung unterschiedlicher Formulierungen für die gleiche Sache.* Auch wenn es nicht um Fachbegriffe geht, kann es verwirren, wenn eine Liste z.B. einmal eine "Liste" ist, dann wieder ein "Array" und dann vielleicht noch ein "Vektor". Reden wir von Array-Listen, sind alle drei Bezeichnungen zutreffend, aber dass mit allen dreien das gleiche gemeint ist, ist dadurch nicht automatisch sicher. Hierbei sei an die Aufgabenoperatoren aus dem Abitur erinnert: Der gleiche Arbeitsauftrag sollte auch durch den gleichen Operator ausgedrückt werden (nachzuschlagen etwa [hier als Liste vom Hessischen Kultusministerium](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf)) 
+* *Use the correct terms.* All the strange domain-specific words are there to make sure that both sides know exactly what the other person is talking about.
+* *Avoid wrong or alternative uses of domain-specific terms at all costs*. As mentioned about, domain-specific terms usually have a clear definition. You cannot use these terms loosely in an exercise text.
+* *Avoid using different terms for the same concept throughout the text.* Even if we do not talk about domain-specific terms, it can be confusing when a list is referred to as a "list", then as an "array" and then maybe as a "vector". If we are talking about array lists, all three terms are appropriate, but this does not make it evident that the author really means the same concept with each term. For german exercises you can also refer to the "exercise operators": The same task should use the same operator (see the [list from the hessian cultural ministery](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf))
 
-### 4.2. Verständlich
+### 4.2. Understandable
 
-Das Problem an eindeutigen und präzisen Formulierungen ist, dass dabei oft eher verklausulierte Sätze herauskommen, die man auch wirklich nur entschlüsseln kann, wenn man ein tiefes Verständnis der Fachsprache hat.
-Es hilft nichts, wenn eine Aufgabenstellung für den Ersteller eindeutig ist, aber für einen Studierenden völlig unverständlich.
+The problem with precise and unambiguous wording is that often this goal will result in complicated sentences that you can only understand if you have a very deep understanding of the domain.
+It does not help if the exercise text is perfect from the viewpoint of the author, but not at all understandable for a student.
 
-Es gilt daher einen schwierigen Balanceakt zu vollführen zwischen Präzision und Verständlichkeit. Dabei können die folgenden Tipps helfen:
+The goal therefore is to find a balance between precision and understandability.
+The following tips may help with that:
+
+* *Only use the most important domain-specific terms.* You can 
 
 * *Verwende nur die zentralen Fachbegriffe.* Was in der Vorlesung und Übung explizit besprochen wurde, kann vorausgesetzt werden. Alles andere sollte mit Vorsicht eingeführt werden.
 * *Erkläre seltener verwendete Fachbegriffe mit Nebensätzen.* Oft reichen schon ein oder zwei zusätzliche Wörter, um eine Formulierung deutlich verständlicher zu machen.
