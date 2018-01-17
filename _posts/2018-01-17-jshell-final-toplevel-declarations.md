@@ -3,8 +3,8 @@ layout: post
 title:  "Top-level final declarations and the JShell"
 description: >
     The keyword final is ignored for top-level classes and variables in the JShell. This is not consistent with normal Java semantics.
-date:   2017-12-23 10:47 +0200
-categories: java jshell top-level class variable final
+date:   2018-01-17 21:38 +0100
+categories: java jshell
 ---
 
 This post is about [my first JDK bug report](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8193919).
