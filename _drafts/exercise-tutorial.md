@@ -176,7 +176,7 @@ There are a few basic tips that may help with this task:
 
 * *Use the correct terms.* All the strange domain-specific words are there to make sure that both sides know exactly what the other person is talking about.
 * *Avoid wrong or alternative uses of domain-specific terms at all costs*. As mentioned about, domain-specific terms usually have a clear definition. You cannot use these terms loosely in an exercise text.
-* *Avoid using different terms for the same concept throughout the text.* Even if we do not talk about domain-specific terms, it can be confusing when a list is referred to as a "list", then as an "array" and then maybe as a "vector". If we are talking about array lists, all three terms are appropriate, but this does not make it evident that the author really means the same concept with each term. For german exercises you can also refer to the "exercise operators": The same task should use the same operator (see the [list from the hessian cultural ministery](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf))
+* *Avoid using different terms for the same concept throughout the text.* Even if we do not talk about domain-specific terms, it can be confusing when a list is referred to as a "list", then as an "array" and then maybe as a "vector". If we are talking about array lists, all three terms are appropriate, but this does not make it evident that the author really means the same concept with each term. For german exercises you can also refer to the "exercise operators": The same task should use the same operator (see the [list from the hessian cultural ministry](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf))
 
 ### 4.2. Understandable
 
@@ -186,45 +186,44 @@ It does not help if the exercise text is perfect from the viewpoint of the autho
 The goal therefore is to find a balance between precision and understandability.
 The following tips may help with that:
 
-* *Only use the most important domain-specific terms.* You can 
+* *Only use the most important domain-specific terms.* You can expect the students to know the terms that have been explicitly discussed in the lecture and in other exercises. Everything else should be introduced very carefully.
+* *Explain infrequent terms with an additional clause.* Often one or two additional words may suffice to make a particular wording much more understandable.
+* *When in doubt, let somebody else read the text.* Your own words naturally sound understandable to you. The question is if other people share this assessment.
 
-* *Verwende nur die zentralen Fachbegriffe.* Was in der Vorlesung und Übung explizit besprochen wurde, kann vorausgesetzt werden. Alles andere sollte mit Vorsicht eingeführt werden.
-* *Erkläre seltener verwendete Fachbegriffe mit Nebensätzen.* Oft reichen schon ein oder zwei zusätzliche Wörter, um eine Formulierung deutlich verständlicher zu machen.
-* *Wenn du Zweifel hast, gib den Text jemand anderem zu lesen.* Für dich selbst ist alles, was du schreibst, verständlich. Die Frage ist, ob andere das auch so sehen.
+### 4.3. Correct
 
-### 4.3. Korrekt
+It is self-explanatory that exercise texts have to conform to the same requirements as slides or lecture nodes regarding correctness.
+Yet, there will be situations where you will feel tempted to simplify a description in order to save some space.
+To some extend this is OK and even unavoidable - you cannot confront your students with every exception of an exception - but you have to be very careful with this.
 
-Es erklärt sich von selbst, dass für Texte in Aufgabenstellungen die gleichen Korrektheitsansprüche gelten, wie für Texte auf Folien oder im Skript.
-Trotzdem kommt man immer wieder einmal in Versuchung, einen Sachverhalt vereinfachend darzustellen, um Platz zu sparen.
-Das ist in gewissem Umfang in Ordnung und sogar unvermeidlich - man kann Studierende nicht mit jeder Ausnahme der Ausnahme der Ausnahme konfrontieren - aber man muss damit sehr vorsichtig sein.
+The following tips may help in this regard:
 
-Die folgenden Tipps können dabei helfen:
+* *No sentence in an exercise text should contradict a sentence on a slide.*
+* *Exceptions to a rule can be given as a hint box that is separate to the exercise text.* In this way you can still use the simplified and more understandable wording without confusing the student. Example: "Hint: You may ignore XYZ."
+* *You should always have a small voice in your head that tries to disprove or trick you.* This may sound schizophrenic, but it helps. :wink: :water_buffalo:
 
-* *Kein Satz in einer Aufgabenstellung sollte einem Satz auf einer Folie widersprechen.*
-* *Ausnahmen kann man auch in einer Hinweis-Box separat zum Aufgabentext abhandeln.* Dadurch kann man trotzdem die einfachere und verständlichere Formulierung verwenden, aber verwirrt den Studierenden nicht. Beispiel: "Hinweis: Sie dürfen XYZ ignorieren."
-* *Man sollte immer eine kleine Stimme im Hinterkopf haben, die versucht einen selbst zu widerlegen oder auszutricksen.* Klingt schizophren, ist aber hilfreich. :wink: :water_buffalo:
+### 4.4. Explanatory
 
-### 4.4. Erklärend
+As already mentioned, good exercise texts are part of the explanation of a topic themselves rather than being mere prompts.
+Not every exercise text has to explain the main terms and concepts, but an explanation may, for example, simply be a good way to establish a connection to previous knowledge and therefore provide an easier entry point to the exercise.
 
-Wie schon einmal erwähnt, sind gute Aufgabentexte selbst Teil der Erklärung eines Sachverhalts und nicht bloße Aufforderungen.
-Nicht jeder Aufgabentext muss noch einmal die verwendeten Begriffe und Konzepte erklären, aber eine Erklärung kann auch z.B. einfach eine sehr gute Anknüpfung an bekanntes Wissen geben und den Einstieg in eine Aufgabe erleichtern.
+Here, too, some tips:
 
-Auch hier ein paar konkretere Tipps dazu:
+* *"In the lecture you have learned that ..."* is an excellent introduction for a question. By repeating the explanation from the lecture you activate the memory of the student and can then continue to ask further questions - e.g. about facts that seem to contradict that explanation.
+* *Multiple-choice answers with explanations set a good example.* In their answers to free text exercises, students are often content with the main fact itself without giving an explanation. Therefore it is helpful to set a good example by formulating possible answers in the same way in which you would like to see them from your students.
 
-* *"In der Vorlesung haben sie gelernt, dass..."* ist eine super Einleitung für eine Frage. Durch die Wiederholung der Erklärung aus der Vorlesung aktiviert man die Erinnerung des Studierenden und kann dann weiterführende Fragen stellen - z.B. zu Sachverhalten, die im scheinbaren Widerspruch mit so einer Erklärung stehen.
-* *Multiple-Choice-Antworten mit Erklärung setzen ein gutes Beispiel.* Studierende geben sich oft bei ihrer eigenen Antwort auf Freitextfragen mit dem Sachverhalt zufrieden, ohne eine Begründung anzugeben. Daher ist es nützlich, wenn man gleich mit gutem Beispiel vorangeht und die Antwortmöglichkeiten entsprechend so ausformuliert, wie man sie auch von den Studierenden gerne sehen würde.
+## 5. Refinement
 
-## 5. Verfeinern
+Hardly any exercise is perfect in its first version.
+Either it requires too much time or it is still somewhat confusing or it lacks some part of the content that it is supposed to cover.
+This is normal and all right.
+Most really good exercises arise from mediocre exercises that are shortened or extended or from the transfer of the exercise style into the topic of another exercise.
 
-Kaum eine Aufgabe ist nach ihrer ersten Ausarbeitung perfekt. Entweder braucht sie zu viel Zeit, oder sie ist noch etwas verwirrend, oder es fehlt noch ein Teil dessen, was sie eigentlich beinhalten soll.
-Das ist normal und in Ordnung.
-Die meisten richtig guten Übungen entstehen dadurch, dass einem später einfällt wie man eine mittelprächtige Übung noch kürzen oder erweitern kann oder wie man in das gleiche Aufgabenschema eine andere Aufgabe einfügen kann.
-
-Daher macht es auch immer Sinn, bei der Suche nach neuen Aufgaben erst einmal in Altbewährtem nachzusehen, ob man vielleicht eine Anregung findet.
+Therefore it always makes sense to look for suggestions in preexisting material.
 
 ***
 
-## Checkliste
+## Checklist
 
 Ich gehe davon aus, dass niemand den Nerv hat, dieses Dokument mehr als einmal ganz durchzulesen. Daher versuche ich den Inhalt hier noch einmal in einer TLDR-Variante als Checkliste zusammenzufassen:
 
