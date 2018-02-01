@@ -107,7 +107,7 @@ jshell> <T> T[] genAr() { return new T[3]; }
 |                           ^------^
 ```
 
-The only solution to this dilemma is to actually use an array of type `Object[]` and to cast it to `T[]` (which only works, because `T[]` is erased to `Object[]` at runtime).
+The only[^1] solution to this dilemma is to actually use an array of type `Object[]` and to cast it to `T[]` (which only works, because `T[]` is erased to `Object[]` at runtime).
 Back to our example of `foo` and `bar` this means that we now have a compiler-generated call `foo((T[])new Object[]{thing})`.
 And *this* leads to heap pollution, because when we call `bar(7)` we expect `things` to be an `Integer[]`, but we actually have the type `Object[]` which is not a subtype of `Integer[]`.
 
@@ -132,6 +132,10 @@ jshell> Double[] ar = caster(3.5);
 ```
 
 And there you have it: Heap pollution caused by a varargs parameter.
+
+[^1]: Actually you can use the static Method `newInstance(Class<?>,int)` of the class `java.lang.reflect.Array` to generate an Array of an arbitrary component Type at runtime, but you have to change your signature, because you need a reference to the class object of the component Type.
+This is the reason why the generic version of the Method `toArray(T[])` of the Interface `List` needs an Argument of type `T[]`.
+It needs to infer the component type at runtime from the existing Array.
 
 ## The solution
 
