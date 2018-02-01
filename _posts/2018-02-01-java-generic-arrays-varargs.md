@@ -3,13 +3,10 @@ layout: post
 title:  "Generic Java arrays and varargs heap pollution"
 description: >
     When working with generic classes and varargs parameters in Java, you may get a message warning you of "possible heap pollution", but what does that actually mean and how concerned should you be?
-date:   2017-12-23 13:50 +0200
+date:   2018-02-01 10:33 +0100
 categories:
     - teaching
     - java
-    - generics
-    - arrays
-    - varargs
 ---
 
 When working with generic classes in Java, you may run into problems when you use a varargs parameter like in the following example:
