@@ -144,3 +144,5 @@ I think this can be summed up in two simple rules:
 
 1. If you can avoid it, do not use varargs parameters with generic types (or cast an Object array to an array of a generic type).
 2. If you cannot avoid it, make sure not to expose the varargs parameter (or the generic array) to any other method or class.
+
+## Footnotes
