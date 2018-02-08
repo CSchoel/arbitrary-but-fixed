@@ -76,3 +76,11 @@ h1,h2,h3,h4,h5 {
 a.post-link {
   display:inline;
 }
+
+p.post-meta {
+  margin-bottom:5px;
+}
+
+.post-meta:last-of-type {
+  margin-bottom:15px;
+}
