@@ -15,9 +15,14 @@ layout: default
         <span class="post-meta">{{ post.date | date: date_format }}</span>
 
         <h2>
-          {% assign other_versions = site.posts | where: "ref",post.ref %}
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-          {{ other_versions | size }}
+          {% assign other_versions = site.posts | where: "ref",post.ref %}
+          {% if other_versions.size >= 2 %}
+            ({%- for version in other_versions -%}
+              <a class="post-link" href="{{ version.url | relative_url }}">{{ version.lang }}</a>
+              {%- unless forloop.last -%}, {% endunless -%}
+            {%- endfor -%})
+          {% endif %}
         </h2>
       </li>
     {% endfor %}
