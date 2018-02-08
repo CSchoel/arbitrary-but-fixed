@@ -7,9 +7,7 @@ description: >
 date:   2017-11-14 16:02 +0200
 categories:
     - teaching
-    - exercise
-    - do's and don'ts
-    - instruction
+    - tutorial
     - german
 ---
 
