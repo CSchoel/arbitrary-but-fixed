@@ -15,7 +15,9 @@ layout: default
         <span class="post-meta">{{ post.date | date: date_format }}</span>
 
         <h2>
+          {% assign other_versions = site.posts | where: "ref",post.ref %}
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          {{ other_versions | size }}
         </h2>
       </li>
     {% endfor %}
