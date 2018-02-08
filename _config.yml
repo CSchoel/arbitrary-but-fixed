@@ -18,7 +18,7 @@ logo: assets/arbitrary_but_fixed.png
 author: Christopher Schölzel
 email: christopher.schoelzel@mni.thm.de
 description: > # this means to ignore newlines until "baseurl:"
-  I share fixes to problems that I encounter on the way to my PhD.
+  In this blog I share fixes to problems that I encounter on the way to my PhD.
   Topics are arbitrary, but somewhat centered around computer science
   and systems biology.
 baseurl: "" # the subpath of your site, e.g. /blog
