@@ -4,9 +4,7 @@ title:  "Unit tests for JShell code with the jdk.jshell module"
 description: >
     Using the jdk.jshell module of the java API it is possible to evaluate jshell code from a normal java application.
     I did this to build a JUnit test for an e-learning platform and encountered some interesting quirks and an actual bug in the API.
-date:   2018-10-14 15:07 +0100
-categories:
-    - teaching java jshell
+categories: teaching java jshell
 ---
 
 ## Introduction
