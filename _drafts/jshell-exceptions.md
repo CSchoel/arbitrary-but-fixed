@@ -15,7 +15,7 @@ The JShell is the [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%9
 Although it has some [peculiarities]({{ site.baseurl }}{% post_url 2017-12-15-jshell-peculiarities %}), it is very useful to test small snippets of Java code, which makes it a great tool for teaching Java to programming novices.
 
 There are some interesting projects that build on the JShell. For example, you can now create a [Jupyter notebook](http://jupyter.org/) with a [Java kernel](https://github.com/SpencerPark/IJava).
-This is possible, because you can interact with the JShell from a normal java application using the classes in the module `jdk.jshell` in the Java API.
+This is possible, because you can interact with the JShell from a normal java application using the classes in the module [`jdk.jshell`](https://docs.oracle.com/javase/10/docs/api/jdk.jshell-summary.html) in the Java API.
 
 Since I am using an e-learning tool based on unit tests for my lectures, I wanted to be able to test JShell code from a normal JUnit test.
 In this post I want to guide you to the process of building the base class for these tests and discuss the quirks of the API that may confuse the user at first glance.
@@ -60,7 +60,7 @@ shell.variables().map(x -> x.name()).forEach(System.out::println);
 If you want to evaluate a larger file with several lines of JShell code, as is the case for our JUnit scenario, you will have to use [`SourceCodeAnalysis.analyzeCompletion(String)`](https://docs.oracle.com/javase/10/docs/api/jdk/jshell/SourceCodeAnalysis.html#analyzeCompletion(java.lang.String)) as suggested by the documentation.
 Note that the previous example also shows that it is not enough to just evaluate the file line by line with `eval`, because a single line of code may contain multiple snippets.
 
-This is the first example where the JShell API is a little bit confusing.
+This is another example where the JShell API is a little bit confusing.
 One would expect to have a method that simply splits a large string into snippets.
 `analyzeCompletion` kind of does that, but not directly.
 Instead, you have to setup a loop like the following:
@@ -78,6 +78,7 @@ do {
 
 Although the documentation for `analyzeCompletion` states that it will "evaluate if it [the snippet] is complete", the source snippet actually is *not* passed to `JShell.eval` automatically.
 Instead, you have to call `JShell.eval` yourself, which allows you to collect the `SnippetEvent`s that are triggered by the code.
+The following code does this to collect a flat list of `SnippetEvents` for all the snippet strings contained in the list `snippets`.
 
 ```java
 List<SnippetEvent> ev = snippets.stream().map(shell::eval)
@@ -99,7 +100,8 @@ This already allows to build the typical JUnit tests with methods such as `asser
 On top of that, you can also inspect some static aspects of the code such as variable types.
 
 ```java
-VarSnippet varX = shell.variables().filter(x -> "x".equals(x.name())).findFirst().get();
+VarSnippet varX = shell.variables().filter(x -> "x".equals(x.name()))
+    .findFirst().get();
 String typeX = varX.typeName();
 ```
 
@@ -113,7 +115,6 @@ Of course we want to also get that information from the JShell when we are build
 The exceptions are actually quite easy to get as there is a Method [`SnippetEvent.exception()`](https://docs.oracle.com/javase/10/docs/api/jdk/jshell/SnippetEvent.html#exception()) that returns the exception thrown by a given snippet if there was any.
 
 The exception will either be a [`UnresolvedReferenceException`](https://docs.oracle.com/javase/10/docs/api/jdk/jshell/UnresolvedReferenceException.html) or a [`EvalException`](https://docs.oracle.com/javase/10/docs/api/jdk/jshell/EvalException.html).
-
 `UnresolvedReferenceException`s capture warnings by the JShell that a method was called that has references to another method, type or variable that has not yet been declared.
 
 ```java
@@ -145,11 +146,13 @@ Apart from the error message, `Diag` objects also provide access to the location
 So far, so well. The JShell API gives us access to everything we need to build comprehensive unit tests.
 Especially for java novices, however, the raw feedback that we can provide with the API might not be that helpful.
 For example, if a method has ten or more lines of code, the diagnostic for a syntax error may say that this error is located from character 541 to character 549 of that method snippet.
-This is not very comprehensible in itself.
-The stacktrace of an `EvalException` at least shows some line numbers, but they do not refer to global line numbers in the source file but local line numbers inside the respective snippet and the numeric snippet id serves as the file name.
+This is not very human readable in itself.
+The stacktrace of an `EvalException` at least shows some line numbers, but they do not refer to global line numbers in the source file but local line numbers inside the respective snippet.
+Instead of the file name you therefore see the numeric snippet id in front of the line number.
 
-```
-Exception in thread "main" jdk.jshell.UnresolvedReferenceException: Attempt to use definition snippet with unresolved references
+```text
+Exception in thread "main" jdk.jshell.UnresolvedReferenceException: Attempt to use
+definition snippet with unresolved references
 	at .foo(#4:3)
 	at .(#5:1)
 ```
@@ -159,13 +162,26 @@ This is not immediately recognizable for a novice - especially if he or she just
 
 Fortunately, we can augment the error messages and stack traces with global line numbers.
 For this, we need a `Map<String,Integer>`, that maps from the unique snippet id (which can be obtained by the method [`Snippet.id()`](https://docs.oracle.com/javase/10/docs/api/jdk/jshell/Snippet.html#id())) to the line number where this snippet starts in the source file.
-For `Diag` objects this is straightforward, since we can retrieve the character position of the error and the source string of the snippet from the JShell instance.
+
+```java
+Map<String, Integer> globalLineNumbers = new HashMap<>();
+int lnr = 0;
+for(String source: snippets) {
+    List<SnippetEvent> events = shell.eval(source);
+    for(SnippetEvent e: events) {
+        globalLineNumbers.putIfAbsent(e.snippet().id(), lnr);
+    }
+    lnr += source.split("\\n|(\\r\\n?)").length - 1;
+}
+```
+
+For `Diag` objects the conversion of line numbers is straightforward, since we can retrieve the character position of the error and the source string of the snippet from the JShell instance.
 For exceptions the case is a little bit trickier, but since we use the snippet id in our map, we can use the methods [`getStackTrace()`](https://docs.oracle.com/javase/10/docs/api/java/lang/Throwable.html#getStackTrace()) and [`setStackTrace(StackTraceElement[])`](https://docs.oracle.com/javase/10/docs/api/java/lang/Throwable.html#setStackTrace(java.lang.StackTraceElement%5B%5D)) of the `Throwable` interface.
 We can also throw our own exception and pass the original `JShellException` as the cause so that the student is able to locate the error both within the unit test and within his or her own code.
 
 With this, we can create error messages such as this one (for static errors)
 
-```
+```text
 Compiler error in following snippet:
 ##### Snippet start #####
  1|if (true) {
@@ -181,9 +197,9 @@ incompatible types: possible lossy conversion from long to int
 
 or this one (for dynamic exceptions; note that for JUnit tests the stack trace is much longer than in this example)
 
-```
-Exception in thread "main" JShellTestException: An java.lang.NullPointerException occurred during the
-execution of your JShell code.
+```text
+Exception in thread "main" JShellTestException: An java.lang.NullPointerException
+occurred during the execution of your JShell code.
 
 Hint: To find out, which test failed you can look at the next entry
 after the method 'expressionResult'. If 'expressionResult' is not in
@@ -209,7 +225,7 @@ jshell> if (true) {
 |        at (#1:1)
 ```
 
-The exception says the exception occurred on line one, but in the multiline snippet that we entered, the error that caused the exception is actually on line three.
+The message says the exception occurred on line one, but in the multiline snippet that we entered, the error that caused the exception is actually on line three.
 
 Funny enough, a single additional newline "fixes" this problem, but I have yet to find any consistent pattern when this error occurs and when it does not.
 
