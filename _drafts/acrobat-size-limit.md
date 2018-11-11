@@ -3,7 +3,6 @@ layout: post
 title:  "Acrobat Reader has a maximum document size"
 description: >
     Do you want to convert a large vector graphics file to PDF for printing? It should better not exceed 5080mm in width or height, or otherwise the Acrobat Reader will crop the edges when it is displayed.
-date:   2017-11-14 16:02 +0200
 categories:
     - private project
 ---
