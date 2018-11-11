@@ -4,7 +4,6 @@ title:  "Was macht eine \"gute\" Aufgabe aus?"
 description: >
     Es gibt gute Aufgaben, die Spaß machen und erleuchten und schlechte Aufgaben, die bestenfalls langweilig und mühsam und schlimmstenfalls auch noch verwirrend sind.
     Was trennt die guten von den schlechten und wie können wir sicherstellen, dass unsere Aufgaben zu den ersteren gehören?
-date:   2017-11-14 16:02 +0200
 ref: exercise-tutorial
 lang: de
 categories:
@@ -21,7 +20,7 @@ Trotzdem blieb die Aufgabe natürlich herausfordernd - besonders, da es nicht so
 
 Aus diesem Grund habe ich mir die Zeit genommen, dieses Tutorial zu verfassen, was ich nun hier mit der Welt teilen möchte.
 Dies ist die originale deutsche Version.
-Ich habe das Dokument auch [möglichst wortgetreu ins Englische übersetzt]({{ site.baseurl }}{% post_url XXX-XX-XX-exercise-tutorial %}).
+Ich habe das Dokument auch [möglichst wortgetreu ins Englische übersetzt]({{ site.baseurl }}{% post_url 2018-11-11-exercise-tutorial %}).
 
 ## 0 Einführung
 
