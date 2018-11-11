@@ -13,7 +13,7 @@ categories:
     - german
 ---
 
-For my course in algorithms and datastructures in summer semester 2017 I knew that I would not have the time to create both a completely fresh set of slides and a sufficient amount of mandatory exercises - let alone enough bonus exercises for the gamification concept that I had in mind.
+For my course in algorithms and data structures in summer semester 2017 I knew that I would not have the time to create both a completely fresh set of slides and a sufficient amount of mandatory exercises - let alone enough bonus exercises for the gamification concept that I had in mind.
 
 My solution was to hire a lot of tutors and let *them* create the exercises.
 I knew they could do it, since they were among the best students that I met in my previous semesters, but the task remains quite hard.
@@ -21,7 +21,7 @@ Especially since it is not so easy to define what makes one exercise good and an
 
 For this purpose I chose to invest the time to write a tutorial.
 I would like to share the result with you here.
-The original version was of course in german, but I did my best to translate it to english.
+The original version was of course in German, but I did my best to translate it to English.
 
 
 ## 0. Introduction
@@ -176,7 +176,7 @@ There are a few basic tips that may help with this task:
 
 * *Use the correct terms.* All the strange domain-specific words are there to make sure that both sides know exactly what the other person is talking about.
 * *Avoid wrong or alternative uses of domain-specific terms at all costs*. As mentioned about, domain-specific terms usually have a clear definition. You cannot use these terms loosely in an exercise text.
-* *Avoid using different terms for the same concept throughout the text.* Even if we do not talk about domain-specific terms, it can be confusing when a list is referred to as a "list", then as an "array" and then maybe as a "vector". If we are talking about array lists, all three terms are appropriate, but this does not make it evident that the author really means the same concept with each term. For german exercises you can also refer to the "exercise operators": The same task should use the same operator (see the [list from the hessian cultural ministry](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf))
+* *Avoid using different terms for the same concept throughout the text.* Even if we do not talk about domain-specific terms, it can be confusing when a list is referred to as a "list", then as an "array" and then maybe as a "vector". If we are talking about array lists, all three terms are appropriate, but this does not make it evident that the author really means the same concept with each term. For German exercises you can also refer to the "exercise operators": The same task should use the same operator (see the [list from the Hessian cultural ministry](http://informatik.archenhold.de/bk14alle/dateien/operatorliste.pdf))
 
 ### 4.2. Understandable
 
@@ -225,41 +225,46 @@ Therefore it always makes sense to look for suggestions in preexisting material.
 
 ## Checklist
 
-Ich gehe davon aus, dass niemand den Nerv hat, dieses Dokument mehr als einmal ganz durchzulesen. Daher versuche ich den Inhalt hier noch einmal in einer TLDR-Variante als Checkliste zusammenzufassen:
+I assume that nobody wants to read this document in full more than once.
+Therefore I try to summarize the content here in a TLDR-variant as a checklist:
 
-- [ ] Entscheidung: Reproduktion, Anwendung oder Transfer?
-- [ ] Lernziele aufschreiben
-- [ ] Vorhandene Vorkenntnisse aufschreiben
-- [ ] Zeitlichen Soll-Aufwand bestimmen
-- [ ] In alten Aufgaben nach Ideen suchen
-- [ ] Brainstorming nach neuen Ideen
-- [ ] Musterlösung erstellen (zeitlichen Ist-Aufwand festhalten)
-- [ ] Grobe Ausarbeitung
-- [ ] Bewertungskriterien und Feedbackform festlegen
-- [ ] Ausformulierung: eindeutig, verständlich, korrekt und erklärend
-- [ ] Korrigieren, reduzieren, verbessern
+- [ ] Decide: Reproduction, application or transfer?
+- [ ] Write down learning goals
+- [ ] Write down what topics your students are already familiar with
+- [ ] Determine desired expenditure of time
+- [ ] Search for ideas in old exercises
+- [ ] Brainstorming for new ideas
+- [ ] Create a sample solution (measure actual expenditure of time)
+- [ ] Coarse draft
+- [ ] Determine scoring scheme and form of feedback
+- [ ] Finalize draft: unambiguous, comprehensible, correct, explanatory
+- [ ] Correct, reduce, improve
 
 ***
 
-## Beispiele
+## Examples
 
-### Allgemeiner Hinweis
+### General Remark
 
-Die folgenden Beispiele sind alle aus echten Aufgaben entnommen. Meistens handelt es sich dabei um meine eigenen Formulierungen, manchmal aber auch um die von anderen Lehrenden. Natürlich sind meine immer nur die Positivbeispiele. :stuck_out_tongue:
+The following examples all stem from real exercises.
+Most of the time the wording is my own, but sometimes it is taken from other lecturers.
+Of course my examples are the positive ones. :stuck_out_tongue:
 
-### Beispiel 1: Der Begriff *Literal*
+### Example 1: The term *literal*
 
->Nenne 4 der 8 primitiven Typen von Java. Gib jeweils ein Beispiel an, wie ein Literal des entsprechenden Typs in korrekter Java-Syntax aussehen könnte.
+> Name 4 of the 8 primitive types in Java. Give an example, how a literal of the given type could look in correct Java syntax.
 
-Wichtig ist hier, dass tatsächlich der korrekte Begriff *Literal* verwendet wird. In einer älteren Version lautete die Aufgabe in etwa wie folgt:
+The important part is that the correct term *literal* is used in the exercise description.
+In an older version the wording was the following:
 
-> Nenne die 8 primitiven Typen von Java und gib für jeden Typ ein Beispiel für einen legalen Wert an.
+> Name all 8 primitive types in Java and give an example of a legal value for each type.
 
-Wenn nur nach dem Wert gefragt wird, ist nicht klar, *wie* dieser Wert aufgeschrieben werden soll. Für `float` wäre also `0,5` genau so korrekt gewesen wie `0.5` oder (was als einziges dem entspricht, was *gemeint* war) `0.5f`.
+If you only ask for a value it is not clear *how* this value should be written down.
+For `float`, for example, `0,5` (following the German convention for writing floating point numbers) would be as correct as `0.5` or (the actual solution that was expected) `0.5f`.
 
-### Beispiel 2: Eindeutigkeit in diesem Text
+### Example 2: Unambiguity in this text
 
-Dieser Text hatte in seiner ersten Version ein Problem mit der Eindeutigkeit. 
+The text that you are reading now had some problems regarding uniqueness in it's first (German) version.
 
 ># Wie schreibt man eine gute Übungsaufgabe?
 >
@@ -267,32 +272,42 @@ Dieser Text hatte in seiner ersten Version ein Problem mit der Eindeutigkeit.
 >
 >Mit diesem Dokument möchte ich versuchen eine "Anleitung" zum Erstellen von guten Übungsaufgaben zusammenzustellen [...].
 
-Was fällt bei dieser Textpassage auf? Ich rede einmal vom *Schreiben*, dann vom *Formulieren* und dann wieder vom *Erstellen* von Übungsaufgaben.
-Ich könnte mich damit herausreden, dass ich das gemacht habe, um die Formulierungen im Text abwechslungsreicher zu gestalten, aber das war nicht der Fall.
-Ich habe schlicht und ergreifend nicht darauf geachtet.
-Das Problem ist noch nicht so schlimm, aber trotzdem habe ich versucht, es in dieser Version zu beheben - zumal das *Formulieren* wirklich missverständlich einmal als Teilbegriff und einmal für das gesamte Erstellen von Übungsaufgaben verwendet wurde.
+Translated this would read as follows:
 
-### Beispiel 3: Uneindeutige Aufgabenstellung
+># How do you write a good exercise?
+>
+>The wording of good exercise descriptions is among the hardest tasks of a teacher. [...]
+>
+>With this document I want to give you my best shot at creating a "tutorial" on how to create good exercises. 
 
->Gegeben seien die folgenden Java-Klassen:
+What stands out for you in this text passage?
+First, I talk abou *writing*, then about *wording* and finally about *creating* exercises.
+I could make excuses that I did this to make the wording of the text more varied, but that was not the case.
+I simply did not pay attention.
+The problem is not really grave, but I tried to fix it in this version - especially since I actually used *wording* ambiguously both as a part of the exercise creation process and to refer to the whole process itself.
+
+### Example 3: Ambiguous exercise description
+
+>Look at the following Java classes:
 >
 >```java
->public class Mensch implements Benannt { [...] }
->public class Haustier implements Benannt { [...] } 
+>public class Human implements Named { [...] }
+>public class Pet implements Named { [...] } 
 >```
 >
->Implementieren Sie das Interface Benannt in Java, das die Gemeinsamkeiten aller benannten Objekte zusammenfasst.
+>Implement the interface Named in Java, that summarizes the commonalities of all named Objects.
 
-Diese Aufgabe tauchte so (natürlich mit ein wenig mehr Inhalt in den Klassen) in einer OOP-Klausur auf.
-Wir mussten die Aufgabe streichen, weil die Formulierung "Implementieren Sie das Interface" missverständlich war.
-Gemeint war natürlich den Inhalt der Datei `Benannt.java` anzugeben, die eine entsprechende Interface-Deklaration enthalten sollte.
-Man hätte die Aufgabe aber auch so interpretieren können (und manche Studierenden haben das getan), dass man noch eine *Klasse* schreiben sollte, die ebenfalls `Benannt` implementiert.
+The exercise appeared like this (of course with more content in the classes) in an OOP-exam.
+We had to rule out the exercise, because the wording "Implement the interface" was ambiguous.
+We meant that the students should provide the content of a file named `Named.java` that should contain an interface declaration.
+However, you also could (and some students did) think, that you had to write a *new class* that also implements the interface `Named`.
 
-### Beispiel 4: Komplizierter als gedacht - Regex
+### Example 4: More complicated than expected - Regex
 
->Geben Sie einen regulären Ausdruck an, der E-Mail-Adressen erkennen kann.
+>Write down a regular expression that can recognize e-mail addresses.
 
-Klingt unschuldig als Aufgabe, oder? Diese Aufgabe hat aber [keine korrekte Lösung](http://www.regular-expressions.info/email.html) und die bestmögliche Lösung sieht so aus:
+Sounds innocent enough, right?
+However, this exercise [has no correct answer](http://www.regular-expressions.info/email.html) and the best possible answer looks like this:
 
 ```
 \A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*
@@ -306,41 +321,43 @@ Klingt unschuldig als Aufgabe, oder? Diese Aufgabe hat aber [keine korrekte Lös
      \])\z
 ```
 
-### Beispiel 5: Komplizierter als gedacht - Java
+### Exercise 5: More complicated than expected - Java
 
-Ein beliebtes Minimalbeispiel für Threads in Java ist ein Chatserver.
-Es sollte doch nicht sehr viel mehr Aufwand sein, einen Server zu schreiben, der statt Chatnachrichten Pixelkoordinaten an den Server schickt, sodass der Server diesen Pixel auf seinem Display-Fenster mit einer dem Client zugewiesenen Farbe füllt, oder?
+A popular minimal example for threads in Java is a chat server application.
+It should not require that much more effort to write a server that sends pixel coordinates instead of chat messages letting the server display them in a window with a color that it assigns to the client, right?
 
-Wieder einmal falsch gedacht: Wie man es auch dreht und wendet, selbst der einfachste (single-threaded) Java-Client braucht dazu mehr als 100 Zeilen Code und, wenn man den Server mit weiteren 500 Zeilen nicht zur Aufgabe mit dazu nimmt, kann man mit der Aufgabe die Grundkonzepte des Threading nicht sinnvoll vermitteln.
+Wrong again: However you put it, even the simplest (single threaded) Java client needs at least 100 lines of code.
+And if you do not include the server with another 500 lines of code to the exercise, it is not possible to convey the main concepts of threading to the students.
 
-### Beispiel 6: Klarheit durch Einschränkung
+### Example 6: Clarity by restriction
 
->Schreiben Sie ein Java-Programmfragment, das alle Teiler einer ganzen Zahl ausgibt.
->Die Zahl darf dabei direkt als Literal im Code angegeben werden.
+>Write a Java code fragment that outputs all divisors of a number.
+>The number may be included directly as a literal in your code.
 
-Der zweite Satz ist entscheidend – insbesondere wenn es sich um eine Klausur handelt. Ansonsten könnten Studierende auf die Idee kommen, sie müssten mit einer `Scanner`-Klasse oder Kommandozeilenparametern hantieren.
+The second sentence is crucial - especially in an exam.
+Otherwise, students could think that they would have to write additional code using a `Scanner` or parsing command line parameters.
 
-### Beispiel 7: Einführung eines neuen Konzepts in einer Aufgabenstellung
+### Example 7: Introducing a new concept within an exercise description
 
->## Aufgabe 6: Experimente mit Varargs
->Ein Varargs-Parameter stellt eine Möglichkeit dar, eine Funktion mit beliebig vielen Parametern zu definieren.
->Als Benutzer der Funktion kann man einfach normal mit Komma getrennt so viele Argumente übergeben wie man möchte. Als Entwickler der Funktion geht man mit dem Varargs-Parameter um wie mit einem normalen Array.
->Das folgende Beispiel zeigt eine Funktion, die die Summe von beliebig vielen Integer-Werten bildet:
+>## Exercise 6: Experimenting with varargs
+>A varargs parameter allows to define a function with arbitrarily many parameters.
+>As caller of the function you can simply input as many arguments as you want separated by a comma.
+>The following example shows a function that calculates the sum of arbitrarily many integer values:
 >
 >```
->// Code-Beispiel
+>// code example
 >```
 >
 >### 6.1 Min+Max
->Schreiben Sie nun selbst zwei Funktionen `max` und `min` mit Varargs-Parameter, die das Maximum und das Minimum von beliebig vielen ganzen Zahlen bestimmen können.
+>Now write the varargs functions `min` and `max` that calculate the minimum and maximum of arbitrarily many integers.
 
-Dank der vorherigen Erklärung sind Studierende (hoffentlich) in der Lage, die Aufgabe 6.1 zu lösen, indem sie ihr bisheriges Wissen über Arrays und Schleifen auf das für sie neue Konzept *Varargs* transferieren.
+Thanks to the previous explanation, students will (hopefully) be able to solve exercise 6.1 by transferring their knowledge about arrays and loops to the new concept *varargs*.
 
-### Beispiel 8: Versteckte Rechercheaufgabe
+### Example 8: Hidden research exercise
 
 >### Continue
->Vervollständigen Sie die Methode safeSum, die die Werte eines Arrays vom Typ double aufsummiert, so dass Einträge mit dem Wert NaN ignoriert werden.
->Verwenden Sie dazu eine `continue`-Anweisung;
+>Complete the method safeSum that sums values of an array of type double so that entries with the value NaN are ignored.
+>Use the `continue` statement.
 >
 >```
 >double safeSum(double[] ar) {
@@ -352,33 +369,37 @@ Dank der vorherigen Erklärung sind Studierende (hoffentlich) in der Lage, die A
 >}
 >```
 
-Das Besondere an dieser Aufgabe ist, dass sie ein neues Konzept beibringt, ohne es zu erklären, indem Sie die Studierenden zuerst einmal verwirrt.
-Das Einfügen von `if (ar[i] == Double.NaN) continue;` löst das Problem nämlich nicht.
-Nur wer durch gutes Testen oder Nachfragen die Ursache für den Fehler sucht, wird erfahren, dass Vergleiche mit `NaN` *immer* `false` ergeben - selbst bei `Double.NaN == Double.NaN`.
-Deshalb braucht man die Methode `Double.isNaN` - ein Fakt an den die Studierenden sich hoffentlich erinnern, weil die Aufgabe sie genau vor dieses Problem gestoßen hat.
+The interesting part of this exercise is that it teaches a new concept without explaining it by confusing the students first.
+Namely, adding `if (ar[i] == Double.NaN) continue;` does not solve the problem.
+Only the students who search for the error by writing good test cases or asking questions will learn that comparisons with `NaN` will *always* evaluate to `false` - even with `Double.NaN == Double.NaN`.
+This is the reason why you need the method `Double.isNaN` - a fact that the students will hopefully remember since the exercise presented them with exactly this problem.
 
-### Beispiel 9: Begriffsverwirrung
+### Example 9: Confusing terms
 
->Die zu testende Methode bekommt als Parameter ein String-Array übergeben. Mit welchen Parametern testen Sie die Methode ?
+>A String array is passed to the method that should be tested. 
+>Which parameters do you use to test the method?
 >
->- [ ] Mit einem deklarierten String-Array
->- [ ] Mit einem initialisierten String-Array
->- [ ] Mit einem initialisierten String-Array, welches null-Werte besitzt
->- [ ] Mit einem deklarierten char-Array
->- [ ] Mit einem initialisierten Character-Array
+>- [ ] a declared String array
+>- [ ] an initialized String array
+>- [ ] an initialized String array that has null values
+>- [ ] a declared char array
+>- [ ] an initialized Character array
 
-Diese Frage ist nicht per se schlecht.
-Die Idee ist gut, aber es ist fragwürdig, ob sofort jeder Studierende versteht, was ein "initialisiertes Array" ist oder versteht, dass "deklariert" in diesem Fall mit "nicht-initialisiert" gleichzusetzen ist.
+The question is not bad per se.
+The idea is good, but it is questionable if every student will understand what an "initialized array" is or if he or she understands that "declared" is synonymous with "not initialized" in this case.
 
-Man könnte die Aufgabe verbessern, indem man konkrete Codezeilen angibt und fragt, ob es sich bei diesen Aufrufen um sinnvolle Testfälle handelt.
+You could improve the exercise by giving specific lines of code and ask if they constitute sensible test cases.
 
-Außerdem ist bei dieser Frage zweifelhaft, ob wirklich die richtige Botschaft bei den Studierenden ankommt.
-Die Frage sollte vermutlich als Ziel haben, sinnvolle von weniger sinnvollen Testfällen zu unterscheiden.
-Da hätte man auf jeden Fall noch auf andere Randfälle bzw. eben auf unnötige Variationen gleicher Fälle oder ähnliches eingehen können und müssen.
+Additionally it is questionable if the exercise really transports the correct message to the students.
+The question probably should teach to distinguish sensible from pointless test cases.
+If this is the goal, it should and would have had to mention other corner cases, unnecessary variations or similar problems.
 
-### Beispiel 10: Zu freie Aufgabe
+### Example 10: Too loose exercise
 
->Simuliere einen Aufzug in einem Hochhaus. Der Benutzer soll in jedem Stockwerk auf einen Knopf drücken können, um den Aufzug zu rufen. Was macht der Aufzug, wenn er zu mehreren Stockwerken gleichzeitig gerufen wird?
+>Simulate an elevator in a skyscraper.
+>The user should be able to press a button in each story to call the elevator.
+>What does the elevator do if it is called to multiple stories at the same time?
 
-Diese Aufgabe stammt aus der aktuellen Aufgabensammlung für den Brückenkurs. Sie ist eigentlich keine fertige Aufgabe, sondern mehr eine Anregung - eine grobe Idee, was für ein Programm man schreiben könnte.
-Würde diese Aufgabe so auf einem tatsächlichen Übungsblatt auftauchen, wäre eine Bewertung fast unmöglich, weil es keinerlei klare Rahmenbedingungen gibt (Wie viele Stockwerke? Wie lange darf ein Benutzer maximal warten? ...).
+This exercise stems from the current exercise pool for our bridging course.
+It is not really a finished exercise, but more a suggestion - a coarse idea of a program that you could write.
+If this exercise was used on an actual exercise sheet, grading it would be nearly impossible because there are no clear determining factors (how many stories, how long may a user wait, ...).
