@@ -40,18 +40,19 @@ public class Mergesort {
         merge(ar, from, middle, to);
     }
     public static void merge(int[] ar, int from, int middle, int to) {
-        int[] old_values = Arrays.copyOfRange(ar, from, to);
+        int[] left = Arrays.copyOfRange(ar, from, middle);
+        int[] right = Arrays.copyOfRange(ar, middle, to);
         int left_index = 0;
-        int right_index = middle - from;
+        int right_index = 0;
         for(int i = from; i < to; i++) {
-            boolean more_left = left_index < middle - from;
-            boolean more_right = right_index < to - from;
-            boolean left_smaller = more_left && more_right && old_values[left_index] < old_values[right_index];
+            boolean more_left = left_index < left.length;
+            boolean more_right = right_index < right.length;
+            boolean left_smaller = more_left && more_right && left[left_index] < right[right_index];
             if (!more_right || left_smaller) {
-                ar[i] = old_values[left_index];
+                ar[i] = left[left_index];
                 left_index++;
             } else {
-                ar[i] = old_values[right_index];
+                ar[i] = right[right_index];
                 right_index++;
             }
         }
