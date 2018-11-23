@@ -3,8 +3,8 @@ layout: post
 title:  "Plagiarizing a Java mergesort correctly"
 description: >
     If you plagiarze, you can at least do it properly! Most online examples for the mergesort algorithm in Java are much too complicated to be really understandable for a beginner. With this post I want to provide a better option - hopefully for understanding the algorithm, but at least for plagiarizing it.
-ref: exercise-tutorial
-lang: de
+ref: mergesort
+lang: en
 categories:
     - teaching
     - java
