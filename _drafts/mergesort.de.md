@@ -273,9 +273,16 @@ Natürlich ist die Frage, ob das linke Element kleiner als das rechte ist nur da
 
 ## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
 
+Wenn in einem Stück Code von Student\*in A ein `@author Student*in B` auftaucht, der Paketname `package com.java2novice.sorting` lautet oder ausführliche englische Kommentare aus dem Original mitkopiert wurden, dann fühle ich mich als Dozent schon ein wenig beleidigt.
+Wenn man schon plagiiert, dann kann man sich doch ein Mindestmaß an Mühe geben, das zu verschleiern.
+Für wie blöd halten mich meine Studierenden eigentlich?
 
+Darum die oberste Regel: **Lies den Scheiß, den du kopierst wenigstens einmal durch!**
+Du musst ja nicht alles begreifen, aber die offensichtlichsten Hinweise auf die Quelle kann man leicht entfernen.
+Und wenn man dann von seine*r Dozent*in eingeladen und gefragt wird, was man sich denn bei dem Ausdruck `arr[r + q + 1 - j] = intArr[j];` gedacht hat, ist "Öhm, keine Ahnung? Aber es funktioniert!" nicht die beste Antwort, um den Kopf aus der Schlinge zu ziehen. :wink:
 
-Jetzt muss ich aber noch ein wenig über die Lösungen meckern, die online zu finden sind und die immer wieder als Plagiate eingereicht werden:
+In diesem Zuge möchte ich mir jetzt einmal den Spaß machen, aufzulisten, wo die am häufigsten verwendeten Onlinequellen dem geneigten Plagiator diesbezüglich überall ein Bein stellen.
+Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate eben nie wegen klaren Codezeilen auffallen, sondern wegen denen die seltsam, unnötig oder fehlerhaft sind.
 
 #### [GeeksforGeeks](https://www.geeksforgeeks.org/merge-sort/)
 
@@ -382,9 +389,53 @@ Wenn man sich die vier Beispiele so anschaut bekommt man übrigens durchaus den 
 
 ## Dritte Regel des Plagiierens: Lies die verdammte Aufgabenstellung!
 
+Wie, noch mehr Lesen?
+Ja, Lesen hilft.
+Die Deutschnote ist laut einigen didaktischen Studien ein besserer Prädiktor für den Erfolg im Informatikstudium als die Mathenote.
+Vielleicht weil man Aufgabenstellungen erst einmal *lesen* könen muss, bevor man sie lösen kann?
+
+Was meine ich damit? Meistens ist sich die Person, die die Aufgabe gestellt hat, völlig bewusst, dass es im Internet hunderte verschiedene Mergesort-Implementierungen in Java zum Download gibt.
+Die einfachste Lösung für das Problem ist es, kleine "Fallen" in die Aufgabenstellung einzubauen, so dass eine 1:1-Kopie eben nicht ausreicht.
+
+Meistens handelt es sich dabei um Veränderungen, bei denen man Methodenaufrufe zählen oder eine Laufzeitmessung unternehmen muss.
+(*Protip: Das Kopieren von exakten bis auf die Millisekunde identischen Laufzeiten ist ziemlich auffällig - ganz besonders dann, wenn auch noch Zeiten von einem Testfall aus dem Vorsemester aufgeschrieben werden, der in diesem Semester gar nicht mehr verlangt wird.*)
+
+Die versprochene Variante, die du weiter unten in diesem (zugegebenermaßen viel zu langen) Post findest, kann mit den meisten Änderungen dieser Art super umgehen.
+Wenn das nichts hilft, musst du eben doch Hand an den kopierten Code anlegen.
+In der Regel sind auch nur ein paar Zeilen an der richtigen Stelle nötig (am Anfang oder Ende der Methoden).
+Ein ganz klein wenig musst du dafür aber schon kapieren, was die Methoden eigentlich machen.
+Und das führt uns zum nächsten Punkt.
+
 ## Vierte Regel des Plagiierens: Wer gut plagiieren kann, braucht es eigentlich nicht.
 
 Und wer es nicht gut kann, dem bringt es auch nichts, weil es nämlich sowieso auffliegt.
+Das ist die traurige (oder aus Dozent\*innensicht tröstliche) Realität.
+
+Ich schildere hier einmal, was es aus meiner Sicht braucht, um bei einem Plagiat wirklich sicher zu sein:
+Der Code darf nicht 1:1 kopiert sein - auch nicht in größeren Teilen.
+Das fällt sofort auf.
+Ein einfaches Umbenennen von Variablen reicht auch nicht.
+Variablennamen sind im Kopf des oder der Dozent\*in sowieso austauschbar und es gibt sehr zuverlässige Plagiatssoftware, die ebenfalls Namen ignoriert.
+Das gleiche gilt auch für das Vertauschen von Zeilen, deren Reihenfolge unwichtig ist.
+Entweder musst Du also wirklich einen Teil des Programms, den du gut genug verstehst, nach deinem eigenen Stil neu schreiben, oder du musst Code kopieren, der wirklich keine unnötigen oder stilistisch auffälligen Passagen besitzt - eben Code, bei dem es wirklich glaubhaft ist, dass zwei Studierende auf genau die gleiche Idee gekommen sind.
+In letzterem Fall wird aber trotzdem die Plagiatssoftware oder der Spinnensinn des oder der Dozent\*in anschlagen.
+In so einem Fall entscheiden wir normalerweise danach, ob der oder die Student\*in in der Lage ist, den Code zu erklären.
+
+Unter dem Strich heißt das also, dass Du den Code entweder gut genug verstehen musst, um wesentliche Teile davon abzuändern, oder um ihn im Gesamten zu erklären.
+Wenn Du das nicht kannst, ist das Risiko sehr hoch, dass das Plagiat auffällt und Du echte Probleme für dein weiteres Studium bekommen kannst.
+Wenn Du das aber kannst, dann behaupte ich an dieser Stelle einfach einmal, dass Du es auch schaffst, eine eigene Lösung für die Aufgabe zu schreiben, ohne zu plagiieren.
+
+Was bleibt Dir also noch übrig, wenn das eben doch nicht der Fall ist?
+Ich sehe drei mögliche Lösungen:
+
+* Du setzt dich doch noch einmal an deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine*r Kommiliton*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
+* Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin. (z.B. `\* Idee von http://arbitrary-but-fixed.net/ \*`)
+    Damit handelt es sich um ein Zitat und kein Plagiat.
+    Es kann sein, dass du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (nicht-Bestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
+* Du gibst eine unfertige Lösung ab.
+    Dozent*innen und Tutor*innen sind keine Monster.
+    Wir geben so viele Teilpunkte, wie wir irgendwie rechtfertigen können.
+    Es muss nicht immer alles perfekt sein.
 
 ### Übliche Probleme
 
