@@ -35,7 +35,7 @@ public class Mergesort {
         // subarrays of size 1 and 0 cannot be unsorted
         if (remaining_length <= 1) return;
         int middle = (from + to) / 2;
-        sort(ar, 0, middle);
+        sort(ar, from, middle);
         sort(ar, middle, to);
         merge(ar, from, middle, to);
     }
@@ -73,6 +73,36 @@ public class Mergesort {
 Liest Du immer noch weiter?
 Gut! Wenn Du bis zum Ende durchhaltest, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein Dozent vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
 
+## Nullte Regel des Plagiierens: Das Plagiat ist das Symptom, nicht die Krankheit.
+
+Warum plagiiert jemand bei einer Hausübung?
+*Willst* Du plagiieren, oder glaubst du, dass du es *musst*, um zu bestehen?
+Ich persönlich glaube, dass fast immer letzteres der Fall ist.
+Niemand, der in der Lage ist, eine Aufgabe in kurzer Zeit auf normalem Wege zu lösen, entscheidet sich stattdessen einfach eine Lösung zu kopieren.
+Ich glaube also hinter dem Plagiat steht immer ein anderes Problem.
+Vermutlich eins der Folgenden:
+
+* **Du besitzt tatsächlich nicht die Fähigkeiten, die Aufgabe zu lösen.**
+    Vielleicht hast Du schon Schwierigkeiten mit Themen, die aus vergangenen Semestern vorausgesetzt werden; oder du stößt einfach an eine Verständnisgrenze, wo dir die informatisch-algorithmische Denkweise, die für die Lösung nötig wäre, zu fremd ist, um sie nachzuvollziehen.
+    In diesem Fall ist die Frage angemessen: Ist Informatik der richtige Studiengang für dich?
+    Also ist das *wirklich* ein Fach, für das du dich begeisterst, und bei dem du dir vorstellen kannst, ein Leben lang damit zu arbeiten?
+    Warum nich Germanist\*in, Physiker\*in, Mechatroniker\*in oder Konditor\*in?
+    Die Frage ist ernst und in keinster Weise abwertend gemeint.
+* **Du hast die nötigen Fähigkeiten, aber Dir fehlt die Zeit.**
+    Dann bekomm Dein Leben auf die Reihe!
+    Ein Studium und die damit verbundene Selbstständigkeit bringt so viele neue persönliche Probleme mit sich.
+    Klar, dass da mal das ein oder andere Modul auf der Strecke bleiben kann.
+    Vielleicht müssen es nicht jedes Semester 30 Creditpoints sein?
+    Vielleicht ist die PvP-Meisterschaft im Spiel Deiner Wahl auch nicht so wichtig, wie sie zu Beginn des Semesters erschien. 😉
+    Überleg dir deine Prioritäten und gestalte dein Studium entsprechend.
+* **Eigentlich weißt du, was du tun musst, aber der Rechner will nicht so, wie du.**
+    Du hast die Lösung fast hinbekommen, aber da ist dieser eine Bug, der ums Verrecken nicht verschwinden will.
+    Das kann darauf hinweisen, dass Dir einfach (noch) die Techniken zum systematischen Debuggen fehlen.
+    Informatik hat viel mit Frustrationstoleranz, richtigem (!) Googeln und akribischem sezieren von Code zu tun.
+    All diese drei Dinge wollen gelernt sein.
+    Habe keine Angst, deinen unfertigen hässlichen Code jemandem zu zeigen - deine\*n Dozent\*in eingeschlossen.
+    Nur durch Fehler und Feedback kannst Du etwas dazulernen.
+
 ## Erste Regel des Plagiierens: Einfachheit ist Trumpf!
 
 Warum halte ich meinen obigen Code für besser als den von [GeeksforGeeks](https://www.geeksforgeeks.org/merge-sort/), [Vogella](http://www.vogella.com/tutorials/JavaAlgorithmsMergesort/article.html), [Baeldung](https://www.baeldung.com/java-merge-sort) oder [Java2Novice](http://www.java2novice.com/java-sorting-algorithms/merge-sort/)?
@@ -80,7 +110,12 @@ Zunächst einmal müssen wir klarstellen, was hier "besser" heißt: Mein Code is
 Ich habe aber versucht, ihn *verständlicher* für Java-Einsteiger zu schreiben.
 (Und seien wir mal ehrlich: Für eine performante Version nehme ich eine fertige Library und [Code-Golf](https://en.wikipedia.org/wiki/Code_golf) führt selten zu schönen Lösungen.)
 
-Die beste Möglichkeit, diese Einfachheit zu demonstrieren, ist aus meiner Sicht, den Code und damit den Algorithmus zu erklären.
+Warum sollte man sich als Plagiator scheren, ob der Code, den man kopiert einfach oder kompliziert ist?
+Zwei Gründe: Erstens kannst Du den Code sowieso nicht exakt so abgeben, weil dein Dozent vermutlich eine leicht andere Schnittstelle fordert, oder eine Zeitmessung, oder oder oder.
+Zweitens wird das Plagiat sowieso auffallen.
+Retten kannst Du dich nur, indem du nachher in der Lage bist, sauber zu erklären was der Code tut und warum du ihn (angeblich) so geschrieben hast, wie er da steht.
+
+Um jetzt zu demonstrieren, warum ich meinen Code für einfacher halte, werde ich ihn erst erklären und dann auf den Dingen herumhacken, die die anderen Optionen aus dem Internet unnötig kompliziert bzw. auffällig schlecht machen.
 
 ### Erklärung: Sort und die Rekursion
 
@@ -197,7 +232,7 @@ int[] left = Arrays.copyOfRange(ar, from, middle);
 int[] right = Arrays.copyOfRange(ar, middle, to);
 ```
 
-Wir könnten das zwar auch mit einer eigenen Schleife machen, aber warum sich den Aufwand machen und den Code zu verkomplizieren? Ein Hoch auf die Utility-Klassen [`Arrays`](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html), [`Collections`](https://docs.oracle.com/javase/10/docs/api/java/util/Collections.html), [`Files`](https://docs.oracle.com/javase/10/docs/api/java/nio/file/Files.html) und Co!
+Wir könnten das zwar auch mit einer eigenen Schleife machen, aber warum sich den Aufwand machen und den Code verkomplizieren? Ein Hoch auf die Utility-Klassen [`Arrays`](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html), [`Collections`](https://docs.oracle.com/javase/10/docs/api/java/util/Collections.html), [`Files`](https://docs.oracle.com/javase/10/docs/api/java/nio/file/Files.html) und Co!
 
 Für unser Reißverschlussverfahren merken wir uns jetzt jeweils, wo wir uns in `left` und `right` gerade befinden.
 
@@ -251,6 +286,11 @@ Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vie
     Diese Ausnahme kann viele Gründe haben, heißt aber immer, dass irgendwo eine Indexberechnung schief gegangen ist - vermutlich bei der oberen Grenze für den rechten Index oder den Gesamtindex in `merge`.
     Hier hilft vor Allem systematisches Debuggen: Such dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
     Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn du dir sicher bist, dass `merge` sauber funktioniert.
+* Der Algorithmus hängt in einer Endlosschleife?
+    Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
+    `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
+    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen.
+    (Ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`.)
 * Der Algorithmus läuft durch, sortiert aber nicht richtig?
     Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
     Eventuell kann hier irgendwo ein `+1` oder `-1` Wunder wirken.
@@ -281,7 +321,7 @@ Jetzt muss ich aber noch ein wenig über die Lösungen meckern, die online zu fi
 * Zwei `while`-Schleifen statt einer `for`-Schleife.
 * `i`, `j`, `k`, ... Ja, es sind Zählvariablen, aber manchmal verdienen auch Zählvariablen eine semantische Benennung.
     Besonders dann, wenn sie manuell hochgezählt werden!
-* Der mitgelieferte JUnit-Test ist auch ein Paradebeispiel dafür, wie man einen JUnit-Test *nicht* schreiben sollte. `fail("Should not happen")` - Vielen Dank für die informative Fehlermeldung. :facepalm:
+* Der mitgelieferte JUnit-Test ist auch ein Paradebeispiel dafür, wie man einen JUnit-Test *nicht* schreiben sollte. `fail("Should not happen")` - Vielen Dank für die informative Fehlermeldung. :man_facepalming:
     Über die [Probleme mit der Zeitmessung](https://www.baeldung.com/java-jvm-warmup) im Test reden wir mal lieber gar nicht.
 * Diese Implementierung hat einen Grund, warum die Methoden nicht `static` sind, aber keinen guten: Der Input-Array und seine Kopie werden als private Variablen mitgeschleift. :scream:
     Der Sinn dahinter ist auch hier wieder eine für den eigentlichen Zweck völlig unnötige Optimierung (weniger Array-Erzeugungen).
@@ -307,7 +347,63 @@ Jetzt muss ich aber noch ein wenig über die Lösungen meckern, die online zu fi
 * Zwei Schleifen statt einer.
 * Wieder `if (lowerIndex < higherIndex)` statt einem sauberen `return`.
 
-Wenn man sich die vier Beispiele so anschaut bekommt man übrigens durchaus den Eindruck, dass die vier Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
+#### [Javabeginners](https://javabeginners.de/Algorithmen/Sortieralgorithmen/Mergesort.php)
+
+* Methoden sind nicht `static`.
+* `sort` übernimmt keinen Array als Argument, gibt aber einen Array zurück.
+    Wie soll ich diese Methode verwenden?
+
+    ```java
+    Mergesort.intArr = new int[]{5, 4, 3, 2, 1};
+    int[] sorted = new MergeSort().sort(0, Mergesort.intArr.length);
+    ```
+
+    Seriously?
+    Das dürfte das bescheuertste Interface für eienen Sortieralgorithmus sein, das ich bisher gesehen habe - und ich schaue mir regelmäßig Code von Erst- und Zweitsemestern an!
+    Besonders toll: Der Rückgabetyp suggeriert, dass ein neues Array erzeugt würde, was aber gar nicht der Fall ist.
+* `if (l < r)` statt sauberem `return`.
+* Hier haben wir die bisher härteste unnötige Optimierung.
+
+    ```java
+    for (j = q + 1; j <= r; j++) {
+      arr[r + q + 1 - j] = intArr[j];
+    }
+    ```
+    Ist klar, oder?
+    Nicht?
+    Lass uns das kurz einmal umschreiben:
+
+    ```java
+    for (j = middle; j < right; j++) {
+        j0 = j - middle;
+        arr[right - j0] = intArr[j];
+    }
+    ```
+
+    mit `middle = q + 1` und `right = r` haben wir hier den gleichen Code.
+    Der ist zwar immer noch kompliziert, aber jetzt erkennt man wenigstens, dass hier der rechte Teilarray *rückwärts* in den temporären Array `arr` kopiert wird.
+    Damit kann man sich dann in der Merge-Schleife die Abfrage sparen, ob noch Elemente im linken oder rechten Teilarray sind.
+    Wenn das linke Array zuerst durchlaufen wird, springt der linke Index `i` auf das *größte* Element des rechten Arrays `arr[middle + 1]`.
+    Daher wird die Abfrage `arr[i] <= arr[j]` so lange `false` bleiben, bis auch das rechte Teilarray komplett durchlaufen wurde.
+    Anders herum gilt das gleiche, da der rechte Index `j` von rechts nach links läuft und damit beim größten Element des *linken* Arrays anhält.
+
+    Ich will nicht lügen: Ich musste selbst auch einige Minuten lang konzentriert den Code analysieren, bevor ich diesen erklärenden Text schreiben konnte.
+
+    Kleines Schmankerl: So viel Arbeit um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann wenn er nur eine Kopie von zwei Elementen braucht?
+    Wirklich tolle Optimierungskünste. :man_facepalming:
+* `i`, `j` und `k` - besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
+
+#### [Dieses beliebige Gist](https://gist.github.com/cocodrips/5937371)
+
+* Ok, hier müssen wir langsam Aufhören. Hier fehlt sogar die Klassendeklaration.
+* Händisches Kopieren von Arrays.
+* Zwei Schleifen statt einer.
+* Methoden sind nicht `static` und sind auch noch package private. :scream:
+* `if (low < high)` statt sauberem `return`.
+
+Wenn man sich die vier Beispiele so anschaut bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
+
+
 
 ## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
 
@@ -336,7 +432,7 @@ public class Mergesort {
         int rightI = 0;
         for(int i = 0; i < total.size(); i++) {
             boolean more_left = leftI < left.size();
-            boolean more_right = leftR < left.size();
+            boolean more_right = rightI < left.size();
             boolean left_smaller = more_left && more_right && leftI.compareTo(right) < 0;
             if (left_smaller || ! more_right) {
                 total.set(i, left.get(leftI));
@@ -349,3 +445,5 @@ public class Mergesort {
     }
 }
 ```
+
+<!-- Todo: Parallel merge sort -->
