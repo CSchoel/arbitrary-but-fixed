@@ -78,7 +78,7 @@ Gut! Wenn Du bis zum Ende durchhaltest, gibt es unten noch ein Stück Code, dass
 Warum plagiiert jemand bei einer Hausübung?
 *Willst* Du plagiieren, oder glaubst du, dass du es *musst*, um zu bestehen?
 Ich persönlich glaube, dass fast immer letzteres der Fall ist.
-Niemand, der in der Lage ist, eine Aufgabe in kurzer Zeit auf normalem Wege zu lösen, entscheidet sich stattdessen einfach eine Lösung zu kopieren.
+Niemand, der problemlos in der Lage ist, eine Aufgabe auf normalem Wege zu lösen, entscheidet sich stattdessen einfach eine Lösung zu kopieren.
 Ich glaube also hinter dem Plagiat steht immer ein anderes Problem.
 Vermutlich eins der Folgenden:
 
@@ -95,8 +95,7 @@ Vermutlich eins der Folgenden:
     Vielleicht müssen es nicht jedes Semester 30 Creditpoints sein?
     Vielleicht ist die PvP-Meisterschaft im Spiel Deiner Wahl auch nicht so wichtig, wie sie zu Beginn des Semesters erschien. 😉
     Überleg dir deine Prioritäten und gestalte dein Studium entsprechend.
-* **Eigentlich weißt du, was du tun musst, aber der Rechner will nicht so, wie du.**
-    Du hast die Lösung fast hinbekommen, aber da ist dieser eine Bug, der ums Verrecken nicht verschwinden will.
+* **Du hast die Fähigkeiten und die Zeit, schaffst es aber nicht, die letzten Bugs in deinem Code zu beheben.**
     Das kann darauf hinweisen, dass Dir einfach (noch) die Techniken zum systematischen Debuggen fehlen.
     Informatik hat viel mit Frustrationstoleranz, richtigem (!) Googeln und akribischem sezieren von Code zu tun.
     All diese drei Dinge wollen gelernt sein.
@@ -105,17 +104,20 @@ Vermutlich eins der Folgenden:
 
 ## Erste Regel des Plagiierens: Einfachheit ist Trumpf!
 
-Warum halte ich meinen obigen Code für besser als den von [GeeksforGeeks](https://www.geeksforgeeks.org/merge-sort/), [Vogella](http://www.vogella.com/tutorials/JavaAlgorithmsMergesort/article.html), [Baeldung](https://www.baeldung.com/java-merge-sort) oder [Java2Novice](http://www.java2novice.com/java-sorting-algorithms/merge-sort/)?
+Genug der Moralpredigten!
+Wir wollen einen Mergesort plagiieren und zwar richtig!
+
+Warum denke ich, dass mein obiger Code dafür besser geeignet ist als der von [GeeksforGeeks](https://www.geeksforgeeks.org/merge-sort/), [Vogella](http://www.vogella.com/tutorials/JavaAlgorithmsMergesort/article.html), [Baeldung](https://www.baeldung.com/java-merge-sort) oder [Java2Novice](http://www.java2novice.com/java-sorting-algorithms/merge-sort/)?
 Zunächst einmal müssen wir klarstellen, was hier "besser" heißt: Mein Code ist nicht performanter oder wesentlich kürzer als andere Lösungen.
 Ich habe aber versucht, ihn *verständlicher* für Java-Einsteiger zu schreiben.
-(Und seien wir mal ehrlich: Für eine performante Version nehme ich eine fertige Library und [Code-Golf](https://en.wikipedia.org/wiki/Code_golf) führt selten zu schönen Lösungen.)
 
 Warum sollte man sich als Plagiator scheren, ob der Code, den man kopiert einfach oder kompliziert ist?
 Zwei Gründe: Erstens kannst Du den Code sowieso nicht exakt so abgeben, weil dein Dozent vermutlich eine leicht andere Schnittstelle fordert, oder eine Zeitmessung, oder oder oder.
-Zweitens wird das Plagiat sowieso auffallen.
-Retten kannst Du dich nur, indem du nachher in der Lage bist, sauber zu erklären was der Code tut und warum du ihn (angeblich) so geschrieben hast, wie er da steht.
+Du musst ihn also genug verstehen, um ihn anpassen zu können.
+Zweitens ist die Wahrscheinlichkeit, dass ein Plagiat auffällt, höher, je weniger der Code abgeändert wurde und je weniger er nach Deinem sonstigen Stil aussieht.
+Retten kannst Du dich nur, indem du eigene Anpassungen vornimmst, und nachher in der Lage bist, sauber zu erklären was der Code tut und warum Du ihn so geschrieben hast, wie er da steht.
 
-Um jetzt zu demonstrieren, warum ich meinen Code für einfacher halte, werde ich ihn erst erklären und dann auf den Dingen herumhacken, die die anderen Optionen aus dem Internet unnötig kompliziert bzw. auffällig schlecht machen.
+Um jetzt zu demonstrieren, warum ich meinen Code für einfacher halte, werde ich ihn erst erklären. Im nächsten Abschnitt hacke ich dann auf den Dingen herum, die die anderen Optionen aus dem Internet unnötig kompliziert bzw. auffällig schlecht machen.
 
 ### Erklärung: Sort und die Rekursion
 
@@ -269,34 +271,9 @@ if (!more_right || left_smaller) {
 Wir nehmen das linke Element entweder wenn es kleiner ist als das rechte (`left_smaller`), oder wenn überhaupt kein Element mehr auf der rechten Seite übrig ist (`!more_right`).
 Natürlich ist die Frage, ob das linke Element kleiner als das rechte ist nur dann sinnvoll, wenn es auch auf beiden Seiten noch weitere Elemente gibt (`more_left` und `more_right`).
 
-### Übliche Probleme
+## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
 
-Wenn das ganze so einfach ist, warum bist Du dann überhaupt hier?
-Vermutlich, weil die Theorie eben schnell erklärt und auch vermutlich verstanden ist, aber in der Praxis dann doch `ArrayIndexOutOfBoundsException`s und `StackOverflowError`s links und rechts an einem vorbeifliegen, wenn man sich an einer eigenen Implementierung versucht.
-Das ist auch ganz normal.
-Mergesort gehört zu einem der ersten "größeren" Algorithmen, die man im Studium implementiert.
-Da ist es nur logisch, dass man zu diesem Zeitpunkt noch kein Experte im Debuggen ist.
 
-Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vielleicht doch noch zum Durchbruch verhelfen können.
-
-* Du hast einen `StackOverflowError`?
-    Dann ist die Abbruchbedingung deiner Rekursion nicht vorhanden oder kaputt.
-* Du hast eine `ArrayIndexOutOfBoundsException`?
-    Dann gnade dir James Gosling. :laughing:
-    Diese Ausnahme kann viele Gründe haben, heißt aber immer, dass irgendwo eine Indexberechnung schief gegangen ist - vermutlich bei der oberen Grenze für den rechten Index oder den Gesamtindex in `merge`.
-    Hier hilft vor Allem systematisches Debuggen: Such dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
-    Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn du dir sicher bist, dass `merge` sauber funktioniert.
-* Der Algorithmus hängt in einer Endlosschleife?
-    Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
-    `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
-    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen.
-    (Ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`.)
-* Der Algorithmus läuft durch, sortiert aber nicht richtig?
-    Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
-    Eventuell kann hier irgendwo ein `+1` oder `-1` Wunder wirken.
-    In jedem Fall aber gilt wie im vorherigen Fall: Systematisches Debuggen an möglichst kleinen Beispielen mit möglichst wenig Methodenaufrufen.
-
-### Lästereien
 
 Jetzt muss ich aber noch ein wenig über die Lösungen meckern, die online zu finden sind und die immer wieder als Plagiate eingereicht werden:
 
@@ -403,15 +380,38 @@ Jetzt muss ich aber noch ein wenig über die Lösungen meckern, die online zu fi
 
 Wenn man sich die vier Beispiele so anschaut bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
 
-
-
-## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
-
 ## Dritte Regel des Plagiierens: Lies die verdammte Aufgabenstellung!
 
 ## Vierte Regel des Plagiierens: Wer gut plagiieren kann, braucht es eigentlich nicht.
 
 Und wer es nicht gut kann, dem bringt es auch nichts, weil es nämlich sowieso auffliegt.
+
+### Übliche Probleme
+
+Wenn das ganze so einfach ist, warum bist Du dann überhaupt hier?
+Vermutlich, weil die Theorie eben schnell erklärt und auch vermutlich verstanden ist, aber in der Praxis dann doch `ArrayIndexOutOfBoundsException`s und `StackOverflowError`s links und rechts an einem vorbeifliegen, wenn man sich an einer eigenen Implementierung versucht.
+Das ist auch ganz normal.
+Mergesort gehört zu einem der ersten "größeren" Algorithmen, die man im Studium implementiert.
+Da ist es nur logisch, dass man zu diesem Zeitpunkt noch kein Experte im Debuggen ist.
+
+Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vielleicht doch noch zum Durchbruch verhelfen können.
+
+* Du hast einen `StackOverflowError`?
+    Dann ist die Abbruchbedingung deiner Rekursion nicht vorhanden oder kaputt.
+* Du hast eine `ArrayIndexOutOfBoundsException`?
+    Dann gnade dir James Gosling. :laughing:
+    Diese Ausnahme kann viele Gründe haben, heißt aber immer, dass irgendwo eine Indexberechnung schief gegangen ist - vermutlich bei der oberen Grenze für den rechten Index oder den Gesamtindex in `merge`.
+    Hier hilft vor Allem systematisches Debuggen: Such dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
+    Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn du dir sicher bist, dass `merge` sauber funktioniert.
+* Der Algorithmus hängt in einer Endlosschleife?
+    Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
+    `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
+    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen.
+    (Ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`.)
+* Der Algorithmus läuft durch, sortiert aber nicht richtig?
+    Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
+    Eventuell kann hier irgendwo ein `+1` oder `-1` Wunder wirken.
+    In jedem Fall aber gilt wie im vorherigen Fall: Systematisches Debuggen an möglichst kleinen Beispielen mit möglichst wenig Methodenaufrufen.
 
 ## Bonus: "Schöne" Mergesorts
 
