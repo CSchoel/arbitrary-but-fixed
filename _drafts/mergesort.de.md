@@ -429,6 +429,7 @@ Was bleibt Dir also noch übrig, wenn das eben doch nicht der Fall ist?
 Ich sehe drei mögliche Lösungen:
 
 * Du setzt dich doch noch einmal an deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine*r Kommiliton*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
+    Vielleicht hilft es sogar, einfach alles wegzuwerfen und noch einmal ganz von vorne anzufangen.
 * Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin. (z.B. `\* Idee von http://arbitrary-but-fixed.net/ \*`)
     Damit handelt es sich um ein Zitat und kein Plagiat.
     Es kann sein, dass du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (nicht-Bestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
@@ -437,34 +438,212 @@ Ich sehe drei mögliche Lösungen:
     Wir geben so viele Teilpunkte, wie wir irgendwie rechtfertigen können.
     Es muss nicht immer alles perfekt sein.
 
-### Übliche Probleme
+## Hilfe zur Selbsthilfe
 
-Wenn das ganze so einfach ist, warum bist Du dann überhaupt hier?
-Vermutlich, weil die Theorie eben schnell erklärt und auch vermutlich verstanden ist, aber in der Praxis dann doch `ArrayIndexOutOfBoundsException`s und `StackOverflowError`s links und rechts an einem vorbeifliegen, wenn man sich an einer eigenen Implementierung versucht.
-Das ist auch ganz normal.
+Warum funktioniert jetzt also deine eigene Mergesort-Implementierung nicht?
+Das ist natürlich schwer zu sagen.
+Vor allem ist das aber erst einmal ganz normal.
 Mergesort gehört zu einem der ersten "größeren" Algorithmen, die man im Studium implementiert.
 Da ist es nur logisch, dass man zu diesem Zeitpunkt noch kein Experte im Debuggen ist.
 
 Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vielleicht doch noch zum Durchbruch verhelfen können.
 
-* Du hast einen `StackOverflowError`?
+* **Du hast einen `StackOverflowError`?**
     Dann ist die Abbruchbedingung deiner Rekursion nicht vorhanden oder kaputt.
-* Du hast eine `ArrayIndexOutOfBoundsException`?
+* **Du hast eine `ArrayIndexOutOfBoundsException`?**
     Dann gnade dir James Gosling. :laughing:
     Diese Ausnahme kann viele Gründe haben, heißt aber immer, dass irgendwo eine Indexberechnung schief gegangen ist - vermutlich bei der oberen Grenze für den rechten Index oder den Gesamtindex in `merge`.
     Hier hilft vor Allem systematisches Debuggen: Such dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
     Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn du dir sicher bist, dass `merge` sauber funktioniert.
-* Der Algorithmus hängt in einer Endlosschleife?
+* **Der Algorithmus hängt in einer Endlosschleife?**
     Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
     `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
     Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen.
     (Ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`.)
-* Der Algorithmus läuft durch, sortiert aber nicht richtig?
+* **Der Algorithmus läuft durch, sortiert aber nicht richtig?**
     Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
     Eventuell kann hier irgendwo ein `+1` oder `-1` Wunder wirken.
     In jedem Fall aber gilt wie im vorherigen Fall: Systematisches Debuggen an möglichst kleinen Beispielen mit möglichst wenig Methodenaufrufen.
 
-## Bonus: "Schöne" Mergesorts
+Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschreiben und dann im eigenen Code Schritt für Schritt mit Debugger oder Print-Anweisung nachvollziehen kann:
+
+* Für `sort` kannst Du das Beispiel aus dem Anfang dieses Posts nehmen.
+    Ich gehe dabei davon aus, dass Du den Aufruf `merge(ar, left, middle, right)` auch so definiert hast, dass der linke Teilarray von `left` bis `middle-1` läuft und der rechte von `middle` bis `right-1`.
+    Wenn das der Fall ist, dann muss das Sortieren des Arrays `{5, 4, 3, 2, 1}` die folgende Sequenz von `merge`-Aufrufen produzieren:
+
+    ```java
+    merge(input, 0, 1, 2);
+    merge(input, 3, 4, 5);
+    merge(input, 2, 3, 5);
+    merge(input, 0, 2, 5);
+    ```
+* Für `merge` schauen wir uns das Array `{5, 1, 4, 2, 3, 0}` an.
+    Wenn wir `merge(input, 1, 3, 5)` aufrufen, sollten die Teilarrays `{1, 4}` und `{2, 3}` zu `{1, 2, 3, 4}` kombiniert werden und die `0` und die `5` sollten unverändert am Anfang bzw. Ende stehen bleiben.
+    Um zu prüfen, ob das wirklich passiert, schreiben wir uns einfach in einer Tabelle auf, welche Werte die wichtigen Variablen nach jedem Durchlauf der Schleife in `merge` haben müssen:
+
+     ```text
+     i  left_index   right_index   ar
+     -           0             0   {5, 1, 4, 2, 3, 0}
+     1           1             0   {5, 1, 4, 2, 3, 0}
+     2           1             1   {5, 1, 2, 2, 3, 0}
+     3           1             2   {5, 1, 2, 3, 3, 0}
+     4           2             2   {5, 1, 2, 3, 4, 0}
+     ```
+
+## Bonus: Die Königin der Mergesort-Plagiate
+
+Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozent*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](foo)):
+
+```java
+package net.arbitrary_but_fixed.mergesort;
+import java.util.Arrays;
+
+public class ListenerMergesort {
+    public interface MergesortListener {
+        default void callMerge(int[] ar, int from, int middle, int to) {};
+        default void exitMerge(int[] ar, int from, int middle, int to) {};
+        default void mergeStep(int i, int l, int r, int[] ar) {};
+        default void callSort(int[] ar, int from, int to) {};
+        default void exitSort(int[] ar, int from, int to) {};
+    }
+    public static void sort(int[] ar) {
+        sort(ar, new MergesortListener(){});
+    }
+    public static void sort(int[] ar, MergesortListener listener) {
+        sort(ar, 0, ar.length, listener);
+    }
+    public static void sort(int[] ar, int from, int to, MergesortListener listener) {
+        listener.callSort(ar, from, to);
+        int remaining_length = to - from;
+        // subarrays of size 1 and 0 cannot be unsorted
+        if (remaining_length <= 1) { listener.exitSort(ar, from, to); return;}
+        int middle = (from + to) / 2;
+        sort(ar, from, middle, listener);
+        sort(ar, middle, to, listener);
+        merge(ar, from, middle, to, listener);
+        listener.exitSort(ar, from, to);
+    }
+    public static void merge(int[] ar, int from, int middle, int to, MergesortListener listener) {
+        listener.callMerge(ar, from, middle, to);
+        int[] left = Arrays.copyOfRange(ar, from, middle);
+        int[] right = Arrays.copyOfRange(ar, middle, to);
+        int left_index = 0;
+        int right_index = 0;
+        for(int i = from; i < to; i++) {
+            boolean more_left = left_index < left.length;
+            boolean more_right = right_index < right.length;
+            boolean left_smaller = more_left && more_right && left[left_index] < right[right_index];
+            if (!more_right || left_smaller) {
+                ar[i] = left[left_index];
+                left_index++;
+            } else {
+                ar[i] = right[right_index];
+                right_index++;
+            }
+            listener.mergeStep(i, left_index, right_index, ar);
+        }
+        listener.exitMerge(ar, from, middle, to);
+    }
+    public static void main(String[] args) {
+        int[] input;
+        if(args.length > 0) {
+            input = Arrays.stream(args).mapToInt(Integer::parseInt).toArray();
+        } else {
+            input = new int[]{5, 4, 3, 2, 1};
+        }
+        // Test for sort, print call hierarchy and intermediary results
+        sort(input, new MergesortListener(){
+            int sortDepth = 0;
+            public void callSort(int[] ar, int f, int t) {
+                for(int i = 0; i < sortDepth; i++) {
+                    System.out.print("\t");
+                }
+                System.out.println(String.format("sort(ar, %d, %d)", f, t));
+                sortDepth++;
+            }
+            public void exitSort(int[] ar, int f , int t) {
+                sortDepth--;
+            }
+            public void callMerge(int[] ar, int f, int m, int t) {
+                for(int i = 0; i < sortDepth; i++) {
+                    System.out.print("\t");
+                }
+                System.out.println(String.format("merge(ar, %d, %d, %d)", f, m, t));
+            }
+            public void exitMerge(int[] ar, int f, int m, int t) {
+                for(int i = 0; i < sortDepth; i++) {
+                    System.out.print("\t");
+                }
+                System.out.println(Arrays.toString(ar));
+            }
+        });
+        System.out.println();
+        // Test for merge, print inner variables
+        System.out.println("  i   l   r   ar");
+        input = new int[]{5, 1, 4, 2, 3, 0};
+        merge(input, 1, 3, 5, new MergesortListener() {
+            @Override
+            public void mergeStep(int i, int l, int r, int[] ar) {
+                System.out.println(String.format("%3d %3d %3d   %s", i, l, r, Arrays.toString(ar)));
+            }
+        });
+    }
+}
+```
+
+Eigentlich ist das der gleiche Code wie am Anfang, aber ich habe einen kleinen [Listener](https://sourcemaking.com/design_patterns/observer) eingebaut.
+
+```java
+public interface MergesortListener {
+    default void callMerge(int[] ar, int from, int middle, int to) {};
+    default void exitMerge(int[] ar, int from, int middle, int to) {};
+    default void mergeStep(int i, int l, int r, int[] ar) {};
+    default void callSort(int[] ar, int from, int to) {};
+    default void exitSort(int[] ar, int from, int to) {};
+}
+```
+
+Dieses Interface definiert unsere Listener-Objekte, die Code enthalten können, um auf die jeweiligen Events zu reagieren.
+`callMerge` wird am Anfang der Methode `merge` aufgerufen, `exitMerge` an deren Ende.
+Für `sort` gibt es ebenfalls entsprechende Methoden.
+Zu guter letzt habe ich noch die Methode `mergeStep` hinzugefügt, die nach jedem einzelnen Schleifendurchlauf in `merge` aufgerufen wird.
+
+Jetzt kann man beim Aufruf von `sort` oder `merge` ein entsprechendes Objekt (in der Regel als [anonyme Klasse](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)) mitgeben, das eine oder mehrere dieser Methoden implementiert und mit deren Hilfe diagnostische Ausgaben erzeugt oder statistiken errechnet.
+
+Die `main`-Methode von `ListenerMergesort` zeigt, wie man mit diesem Pattern wunderschön die Aufrufhierarchie von `sort` und die Funktionsweise von `merge` nachverfolgen kann.
+
+*Protip: Wenn du so einen Listener in Deinen eigenen Code implementierst, kannst Du damit vermutlich Deinen Bugs sehr viel leichter auf die Schliche kommen.*
+
+```text
+sort(ar, 0, 5)
+	sort(ar, 0, 2)
+		sort(ar, 0, 1)
+		sort(ar, 1, 2)
+		merge(ar, 0, 1, 2)
+		[4, 5, 3, 2, 1]
+	sort(ar, 2, 5)
+		sort(ar, 2, 3)
+		sort(ar, 3, 5)
+			sort(ar, 3, 4)
+			sort(ar, 4, 5)
+			merge(ar, 3, 4, 5)
+			[4, 5, 3, 1, 2]
+		merge(ar, 2, 3, 5)
+		[4, 5, 1, 2, 3]
+	merge(ar, 0, 2, 5)
+	[1, 2, 3, 4, 5]
+
+  i   l   r   ar
+  1   1   0   [5, 1, 4, 2, 3, 0]
+  2   1   1   [5, 1, 2, 2, 3, 0]
+  3   1   2   [5, 1, 2, 3, 3, 0]
+  4   2   2   [5, 1, 2, 3, 4, 0]
+```
+
+## Bonus 2: "Schöne" Mergesorts
+
+Dieser Post ist sowieso schon viel zu lang.
+Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von Mergesort zu präsentieren - nur um zu zeigen, wie man es auch noch machen könnte.
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -498,3 +677,5 @@ public class Mergesort {
 ```
 
 <!-- Todo: Parallel merge sort -->
+
+<!-- Todo: Wirklich optimierter merge sort -->
