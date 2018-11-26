@@ -15,12 +15,12 @@ Der Kollege, der die Veranstaltung im Wintersemester hält, macht gerade die gle
 
 Die Anzahl der Plagiate (10 bis 20 Prozent des Kurses) ist dabei schlimm genug.
 Noch schlimmer ist aber, dass nicht einmal *guter* Code plagiiert wird.
-Die meisten Beispiele, die man online findet, sind fehlerhaft oder viel zu kompliziert für einen Anfänger.
+Die meisten Beispiele, die man online findet, sind fehlerhaft oder viel zu kompliziert für eine\*n Anfänger\*in.
 
-Aus einer Mischung von verzweifeltem Humor und leiser Hoffnung, vielleicht doch noch dem ein oder anderen zu helfen, diesen Algorithmus wirklich zu *versehen* habe ich mir daher vorgenommen, einmal zu zeigen wie man es (meiner Meinung nach) *richtig* macht - also sowohl das Plagiieren als auch die Implementierung von Mergesort als Java-Neuling.
+Aus einer Mischung von verzweifeltem Humor und leiser Hoffnung, vielleicht doch noch dem ein oder anderen zu helfen, diesen Algorithmus wirklich zu *verstehen*, habe ich mir daher vorgenommen, einmal zu zeigen, wie man es (meiner Meinung nach) *richtig* macht - also sowohl das Plagiieren als auch die Implementierung von Mergesort als Java-Neuling.
 
 So, und damit mir die potentiellen Plagiatoren jetzt nicht schon abspringen, gibt es hier fertig plagiierbaren Code.
-Ein wunderschöner kompakter verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad]():
+Ein wunderschöner kompakter, verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad]():
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -71,16 +71,16 @@ public class Mergesort {
 ```
 
 Liest Du immer noch weiter?
-Gut! Wenn Du bis zum Ende durchhaltest, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein Dozent vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
+Gut! Wenn Du bis zum Ende durchhältst, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein Dozent vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
 
 ## Nullte Regel des Plagiierens: Das Plagiat ist das Symptom, nicht die Krankheit.
 
 Warum plagiiert jemand bei einer Hausübung?
 *Willst* Du plagiieren, oder glaubst du, dass du es *musst*, um zu bestehen?
 Ich persönlich glaube, dass fast immer letzteres der Fall ist.
-Niemand, der problemlos in der Lage ist, eine Aufgabe auf normalem Wege zu lösen, entscheidet sich stattdessen einfach eine Lösung zu kopieren.
+Niemand, der problemlos in der Lage ist, eine Aufgabe auf normalem Wege zu lösen, entscheidet sich stattdessen, einfach eine Lösung zu kopieren.
 Ich glaube also hinter dem Plagiat steht immer ein anderes Problem.
-Vermutlich eins der Folgenden:
+Vermutlich eins der folgenden:
 
 * **Du besitzt tatsächlich nicht die Fähigkeiten, die Aufgabe zu lösen.**
     Vielleicht hast Du schon Schwierigkeiten mit Themen, die aus vergangenen Semestern vorausgesetzt werden; oder du stößt einfach an eine Verständnisgrenze, wo dir die informatisch-algorithmische Denkweise, die für die Lösung nötig wäre, zu fremd ist, um sie nachzuvollziehen.
@@ -94,12 +94,13 @@ Vermutlich eins der Folgenden:
     Klar, dass da mal das ein oder andere Modul auf der Strecke bleiben kann.
     Vielleicht müssen es nicht jedes Semester 30 Creditpoints sein?
     Vielleicht ist die PvP-Meisterschaft im Spiel Deiner Wahl auch nicht so wichtig, wie sie zu Beginn des Semesters erschien. 😉
+    <!-- Todo: Condescending -->
     Überleg dir deine Prioritäten und gestalte dein Studium entsprechend.
 * **Du hast die Fähigkeiten und die Zeit, schaffst es aber nicht, die letzten Bugs in deinem Code zu beheben.**
     Das kann darauf hinweisen, dass Dir einfach (noch) die Techniken zum systematischen Debuggen fehlen.
-    Informatik hat viel mit Frustrationstoleranz, richtigem (!) Googeln und akribischem sezieren von Code zu tun.
+    Informatik hat viel mit Frustrationstoleranz, richtigem (!) Googeln und akribischem Sezieren von Code zu tun.
     All diese drei Dinge wollen gelernt sein.
-    Habe keine Angst, deinen unfertigen hässlichen Code jemandem zu zeigen - deine\*n Dozent\*in eingeschlossen.
+    Habe keine Angst, deinen unfertigen, hässlichen Code jemandem zu zeigen - deine\*m Dozent\*in eingeschlossen.
     Nur durch Fehler und Feedback kannst Du etwas dazulernen.
 
 ## Erste Regel des Plagiierens: Einfachheit ist Trumpf!
@@ -115,7 +116,7 @@ Warum sollte man sich als Plagiator scheren, ob der Code, den man kopiert einfac
 Zwei Gründe: Erstens kannst Du den Code sowieso nicht exakt so abgeben, weil dein Dozent vermutlich eine leicht andere Schnittstelle fordert, oder eine Zeitmessung, oder oder oder.
 Du musst ihn also genug verstehen, um ihn anpassen zu können.
 Zweitens ist die Wahrscheinlichkeit, dass ein Plagiat auffällt, höher, je weniger der Code abgeändert wurde und je weniger er nach Deinem sonstigen Stil aussieht.
-Retten kannst Du dich nur, indem du eigene Anpassungen vornimmst, und nachher in der Lage bist, sauber zu erklären was der Code tut und warum Du ihn so geschrieben hast, wie er da steht.
+Retten kannst Du dich nur, indem du eigene Anpassungen vornimmst, und nachher in der Lage bist, sauber zu erklären, was der Code tut und warum Du ihn so geschrieben hast, wie er da steht.
 
 Um jetzt zu demonstrieren, warum ich meinen Code für einfacher halte, werde ich ihn erst erklären. Im nächsten Abschnitt hacke ich dann auf den Dingen herum, die die anderen Optionen aus dem Internet unnötig kompliziert bzw. auffällig schlecht machen.
 
@@ -138,10 +139,10 @@ public static void sort(int[] ar, int from, int to) {
 ```
 
 Warum funktioniert das?
-Rekursion verbiegt auf den ersten Blick das Gehirn, aber es hilft enorm, wenn man sich einfach ganz ganz dumm stellt.
+Rekursion verbiegt auf den ersten Blick das Gehirn, aber es hilft enorm, wenn man sich einfach ganz, ganz dumm stellt.
 Der Java-Compiler ist auch nicht schlauer, versprochen.
 `sort(ar, 0, middle)` ist ein ganz normaler Methodenaufruf und vereinfacht kann man Methodenaufrufe so betrachten, als würde man den Code, der in der Methode steht, an die Stelle schreiben, wo sie aufgerufen wird.
-Beginnen wir also mit dem folgenden Aufruf
+Beginnen wir also mit dem folgenden Aufruf:
 
 ```java
 int[] input = {5, 4, 3, 2, 1};
@@ -176,9 +177,9 @@ merge(input, 0, 2, 5);
 Hier sieht man schon, dass die Teilaufgaben trivial werden.
 `sort(input, 0, 1)` heißt ja per Definition, dass wir alle Zahlen von Index 0 (inklusive) bis Index 1 (exklusive) im Array sortieren sollen.
 Da der Index 1 schon nicht mehr mit dabei ist, bleibt nur noch eine Zahl übrig (nämlich die 5).
-Das Sortieren von einer Zahl geht ziemlich schnell, denn wenn wir nur ein Element haben kann auch nichts unsortiert sein.
+Das Sortieren von einer Zahl geht ziemlich schnell, denn wenn wir nur ein Element haben, kann auch nichts unsortiert sein.
 Für `sort(input, 0, 1)` müssen wir also rein gar nichts machen.
-In unserem Beispiel erzeugt jetzt nur noch `sort(input, 3, 5)` einen weiteren rekursiven Aufruf, den wir auflösen müssen. (Weil hier noch die zwei Zahlen 2 und 1 zu sortieren sind.)
+In unserem Beispiel erzeugt jetzt nur noch `sort(input, 3, 5)` einen weiteren rekursiven Aufruf, den wir auflösen müssen (weil hier noch die zwei Zahlen 2 und 1 zu sortieren sind).
 
 ```java
 int[] input = {5, 4, 3, 2, 1};
@@ -207,7 +208,7 @@ Die Kommentare hinter den Aufrufen zeigen, warum das funktioniert.
 Die Methode `merge` fügt zwei bereits sortierte Abschnitte, die im Array nebeneinander liegen, mit einer Art Reißverschlussverfahren zu einem größeren sortierten Abschnitt zusammen.
 Wir beginnen bei Listen der Länge eins und arbeiten uns langsam voran, bis die ganze Liste sortiert ist.
 
-Ich habe ersten Zeilen aus der Methodendefinition aus Platzgründen weggelassen.
+Ich habe die ersten Zeilen aus der Methodendefinition aus Platzgründen weggelassen.
 Wir schauen sie uns jetzt aber noch einmal an:
 
 ```java
@@ -225,7 +226,7 @@ Ohne geht es nicht.
 
 Bisher haben wir angenommen, dass `merge` einfach magisch das tut, was es tun soll:
 
-> Füge den linken sortierten Bereich von `from` (inklusive) bis `middle` (exklusive) und den rechten sortierten Bereich von `middle` (inklusive) bis `to` (exklusive) zusammen, so dass am Ende der ganze Bereich von `from` (inklusive) bis `to` (exklusive) sortiert ist.
+> Füge den linken sortierten Bereich von `from` (inklusive) bis `middle` (exklusive) und den rechten sortierten Bereich von `middle` (inklusive) bis `to` (exklusive) zusammen, sodass am Ende der ganze Bereich von `from` (inklusive) bis `to` (exklusive) sortiert ist.
 
 Dazu ist es erst einmal nötig, eine Arbeitskopie der zwei Bereiche zu erstellen, damit wir nicht teile des Arrays überschreiben, die wir danach aber gerne wieder im Ursprungszustand lesen würden:
 
@@ -253,7 +254,7 @@ for(int i = from; i < to; i++) {
 
 Wir belegen also jedes Element von `from` bis `to` mit einem neuen Wert, der entweder aus `left` oder aus `right` kommt.
 Wichtig ist also nur noch die Entscheidung, wann wir den nächsten Wert aus `left` nehmen müssen und wann wir `right` als Quelle benutzen müssen.
-Ich habe hier im Code absichtlich mehrere boolesche Variablen eingeführt, um die Bedingung selbst etwas lesbarer zu machen.
+Ich habe hier im Code absichtlich mehrere Boolesche Variablen eingeführt, um die Bedingung selbst etwas lesbarer zu machen.
 
 ```java
 boolean more_left = left_index < left.length;
@@ -268,7 +269,7 @@ if (!more_right || left_smaller) {
 }
 ```
 
-Wir nehmen das linke Element entweder wenn es kleiner ist als das rechte (`left_smaller`), oder wenn überhaupt kein Element mehr auf der rechten Seite übrig ist (`!more_right`).
+Wir nehmen das linke Element entweder, wenn es kleiner ist als das rechte (`left_smaller`), oder, wenn überhaupt kein Element mehr auf der rechten Seite übrig ist (`!more_right`).
 Natürlich ist die Frage, ob das linke Element kleiner als das rechte ist nur dann sinnvoll, wenn es auch auf beiden Seiten noch weitere Elemente gibt (`more_left` und `more_right`).
 
 ## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
@@ -277,16 +278,16 @@ Wenn in einem Stück Code von Student\*in A ein `@author Student*in B` auftaucht
 Wenn man schon plagiiert, dann kann man sich doch ein Mindestmaß an Mühe geben, das zu verschleiern.
 Für wie blöd halten mich meine Studierenden eigentlich?
 
-Darum die oberste Regel: **Lies den Scheiß, den du kopierst wenigstens einmal durch!**
+Darum die oberste Regel: **Lies den Kram, den du kopierst wenigstens einmal durch!**
 Du musst ja nicht alles begreifen, aber die offensichtlichsten Hinweise auf die Quelle kann man leicht entfernen.
-Und wenn man dann von seine*r Dozent*in eingeladen und gefragt wird, was man sich denn bei dem Ausdruck `arr[r + q + 1 - j] = intArr[j];` gedacht hat, ist "Öhm, keine Ahnung? Aber es funktioniert!" nicht die beste Antwort, um den Kopf aus der Schlinge zu ziehen. :wink:
+Und wenn man dann von seine\*r Dozent\*in eingeladen und gefragt wird, was man sich denn bei dem Ausdruck `arr[r + q + 1 - j] = intArr[j];` gedacht hat, ist "Öhm, keine Ahnung? Aber es funktioniert!" nicht die beste Antwort, um den Kopf aus der Schlinge zu ziehen. :wink:
 
 In diesem Zuge möchte ich mir jetzt einmal den Spaß machen, aufzulisten, wo die am häufigsten verwendeten Onlinequellen dem geneigten Plagiator diesbezüglich überall ein Bein stellen.
-Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate eben nie wegen klaren Codezeilen auffallen, sondern wegen denen die seltsam, unnötig oder fehlerhaft sind.
+Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate eben nie wegen klaren Codezeilen auffallen, sondern wegen denen, die seltsam, unnötig oder fehlerhaft sind.
 
 #### [GeeksforGeeks](https://www.geeksforgeeks.org/merge-sort/)
 
-* Kein normal denkender Mensch schreibt seine Arraytypen in C-style, wenn er Anfängern das Programmieren in Java beibringt.
+* Kein normal denkender Mensch schreibt seine Arraytypen in C-style, wenn er Anfänger\*innen das Programmieren in Java beibringt.
     `int L[] = new int [n1];` ist syntaktisch korrekt, aber moralisch höchst fragwürdig.
 * Arrays von Hand kopieren ist spätestens seit Java 1.6 nur noch Studierendenschikane und For-Schleifen ohne geschweifte Klammern sind grob fahrlässig.
 
@@ -318,7 +319,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * `merge` hat viel zu viele unnötige Parameter, weil `mergeSort` ein paar Dinge tut, die `merge` eigentlich selbst tun sollte.
 * Das übliche `i`/`j`/`k`-Debakel.
 * `a[k++] = l[i++];` Kürzer als die anderen, aber nicht lesbarer.
-    Für einen erfahrenen Programmierer mag das egal sein, aber ich behaupte für eine Erklärung für Anfänger ist es nicht klug, drei Zuweisungen in einer zu verstecken.
+    Für einen erfahrenen Programmierer mag das egal sein, aber ich behaupte für eine Erklärung für Anfänger\*innen ist es nicht klug, drei Zuweisungen in einer zu verstecken.
 * Wieder drei Schleifen statt einer... hört endlich auf Beispielcode zu optimieren!
 
 #### [Java2Novice](http://www.java2novice.com/java-sorting-algorithms/merge-sort/)
@@ -343,7 +344,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
     ```
 
     Seriously?
-    Das dürfte das bescheuertste Interface für eienen Sortieralgorithmus sein, das ich bisher gesehen habe - und ich schaue mir regelmäßig Code von Erst- und Zweitsemestern an!
+    Das dürfte das bescheuertste Interface für einen Sortieralgorithmus sein, das ich bisher gesehen habe - und ich schaue mir regelmäßig Code von Erst- und Zweitsemestern an!
     Besonders toll: Der Rückgabetyp suggeriert, dass ein neues Array erzeugt würde, was aber gar nicht der Fall ist.
 * `if (l < r)` statt sauberem `return`.
 * Hier haben wir die bisher härteste unnötige Optimierung.
@@ -364,7 +365,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
     }
     ```
 
-    mit `middle = q + 1` und `right = r` haben wir hier den gleichen Code.
+    Mit `middle = q + 1` und `right = r` haben wir hier den gleichen Code.
     Der ist zwar immer noch kompliziert, aber jetzt erkennt man wenigstens, dass hier der rechte Teilarray *rückwärts* in den temporären Array `arr` kopiert wird.
     Damit kann man sich dann in der Merge-Schleife die Abfrage sparen, ob noch Elemente im linken oder rechten Teilarray sind.
     Wenn das linke Array zuerst durchlaufen wird, springt der linke Index `i` auf das *größte* Element des rechten Arrays `arr[middle + 1]`.
@@ -373,7 +374,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 
     Ich will nicht lügen: Ich musste selbst auch einige Minuten lang konzentriert den Code analysieren, bevor ich diesen erklärenden Text schreiben konnte.
 
-    Kleines Schmankerl: So viel Arbeit um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann wenn er nur eine Kopie von zwei Elementen braucht?
+    Kleines Schmankerl: so viel Arbeit, um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann, wenn er nur eine Kopie von zwei Elementen braucht?
     Wirklich tolle Optimierungskünste. :man_facepalming:
 * `i`, `j` und `k` - besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
 
@@ -385,17 +386,17 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * Methoden sind nicht `static` und sind auch noch package private. :scream:
 * `if (low < high)` statt sauberem `return`.
 
-Wenn man sich die vier Beispiele so anschaut bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
+Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
 
 ## Dritte Regel des Plagiierens: Lies die verdammte Aufgabenstellung!
 
 Wie, noch mehr Lesen?
 Ja, Lesen hilft.
 Die Deutschnote ist laut einigen didaktischen Studien ein besserer Prädiktor für den Erfolg im Informatikstudium als die Mathenote.
-Vielleicht weil man Aufgabenstellungen erst einmal *lesen* könen muss, bevor man sie lösen kann?
+Vielleicht, weil man Aufgabenstellungen erst einmal *lesen* könen muss, bevor man sie lösen kann?
 
 Was meine ich damit? Meistens ist sich die Person, die die Aufgabe gestellt hat, völlig bewusst, dass es im Internet hunderte verschiedene Mergesort-Implementierungen in Java zum Download gibt.
-Die einfachste Lösung für das Problem ist es, kleine "Fallen" in die Aufgabenstellung einzubauen, so dass eine 1:1-Kopie eben nicht ausreicht.
+Die einfachste Lösung für das Problem ist es, kleine "Fallen" in die Aufgabenstellung einzubauen, sodass eine 1:1-Kopie eben nicht ausreicht.
 
 Meistens handelt es sich dabei um Veränderungen, bei denen man Methodenaufrufe zählen oder eine Laufzeitmessung unternehmen muss.
 (*Protip: Das Kopieren von exakten bis auf die Millisekunde identischen Laufzeiten ist ziemlich auffällig - ganz besonders dann, wenn auch noch Zeiten von einem Testfall aus dem Vorsemester aufgeschrieben werden, der in diesem Semester gar nicht mehr verlangt wird.*)
@@ -428,13 +429,13 @@ Wenn Du das aber kannst, dann behaupte ich an dieser Stelle einfach einmal, dass
 Was bleibt Dir also noch übrig, wenn das eben doch nicht der Fall ist?
 Ich sehe drei mögliche Lösungen:
 
-* Du setzt dich doch noch einmal an deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine*r Kommiliton*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
+* Du setzt dich doch noch einmal an deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
     Vielleicht hilft es sogar, einfach alles wegzuwerfen und noch einmal ganz von vorne anzufangen.
-* Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin. (z.B. `\* Idee von http://arbitrary-but-fixed.net/ \*`)
+* Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin (z.B. `\* Idee von http://arbitrary-but-fixed.net/ \*`).
     Damit handelt es sich um ein Zitat und kein Plagiat.
-    Es kann sein, dass du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (nicht-Bestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
+    Es kann sein, dass du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (Nichtbestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
 * Du gibst eine unfertige Lösung ab.
-    Dozent*innen und Tutor*innen sind keine Monster.
+    Dozent\*innen und Tutor\*innen sind keine Monster.
     Wir geben so viele Teilpunkte, wie wir irgendwie rechtfertigen können.
     Es muss nicht immer alles perfekt sein.
 
@@ -458,12 +459,11 @@ Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vie
 * **Der Algorithmus hängt in einer Endlosschleife?**
     Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
     `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
-    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen.
-    (Ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`.)
+    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen (ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`).
 * **Der Algorithmus läuft durch, sortiert aber nicht richtig?**
-    Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
+    Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus Versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
     Eventuell kann hier irgendwo ein `+1` oder `-1` Wunder wirken.
-    In jedem Fall aber gilt wie im vorherigen Fall: Systematisches Debuggen an möglichst kleinen Beispielen mit möglichst wenig Methodenaufrufen.
+    In jedem Fall aber gilt wie im vorherigen Fall: systematisches Debuggen an möglichst kleinen Beispielen mit möglichst wenig Methodenaufrufen.
 
 Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschreiben und dann im eigenen Code Schritt für Schritt mit Debugger oder Print-Anweisung nachvollziehen kann:
 
@@ -606,7 +606,7 @@ public interface MergesortListener {
 Dieses Interface definiert unsere Listener-Objekte, die Code enthalten können, um auf die jeweiligen Events zu reagieren.
 `callMerge` wird am Anfang der Methode `merge` aufgerufen, `exitMerge` an deren Ende.
 Für `sort` gibt es ebenfalls entsprechende Methoden.
-Zu guter letzt habe ich noch die Methode `mergeStep` hinzugefügt, die nach jedem einzelnen Schleifendurchlauf in `merge` aufgerufen wird.
+Zu guter Letzt habe ich noch die Methode `mergeStep` hinzugefügt, die nach jedem einzelnen Schleifendurchlauf in `merge` aufgerufen wird.
 
 Jetzt kann man beim Aufruf von `sort` oder `merge` ein entsprechendes Objekt (in der Regel als [anonyme Klasse](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)) mitgeben, das eine oder mehrere dieser Methoden implementiert und mit deren Hilfe diagnostische Ausgaben erzeugt oder statistiken errechnet.
 
@@ -643,7 +643,9 @@ sort(ar, 0, 5)
 ## Bonus 2: "Schöne" Mergesorts
 
 Dieser Post ist sowieso schon viel zu lang.
-Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von Mergesort zu präsentieren - nur um zu zeigen, wie man es auch noch machen könnte.
+Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von Mergesort zu präsentieren - nur um zu zeigen, wie man es auch noch machen könnte:
+
+### Optimierter Mergesort
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
