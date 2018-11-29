@@ -645,7 +645,12 @@ sort(ar, 0, 5)
 Dieser Post ist sowieso schon viel zu lang.
 Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von Mergesort zu präsentieren - nur um zu zeigen, wie man es auch noch machen könnte:
 
-### Optimierter Mergesort
+### Mergesort mit Sublist
+
+Die folgende Variante sortiert keine Arrays, sondern Listen.
+Das Schöne an ihr ist, dass sie sich der Methode `sublist(int, int)` des Interface `List` bedient, die eine *Ansicht* der Liste erzeugt.
+So lange man nur nichtstrukturelle Änderungen an der Liste vornimmt (also keine Werte löscht oder hinzufügt), werden diese Änderungen auch in die ursprüngliche Liste übernommen.
+Dadurch muss man sich noch weniger Gedanken um die Berechnung von Indices und Grenzen machen als sonst.
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -677,6 +682,60 @@ public class Mergesort {
     }
 }
 ```
+
+Ähnlich wie bei der ursprünglichen Variante wird hier eine Kopie der linken und rechten Liste für den `merge`-Schritt erstellt.
+Das geschieht in diesem Fall mit einem Copy-Konstruktor (`new ArrayList<T>(left)`).
+Außerdem sieht man hier schön die Macht des Comparable-Interfaces.
+Diese Methode funktioniert fast genauso wie die mit Int-Arrays, kann aber alles sortieren, was `Comparable` ist.
+
+### Swap + Rev variante
+
+Hier kommen wir ins Reich der Optimierungen.
+Wie ich schon sagte müssen wir hier die drei Regeln der Optimierung beachten:
+
+1. Lass es!
+2. Lass es ... erstmal. (für Experten)
+3. Mach vorher ein Profiling!
+
+Da ich jetzt so viele scheinbar optimierte Varianten gesehen habe, hatte ich Lust, mich selbst einmal an dem Problem zu versuchen.
+
+Zuerst habe ich einfach einmal verglichen, welche der Online-Varianten denn überhaupt die schnellste ist.
+Dazu habe ich den Java Microbenchmarking Harness (JMH) verwendet, weil Benchmarks in Java ein Minenfeld sind.
+
+<!-- TODO: geplotteter benchmark -->
+
+Und hier sieht man das Ergebnis von sinnlosem herumoptimieren.
+Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in $\mathcal{O}(n^2)$ statt in $\mathcal{O}(n \log n)$ liegen.
+Und dazu sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber nur mit einem Faktor von etwa 0,8, was für die meisten Anwendungen vernachlässigbar sein dürfte.
+
+Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen.
+Die folgende Variante schafft ziemlich ordentliche Geschwindigkeiten und bleibt dabei doch noch einigermaßen lesbar:
+
+```java
+TODO: SwapRev-Variante
+```
+
+Hier werden im Wesentlichen zwei Tricks kombiniert:
+
+1. Es wird ganz zu Beginn eine Kopie des Input-Arrays erstellt.
+    Beim ersten Aufruf von `sort` wird am Ende von der Kopie als Quelle (*source*, `src`) in das Original als Ziel (*destination*, `dst`) gemerged.
+    Damit das funktioniert, müssen die zwei rekursiven Aufrufe aber ihr Ergebnis in `src` schreiben - die Rolle von Quelle und Ziel wird also vertauscht.
+    Dieses Vertauschen geht so lange weiter bis wir die Rekursion vollständig aufgelöst haben.
+
+    Durch diese Technik sparen wir uns den Code zum Kopieren der Arrayinhalte in `merge` vollständig.
+    Ich habe mir diesen Trick nicht selbst ausgedacht, sondern bin irgendwo im Internet bei meinen Recherchen darüber gestolpert.
+    Leider weiß ich aber nicht mehr wo.
+    Wer mir da also helfen kann, der schickt mir bitte eine Mail, damit ich die Quelle hier ergänzen kann (Hat schon was ironisches in einem Post über Plagiate, oder?).
+2. Die Grundidee von Javabeginners war gar nicht verkehrt.
+    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als Sentinel.
+    Da wir mit der Swap-Variante aus dem ersten Punkt aber schon alle Kopien vermieden haben, würden wir ja jetzt wieder Zusatzaufwand für das Umkehren der rechten Hälfte verbrauchen - Es sei denn, wir schreiben die Inhalte einfach schon in der richtigen Reihenfolge.
+    Dazu habe ich einen weitereren Parameter `sortAsc` eingeführt (`true` steht für aufsteigendes Sortieren).
+
+Mit diesen beiden Tricks können wir noch einmal weitere 20% vom gesamten Zeitaufwand einsparen.
+
+### Mergesort auf Steroiden
+
+<!-- TODO: "schöner" iterativer merge sort -->
 
 <!-- Todo: Parallel merge sort -->
 
