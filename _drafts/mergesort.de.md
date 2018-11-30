@@ -20,7 +20,7 @@ Die meisten Beispiele, die man online findet, sind fehlerhaft oder viel zu kompl
 Aus einer Mischung von verzweifeltem Humor und leiser Hoffnung, vielleicht doch noch dem ein oder anderen zu helfen, diesen Algorithmus wirklich zu *verstehen*, habe ich mir daher vorgenommen, einmal zu zeigen, wie man es (meiner Meinung nach) *richtig* macht - also sowohl das Plagiieren als auch die Implementierung von Mergesort als Java-Neuling.
 
 So, und damit mir die potentiellen Plagiatoren jetzt nicht schon abspringen, gibt es hier fertig plagiierbaren Code.
-Ein wunderschöner kompakter, verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad]():
+Ein wunderschöner kompakter, verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad](#TODO):
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -71,21 +71,21 @@ public class Mergesort {
 ```
 
 Liest Du immer noch weiter?
-Gut! Wenn Du bis zum Ende durchhältst, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein Dozent vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
+Gut! Wenn Du bis zum Ende durchhältst, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein*e Dozent*in vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
 
 ## Nullte Regel des Plagiierens: Das Plagiat ist das Symptom, nicht die Krankheit.
 
 Warum plagiiert jemand bei einer Hausübung?
-*Willst* Du plagiieren, oder glaubst du, dass du es *musst*, um zu bestehen?
+*Willst* Du plagiieren, oder glaubst Du, dass Du es *musst*, um zu bestehen?
 Ich persönlich glaube, dass fast immer letzteres der Fall ist.
 Niemand, der problemlos in der Lage ist, eine Aufgabe auf normalem Wege zu lösen, entscheidet sich stattdessen, einfach eine Lösung zu kopieren.
 Ich glaube also hinter dem Plagiat steht immer ein anderes Problem.
 Vermutlich eins der folgenden:
 
 * **Du besitzt tatsächlich nicht die Fähigkeiten, die Aufgabe zu lösen.**
-    Vielleicht hast Du schon Schwierigkeiten mit Themen, die aus vergangenen Semestern vorausgesetzt werden; oder du stößt einfach an eine Verständnisgrenze, wo dir die informatisch-algorithmische Denkweise, die für die Lösung nötig wäre, zu fremd ist, um sie nachzuvollziehen.
+    Vielleicht hast Du schon Schwierigkeiten mit Themen, die aus vergangenen Semestern vorausgesetzt werden; oder Du stößt einfach an eine Verständnisgrenze, wo Dir die informatisch-algorithmische Denkweise, die für die Lösung nötig wäre, zu fremd ist, um sie nachzuvollziehen.
     In diesem Fall ist die Frage angemessen: Ist Informatik der richtige Studiengang für dich?
-    Also ist das *wirklich* ein Fach, für das du dich begeisterst, und bei dem du dir vorstellen kannst, ein Leben lang damit zu arbeiten?
+    Also ist das *wirklich* ein Fach, für das Du dich begeisterst, und bei dem Du Dir vorstellen kannst, ein Leben lang damit zu arbeiten?
     Warum nich Germanist\*in, Physiker\*in, Mechatroniker\*in oder Konditor\*in?
     Die Frage ist ernst und in keinster Weise abwertend gemeint.
 * **Du hast die nötigen Fähigkeiten, aber Dir fehlt die Zeit.**
@@ -95,12 +95,12 @@ Vermutlich eins der folgenden:
     Vielleicht müssen es nicht jedes Semester 30 Creditpoints sein?
     Vielleicht ist die PvP-Meisterschaft im Spiel Deiner Wahl auch nicht so wichtig, wie sie zu Beginn des Semesters erschien. 😉
     <!-- Todo: Condescending -->
-    Überleg dir deine Prioritäten und gestalte dein Studium entsprechend.
+    Überleg Dir Deine Prioritäten und gestalte Dein Studium entsprechend.
 * **Du hast die Fähigkeiten und die Zeit, schaffst es aber nicht, die letzten Bugs in deinem Code zu beheben.**
     Das kann darauf hinweisen, dass Dir einfach (noch) die Techniken zum systematischen Debuggen fehlen.
     Informatik hat viel mit Frustrationstoleranz, richtigem (!) Googeln und akribischem Sezieren von Code zu tun.
     All diese drei Dinge wollen gelernt sein.
-    Habe keine Angst, deinen unfertigen, hässlichen Code jemandem zu zeigen - deine\*m Dozent\*in eingeschlossen.
+    Habe keine Angst, Deinen unfertigen, hässlichen Code jemandem zu zeigen - Deine\*m Dozent\*in eingeschlossen.
     Nur durch Fehler und Feedback kannst Du etwas dazulernen.
 
 ## Erste Regel des Plagiierens: Einfachheit ist Trumpf!
@@ -113,10 +113,10 @@ Zunächst einmal müssen wir klarstellen, was hier "besser" heißt: Mein Code is
 Ich habe aber versucht, ihn *verständlicher* für Java-Einsteiger zu schreiben.
 
 Warum sollte man sich als Plagiator scheren, ob der Code, den man kopiert einfach oder kompliziert ist?
-Zwei Gründe: Erstens kannst Du den Code sowieso nicht exakt so abgeben, weil dein Dozent vermutlich eine leicht andere Schnittstelle fordert, oder eine Zeitmessung, oder oder oder.
+Zwei Gründe: Erstens kannst Du den Code sowieso nicht exakt so abgeben, weil Dein Dozent vermutlich eine leicht andere Schnittstelle fordert, oder eine Zeitmessung, oder oder oder.
 Du musst ihn also genug verstehen, um ihn anpassen zu können.
 Zweitens ist die Wahrscheinlichkeit, dass ein Plagiat auffällt, höher, je weniger der Code abgeändert wurde und je weniger er nach Deinem sonstigen Stil aussieht.
-Retten kannst Du dich nur, indem du eigene Anpassungen vornimmst, und nachher in der Lage bist, sauber zu erklären, was der Code tut und warum Du ihn so geschrieben hast, wie er da steht.
+Retten kannst Du dich nur, indem Du eigene Anpassungen vornimmst, und nachher in der Lage bist, sauber zu erklären, was der Code tut und warum Du ihn so geschrieben hast, wie er da steht.
 
 Um jetzt zu demonstrieren, warum ich meinen Code für einfacher halte, werde ich ihn erst erklären. Im nächsten Abschnitt hacke ich dann auf den Dingen herum, die die anderen Optionen aus dem Internet unnötig kompliziert bzw. auffällig schlecht machen.
 
@@ -278,7 +278,7 @@ Wenn in einem Stück Code von Student\*in A ein `@author Student*in B` auftaucht
 Wenn man schon plagiiert, dann kann man sich doch ein Mindestmaß an Mühe geben, das zu verschleiern.
 Für wie blöd halten mich meine Studierenden eigentlich?
 
-Darum die oberste Regel: **Lies den Kram, den du kopierst wenigstens einmal durch!**
+Darum die oberste Regel: **Lies den Kram, den Du kopierst wenigstens einmal durch!**
 Du musst ja nicht alles begreifen, aber die offensichtlichsten Hinweise auf die Quelle kann man leicht entfernen.
 Und wenn man dann von seine\*r Dozent\*in eingeladen und gefragt wird, was man sich denn bei dem Ausdruck `arr[r + q + 1 - j] = intArr[j];` gedacht hat, ist "Öhm, keine Ahnung? Aber es funktioniert!" nicht die beste Antwort, um den Kopf aus der Schlinge zu ziehen. :wink:
 
@@ -401,10 +401,10 @@ Die einfachste Lösung für das Problem ist es, kleine "Fallen" in die Aufgabens
 Meistens handelt es sich dabei um Veränderungen, bei denen man Methodenaufrufe zählen oder eine Laufzeitmessung unternehmen muss.
 (*Protip: Das Kopieren von exakten bis auf die Millisekunde identischen Laufzeiten ist ziemlich auffällig - ganz besonders dann, wenn auch noch Zeiten von einem Testfall aus dem Vorsemester aufgeschrieben werden, der in diesem Semester gar nicht mehr verlangt wird.*)
 
-Die versprochene Variante, die du weiter unten in diesem (zugegebenermaßen viel zu langen) Post findest, kann mit den meisten Änderungen dieser Art super umgehen.
-Wenn das nichts hilft, musst du eben doch Hand an den kopierten Code anlegen.
+Die versprochene Variante, die Du weiter unten in diesem (zugegebenermaßen viel zu langen) Post findest, kann mit den meisten Änderungen dieser Art super umgehen.
+Wenn das nichts hilft, musst Du eben doch Hand an den kopierten Code anlegen.
 In der Regel sind auch nur ein paar Zeilen an der richtigen Stelle nötig (am Anfang oder Ende der Methoden).
-Ein ganz klein wenig musst du dafür aber schon kapieren, was die Methoden eigentlich machen.
+Ein ganz klein wenig musst Du dafür aber schon kapieren, was die Methoden eigentlich machen.
 Und das führt uns zum nächsten Punkt.
 
 ## Vierte Regel des Plagiierens: Wer gut plagiieren kann, braucht es eigentlich nicht.
@@ -418,22 +418,22 @@ Das fällt sofort auf.
 Ein einfaches Umbenennen von Variablen reicht auch nicht.
 Variablennamen sind im Kopf des oder der Dozent\*in sowieso austauschbar und es gibt sehr zuverlässige Plagiatssoftware, die ebenfalls Namen ignoriert.
 Das gleiche gilt auch für das Vertauschen von Zeilen, deren Reihenfolge unwichtig ist.
-Entweder musst Du also wirklich einen Teil des Programms, den du gut genug verstehst, nach deinem eigenen Stil neu schreiben, oder du musst Code kopieren, der wirklich keine unnötigen oder stilistisch auffälligen Passagen besitzt - eben Code, bei dem es wirklich glaubhaft ist, dass zwei Studierende auf genau die gleiche Idee gekommen sind.
+Entweder musst Du also wirklich einen Teil des Programms, den Du gut genug verstehst, nach deinem eigenen Stil neu schreiben, oder Du musst Code kopieren, der wirklich keine unnötigen oder stilistisch auffälligen Passagen besitzt - eben Code, bei dem es wirklich glaubhaft ist, dass zwei Studierende auf genau die gleiche Idee gekommen sind.
 In letzterem Fall wird aber trotzdem die Plagiatssoftware oder der Spinnensinn des oder der Dozent\*in anschlagen.
 In so einem Fall entscheiden wir normalerweise danach, ob der oder die Student\*in in der Lage ist, den Code zu erklären.
 
 Unter dem Strich heißt das also, dass Du den Code entweder gut genug verstehen musst, um wesentliche Teile davon abzuändern, oder um ihn im Gesamten zu erklären.
-Wenn Du das nicht kannst, ist das Risiko sehr hoch, dass das Plagiat auffällt und Du echte Probleme für dein weiteres Studium bekommen kannst.
+Wenn Du das nicht kannst, ist das Risiko sehr hoch, dass das Plagiat auffällt und Du echte Probleme für Dein weiteres Studium bekommen kannst.
 Wenn Du das aber kannst, dann behaupte ich an dieser Stelle einfach einmal, dass Du es auch schaffst, eine eigene Lösung für die Aufgabe zu schreiben, ohne zu plagiieren.
 
 Was bleibt Dir also noch übrig, wenn das eben doch nicht der Fall ist?
 Ich sehe drei mögliche Lösungen:
 
-* Du setzt dich doch noch einmal an deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
+* Du setzt dich doch noch einmal an Deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
     Vielleicht hilft es sogar, einfach alles wegzuwerfen und noch einmal ganz von vorne anzufangen.
 * Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin (z.B. `\* Idee von http://arbitrary-but-fixed.net/ \*`).
     Damit handelt es sich um ein Zitat und kein Plagiat.
-    Es kann sein, dass du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (Nichtbestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
+    Es kann sein, dass Du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (Nichtbestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
 * Du gibst eine unfertige Lösung ab.
     Dozent\*innen und Tutor\*innen sind keine Monster.
     Wir geben so viele Teilpunkte, wie wir irgendwie rechtfertigen können.
@@ -441,7 +441,7 @@ Ich sehe drei mögliche Lösungen:
 
 ## Hilfe zur Selbsthilfe
 
-Warum funktioniert jetzt also deine eigene Mergesort-Implementierung nicht?
+Warum funktioniert jetzt also Deine eigene Mergesort-Implementierung nicht?
 Das ist natürlich schwer zu sagen.
 Vor allem ist das aber erst einmal ganz normal.
 Mergesort gehört zu einem der ersten "größeren" Algorithmen, die man im Studium implementiert.
@@ -452,10 +452,10 @@ Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vie
 * **Du hast einen `StackOverflowError`?**
     Dann ist die Abbruchbedingung deiner Rekursion nicht vorhanden oder kaputt.
 * **Du hast eine `ArrayIndexOutOfBoundsException`?**
-    Dann gnade dir James Gosling. :laughing:
+    Dann gnade Dir James Gosling. :laughing:
     Diese Ausnahme kann viele Gründe haben, heißt aber immer, dass irgendwo eine Indexberechnung schief gegangen ist - vermutlich bei der oberen Grenze für den rechten Index oder den Gesamtindex in `merge`.
-    Hier hilft vor Allem systematisches Debuggen: Such dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
-    Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn du dir sicher bist, dass `merge` sauber funktioniert.
+    Hier hilft vor Allem systematisches Debuggen: Such Dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was Dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
+    Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn Du Dir sicher bist, dass `merge` sauber funktioniert.
 * **Der Algorithmus hängt in einer Endlosschleife?**
     Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
     `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
@@ -612,7 +612,7 @@ Jetzt kann man beim Aufruf von `sort` oder `merge` ein entsprechendes Objekt (in
 
 Die `main`-Methode von `ListenerMergesort` zeigt, wie man mit diesem Pattern wunderschön die Aufrufhierarchie von `sort` und die Funktionsweise von `merge` nachverfolgen kann.
 
-*Protip: Wenn du so einen Listener in Deinen eigenen Code implementierst, kannst Du damit vermutlich Deinen Bugs sehr viel leichter auf die Schliche kommen.*
+*Protip: Wenn Du so einen Listener in Deinen eigenen Code implementierst, kannst Du damit vermutlich Deinen Bugs sehr viel leichter auf die Schliche kommen.*
 
 ```text
 sort(ar, 0, 5)
