@@ -730,6 +730,7 @@ Hier werden im Wesentlichen zwei Tricks kombiniert:
     Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als Sentinel.
     Da wir mit der Swap-Variante aus dem ersten Punkt aber schon alle Kopien vermieden haben, würden wir ja jetzt wieder Zusatzaufwand für das Umkehren der rechten Hälfte verbrauchen - Es sei denn, wir schreiben die Inhalte einfach schon in der richtigen Reihenfolge.
     Dazu habe ich einen weitereren Parameter `sortAsc` eingeführt (`true` steht für aufsteigendes Sortieren).
+3. Für sehr kleine Arrays (deutlich weniger als 100 Elemente) ist Insertionsort schneller als Mergesort, weil er nicht den Overhead
 
 Mit diesen beiden Tricks können wir noch einmal weitere 20% vom gesamten Zeitaufwand einsparen.
 
