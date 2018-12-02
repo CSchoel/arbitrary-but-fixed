@@ -132,9 +132,9 @@ Diese rekursive Definition finden wir direkt im Code wieder:
 public static void sort(int[] ar, int from, int to) {
     // ...
     int middle = (from + to) / 2;
-    sort(ar, 0, middle);
-    sort(ar, middle, to);
-    merge(ar, from, middle, to);
+    sort(ar, 0, middle);          // sortiere die linke Hälfte
+    sort(ar, middle, to);         // sortiere die rechte Hälfe
+    merge(ar, from, middle, to);  // füge beide Hälften zusammen
 }
 ```
 
@@ -274,7 +274,7 @@ Natürlich ist die Frage, ob das linke Element kleiner als das rechte ist nur da
 
 ## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
 
-Wenn in einem Stück Code von Student\*in A ein `@author Student*in B` auftaucht, der Paketname `package com.java2novice.sorting` lautet oder ausführliche englische Kommentare aus dem Original mitkopiert wurden, dann fühle ich mich als Dozent schon ein wenig beleidigt.
+Wenn in einem Stück Code von Student\*in A ein `@author Student*in B` auftaucht, die Paketdefinition `package com.java2novice.sorting` lautet oder ausführliche englische Kommentare aus dem Original mitkopiert wurden, dann fühle ich mich als Dozent schon ein wenig beleidigt.
 Wenn man schon plagiiert, dann kann man sich doch ein Mindestmaß an Mühe geben, das zu verschleiern.
 Für wie blöd halten mich meine Studierenden eigentlich?
 
@@ -289,7 +289,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 
 * Kein normal denkender Mensch schreibt seine Arraytypen in C-style, wenn er Anfänger\*innen das Programmieren in Java beibringt.
     `int L[] = new int [n1];` ist syntaktisch korrekt, aber moralisch höchst fragwürdig.
-* Arrays von Hand kopieren ist spätestens seit Java 1.6 nur noch Studierendenschikane und For-Schleifen ohne geschweifte Klammern sind grob fahrlässig.
+* Arrays von Hand kopieren ist spätestens seit Java 1.6 nur noch Studierendenschikane und `for`-Schleifen ohne geschweifte Klammern sind grob fahrlässig.
 
     ```java
     for (int i=0; i<n1; ++i) 
@@ -308,6 +308,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
     Besonders dann, wenn sie manuell hochgezählt werden!
 * Der mitgelieferte JUnit-Test ist auch ein Paradebeispiel dafür, wie man einen JUnit-Test *nicht* schreiben sollte. `fail("Should not happen")` - Vielen Dank für die informative Fehlermeldung. :man_facepalming:
     Über die [Probleme mit der Zeitmessung](https://www.baeldung.com/java-jvm-warmup) im Test reden wir mal lieber gar nicht.
+    <!-- TODO: besserer Link (JMH)? -->
 * Diese Implementierung hat einen Grund, warum die Methoden nicht `static` sind, aber keinen guten: Der Input-Array und seine Kopie werden als private Variablen mitgeschleift. :scream:
     Der Sinn dahinter ist auch hier wieder eine für den eigentlichen Zweck völlig unnötige Optimierung (weniger Array-Erzeugungen).
 * Wieder ein `if (low < high)` statt einer sauberen Abbruchbedingung mit `return`.
@@ -318,7 +319,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
     Das war aber in Java noch nie nötig. Da steckt noch jemand in C-Zeiten fest.
 * `merge` hat viel zu viele unnötige Parameter, weil `mergeSort` ein paar Dinge tut, die `merge` eigentlich selbst tun sollte.
 * Das übliche `i`/`j`/`k`-Debakel.
-* `a[k++] = l[i++];` Kürzer als die anderen, aber nicht lesbarer.
+* `a[k++] = l[i++];` - kürzer als die anderen, aber nicht lesbarer.
     Für einen erfahrenen Programmierer mag das egal sein, aber ich behaupte für eine Erklärung für Anfänger\*innen ist es nicht klug, drei Zuweisungen in einer zu verstecken.
 * Wieder drei Schleifen statt einer... hört endlich auf Beispielcode zu optimieren!
 
@@ -375,8 +376,9 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
     Ich will nicht lügen: Ich musste selbst auch einige Minuten lang konzentriert den Code analysieren, bevor ich diesen erklärenden Text schreiben konnte.
 
     Kleines Schmankerl: so viel Arbeit, um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann, wenn er nur eine Kopie von zwei Elementen braucht?
-    Wirklich tolle Optimierungskünste. :man_facepalming:
-* `i`, `j` und `k` - besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
+    Wirklich tolle Optimierungskünste!
+    Das verschlechtert sogar die Effizienzklasse von $\mathcal{O}(n \log n)$ auf $\mathcal{O}(n^2)$. :man_facepalming:
+* `i`, `j` und `k` sind besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
 
 #### [Dieses beliebige Gist](https://gist.github.com/cocodrips/5937371)
 
@@ -385,6 +387,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * Zwei Schleifen statt einer.
 * Methoden sind nicht `static` und sind auch noch package private. :scream:
 * `if (low < high)` statt sauberem `return`.
+* <!-- TODO: warum ist der hier auch in n^2? -->
 
 Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
 
@@ -392,7 +395,7 @@ Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den
 
 Wie, noch mehr Lesen?
 Ja, Lesen hilft.
-Die Deutschnote ist laut einigen didaktischen Studien ein besserer Prädiktor für den Erfolg im Informatikstudium als die Mathenote.
+Die Deutschnote ist laut einigen [didaktischen Studien](TODO) ein besserer Prädiktor für den Erfolg im Informatikstudium als die Mathenote.
 Vielleicht, weil man Aufgabenstellungen erst einmal *lesen* könen muss, bevor man sie lösen kann?
 
 Was meine ich damit? Meistens ist sich die Person, die die Aufgabe gestellt hat, völlig bewusst, dass es im Internet hunderte verschiedene Mergesort-Implementierungen in Java zum Download gibt.
@@ -416,7 +419,7 @@ Ich schildere hier einmal, was es aus meiner Sicht braucht, um bei einem Plagiat
 Der Code darf nicht 1:1 kopiert sein - auch nicht in größeren Teilen.
 Das fällt sofort auf.
 Ein einfaches Umbenennen von Variablen reicht auch nicht.
-Variablennamen sind im Kopf des oder der Dozent\*in sowieso austauschbar und es gibt sehr zuverlässige Plagiatssoftware, die ebenfalls Namen ignoriert.
+Variablennamen sind im Kopf des oder der Dozent\*in sowieso austauschbar und es gibt sehr zuverlässige [Plagiatssoftware](TODO), die ebenfalls Namen ignoriert.
 Das gleiche gilt auch für das Vertauschen von Zeilen, deren Reihenfolge unwichtig ist.
 Entweder musst Du also wirklich einen Teil des Programms, den Du gut genug verstehst, nach deinem eigenen Stil neu schreiben, oder Du musst Code kopieren, der wirklich keine unnötigen oder stilistisch auffälligen Passagen besitzt - eben Code, bei dem es wirklich glaubhaft ist, dass zwei Studierende auf genau die gleiche Idee gekommen sind.
 In letzterem Fall wird aber trotzdem die Plagiatssoftware oder der Spinnensinn des oder der Dozent\*in anschlagen.
@@ -429,9 +432,9 @@ Wenn Du das aber kannst, dann behaupte ich an dieser Stelle einfach einmal, dass
 Was bleibt Dir also noch übrig, wenn das eben doch nicht der Fall ist?
 Ich sehe drei mögliche Lösungen:
 
-* Du setzt dich doch noch einmal an Deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#ubliche_probleme) Deine Bugs zu beheben.
+* Du setzt dich doch noch einmal an Deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#TODO) Deine Bugs zu beheben.
     Vielleicht hilft es sogar, einfach alles wegzuwerfen und noch einmal ganz von vorne anzufangen.
-* Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin (z.B. `\* Idee von http://arbitrary-but-fixed.net/ \*`).
+* Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin (z.B. `\* Idee von http://arbitrary-but-fixed.net/... \*`).
     Damit handelt es sich um ein Zitat und kein Plagiat.
     Es kann sein, dass Du dafür weniger oder gar keine Punkte bekommst, weil es nicht Deine eigene Leistung ist, aber es kann nicht zu schlimmeren Folgen (Nichtbestehen des Arbeitsblattes, Eintrag in der Akte, Exmatrikulation) kommen.
 * Du gibst eine unfertige Lösung ab.
@@ -459,7 +462,7 @@ Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vie
 * **Der Algorithmus hängt in einer Endlosschleife?**
     Dafür sind in der Regel nur `while`-Schleifen verantwortlich, deren Abbruchbedingung eben nie erfüllt wird.
     `for`-Schleifen sind als Schuldige unwahrscheinlicher, weil man dort meistens schon beim ersten Blick auf den Schleifenkopf merkt, wenn etwas verkehrt läuft.
-    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen (ich habe einmal so eine Endlosschleife gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`).
+    Rekursive Aufrufe *können* theoretisch auch eine Endlosschleife fabrizieren, aber dabei ist es viel wahrscheinlicher, einen `StackOverflowError` zu erzeugen (ich habe einmal so eine "Endlosschleife" gebaut, indem ich aus versehen beim ersten rekursiven Aufruf von `sort` immer bei `0` angefangen habe statt bei `from`).
 * **Der Algorithmus läuft durch, sortiert aber nicht richtig?**
     Meistens liegt das daran, dass die Teilarrays `left` und `right` sich in Deiner Implementierung aus Versehen überlappen - zum Beispiel weil der Index `middle` auch zu `left` mit dazugezählt wird und nicht nur zu `right`.
     Eventuell kann hier irgendwo ein `+1` oder `-1` Wunder wirken.
@@ -477,6 +480,8 @@ Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschrei
     merge(input, 2, 3, 5);
     merge(input, 0, 2, 5);
     ```
+
+    Wenn das der Fall ist, liegt das Problem bei `merge` und nicht bei `sort`.
 * Für `merge` schauen wir uns das Array `{5, 1, 4, 2, 3, 0}` an.
     Wenn wir `merge(input, 1, 3, 5)` aufrufen, sollten die Teilarrays `{1, 4}` und `{2, 3}` zu `{1, 2, 3, 4}` kombiniert werden und die `0` und die `5` sollten unverändert am Anfang bzw. Ende stehen bleiben.
     Um zu prüfen, ob das wirklich passiert, schreiben wir uns einfach in einer Tabelle auf, welche Werte die wichtigen Variablen nach jedem Durchlauf der Schleife in `merge` haben müssen:
@@ -490,9 +495,11 @@ Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschrei
      4           2             2   {5, 1, 2, 3, 4, 0}
      ```
 
+     Wenn das bei Dir genauso aussieht (oder entsprechend zu deiner Definition der Variablen), dann liegt das Problem bei `sort` und nicht bei `merge`.
+
 ## Bonus: Die Königin der Mergesort-Plagiate
 
-Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozent*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](foo)):
+Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozent*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](#TODO)):
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -609,10 +616,10 @@ Für `sort` gibt es ebenfalls entsprechende Methoden.
 Zu guter Letzt habe ich noch die Methode `mergeStep` hinzugefügt, die nach jedem einzelnen Schleifendurchlauf in `merge` aufgerufen wird.
 
 Jetzt kann man beim Aufruf von `sort` oder `merge` ein entsprechendes Objekt (in der Regel als [anonyme Klasse](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)) mitgeben, das eine oder mehrere dieser Methoden implementiert und mit deren Hilfe diagnostische Ausgaben erzeugt oder statistiken errechnet.
+Das [`default`](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html) und der leere Methodenkörper `{}` in der Interfacedeklaration sorgen dafür, dass man nicht immer jede Methode implementieren muss, sondern nur die, die man auch mit Inhalt füllen möchte.
+Vor Java 8 musste man dafür eine separate [Adapter-Klasse](https://stackoverflow.com/questions/10170698/what-is-an-adapter-class) schreiben.
 
-Die `main`-Methode von `ListenerMergesort` zeigt, wie man mit diesem Pattern wunderschön die Aufrufhierarchie von `sort` und die Funktionsweise von `merge` nachverfolgen kann.
-
-*Protip: Wenn Du so einen Listener in Deinen eigenen Code implementierst, kannst Du damit vermutlich Deinen Bugs sehr viel leichter auf die Schliche kommen.*
+Die `main`-Methode von `ListenerMergesort` zeigt, wie man mit diesem Pattern wunderschön die Aufrufhierarchie von `sort` und die Funktionsweise von `merge` nachverfolgen kann:
 
 ```text
 sort(ar, 0, 5)
@@ -640,6 +647,11 @@ sort(ar, 0, 5)
   4   2   2   [5, 1, 2, 3, 4, 0]
 ```
 
+Wenn bei Dir die Aufrufreihenfolge anders aussieht, gibt es vermutlich ein Problem in `sort` (oder du hast die Grenzen der Array-Hälften anders definiert).
+Wenn der untere Teil anders aussieht, gibt es ein Problem in `merge` (wie im [vorherigen Abschnitt](TODO) erklärt).
+
+*Protip: Wenn Du so einen Listener in Deinen eigenen Code implementierst, kannst Du damit vermutlich Deinen Bugs sehr viel leichter auf die Schliche kommen.*
+
 ## Bonus 2: "Schöne" Mergesorts
 
 Dieser Post ist sowieso schon viel zu lang.
@@ -648,7 +660,7 @@ Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von M
 ### Mergesort mit Sublist
 
 Die folgende Variante sortiert keine Arrays, sondern Listen.
-Das Schöne an ihr ist, dass sie sich der Methode `sublist(int, int)` des Interface `List` bedient, die eine *Ansicht* der Liste erzeugt.
+Das Schöne an ihr ist, dass sie sich der Methode [`sublist(int, int)`](TODO) des Interface `List` bedient, die eine *Ansicht* der Liste erzeugt.
 So lange man nur nichtstrukturelle Änderungen an der Liste vornimmt (also keine Werte löscht oder hinzufügt), werden diese Änderungen auch in die ursprüngliche Liste übernommen.
 Dadurch muss man sich noch weniger Gedanken um die Berechnung von Indices und Grenzen machen als sonst.
 
@@ -684,40 +696,43 @@ public class Mergesort {
 ```
 
 Ähnlich wie bei der ursprünglichen Variante wird hier eine Kopie der linken und rechten Liste für den `merge`-Schritt erstellt.
-Das geschieht in diesem Fall mit einem Copy-Konstruktor (`new ArrayList<T>(left)`).
+Das geschieht in diesem Fall mit einem Copy-Konstruktor ([`new ArrayList<T>(left)`](TODO)).
 Außerdem sieht man hier schön die Macht des Comparable-Interfaces.
-Diese Methode funktioniert fast genauso wie die mit Int-Arrays, kann aber alles sortieren, was `Comparable` ist.
+Diese Methode funktioniert fast genauso wie die mit Int-Arrays, kann aber alles sortieren, was [`Comparable`](TODO) ist.
 
 ### Swap + Rev variante
 
 Hier kommen wir ins Reich der Optimierungen.
-Wie ich schon sagte müssen wir hier die drei Regeln der Optimierung beachten:
+Wie ich schon sagte müssen wir hier die [drei Regeln der Optimierung](TODO) beachten:
 
 1. Lass es!
 2. Lass es ... erstmal. (für Experten)
 3. Mach vorher ein Profiling!
 
-Da ich jetzt so viele scheinbar optimierte Varianten gesehen habe, hatte ich Lust, mich selbst einmal an dem Problem zu versuchen.
+Wir ignorieren Regel eins und zwei vorerst, da es mir nur um ein akademisches Beispiel geht und da wir auch sowieso schon scheinbar optimierte Varianten vorliegen haben.
+Stattdessen möchte ich aber noch eine vierte Regel hinzufügen, die sich auch in diesem Projekt für mich als sehr wichtig herausgestellt hat:
 
-Zuerst habe ich einfach einmal verglichen, welche der Online-Varianten denn überhaupt die schnellste ist.
-Dazu habe ich den Java Microbenchmarking Harness (JMH) verwendet, weil Benchmarks in Java ein Minenfeld sind.
+4. Teste jede Änderung mit einem Benchmark!
+
+Wir beginnen also mit der neuen Regel vier und schauen uns an, welche der bestehenden Varianten denn überhaupt die schnellste ist und wie schlimm die Perfomance der sauberen verständlichen Lösung eigentich im Vergleich aussieht.
+Dazu habe ich den [Java Microbenchmarking Harness (JMH)](TODO) verwendet, weil [Benchmarks in Java](TODO) ein Minenfeld sind.
 
 <!-- TODO: geplotteter benchmark -->
 
 Und hier sieht man das Ergebnis von sinnlosem herumoptimieren.
 Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in $\mathcal{O}(n^2)$ statt in $\mathcal{O}(n \log n)$ liegen.
-Und dazu sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber nur mit einem Faktor von etwa 0,8, was für die meisten Anwendungen vernachlässigbar sein dürfte.
+Dazu sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber nur mit einem Faktor von etwa 0,8, was für die meisten Anwendungen vernachlässigbar sein dürfte.
 
-Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen.
+Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen?
 Die folgende Variante schafft ziemlich ordentliche Geschwindigkeiten und bleibt dabei doch noch einigermaßen lesbar:
 
 ```java
 TODO: SwapRev-Variante
 ```
 
-Hier werden im Wesentlichen zwei Tricks kombiniert:
+Hier werden im Wesentlichen drei Tricks kombiniert:
 
-1. Es wird ganz zu Beginn eine Kopie des Input-Arrays erstellt.
+1. Es wird ganz zu Beginn eine einzige Kopie des Input-Arrays erstellt.
     Beim ersten Aufruf von `sort` wird am Ende von der Kopie als Quelle (*source*, `src`) in das Original als Ziel (*destination*, `dst`) gemerged.
     Damit das funktioniert, müssen die zwei rekursiven Aufrufe aber ihr Ergebnis in `src` schreiben - die Rolle von Quelle und Ziel wird also vertauscht.
     Dieses Vertauschen geht so lange weiter bis wir die Rekursion vollständig aufgelöst haben.
@@ -725,16 +740,50 @@ Hier werden im Wesentlichen zwei Tricks kombiniert:
     Durch diese Technik sparen wir uns den Code zum Kopieren der Arrayinhalte in `merge` vollständig.
     Ich habe mir diesen Trick nicht selbst ausgedacht, sondern bin irgendwo im Internet bei meinen Recherchen darüber gestolpert.
     Leider weiß ich aber nicht mehr wo.
-    Wer mir da also helfen kann, der schickt mir bitte eine Mail, damit ich die Quelle hier ergänzen kann (Hat schon was ironisches in einem Post über Plagiate, oder?).
-2. Die Grundidee von Javabeginners war gar nicht verkehrt.
-    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als Sentinel.
+    Wer mir da also helfen kann, der schickt mir bitte eine Mail, damit ich die Quelle hier ergänzen kann (Hat schon was ironisches in einem Post über Plagiate, oder? :sweat_smile:).
+2. Die Grundidee von [Javabeginners](TODO) war gar nicht verkehrt.
+    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als [Sentinel](TODO).
     Da wir mit der Swap-Variante aus dem ersten Punkt aber schon alle Kopien vermieden haben, würden wir ja jetzt wieder Zusatzaufwand für das Umkehren der rechten Hälfte verbrauchen - Es sei denn, wir schreiben die Inhalte einfach schon in der richtigen Reihenfolge.
-    Dazu habe ich einen weitereren Parameter `sortAsc` eingeführt (`true` steht für aufsteigendes Sortieren).
-3. Für sehr kleine Arrays (deutlich weniger als 100 Elemente) ist Insertionsort schneller als Mergesort, weil er nicht den Overhead
+    Dazu habe ich einen weitereren Parameter `sortAsc` eingeführt (`true` steht für aufsteigendes Sortieren, `false` für absteigendes).
+3. Bei der Diskussion über Sortieralgorithmen in Büchern und im Internet hört man oft, dass Insertionsort für sehr kleine Arrays (deutlich weniger als 100 Elemente) schneller ist, als die komplizierteren rekursiven Algorithmen, weil er eben keinen Overhead durch rekursive Methodenaufrufe hat und sich außerdem durch eine sehr kompakte innere Schleife auszeichnet.
+    Darum stoppt in dieser Variante die Rekursion bei Teilarrays der größe 60 und diese kleinen Reste werden mit Insertionsort sortiert.
 
-Mit diesen beiden Tricks können wir noch einmal weitere 20% vom gesamten Zeitaufwand einsparen.
+Mit diesen drei Tricks breauchen wir nur noch 60% der übrigen Zeit, haben alle der Online-Varianten überholt und der Code ist (mit den entsprechenden Kommentaren) immer noch einigermaßen lesbar.
+
+### Iterative Variante
+
+Die folgende Variante von Mergesort funktioniert iterativ.
+
+```java
+TODO
+```
+
+Sie sortiert das Array erst in Zweierblöcken, dann in Viererblöcken, dann in Achterblöcken und so weiter, bis die Blockgröße die Gesamtgröße des Arrays erreicht hat.
+Interessanterweise bringt das in diesem Fall keinerlei Performancevorsprung vor den rekursiven Varianten - selbst wenn man die bereits erwähnten Performance-Tricks mit einführt.
+Ich habe sie nur aufgeführt, um noch einmal eine ganz andere Variante zu zeigen und weil die Idee für die letzte Variante interessant ist.
 
 ### Mergesort auf Steroiden
+
+Seht her, mein hochgezüchtetes Monstrum:
+
+```java
+TODO
+```
+
+Diese Mergesort-Variante bezieht ihre Energie aus der [dunklen Dimension von Dormamu](TODO).
+Nein, nicht wirklich.
+Aber sie ist das was passiert, wenn man aus Macht- bzw. Performancegier die Lesbarkeit völlig über Bord wirft.
+Die Steroid-Variante verbindet die drei bereits erwähnten Performancetricks mit dem Aufbau der iterativen Variante, um den Algorithmus möglichst gut zu parallelisieren.
+In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ExecutionService`](TODO) gleichmäßig auf mehrere Threads verteilt.
+Per Default entspricht die Anzahl der Threads der Anzahl der Prozessoren des Systems.
+Danach wartet der Haupthread bis alle Teilprobleme gelöst wurden, um dann die Blockgröße zu verdoppeln und die Threads für die nächste Runde zu starten.
+Damit brauchen wir auf einem i7-Prozessor nur noch ein viertel der Zeit im Vergleich zur lesbaren Variante.
+<!-- TODO: Performance gain --->
+
+### Fazit zur Optimierung
+
+Ich habe versprochen, dass ich noch einmal auf die erste Regel der Optimierung eingehe.
+Dazu möchte ich einfach ohne große Worte unsere bisher besten Varianten mit der Standardimplementierung von `Arrays.sort` bzw. `Arrays.parallelSort` vergleichen.
 
 <!-- TODO: "schöner" iterativer merge sort -->
 
