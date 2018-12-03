@@ -715,7 +715,7 @@ Stattdessen möchte ich aber noch eine vierte Regel hinzufügen, die sich auch i
 4. Teste jede Änderung mit einem Benchmark!
 
 Wir beginnen also mit der neuen Regel vier und schauen uns an, welche der bestehenden Varianten denn überhaupt die schnellste ist und wie schlimm die Perfomance der sauberen verständlichen Lösung eigentich im Vergleich aussieht.
-Dazu habe ich den [Java Microbenchmarking Harness (JMH)](TODO) verwendet, weil [Benchmarks in Java](TODO) ein Minenfeld sind.
+Dazu habe ich den [Java Microbenchmarking Harness (JMH)](http://openjdk.java.net/projects/code-tools/jmh/) verwendet, weil [Benchmarks in Java](https://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html) ein Minenfeld sind.
 
 <!-- TODO: geplotteter benchmark -->
 
