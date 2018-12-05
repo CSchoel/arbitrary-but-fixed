@@ -20,7 +20,7 @@ Trotzdem blieb die Aufgabe natürlich herausfordernd - besonders, da es nicht so
 
 Aus diesem Grund habe ich mir die Zeit genommen, dieses Tutorial zu verfassen, was ich nun hier mit der Welt teilen möchte.
 Dies ist die originale deutsche Version.
-Ich habe das Dokument auch [möglichst wortgetreu ins Englische übersetzt]({{ site.baseurl }}{% post_url 2018-11-11-exercise-tutorial %}).
+Ich habe das Dokument auch [möglichst wortgetreu ins Englische übersetzt]({{ site.baseurl }}{% post_url 2018-12-05-exercise-tutorial.en %}).
 
 ## 0 Einführung
 
