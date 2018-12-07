@@ -785,8 +785,11 @@ Damit brauchen wir auf einem i7-Prozessor nur noch ein viertel der Zeit im Vergl
 Ich habe versprochen, dass ich noch einmal auf die erste Regel der Optimierung eingehe.
 Dazu möchte ich einfach ohne große Worte unsere bisher besten Varianten mit der Standardimplementierung von `Arrays.sort` bzw. `Arrays.parallelSort` vergleichen.
 
-<!-- TODO: "schöner" iterativer merge sort -->
+<!-- TODO: Plot -->
 
-<!-- Todo: Parallel merge sort -->
-
-<!-- Todo: Wirklich optimierter merge sort -->
+Wir sehen also, all die Mühe hat am Ende rein gar nichts für praktische Zwecke gebracht.
+Die Implementierung in der Standardbbliothek ist immer noch wesentlich schneller.
+Im single-threaded Fall liegt das hauptsächlich daran, dass ein [anderer Algorithmus](#TODO) verwendet wird.
+Es handelt sich hier um einen Dual-Pivot-Quicksort, der aber auch wieder für kleinere Teilprobleme einen Insertionsort aufruft.
+Im parallelisierten Fall wird (ab einer ausreichenden Problemgröße) zwar auch ein [Merge-basierter Algorithmus](#TODO) verwendet, aber hier kommen viele weitere kleine Optimierungen zum Tragen, die den Code für Laien völlig unleserlich machen.
+Es bleibt also beim Thema der Optimierung für uns Normalsterbliche bei der ersten und wichtigsten Regel: Lass es!
