@@ -770,14 +770,14 @@ Seht her, mein hochgezüchtetes Monstrum:
 TODO
 ```
 
-Diese Mergesort-Variante bezieht ihre Energie aus der [dunklen Dimension von Dormamu](TODO).
+Diese Mergesort-Variante bezieht ihre Energie aus der [dunklen Dimension von Dormamu](http://marvelcinematicuniverse.wikia.com/wiki/Dormammu).
 Nein, nicht wirklich.
 Aber sie ist das was passiert, wenn man aus Macht- bzw. Performancegier die Lesbarkeit völlig über Bord wirft.
 Die Steroid-Variante verbindet die drei bereits erwähnten Performancetricks mit dem Aufbau der iterativen Variante, um den Algorithmus möglichst gut zu parallelisieren.
-In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ExecutionService`](TODO) gleichmäßig auf mehrere Threads verteilt.
+In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ForkJoinPool`s](TODO) gleichmäßig auf mehrere Threads verteilt.
 Per Default entspricht die Anzahl der Threads der Anzahl der Prozessoren des Systems.
 Danach wartet der Haupthread bis alle Teilprobleme gelöst wurden, um dann die Blockgröße zu verdoppeln und die Threads für die nächste Runde zu starten.
-Damit brauchen wir auf einem i7-Prozessor nur noch ein viertel der Zeit im Vergleich zur lesbaren Variante.
+Damit brauchen wir auf einem i7-Prozessor nur noch ein viertel der Zeit im Vergleich zur ersten lesbaren Variante.
 <!-- TODO: Performance gain --->
 
 ### Fazit zur Optimierung
