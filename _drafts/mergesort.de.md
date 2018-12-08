@@ -380,7 +380,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
     Das verschlechtert sogar die Effizienzklasse von $\mathcal{O}(n \log n)$ auf $\mathcal{O}(n^2)$. :man_facepalming:
 * `i`, `j` und `k` sind besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
 
-#### [Dieses beliebige Gist](https://gist.github.com/cocodrips/5937371)
+#### [Dieses beliebige Gist vom Github-User Cocodrips](https://gist.github.com/cocodrips/5937371)
 
 * Ok, hier müssen wir langsam Aufhören. Hier fehlt sogar die Klassendeklaration.
 * Händisches Kopieren von Arrays.
@@ -712,7 +712,7 @@ Wie ich schon sagte müssen wir hier die [drei Regeln der Optimierung](TODO) bea
 Wir ignorieren Regel eins und zwei vorerst, da es mir nur um ein akademisches Beispiel geht und da wir auch sowieso schon scheinbar optimierte Varianten vorliegen haben.
 Stattdessen möchte ich aber noch eine vierte Regel hinzufügen, die sich auch in diesem Projekt für mich als sehr wichtig herausgestellt hat:
 
-4. Teste jede Änderung mit einem Benchmark!
+<ol start="4"><li>Teste jede Änderung mit einem Benchmark!</li></ol>
 
 Wir beginnen also mit der neuen Regel vier und schauen uns an, welche der bestehenden Varianten denn überhaupt die schnellste ist und wie schlimm die Perfomance der sauberen verständlichen Lösung eigentich im Vergleich aussieht.
 Dazu habe ich den [Java Microbenchmarking Harness (JMH)](http://openjdk.java.net/projects/code-tools/jmh/) verwendet, weil [Benchmarks in Java](https://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html) ein Minenfeld sind.
@@ -721,7 +721,15 @@ Dazu habe ich den [Java Microbenchmarking Harness (JMH)](http://openjdk.java.net
 
 Und hier sieht man das Ergebnis von sinnlosem herumoptimieren.
 Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in O(n²) statt in O(n log n) liegen.
-Dazu sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber nur mit einem Faktor von etwa 0,8, was für die meisten Anwendungen vernachlässigbar sein dürfte.
+Alle anderen Implementierungen hängen erst einmal auf einem Klumpen.
+Ich habe den Plot (mit [Bokeh](#TODO)) so gebaut, dass man mit dem Mausrad hineinzoomen kann.
+Den Vergleich sieht man aber auch noch ein wenig besser, wenn man den Plot anders aufbaut.
+Rufen wir uns kurz in Erinnerung, was die O-Notation bedeutet: Algorithmen in der gleichen Effizienzklasse unterscheiden sich (asymptotisch) nur durch einen konstanten Faktor.
+Wir können uns also diesen Faktor einfach für alle O(n log n)-Implementierungen ansehen.
+
+<div class="bokeh-container"><script src="/assets/img/factor.js" id="53d8be46-466e-4da8-9de0-4f7410cc456e"></script></div>
+
+Hier sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber die beste Variante ist bei großen Arrays nur um den Faktor 1,28 schneller, was für die meisten Anwendungen vernachlässigbar sein dürfte.
 
 Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen?
 Die folgende Variante schafft ziemlich ordentliche Geschwindigkeiten und bleibt dabei doch noch einigermaßen lesbar:
