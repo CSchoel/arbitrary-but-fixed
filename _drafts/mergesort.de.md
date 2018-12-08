@@ -71,7 +71,7 @@ public class Mergesort {
 ```
 
 Liest Du immer noch weiter?
-Gut! Wenn Du bis zum Ende durchhältst, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein*e Dozent*in vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
+Gut! Wenn Du bis zum Ende durchhältst, gibt es unten noch ein Stück Code, dass sich perfekt auf die typischen Modifikationen anpassen lässt, die Dein\*e Dozent\*in vermutlich eingebaut hat, um Plagiate schwieriger zu machen. :wink:
 
 ## Nullte Regel des Plagiierens: Das Plagiat ist das Symptom, nicht die Krankheit.
 
@@ -499,7 +499,7 @@ Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschrei
 
 ## Bonus: Die Königin der Mergesort-Plagiate
 
-Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozent*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](#TODO)):
+Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozen\*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](#TODO)):
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
