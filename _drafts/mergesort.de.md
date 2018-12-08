@@ -720,7 +720,7 @@ Dazu habe ich den [Java Microbenchmarking Harness (JMH)](http://openjdk.java.net
 <!-- TODO: geplotteter benchmark -->
 
 Und hier sieht man das Ergebnis von sinnlosem herumoptimieren.
-Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in $\mathcal{O}(n^2)$ statt in $\mathcal{O}(n \log n)$ liegen.
+Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in O(n²) statt in O(n log n) liegen.
 Dazu sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber nur mit einem Faktor von etwa 0,8, was für die meisten Anwendungen vernachlässigbar sein dürfte.
 
 Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen?
