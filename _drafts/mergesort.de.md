@@ -717,7 +717,7 @@ Stattdessen möchte ich aber noch eine vierte Regel hinzufügen, die sich auch i
 Wir beginnen also mit der neuen Regel vier und schauen uns an, welche der bestehenden Varianten denn überhaupt die schnellste ist und wie schlimm die Perfomance der sauberen verständlichen Lösung eigentich im Vergleich aussieht.
 Dazu habe ich den [Java Microbenchmarking Harness (JMH)](http://openjdk.java.net/projects/code-tools/jmh/) verwendet, weil [Benchmarks in Java](https://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html) ein Minenfeld sind.
 
-<!-- TODO: geplotteter benchmark -->
+<div class="bokeh-container"><script src="/assets/img/benchmark.js" id="f2085ffb-169c-45a3-b489-590df01e8d85"></script></div>
 
 Und hier sieht man das Ergebnis von sinnlosem herumoptimieren.
 Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in O(n²) statt in O(n log n) liegen.

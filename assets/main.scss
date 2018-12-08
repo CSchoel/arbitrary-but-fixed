@@ -85,3 +85,18 @@ p.post-meta {
 .post-meta:last-of-type {
   margin-bottom:15px;
 }
+
+/* Bokeh images */
+
+.bokeh-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align:center;
+}
+
+.bokeh-container>* {
+  display:inline-block;
+  border-radius:10px;
+  background-color:white;
+  padding:5px;
+}
