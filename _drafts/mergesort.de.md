@@ -955,7 +955,7 @@ Damit erreichen wir auf einem i7-Prozessor einen Speedup-Faktor von 6,75.
 Ich habe versprochen, dass ich noch einmal auf die erste Regel der Optimierung eingehe.
 Dazu möchte ich einfach ohne große Worte unsere bisher besten Varianten mit der Standardimplementierung von `Arrays.sort` bzw. `Arrays.parallelSort` vergleichen.
 
-<!-- TODO: Plot -->
+<div class="bokeh-container"><script src="/assets/img/api.js" id="59b1f3a8-f001-4c73-9f70-61caed47e31a"></script></div>
 
 Wir sehen also, all die Mühe hat am Ende rein gar nichts für praktische Zwecke gebracht.
 Die Implementierung in der Standardbbliothek ist immer noch wesentlich schneller.
