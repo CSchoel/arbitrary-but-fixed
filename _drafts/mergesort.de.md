@@ -48,7 +48,7 @@ public class Mergesort {
             boolean more_left = left_index < left.length;
             boolean more_right = right_index < right.length;
             boolean left_smaller = more_left && more_right
-                                && left[left_index] < right[right_index];
+                                && left[left_index] <= right[right_index];
             if (!more_right || left_smaller) {
                 ar[i] = left[left_index];
                 left_index++;
@@ -126,7 +126,7 @@ Diese rekursive Definition finden wir direkt im Code wieder:
 public static void sort(int[] ar, int from, int to) {
     // ...
     int middle = (from + to) / 2;
-    sort(ar, 0, middle);          // sortiere die linke Hälfte
+    sort(ar, from, middle);       // sortiere die linke Hälfte
     sort(ar, middle, to);         // sortiere die rechte Hälfe
     merge(ar, from, middle, to);  // füge beide Hälften zusammen
 }
@@ -136,7 +136,7 @@ Warum funktioniert das?
 Rekursion verbiegt auf den ersten Blick das Gehirn, aber es hilft enorm, wenn man sich einfach ganz, ganz dumm stellt.
 Der Java-Compiler ist auch nicht schlauer, versprochen.
 `sort(ar, 0, middle)` ist ein ganz normaler Methodenaufruf und vereinfacht kann man Methodenaufrufe so betrachten, als würde man den Code, der in der Methode steht, an die Stelle schreiben, wo sie aufgerufen wird.
-Beginnen wir also mit dem folgenden Aufruf:
+Beginnen wir also mit dem folgenden Aufruf
 
 ```java
 int[] input = {5, 4, 3, 2, 1};
@@ -173,6 +173,7 @@ Hier sieht man schon, dass die Teilaufgaben trivial werden.
 Da der Index 1 schon nicht mehr mit dabei ist, bleibt nur noch eine Zahl übrig (nämlich die 5).
 Das Sortieren von einer Zahl geht ziemlich schnell, denn wenn wir nur ein Element haben, kann auch nichts unsortiert sein.
 Für `sort(input, 0, 1)` müssen wir also rein gar nichts machen.
+Das gleiche gilt für `sort(input, 1, 2)` und `sort(input, 2, 3)`.
 In unserem Beispiel erzeugt jetzt nur noch `sort(input, 3, 5)` einen weiteren rekursiven Aufruf, den wir auflösen müssen (weil hier noch die zwei Zahlen 2 und 1 zu sortieren sind).
 
 ```java
@@ -182,6 +183,7 @@ merge(input, 0, 1, 2);
 sort(input, 3, 4); // (3+5)/2 = 4
 sort(input, 4, 5);
 merge(input, 3, 4, 5);
+// schon bestehende merge-Aufrufe
 merge(input, 2, 3, 5);
 merge(input, 0, 2, 5);
 ```
@@ -253,7 +255,8 @@ Ich habe hier im Code absichtlich mehrere Boolesche Variablen eingeführt, um di
 ```java
 boolean more_left = left_index < left.length;
 boolean more_right = right_index < right.length;
-boolean left_smaller = more_left && more_right && left[left_index] < right[right_index];
+boolean left_smaller = more_left && more_right
+                     && left[left_index] <= right[right_index];
 if (!more_right || left_smaller) {
     ar[i] = left[left_index];
     left_index++;
@@ -263,7 +266,7 @@ if (!more_right || left_smaller) {
 }
 ```
 
-Wir nehmen das linke Element entweder, wenn es kleiner ist als das rechte (`left_smaller`), oder, wenn überhaupt kein Element mehr auf der rechten Seite übrig ist (`!more_right`).
+Wir nehmen das linke Element entweder, wenn es kleiner oder gleich dem rechten ist (`left_smaller`), oder, wenn überhaupt kein Element mehr auf der rechten Seite übrig ist (`!more_right`).
 Natürlich ist die Frage, ob das linke Element kleiner als das rechte ist nur dann sinnvoll, wenn es auch auf beiden Seiten noch weitere Elemente gibt (`more_left` und `more_right`).
 
 ## Zweite Regel des Plagiierens: Lies den Kram wenigstens!
@@ -370,7 +373,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 
     Kleines Schmankerl: so viel Arbeit, um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann, wenn er nur eine Kopie von zwei Elementen braucht?
     Wirklich tolle Optimierungskünste!
-    Das verschlechtert sogar die Effizienzklasse von O(n log n) auf O(n^2). :man_facepalming:
+    Das verschlechtert sogar die Effizienzklasse von O(n log n) auf O(n²). :man_facepalming:
 * `i`, `j` und `k` sind besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
 
 #### [Dieses beliebige Gist vom Github-User Cocodrips](https://gist.github.com/cocodrips/5937371)
@@ -378,7 +381,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * Ok, hier müssen wir langsam Aufhören. Hier fehlt sogar die Klassendeklaration.
 * Händisches Kopieren von Arrays.
 * Zwei Schleifen statt einer.
-* Methoden sind nicht `static` und sind auch noch package private. :scream:
+* Methoden sind nicht `static` und dann auch noch package private. :scream:
 * `if (low < high)` statt sauberem `return`.
 * Auch diese\*r Kandidat\*in schießt sich mit der Effizienzklasse ab und landet in O(n²).
 
@@ -448,7 +451,7 @@ Daher habe ich hier ein paar Tipps zusammengetragen, die der eigenen Lösung vie
 * **Du hast einen `StackOverflowError`?**
     Dann ist die Abbruchbedingung deiner Rekursion nicht vorhanden oder kaputt.
 * **Du hast eine `ArrayIndexOutOfBoundsException`?**
-    Dann gnade Dir James Gosling. :laughing:
+    Dann gnade Dir [James Gosling](https://en.wikipedia.org/wiki/James_Gosling). :laughing:
     Diese Ausnahme kann viele Gründe haben, heißt aber immer, dass irgendwo eine Indexberechnung schief gegangen ist - vermutlich bei der oberen Grenze für den rechten Index oder den Gesamtindex in `merge`.
     Hier hilft vor Allem systematisches Debuggen: Such Dir einen möglichst einfachen Testfall, in dem das Problem auftritt, und verfolge Schritt für Schritt, was Dein Algorithmus tut und was eigentlich passieren sollte - notfalls auch mit Zettel und Stift.
     Beschränke dich zuerst nur auf einen einzelnen Aufruf von `merge` und teste den Aufruf von `sort` erst, wenn Du Dir sicher bist, dass `merge` sauber funktioniert.
@@ -489,6 +492,8 @@ Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschrei
      ```
 
      Wenn das bei Dir genauso aussieht (oder entsprechend zu deiner Definition der Variablen), dann liegt das Problem bei `sort` und nicht bei `merge`.
+* Sollten beide der obigen Tests für deinen Code funktionieren, kann es sein, dass du einen Fehler hast, der erst bei größeren Arrays oder einer bestimmten Zahlenreihenfolge auftritt.
+     Wiederhole sie also einfach mit einem etwas größeren Array und/oder mit anderen Zahlen.
 
 ## Bonus: Die Königin der Mergesort-Plagiate
 
@@ -500,11 +505,11 @@ import java.util.Arrays;
 
 public class ListenerMergesort {
     public interface MergesortListener {
-        default void callMerge(int[] ar, int from, int middle, int to) {};
-        default void exitMerge(int[] ar, int from, int middle, int to) {};
-        default void mergeStep(int i, int l, int r, int[] ar) {};
-        default void callSort(int[] ar, int from, int to) {};
-        default void exitSort(int[] ar, int from, int to) {};
+        default void callMerge(int[] ar, int from, int middle, int to) {}
+        default void exitMerge(int[] ar, int from, int middle, int to) {}
+        default void mergeStep(int i, int l, int r, int[] ar) {}
+        default void callSort(int[] ar, int from, int to) {}
+        default void exitSort(int[] ar, int from, int to) {}
     }
     public static void sort(int[] ar) {
         sort(ar, new MergesortListener(){});
@@ -512,7 +517,9 @@ public class ListenerMergesort {
     public static void sort(int[] ar, MergesortListener listener) {
         sort(ar, 0, ar.length, listener);
     }
-    public static void sort(int[] ar, int from, int to, MergesortListener listener) {
+    public static void sort(
+            int[] ar, int from, int to, MergesortListener listener
+    ) {
         listener.callSort(ar, from, to);
         int remaining_length = to - from;
         // subarrays of size 1 and 0 cannot be unsorted
@@ -523,7 +530,9 @@ public class ListenerMergesort {
         merge(ar, from, middle, to, listener);
         listener.exitSort(ar, from, to);
     }
-    public static void merge(int[] ar, int from, int middle, int to, MergesortListener listener) {
+    public static void merge(
+            int[] ar, int from, int middle, int to, MergesortListener listener
+    ) {
         listener.callMerge(ar, from, middle, to);
         int[] left = Arrays.copyOfRange(ar, from, middle);
         int[] right = Arrays.copyOfRange(ar, middle, to);
@@ -532,7 +541,8 @@ public class ListenerMergesort {
         for(int i = from; i < to; i++) {
             boolean more_left = left_index < left.length;
             boolean more_right = right_index < right.length;
-            boolean left_smaller = more_left && more_right && left[left_index] < right[right_index];
+            boolean left_smaller = more_left && more_right
+                                 && left[left_index] < right[right_index];
             if (!more_right || left_smaller) {
                 ar[i] = left[left_index];
                 left_index++;
@@ -568,7 +578,8 @@ public class ListenerMergesort {
                 for(int i = 0; i < sortDepth; i++) {
                     System.out.print("\t");
                 }
-                System.out.println(String.format("merge(ar, %d, %d, %d)", f, m, t));
+                String msg = String.format("merge(ar, %d, %d, %d)", f, m, t);
+                System.out.println(msg);
             }
             public void exitMerge(int[] ar, int f, int m, int t) {
                 for(int i = 0; i < sortDepth; i++) {
@@ -584,7 +595,9 @@ public class ListenerMergesort {
         merge(input, 1, 3, 5, new MergesortListener() {
             @Override
             public void mergeStep(int i, int l, int r, int[] ar) {
-                System.out.println(String.format("%3d %3d %3d   %s", i, l, r, Arrays.toString(ar)));
+                System.out.println(String.format(
+                        "%3d %3d %3d   %s", i, l, r, Arrays.toString(ar)
+                ));
             }
         });
     }
@@ -608,7 +621,7 @@ Dieses Interface definiert unsere Listener-Objekte, die Code enthalten können, 
 Für `sort` gibt es ebenfalls entsprechende Methoden.
 Zu guter Letzt habe ich noch die Methode `mergeStep` hinzugefügt, die nach jedem einzelnen Schleifendurchlauf in `merge` aufgerufen wird.
 
-Jetzt kann man beim Aufruf von `sort` oder `merge` ein entsprechendes Objekt (in der Regel als [anonyme Klasse](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)) mitgeben, das eine oder mehrere dieser Methoden implementiert und mit deren Hilfe diagnostische Ausgaben erzeugt oder statistiken errechnet.
+Jetzt kann man beim Aufruf von `sort` oder `merge` ein entsprechendes Objekt (in der Regel als [anonyme Klasse](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)) mitgeben, das eine oder mehrere dieser Methoden implementiert und mit deren Hilfe diagnostische Ausgaben erzeugt oder Statistiken errechnet.
 Das [`default`](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html) und der leere Methodenkörper `{}` in der Interfacedeklaration sorgen dafür, dass man nicht immer jede Methode implementieren muss, sondern nur die, die man auch mit Inhalt füllen möchte.
 Vor Java 8 musste man dafür eine separate [Adapter-Klasse](https://stackoverflow.com/questions/10170698/what-is-an-adapter-class) schreiben.
 
@@ -648,7 +661,7 @@ Wenn der untere Teil anders aussieht, gibt es ein Problem in `merge` (wie im [vo
 ## Bonus 2: "Schöne" Mergesorts
 
 Dieser Post ist sowieso schon viel zu lang.
-Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von Mergesort zu präsentieren - nur um zu zeigen, wie man es auch noch machen könnte:
+Da kann ich mir auch noch den Spaß machen, ein paar weitere Implementierungen von Mergesort zu präsentieren - nur um zu zeigen, wie man es auch noch machen könnte:
 
 ### Mergesort mit Sublist
 
@@ -659,24 +672,31 @@ Dadurch muss man sich noch weniger Gedanken um die Berechnung von Indices und Gr
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
-public class Mergesort {
-    public static <T extends Comparable> void sort(List<T> lst) {
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListMergesort {
+    public static <T extends Comparable<T>> void sort(List<T> lst) {
         if (lst.size() <= 1) return; // nothing to sort
         int half = lst.size()/2;
         List<T> left = lst.subList(0, half);
         List<T> right = lst.subList(half, lst.size());
         sort(left);
         sort(right);
-        mergeInto(new ArrayList<T>(left), new ArrayList<T>(right), lst);
+        merge(new ArrayList<>(left), new ArrayList<>(right), lst);
     }
-    public static <T extends Comparable> void merge(List<T> left, List<T> right, List<T> total) {
+    public static <T extends Comparable<T>> void merge(
+            List<T> left, List<T> right, List<T> total
+    ) {
         int leftI = 0;
         int rightI = 0;
         for(int i = 0; i < total.size(); i++) {
             boolean more_left = leftI < left.size();
-            boolean more_right = rightI < left.size();
-            boolean left_smaller = more_left && more_right && leftI.compareTo(right) < 0;
-            if (left_smaller || ! more_right) {
+            boolean more_right = rightI < right.size();
+            boolean left_smaller = more_left && more_right
+                    && left.get(leftI).compareTo(right.get(rightI)) <= 0;
+            if (!more_right  || left_smaller) {
                 total.set(i, left.get(leftI));
                 leftI++;
             } else {
@@ -722,10 +742,14 @@ Wir können uns also diesen Faktor einfach für alle O(n log n)-Implementierunge
 
 <div class="bokeh-container"><script src="/assets/img/factor.js" id="53d8be46-466e-4da8-9de0-4f7410cc456e"></script></div>
 
-Hier sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber die beste Variante ist bei großen Arrays nur um den Faktor 1,28 schneller, was für die meisten Anwendungen vernachlässigbar sein dürfte.
+Hier sehen wir, dass meine lesbare Variante zwar tatsächlich die langsamste ist, aber die beste Variante (vogella) ist bei großen Arrays nur um den Faktor 1,28 schneller, was für die meisten Anwendungen vernachlässigbar sein dürfte.
+Ich habe mich hier auf Tests mit Arrays mit zufälligem Inhalt beschränkt, weil das der "Standardfall" für das Sortieren ist.
+Für aufsteigend oder absteigend sortierte Arrays sind die Unterschiede deutlich stärker ausgeprägt (Faktor 3,4 bzw. 1,8).
+Das liegt daran, dass hier die innere Schleife schneller bearbeitet werden kann, wodurch der Overhead für die Arbeitskopien im Verhältnis stärker zu Buche schlägt.
 
-Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen?
-Die folgende Variante schafft ziemlich ordentliche Geschwindigkeiten und bleibt dabei doch noch einigermaßen lesbar:
+Was können wir also herauskitzeln, wenn wir wirklich so schnell wie möglich werden wollen?
+Ein schnelles Profiling (wieder mit JMH) zeigt, dass wir die meiste Zeit in der inneren Schleife in `merge` verbringen, aber auch einige Zeit durch die Garbage-Collection der Arbeitskopien verlieren.
+Die folgende Variante nimmt sich dieser Probleme an und schafft ziemlich ordentliche Geschwindigkeiten ohne *allzu* unleserlich zu werden:
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -735,12 +759,15 @@ import java.util.Random;
 
 public class MergesortSwapRevIns {
     public static void sort(int[] ar) {
-        sort(ar, 60); // value 60 was determined by benchmarks => best speedup
+        sort(ar, 60); // determined by benchmarks => best speedup
     }
     public static void sort(int[] ar, int minSize) {
         sort(Arrays.copyOf(ar, ar.length), ar, 0, ar.length, true, minSize);
     }
-    public static void sort(int[] src, int[] dst, int from, int to, boolean orderAsc, int minSize) {
+    public static void sort(
+            int[] src, int[] dst, int from, int to,
+            boolean orderAsc, int minSize
+    ) {
         if(to - from <= minSize) {
             InsertionSort.sort(dst, from, to, orderAsc);
             return;
@@ -748,12 +775,14 @@ public class MergesortSwapRevIns {
         int middle = (from + to) / 2;
         sort(dst, src, from, middle, true, minSize);
         sort(dst, src, middle, to, false, minSize);
-        merge(src, dst, from, middle, to, orderAsc);
+        merge(src, dst, from, to, orderAsc);
     }
-    public static void merge(int[] src, int[] dst, int from, int middle, int to, boolean orderAsc) {
+     public static void merge(
+            int[] src, int[] dst, int from, int to, boolean orderAsc
+    ) {
         int l = from;
         int r = to - 1;
-        if (orderAsc) {
+        if (orderAsc) { // sort ascending
             for(int i = from; i < to; i++) {
                 if (src[l] <= src[r]) {
                     dst[i] = src[l++];
@@ -761,7 +790,7 @@ public class MergesortSwapRevIns {
                     dst[i] = src[r--];
                 }
             }
-        } else {
+        } else { // sort descending
             for(int i = to-1; i >= from; i--) {
                 if (src[l] <= src[r]) {
                     dst[i] = src[l++];
@@ -771,6 +800,7 @@ public class MergesortSwapRevIns {
             }
         }
     }
+}
 ```
 
 Hier werden im Wesentlichen drei Tricks kombiniert:
@@ -780,18 +810,18 @@ Hier werden im Wesentlichen drei Tricks kombiniert:
     Damit das funktioniert, müssen die zwei rekursiven Aufrufe aber ihr Ergebnis in `src` schreiben - die Rolle von Quelle und Ziel wird also vertauscht.
     Dieses Vertauschen geht so lange weiter bis wir die Rekursion vollständig aufgelöst haben.
 
-    Durch diese Technik sparen wir uns den Code zum Kopieren der Arrayinhalte in `merge` vollständig.
+    Durch diese Technik sparen wir uns den Code zum Kopieren der Arrayinhalte in `merge` und damit auch den Overhead vom Garbage-Collector.
     Ich habe mir diesen Trick nicht selbst ausgedacht, sondern bin irgendwo im Internet bei meinen Recherchen darüber gestolpert.
     Leider weiß ich aber nicht mehr wo.
     Wer mir da also helfen kann, der schickt mir bitte eine Mail, damit ich die Quelle hier ergänzen kann (Hat schon was ironisches in einem Post über Plagiate, oder? :sweat_smile:).
 2. Die Grundidee von [Javabeginners](https://javabeginners.de/Algorithmen/Sortieralgorithmen/Mergesort.php) war gar nicht verkehrt.
-    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als [Sentinel](https://en.wikipedia.org/wiki/Sentinel_value).
+    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als [Sentinel](https://en.wikipedia.org/wiki/Sentinel_value), der uns zwei Vergleiche in der inneren Schleife einspart.
     Da wir mit der Swap-Variante aus dem ersten Punkt aber schon alle Kopien vermieden haben, würden wir ja jetzt wieder Zusatzaufwand für das Umkehren der rechten Hälfte verbrauchen - Es sei denn, wir schreiben die Inhalte einfach schon in der richtigen Reihenfolge.
     Dazu habe ich einen weitereren Parameter `sortAsc` eingeführt (`true` steht für aufsteigendes Sortieren, `false` für absteigendes).
 3. Bei der Diskussion über Sortieralgorithmen in Büchern und im Internet hört man oft, dass [Insertionsort](https://www.khanacademy.org/computing/computer-science/algorithms/insertion-sort/a/insertion-sort) für sehr kleine Arrays (deutlich weniger als 100 Elemente) schneller ist, als die komplizierteren rekursiven Algorithmen, weil er eben keinen Overhead durch rekursive Methodenaufrufe hat und sich außerdem durch eine sehr kompakte innere Schleife auszeichnet.
     Darum stoppt in dieser Variante die Rekursion bei Teilarrays der größe 60 und diese kleinen Reste werden mit Insertionsort sortiert.
 
-Mit diesen drei Tricks erreichen wir einen Speedup-Faktor von 1,83, haben alle der Onlinevarianten überholt und der Code ist (mit den entsprechenden Erklärungen) immer noch einigermaßen lesbar.
+Mit diesen drei Tricks erreichen wir einen Speedup-Faktor von 1,83, haben alle der Internetvarianten überholt und der Code ist (mit den entsprechenden Erklärungen) immer noch einigermaßen lesbar.
 
 ### Iterative Variante
 
@@ -807,11 +837,13 @@ import static net.arbitrary_but_fixed.mergesort.Mergesort.merge;
 public class MergesortIterative {
     public static void sort(int[] ar) {
         for(int mergeSize = 2; mergeSize / 2 < ar.length; mergeSize *= 2) {
-            int mergeStart = 0;
-            for(; mergeStart < ar.length - mergeSize; mergeStart += mergeSize) {
-                merge(ar, mergeStart, mergeStart + mergeSize / 2, mergeStart + mergeSize);
+            for(int start = 0; start < ar.length; start += mergeSize) {
+                merge(
+                        ar, start,
+                        Math.min(ar.length, start + mergeSize / 2),
+                        Math.min(ar.length, start + mergeSize)
+                );
             }
-            merge(ar, mergeStart, Math.min(mergeStart + mergeSize / 2, ar.length), Math.min(mergeStart + mergeSize, ar.length));
         }
     }
 }
@@ -945,7 +977,7 @@ Diese Mergesort-Variante bezieht ihre Energie aus der [dunklen Dimension von Dor
 Nein, nicht wirklich.
 Aber sie ist das was passiert, wenn man aus Macht- bzw. Performancegier die Lesbarkeit völlig über Bord wirft.
 Die Steroidvariante verbindet die drei bereits erwähnten Performancetricks mit dem Aufbau der iterativen Variante, um den Algorithmus möglichst gut zu parallelisieren.
-In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ForkJoinPool`s](https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/ForkJoinPool.html) gleichmäßig auf mehrere Threads verteilt.
+In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ExecutorService`s](https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/ExecutorService.html) gleichmäßig auf mehrere Threads verteilt.
 Per Default entspricht die Anzahl der Threads der Anzahl der Prozessoren des Systems.
 Danach wartet der Hauptthread bis alle Teilprobleme gelöst wurden, um dann die Blockgröße zu verdoppeln und die Threads für die nächste Runde zu starten.
 Damit erreichen wir auf einem i7-Prozessor einen Speedup-Faktor von 6,75.
@@ -953,13 +985,15 @@ Damit erreichen wir auf einem i7-Prozessor einen Speedup-Faktor von 6,75.
 ### Fazit zur Optimierung
 
 Ich habe versprochen, dass ich noch einmal auf die erste Regel der Optimierung eingehe.
-Dazu möchte ich einfach ohne große Worte unsere bisher besten Varianten mit der Standardimplementierung von `Arrays.sort` bzw. `Arrays.parallelSort` vergleichen.
+Dazu möchte ich einfach ohne große Worte unsere bisher besten Varianten mit der Standardimplementierung von `Arrays.sort` bzw. `Arrays.parallelSort` vergleichen:
 
 <div class="bokeh-container"><script src="/assets/img/api.js" id="59b1f3a8-f001-4c73-9f70-61caed47e31a"></script></div>
 
 Wir sehen also, all die Mühe hat am Ende rein gar nichts für praktische Zwecke gebracht.
 Die Implementierung in der Standardbbliothek ist immer noch wesentlich schneller.
-Im single-threaded Fall liegt das hauptsächlich daran, dass ein [anderer Algorithmus](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#sort(int%5B%5D)) verwendet wird, [an dem die Autoren über fünf Jahre lang gearbeitet haben](http://mail.openjdk.java.net/pipermail/core-libs-dev/2018-January/051000.html).
+Im single-threaded Fall liegt das hauptsächlich daran, dass ein [anderer Algorithmus](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#sort(int%5B%5D)) verwendet wird, [an dem die Autoren bis heute noch weiter arbeiten](http://mail.openjdk.java.net/pipermail/core-libs-dev/2018-January/051000.html).
 Es handelt sich hier um einen Dual-Pivot-Quicksort, der aber auch wieder für kleinere Teilprobleme einen Insertionsort aufruft.
-Im parallelisierten Fall wird (ab einer ausreichenden Problemgröße) zwar auch ein [Merge-basierter Algorithmus](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#parallelSort(int%5B%5D)) verwendet, aber hier kommen viele weitere kleine Optimierungen zum Tragen, die den Code für Laien völlig unleserlich machen.
+Im parallelisierten Fall wird (ab einer ausreichenden Problemgröße) zwar auch ein [merge-basierter Algorithmus](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#parallelSort(int%5B%5D)) verwendet, aber hier kommen viele weitere kleine Optimierungen zum Tragen, die den Code für Laien völlig unleserlich machen.
+Für aufsteigend oder absteigend sortierte Arrays sieht der Fall übrigens noch einmal krasser aus.
+Hier ist die API wegen zusätzlicher Optimierungen für genau solche Fälle ca. 20 mal so schnell wie unsere besten Implementierungen.
 Es bleibt also beim Thema der Optimierung für uns Normalsterbliche bei der ersten und wichtigsten Regel: **Lass es!**
