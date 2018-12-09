@@ -2,7 +2,8 @@
 layout: post
 title:  "Java Mergesort richtig plagiieren"
 description: >
-    If you plagiarze, you can at least do it properly! Most online examples for the mergesort algorithm in Java are much too complicated to be really understandable for a beginner. With this post I want to provide a better option - hopefully for understanding the algorithm, but at least for plagiarizing it.
+    Wenn du plagiierst, mach es wenigstens richtig! Die meisten Internetbeispiele für Mergesort in Java sind viel zu kompliziert geschrieben für einen Anfänger.
+    Mit diesem Post will ich eine bessere Option anbieten - hoffentlich für das Verstehen des Algorithmus, zumindest aber für das Plagiieren.
 ref: mergesort
 lang: de
 categories:
