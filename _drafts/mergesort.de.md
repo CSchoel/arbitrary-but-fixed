@@ -20,7 +20,7 @@ Die meisten Beispiele, die man online findet, sind fehlerhaft oder viel zu kompl
 Aus einer Mischung von verzweifeltem Humor und leiser Hoffnung, vielleicht doch noch dem ein oder anderen zu helfen, diesen Algorithmus wirklich zu *verstehen*, habe ich mir daher vorgenommen, einmal zu zeigen, wie man es (meiner Meinung nach) *richtig* macht - also sowohl das Plagiieren als auch die Implementierung von Mergesort als Java-Neuling.
 
 So, und damit mir die potentiellen Plagiatoren jetzt nicht schon abspringen, gibt es hier fertig plagiierbaren Code.
-Ein wunderschöner kompakter, verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad](#TODO):
+Ein wunderschöner kompakter, verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad](/assets/code/mergesort_readable.jar):
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -47,7 +47,8 @@ public class Mergesort {
         for(int i = from; i < to; i++) {
             boolean more_left = left_index < left.length;
             boolean more_right = right_index < right.length;
-            boolean left_smaller = more_left && more_right && left[left_index] < right[right_index];
+            boolean left_smaller = more_left && more_right
+                                && left[left_index] < right[right_index];
             if (!more_right || left_smaller) {
                 ar[i] = left[left_index];
                 left_index++;
@@ -58,12 +59,7 @@ public class Mergesort {
         }
     }
     public static void main(String[] args) {
-        int[] input;
-        if(args.length > 0) {
-            input = Arrays.stream(args).mapToInt(Integer::parseInt).toArray();
-        } else {
-            input = new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        }
+        int[] input = new int[]{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         sort(input);
         System.out.println(Arrays.toString(input));
     }
@@ -93,8 +89,6 @@ Vermutlich eins der folgenden:
     Ein Studium und die damit verbundene Selbstständigkeit bringt so viele neue persönliche Probleme mit sich.
     Klar, dass da mal das ein oder andere Modul auf der Strecke bleiben kann.
     Vielleicht müssen es nicht jedes Semester 30 Creditpoints sein?
-    Vielleicht ist die PvP-Meisterschaft im Spiel Deiner Wahl auch nicht so wichtig, wie sie zu Beginn des Semesters erschien. 😉
-    <!-- Todo: Condescending -->
     Überleg Dir Deine Prioritäten und gestalte Dein Studium entsprechend.
 * **Du hast die Fähigkeiten und die Zeit, schaffst es aber nicht, die letzten Bugs in deinem Code zu beheben.**
     Das kann darauf hinweisen, dass Dir einfach (noch) die Techniken zum systematischen Debuggen fehlen.
@@ -307,8 +301,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * `i`, `j`, `k`, ... Ja, es sind Zählvariablen, aber manchmal verdienen auch Zählvariablen eine semantische Benennung.
     Besonders dann, wenn sie manuell hochgezählt werden!
 * Der mitgelieferte JUnit-Test ist auch ein Paradebeispiel dafür, wie man einen JUnit-Test *nicht* schreiben sollte. `fail("Should not happen")` - Vielen Dank für die informative Fehlermeldung. :man_facepalming:
-    Über die [Probleme mit der Zeitmessung](https://www.baeldung.com/java-jvm-warmup) im Test reden wir mal lieber gar nicht.
-    <!-- TODO: besserer Link (JMH)? -->
+    Über die [Probleme mit der Zeitmessung](https://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html) im Test reden wir mal lieber gar nicht.
 * Diese Implementierung hat einen Grund, warum die Methoden nicht `static` sind, aber keinen guten: Der Input-Array und seine Kopie werden als private Variablen mitgeschleift. :scream:
     Der Sinn dahinter ist auch hier wieder eine für den eigentlichen Zweck völlig unnötige Optimierung (weniger Array-Erzeugungen).
 * Wieder ein `if (low < high)` statt einer sauberen Abbruchbedingung mit `return`.
@@ -377,7 +370,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 
     Kleines Schmankerl: so viel Arbeit, um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann, wenn er nur eine Kopie von zwei Elementen braucht?
     Wirklich tolle Optimierungskünste!
-    Das verschlechtert sogar die Effizienzklasse von $\mathcal{O}(n \log n)$ auf $\mathcal{O}(n^2)$. :man_facepalming:
+    Das verschlechtert sogar die Effizienzklasse von O(n log n) auf O(n^2). :man_facepalming: <!-- TODO: oder sogar O(n³)? -->
 * `i`, `j` und `k` sind besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
 
 #### [Dieses beliebige Gist vom Github-User Cocodrips](https://gist.github.com/cocodrips/5937371)
@@ -387,7 +380,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * Zwei Schleifen statt einer.
 * Methoden sind nicht `static` und sind auch noch package private. :scream:
 * `if (low < high)` statt sauberem `return`.
-* <!-- TODO: warum ist der hier auch in n^2? -->
+* Auch diese\*r Kandidat\*in schießt sich mit der Effizienzklasse ab und landet in O(n²). <!-- TODO: auch checken -->
 
 Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
 
@@ -395,7 +388,7 @@ Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den
 
 Wie, noch mehr Lesen?
 Ja, Lesen hilft.
-Die Deutschnote ist laut einigen [didaktischen Studien](TODO) ein besserer Prädiktor für den Erfolg im Informatikstudium als die Mathenote.
+Die Deutschnote ist laut einer [didaktischen Studie](http://publikationen.ub.uni-frankfurt.de/frontdoor/index/index/docId/46847) ein ähnlich guter Prädiktor für den Erfolg im Informatikstudium wie die Note in Mathe oder Informatik.
 Vielleicht, weil man Aufgabenstellungen erst einmal *lesen* könen muss, bevor man sie lösen kann?
 
 Was meine ich damit? Meistens ist sich die Person, die die Aufgabe gestellt hat, völlig bewusst, dass es im Internet hunderte verschiedene Mergesort-Implementierungen in Java zum Download gibt.
@@ -419,7 +412,7 @@ Ich schildere hier einmal, was es aus meiner Sicht braucht, um bei einem Plagiat
 Der Code darf nicht 1:1 kopiert sein - auch nicht in größeren Teilen.
 Das fällt sofort auf.
 Ein einfaches Umbenennen von Variablen reicht auch nicht.
-Variablennamen sind im Kopf des oder der Dozent\*in sowieso austauschbar und es gibt sehr zuverlässige [Plagiatssoftware](TODO), die ebenfalls Namen ignoriert.
+Variablennamen sind im Kopf des oder der Dozent\*in sowieso austauschbar und es gibt sehr zuverlässige [Plagiatssoftware](https://theory.stanford.edu/~aiken/moss/), die ebenfalls Namen ignoriert.
 Das gleiche gilt auch für das Vertauschen von Zeilen, deren Reihenfolge unwichtig ist.
 Entweder musst Du also wirklich einen Teil des Programms, den Du gut genug verstehst, nach deinem eigenen Stil neu schreiben, oder Du musst Code kopieren, der wirklich keine unnötigen oder stilistisch auffälligen Passagen besitzt - eben Code, bei dem es wirklich glaubhaft ist, dass zwei Studierende auf genau die gleiche Idee gekommen sind.
 In letzterem Fall wird aber trotzdem die Plagiatssoftware oder der Spinnensinn des oder der Dozent\*in anschlagen.
@@ -432,7 +425,7 @@ Wenn Du das aber kannst, dann behaupte ich an dieser Stelle einfach einmal, dass
 Was bleibt Dir also noch übrig, wenn das eben doch nicht der Fall ist?
 Ich sehe drei mögliche Lösungen:
 
-* Du setzt dich doch noch einmal an Deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#TODO) Deine Bugs zu beheben.
+* Du setzt dich doch noch einmal an Deinen eigenen Code und versuchst mit Hilfe von Google, dem [Debugger deiner IDE](https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html), der Hilfe eine\*r Kommiliton\*in und/oder meinen [nachfolgenden Tipps](#hilfe-zur-selbsthilfe) Deine Bugs zu beheben.
     Vielleicht hilft es sogar, einfach alles wegzuwerfen und noch einmal ganz von vorne anzufangen.
 * Du lehnst Deine Lösung stark an eine der Internetlösungen an und weist im Code offen darauf hin (z.B. `\* Idee von http://arbitrary-but-fixed.net/... \*`).
     Damit handelt es sich um ein Zitat und kein Plagiat.
@@ -499,7 +492,7 @@ Zum Abschluss hier noch zwei Beispiele, die man schnell auf dem Papier aufschrei
 
 ## Bonus: Die Königin der Mergesort-Plagiate
 
-Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozen\*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](#TODO)):
+Hier wie versprochen der Code, der sich wunderbar auf alle Anforderungen von Dozen\*innen anpassen lässt (gerne auch wieder als [ausführbares JAR-Archiv](/assets/code/mergesort_listener.jar)):
 
 ```java
 package net.arbitrary_but_fixed.mergesort;
@@ -648,7 +641,7 @@ sort(ar, 0, 5)
 ```
 
 Wenn bei Dir die Aufrufreihenfolge anders aussieht, gibt es vermutlich ein Problem in `sort` (oder du hast die Grenzen der Array-Hälften anders definiert).
-Wenn der untere Teil anders aussieht, gibt es ein Problem in `merge` (wie im [vorherigen Abschnitt](TODO) erklärt).
+Wenn der untere Teil anders aussieht, gibt es ein Problem in `merge` (wie im [vorherigen Abschnitt](#hilfe-zur-selbsthilfe) erklärt).
 
 *Protip: Wenn Du so einen Listener in Deinen eigenen Code implementierst, kannst Du damit vermutlich Deinen Bugs sehr viel leichter auf die Schliche kommen.*
 
@@ -660,7 +653,7 @@ Da kann ich mir auch noch den Spaß machen, zwei weitere Implementierungen von M
 ### Mergesort mit Sublist
 
 Die folgende Variante sortiert keine Arrays, sondern Listen.
-Das Schöne an ihr ist, dass sie sich der Methode [`sublist(int, int)`](TODO) des Interface `List` bedient, die eine *Ansicht* der Liste erzeugt.
+Das Schöne an ihr ist, dass sie sich der Methode [`subList(int, int)`](https://docs.oracle.com/javase/10/docs/api/java/util/List.html#subList(int,int)) des Interface `List` bedient, die eine *Ansicht* der Liste erzeugt.
 So lange man nur nichtstrukturelle Änderungen an der Liste vornimmt (also keine Werte löscht oder hinzufügt), werden diese Änderungen auch in die ursprüngliche Liste übernommen.
 Dadurch muss man sich noch weniger Gedanken um die Berechnung von Indices und Grenzen machen als sonst.
 
@@ -696,14 +689,14 @@ public class Mergesort {
 ```
 
 Ähnlich wie bei der ursprünglichen Variante wird hier eine Kopie der linken und rechten Liste für den `merge`-Schritt erstellt.
-Das geschieht in diesem Fall mit einem Copy-Konstruktor ([`new ArrayList<T>(left)`](TODO)).
+Das geschieht in diesem Fall mit einem Copy-Konstruktor ([`new ArrayList<T>(left)`](https://docs.oracle.com/javase/10/docs/api/java/util/ArrayList.html#%3Cinit%3E(java.util.Collection))).
 Außerdem sieht man hier schön die Macht des Comparable-Interfaces.
-Diese Methode funktioniert fast genauso wie die mit Int-Arrays, kann aber alles sortieren, was [`Comparable`](TODO) ist.
+Diese Methode funktioniert fast genauso wie die mit Int-Arrays, kann aber alles sortieren, was [`Comparable`](https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html) ist.
 
 ### Swap + Rev variante
 
 Hier kommen wir ins Reich der Optimierungen.
-Wie ich schon sagte müssen wir hier die [drei Regeln der Optimierung](TODO) beachten:
+Wie ich schon sagte müssen wir hier die [drei Regeln der Optimierung](http://wiki.c2.com/?RulesOfOptimization) beachten:
 
 1. Lass es!
 2. Lass es ... erstmal. (für Experten)
@@ -722,7 +715,7 @@ Dazu habe ich den [Java Microbenchmarking Harness (JMH)](http://openjdk.java.net
 Und hier sieht man das Ergebnis von sinnlosem herumoptimieren.
 Javabeginners und Cocodrips schießen sich sofort ins Aus, weil ihre Implementierungen durch einen dummen Fehler in O(n²) statt in O(n log n) liegen.
 Alle anderen Implementierungen hängen erst einmal auf einem Klumpen.
-Ich habe den Plot (mit [Bokeh](#TODO)) so gebaut, dass man mit dem Mausrad hineinzoomen kann.
+Ich habe den Plot (mit [Bokeh](http://bokeh.pydata.org)) so gebaut, dass man mit dem Mausrad hineinzoomen kann.
 Den Vergleich sieht man aber auch noch ein wenig besser, wenn man den Plot anders aufbaut.
 Rufen wir uns kurz in Erinnerung, was die O-Notation bedeutet: Algorithmen in der gleichen Effizienzklasse unterscheiden sich (asymptotisch) nur durch einen konstanten Faktor.
 Wir können uns also diesen Faktor einfach für alle O(n log n)-Implementierungen ansehen.
@@ -735,7 +728,49 @@ Was aber können wir herauskitzeln, wenn wir wirklich so schnell wie möglich we
 Die folgende Variante schafft ziemlich ordentliche Geschwindigkeiten und bleibt dabei doch noch einigermaßen lesbar:
 
 ```java
-TODO: SwapRev-Variante
+package net.arbitrary_but_fixed.mergesort;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class MergesortSwapRevIns {
+    public static void sort(int[] ar) {
+        sort(ar, 60); // value 60 was determined by benchmarks => best speedup
+    }
+    public static void sort(int[] ar, int minSize) {
+        sort(Arrays.copyOf(ar, ar.length), ar, 0, ar.length, true, minSize);
+    }
+    public static void sort(int[] src, int[] dst, int from, int to, boolean orderAsc, int minSize) {
+        if(to - from <= minSize) {
+            InsertionSort.sort(dst, from, to, orderAsc);
+            return;
+        }
+        int middle = (from + to) / 2;
+        sort(dst, src, from, middle, true, minSize);
+        sort(dst, src, middle, to, false, minSize);
+        merge(src, dst, from, middle, to, orderAsc);
+    }
+    public static void merge(int[] src, int[] dst, int from, int middle, int to, boolean orderAsc) {
+        int l = from;
+        int r = to - 1;
+        if (orderAsc) {
+            for(int i = from; i < to; i++) {
+                if (src[l] <= src[r]) {
+                    dst[i] = src[l++];
+                } else {
+                    dst[i] = src[r--];
+                }
+            }
+        } else {
+            for(int i = to-1; i >= from; i--) {
+                if (src[l] <= src[r]) {
+                    dst[i] = src[l++];
+                } else {
+                    dst[i] = src[r--];
+                }
+            }
+        }
+    }
 ```
 
 Hier werden im Wesentlichen drei Tricks kombiniert:
@@ -749,21 +784,34 @@ Hier werden im Wesentlichen drei Tricks kombiniert:
     Ich habe mir diesen Trick nicht selbst ausgedacht, sondern bin irgendwo im Internet bei meinen Recherchen darüber gestolpert.
     Leider weiß ich aber nicht mehr wo.
     Wer mir da also helfen kann, der schickt mir bitte eine Mail, damit ich die Quelle hier ergänzen kann (Hat schon was ironisches in einem Post über Plagiate, oder? :sweat_smile:).
-2. Die Grundidee von [Javabeginners](TODO) war gar nicht verkehrt.
-    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als [Sentinel](TODO).
+2. Die Grundidee von [Javabeginners](https://javabeginners.de/Algorithmen/Sortieralgorithmen/Mergesort.php) war gar nicht verkehrt.
+    Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als [Sentinel](https://en.wikipedia.org/wiki/Sentinel_value).
     Da wir mit der Swap-Variante aus dem ersten Punkt aber schon alle Kopien vermieden haben, würden wir ja jetzt wieder Zusatzaufwand für das Umkehren der rechten Hälfte verbrauchen - Es sei denn, wir schreiben die Inhalte einfach schon in der richtigen Reihenfolge.
     Dazu habe ich einen weitereren Parameter `sortAsc` eingeführt (`true` steht für aufsteigendes Sortieren, `false` für absteigendes).
-3. Bei der Diskussion über Sortieralgorithmen in Büchern und im Internet hört man oft, dass Insertionsort für sehr kleine Arrays (deutlich weniger als 100 Elemente) schneller ist, als die komplizierteren rekursiven Algorithmen, weil er eben keinen Overhead durch rekursive Methodenaufrufe hat und sich außerdem durch eine sehr kompakte innere Schleife auszeichnet.
+3. Bei der Diskussion über Sortieralgorithmen in Büchern und im Internet hört man oft, dass [Insertionsort](https://www.khanacademy.org/computing/computer-science/algorithms/insertion-sort/a/insertion-sort) für sehr kleine Arrays (deutlich weniger als 100 Elemente) schneller ist, als die komplizierteren rekursiven Algorithmen, weil er eben keinen Overhead durch rekursive Methodenaufrufe hat und sich außerdem durch eine sehr kompakte innere Schleife auszeichnet.
     Darum stoppt in dieser Variante die Rekursion bei Teilarrays der größe 60 und diese kleinen Reste werden mit Insertionsort sortiert.
 
-Mit diesen drei Tricks breauchen wir nur noch 60% der übrigen Zeit, haben alle der Online-Varianten überholt und der Code ist (mit den entsprechenden Kommentaren) immer noch einigermaßen lesbar.
+Mit diesen drei Tricks breauchen wir nur noch 60% der übrigen Zeit, haben alle der Online-Varianten überholt und der Code ist (mit den entsprechenden Kommentaren) immer noch einigermaßen lesbar. <!-- todo speedup statt prozent -->
 
 ### Iterative Variante
 
 Die folgende Variante von Mergesort funktioniert iterativ.
 
 ```java
-TODO
+// wir verwenden die merge-Methode aus der ersten Variante
+import static net.arbitrary_but_fixed.mergesort.Mergesort.merge;
+
+public class MergesortIterative2 {
+    public static void sort(int[] ar) {
+        for(int mergeSize = 2; mergeSize / 2 < ar.length; mergeSize *= 2) {
+            int mergeStart = 0;
+            for(; mergeStart < ar.length - mergeSize; mergeStart += mergeSize) {
+                merge(ar, mergeStart, mergeStart + mergeSize / 2, mergeStart + mergeSize);
+            }
+            merge(ar, mergeStart, Math.min(mergeStart + mergeSize / 2, ar.length), Math.min(mergeStart + mergeSize, ar.length));
+        }
+    }
+}
 ```
 
 Sie sortiert das Array erst in Zweierblöcken, dann in Viererblöcken, dann in Achterblöcken und so weiter, bis die Blockgröße die Gesamtgröße des Arrays erreicht hat.
@@ -775,14 +823,126 @@ Ich habe sie nur aufgeführt, um noch einmal eine ganz andere Variante zu zeigen
 Seht her, mein hochgezüchtetes Monstrum:
 
 ```java
-TODO
+package net.arbitrary_but_fixed.mergesort;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import static net.arbitrary_but_fixed.mergesort.MergesortSwapRevIns.merge;
+
+public class MergesortOnSteroids {
+    private static class MergeRunner implements Runnable {
+        int[] src;
+        int[] dst;
+        private int mergeSize;
+        private int fromTask;
+        private int toTask;
+
+        public MergeRunner(int[] src, int[] dst, int mergeSize, int fromTask, int toTask) {
+            this.src = src;
+            this.dst = dst;
+            this.mergeSize = mergeSize;
+            this.fromTask = fromTask;
+            this.toTask = toTask;
+        }
+
+        @Override
+        public void run() {
+            for(int i = fromTask; i < toTask; i++) {
+                int from = i * mergeSize;
+                merge(
+                        src, dst, from,
+                        Math.min(src.length, from + mergeSize / 2),
+                        Math.min(src.length, from + mergeSize),
+                        i % 2 == 0
+                );
+            }
+        }
+    }
+    private static class InsertionRunner implements Runnable {
+        int[] ar;
+        int from;
+        int to;
+        int step;
+
+        public InsertionRunner(int[] ar, int from, int to, int step) {
+            this.ar = ar;
+            this.from = from * step;
+            this.to = to * step;
+            this.step = step;
+        }
+
+        @Override
+        public void run() {
+            for(int i = from; i < to; i += step) {
+                InsertionSort.sort(ar, i, Math.min(ar.length, i + step), (i / step) % 2 == 0);
+            }
+        }
+    }
+    public static void sort(int[] ar) {
+        sort(ar, 64); // 64 was determined via benchmarks => best speedup
+    }
+    public static int divCeil(int a, int b) {
+        return a / b + (a % b == 0 ? 0 : 1);
+    }
+    public static void awaitAll(List<Future<?>> futures) {
+        try {
+            for(Future<?> f: futures) {
+                f.get();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("runner thread terminated abnormally", e);
+        }
+    }
+    public static void sort(int[] ar, int minSize) {
+        int threads = Runtime.getRuntime().availableProcessors();
+        ExecutorService pool = Executors.newFixedThreadPool(threads);
+        List<Future<?>> futures = new ArrayList<>(threads);
+        int nSorts =  divCeil(ar.length, minSize);
+        int sortsPerThread = divCeil(nSorts, threads);
+        for(int i = 0; i < nSorts; i+= sortsPerThread) {
+            InsertionRunner r = new InsertionRunner(ar, i, Math.min(i + sortsPerThread, nSorts), minSize);
+            futures.add(pool.submit(r));
+        }
+        awaitAll(futures);
+        int iterations = (int)Math.ceil(Math.log(nSorts)/Math.log(2));
+        int[] src = ar;
+        int[] dst = Arrays.copyOf(ar, ar.length);
+        if (iterations % 2 == 1) {
+            int[] tmp = src;
+            src = dst;
+            dst = tmp;
+        }
+        for(int mergeSize = minSize * 2; mergeSize / 2 < ar.length; mergeSize *= 2) {
+            int nMerges = divCeil(ar.length, mergeSize);
+            futures.clear();
+            int mergesPerThread = divCeil(nMerges, threads);
+            for(int i = 0; i < nMerges; i+= mergesPerThread) {
+                MergeRunner runner = new MergeRunner(src, dst, mergeSize, i, Math.min(i + mergesPerThread, nMerges));
+                futures.add(pool.submit(runner));
+            }
+            awaitAll(futures);
+            // switch source and destination
+            int[] tmp = src;
+            src = dst;
+            dst = tmp;
+        }
+        pool.shutdown();
+    }
+}
 ```
 
 Diese Mergesort-Variante bezieht ihre Energie aus der [dunklen Dimension von Dormamu](http://marvelcinematicuniverse.wikia.com/wiki/Dormammu).
 Nein, nicht wirklich.
 Aber sie ist das was passiert, wenn man aus Macht- bzw. Performancegier die Lesbarkeit völlig über Bord wirft.
 Die Steroid-Variante verbindet die drei bereits erwähnten Performancetricks mit dem Aufbau der iterativen Variante, um den Algorithmus möglichst gut zu parallelisieren.
-In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ForkJoinPool`s](TODO) gleichmäßig auf mehrere Threads verteilt.
+In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ForkJoinPool`s](https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/ForkJoinPool.html) gleichmäßig auf mehrere Threads verteilt.
 Per Default entspricht die Anzahl der Threads der Anzahl der Prozessoren des Systems.
 Danach wartet der Haupthread bis alle Teilprobleme gelöst wurden, um dann die Blockgröße zu verdoppeln und die Threads für die nächste Runde zu starten.
 Damit brauchen wir auf einem i7-Prozessor nur noch ein viertel der Zeit im Vergleich zur ersten lesbaren Variante.
@@ -797,7 +957,7 @@ Dazu möchte ich einfach ohne große Worte unsere bisher besten Varianten mit de
 
 Wir sehen also, all die Mühe hat am Ende rein gar nichts für praktische Zwecke gebracht.
 Die Implementierung in der Standardbbliothek ist immer noch wesentlich schneller.
-Im single-threaded Fall liegt das hauptsächlich daran, dass ein [anderer Algorithmus](#TODO) verwendet wird.
+Im single-threaded Fall liegt das hauptsächlich daran, dass ein [anderer Algorithmus](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#sort(int%5B%5D)) verwendet wird, [an dem die Autoren über fünf Jahre lang gearbeitet haben](http://mail.openjdk.java.net/pipermail/core-libs-dev/2018-January/051000.html).
 Es handelt sich hier um einen Dual-Pivot-Quicksort, der aber auch wieder für kleinere Teilprobleme einen Insertionsort aufruft.
-Im parallelisierten Fall wird (ab einer ausreichenden Problemgröße) zwar auch ein [Merge-basierter Algorithmus](#TODO) verwendet, aber hier kommen viele weitere kleine Optimierungen zum Tragen, die den Code für Laien völlig unleserlich machen.
-Es bleibt also beim Thema der Optimierung für uns Normalsterbliche bei der ersten und wichtigsten Regel: Lass es!
+Im parallelisierten Fall wird (ab einer ausreichenden Problemgröße) zwar auch ein [Merge-basierter Algorithmus](https://docs.oracle.com/javase/10/docs/api/java/util/Arrays.html#parallelSort(int%5B%5D)) verwendet, aber hier kommen viele weitere kleine Optimierungen zum Tragen, die den Code für Laien völlig unleserlich machen.
+Es bleibt also beim Thema der Optimierung für uns Normalsterbliche bei der ersten und wichtigsten Regel: **Lass es!**
