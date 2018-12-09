@@ -370,7 +370,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 
     Kleines Schmankerl: so viel Arbeit, um eine zusätzliche Abfrage in der Schleife zu sparen und dann kopiert der Autor trotzdem den *gesamten* Array in jedem Merge-Schritt, auch dann, wenn er nur eine Kopie von zwei Elementen braucht?
     Wirklich tolle Optimierungskünste!
-    Das verschlechtert sogar die Effizienzklasse von O(n log n) auf O(n^2). :man_facepalming: <!-- TODO: oder sogar O(n³)? -->
+    Das verschlechtert sogar die Effizienzklasse von O(n log n) auf O(n^2). :man_facepalming:
 * `i`, `j` und `k` sind besonders lustig, wenn ein Index davon auch noch während seiner Lebensdauer die Zählrichtung ändert.
 
 #### [Dieses beliebige Gist vom Github-User Cocodrips](https://gist.github.com/cocodrips/5937371)
@@ -380,7 +380,7 @@ Dabei werde ich auch generelle stilistische Verbrechen auflisten, weil Plagiate 
 * Zwei Schleifen statt einer.
 * Methoden sind nicht `static` und sind auch noch package private. :scream:
 * `if (low < high)` statt sauberem `return`.
-* Auch diese\*r Kandidat\*in schießt sich mit der Effizienzklasse ab und landet in O(n²). <!-- TODO: auch checken -->
+* Auch diese\*r Kandidat\*in schießt sich mit der Effizienzklasse ab und landet in O(n²).
 
 Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den Eindruck, dass die Hauptquellen für Plagiate auch untereinander tüchtig abgeschrieben haben. :wink:
 
@@ -791,17 +791,20 @@ Hier werden im Wesentlichen drei Tricks kombiniert:
 3. Bei der Diskussion über Sortieralgorithmen in Büchern und im Internet hört man oft, dass [Insertionsort](https://www.khanacademy.org/computing/computer-science/algorithms/insertion-sort/a/insertion-sort) für sehr kleine Arrays (deutlich weniger als 100 Elemente) schneller ist, als die komplizierteren rekursiven Algorithmen, weil er eben keinen Overhead durch rekursive Methodenaufrufe hat und sich außerdem durch eine sehr kompakte innere Schleife auszeichnet.
     Darum stoppt in dieser Variante die Rekursion bei Teilarrays der größe 60 und diese kleinen Reste werden mit Insertionsort sortiert.
 
-Mit diesen drei Tricks breauchen wir nur noch 60% der übrigen Zeit, haben alle der Online-Varianten überholt und der Code ist (mit den entsprechenden Kommentaren) immer noch einigermaßen lesbar. <!-- todo speedup statt prozent -->
+Mit diesen drei Tricks erreichen wir einen Speedup-Faktor von 1,83, haben alle der Onlinevarianten überholt und der Code ist (mit den entsprechenden Erklärungen) immer noch einigermaßen lesbar.
 
 ### Iterative Variante
 
 Die folgende Variante von Mergesort funktioniert iterativ.
 
 ```java
+package net.arbitrary_but_fixed.mergesort;
+import java.util.Arrays;
+
 // wir verwenden die merge-Methode aus der ersten Variante
 import static net.arbitrary_but_fixed.mergesort.Mergesort.merge;
 
-public class MergesortIterative2 {
+public class MergesortIterative {
     public static void sort(int[] ar) {
         for(int mergeSize = 2; mergeSize / 2 < ar.length; mergeSize *= 2) {
             int mergeStart = 0;
@@ -941,12 +944,11 @@ public class MergesortOnSteroids {
 Diese Mergesort-Variante bezieht ihre Energie aus der [dunklen Dimension von Dormamu](http://marvelcinematicuniverse.wikia.com/wiki/Dormammu).
 Nein, nicht wirklich.
 Aber sie ist das was passiert, wenn man aus Macht- bzw. Performancegier die Lesbarkeit völlig über Bord wirft.
-Die Steroid-Variante verbindet die drei bereits erwähnten Performancetricks mit dem Aufbau der iterativen Variante, um den Algorithmus möglichst gut zu parallelisieren.
+Die Steroidvariante verbindet die drei bereits erwähnten Performancetricks mit dem Aufbau der iterativen Variante, um den Algorithmus möglichst gut zu parallelisieren.
 In jeder Iteration wird das Array wieder in Blöcke gleicher größe geteilt und diese Blöcke werden mit Hilfe eines [`ForkJoinPool`s](https://docs.oracle.com/javase/10/docs/api/java/util/concurrent/ForkJoinPool.html) gleichmäßig auf mehrere Threads verteilt.
 Per Default entspricht die Anzahl der Threads der Anzahl der Prozessoren des Systems.
-Danach wartet der Haupthread bis alle Teilprobleme gelöst wurden, um dann die Blockgröße zu verdoppeln und die Threads für die nächste Runde zu starten.
-Damit brauchen wir auf einem i7-Prozessor nur noch ein viertel der Zeit im Vergleich zur ersten lesbaren Variante.
-<!-- TODO: Performance gain --->
+Danach wartet der Hauptthread bis alle Teilprobleme gelöst wurden, um dann die Blockgröße zu verdoppeln und die Threads für die nächste Runde zu starten.
+Damit erreichen wir auf einem i7-Prozessor einen Speedup-Faktor von 6,75.
 
 ### Fazit zur Optimierung
 
