@@ -13,3 +13,5 @@ categories:
 In my course on algorithms and data structures the implementation of mergesort is one of the most frequently plagiarized homework assignments.
 
 That alone is bad enough, but seemingly the plagiarists aren't even able to find good examples online. Most results are much too complicated for a beginner - maybe that is part of the reason why students feel the need to plagiarize? With this post I want to provide a better option. If you plagiarize, you can at least do it correctly!
+
+*Note: I am still working on the english translation of this post. For now, I have to redirect you to the [german version]({{ site.baseurl }}{% post_url 2018-12-09-mergesort.de %}).*
