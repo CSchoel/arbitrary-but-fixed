@@ -18,7 +18,7 @@ Die Anzahl der Plagiate (10 bis 20 Prozent des Kurses) ist dabei schlimm genug.
 Noch schlimmer ist aber, dass nicht einmal *guter* Code plagiiert wird.
 Die meisten Beispiele, die man online findet, sind fehlerhaft oder viel zu kompliziert für eine\*n Anfänger\*in.
 
-Aus einer Mischung von verzweifeltem Humor und leiser Hoffnung, vielleicht doch noch dem ein oder anderen zu helfen, diesen Algorithmus wirklich zu *verstehen*, habe ich mir daher vorgenommen, einmal zu zeigen, wie man es (meiner Meinung nach) *richtig* macht - also sowohl das Plagiieren als auch die Implementierung von Mergesort als Java-Neuling.
+Aus einer Mischung von verzweifeltem Humor und leiser Hoffnung, vielleicht doch noch dem einen oder der anderen zu helfen, diesen Algorithmus wirklich zu *verstehen*, habe ich mir daher vorgenommen, einmal zu zeigen, wie man es (meiner Meinung nach) *richtig* macht - also sowohl das Plagiieren als auch die Implementierung von Mergesort als Java-Neuling.
 
 So, und damit mir die potentiellen Plagiatoren jetzt nicht schon abspringen, gibt es hier fertig plagiierbaren Code.
 Ein wunderschöner kompakter, verständlicher Mergesort in Java - sogar [als ausführbares JAR-Archiv zum Downoad](/assets/code/mergesort_readable.jar):
