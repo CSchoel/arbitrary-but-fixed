@@ -83,7 +83,7 @@ Vermutlich eins der folgenden:
     Vielleicht hast Du schon Schwierigkeiten mit Themen, die aus vergangenen Semestern vorausgesetzt werden; oder Du stößt einfach an eine Verständnisgrenze, wo Dir die informatisch-algorithmische Denkweise, die für die Lösung nötig wäre, zu fremd ist, um sie nachzuvollziehen.
     In diesem Fall ist die Frage angemessen: Ist Informatik der richtige Studiengang für dich?
     Also ist das *wirklich* ein Fach, für das Du dich begeisterst, und bei dem Du Dir vorstellen kannst, ein Leben lang damit zu arbeiten?
-    Warum nich Germanist\*in, Physiker\*in, Mechatroniker\*in oder Konditor\*in?
+    Warum nicht Germanist\*in, Physiker\*in, Mechatroniker\*in oder Konditor\*in?
     Die Frage ist ernst und in keinster Weise abwertend gemeint.
 * **Du hast die nötigen Fähigkeiten, aber Dir fehlt die Zeit.**
     Dann bekomm Dein Leben auf die Reihe!
@@ -393,7 +393,7 @@ Wenn man sich die vier Beispiele so anschaut, bekommt man übrigens durchaus den
 Wie, noch mehr Lesen?
 Ja, Lesen hilft.
 Die Deutschnote ist laut einer [didaktischen Studie](http://publikationen.ub.uni-frankfurt.de/frontdoor/index/index/docId/46847) ein ähnlich guter Prädiktor für den Erfolg im Informatikstudium wie die Note in Mathe oder Informatik.
-Vielleicht, weil man Aufgabenstellungen erst einmal *lesen* könen muss, bevor man sie lösen kann?
+Vielleicht, weil man Aufgabenstellungen erst einmal *lesen* können muss, bevor man sie lösen kann?
 
 Was meine ich damit? Meistens ist sich die Person, die die Aufgabe gestellt hat, völlig bewusst, dass es im Internet hunderte verschiedene Mergesort-Implementierungen in Java zum Download gibt.
 Die einfachste Lösung für das Problem ist es, kleine "Fallen" in die Aufgabenstellung einzubauen, sodass eine 1:1-Kopie eben nicht ausreicht.
@@ -714,7 +714,7 @@ Das geschieht in diesem Fall mit einem Copy-Konstruktor ([`new ArrayList<T>(left
 Außerdem sieht man hier schön die Macht des Comparable-Interfaces.
 Diese Methode funktioniert fast genauso wie die mit Int-Arrays, kann aber alles sortieren, was [`Comparable`](https://docs.oracle.com/javase/10/docs/api/java/lang/Comparable.html) ist.
 
-### Swap + Rev variante
+### Swap + Rev - Variante
 
 Hier kommen wir ins Reich der Optimierungen.
 Wie ich schon sagte müssen wir hier die [drei Regeln der Optimierung](http://wiki.c2.com/?RulesOfOptimization) beachten:
