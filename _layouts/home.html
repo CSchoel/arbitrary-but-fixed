@@ -11,7 +11,7 @@ layout: default
   <ul class="post-list">
     {% for post in site.posts %}
       {% if post.ref == nil %}
-        {% assign other_versions = site.posts | where "title",post.title %}
+        {% assign other_versions = site.posts | where: "title",post.title %}
       {% else %}
         {% assign other_versions = site.posts | where: "ref",post.ref %}
       {% endif %}
