@@ -1,0 +1,1 @@
+OpenModelica has a maximum length for model names (windows)
