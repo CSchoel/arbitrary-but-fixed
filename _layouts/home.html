@@ -10,7 +10,11 @@ layout: default
 
   <ul class="post-list">
     {% for post in site.posts %}
-      {% assign other_versions = site.posts | where: "ref",post.ref %}
+      {% if post.ref == nil %}
+        {% assign other_versions = site.posts | where "title",post.title %}
+      {% else %}
+        {% assign other_versions = site.posts | where: "ref",post.ref %}
+      {% endif %}
       {% if post.lang != nil and post.lang != site.lang and other_versions.size >= 2 %}
         {% continue %}
       {% endif %}
