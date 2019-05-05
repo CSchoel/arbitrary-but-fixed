@@ -15,7 +15,11 @@ layout: default
       {% endif %}
     </p>
     <p class="post-meta">
-      {% assign other_versions = site.posts | where: "ref",page.ref | where_exp: "post", "post.lang != page.lang" %}
+      {% if post.ref == nil %}
+        {% assign other_versions = site.posts | where: "title",post.title %}
+      {% else %}
+        {% assign other_versions = site.posts | where: "ref",page.ref | where_exp: "post", "post.lang != page.lang" %}
+      {% endif %}
       {% if other_versions.size >= 1 %}
         This post is also available in the following languages:
         {% for version in other_versions -%}
