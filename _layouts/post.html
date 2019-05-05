@@ -16,7 +16,7 @@ layout: default
     </p>
     <p class="post-meta">
       {% if page.ref == nil %}
-        {% assign other_versions = site.posts | where: "title",page.title %}
+        {% assign other_versions = nil %}
       {% else %}
         {% assign other_versions = site.posts | where: "ref",page.ref | where_exp: "post", "post.lang != page.lang" %}
       {% endif %}
