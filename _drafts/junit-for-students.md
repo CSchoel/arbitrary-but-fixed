@@ -17,7 +17,7 @@ On the one hand, studying should be about *understanding* the subject through co
 No unit test can tell you that you are "almost there" or praise you for small improvements.
 It will simply tell you if your solution to a particular problem is correct - "Yes" or "No".
 And even this answer can be misguiding.
-I have seen students that passed all unit tests but one look at the code made it clear that there where still some serious misunderstandings of the exercise and the concepts that were being tested.
+I have seen students that passed all unit tests but one look at the code made it clear that there were still some serious misunderstandings of the exercise and the concepts that were being tested.
 I have also seen students where (almost) all unit tests failed - not because they did not understand what they were doing, but because there was some minor but hard to find bug in a single method.
 
 On the other hand you will also find the attitude that computer science is all about *exact* solutions and we should therefore demand this level of accuracy from very early on.
@@ -37,8 +37,8 @@ With this we arrive at the main question of this article: What makes a good unit
 ## Cautionary tales of bad unit tests
 
 We learn by our failures and this is also true in this case.
-For one of my courses, I let my tutors create some exercises with accompanying unit tests for me.
-Both some of the Tests and some of the submissions of my students can serve as a cautionary tale of what *not* to do when designing tests for an educational setting.
+For a course in algorithms and data structures, I let my tutors create some exercises with accompanying unit tests for me.
+Both some of the tests and some of the submissions of my students can serve as a cautionary tale of what *not* to do when designing tests for an educational setting.
 
 ### Tale 1: Thanks for nothing
 
@@ -58,7 +58,7 @@ First of all, the code tests a very complicated recursive function with a single
 There can be hundreds if not thousands of different reasons why it may fail, but if it does, all the information you get is that "An array of size 500 was sorted incorrect\[ly\].".
 This leaves a lot of questions unanswered:
 
-* What does "incorrectly" mean? Is it sorted in reverse order, up to a certain point or not at all?
+* What does "incorrectly" mean? Is it sorted in reverse order, up to a certain point or completely unchanged?
 * What does the array look like, that had to be sorted?
 * What does my resulting array look like?
 
@@ -76,7 +76,7 @@ This is only partly true.
 This is a totally sound choice by the library, as you might call this method with huge arrays.
 However, for testing a merge sort implementation, it would be preferable to see the whole array to get an idea what might be going wrong.
 This is further hindered by the poor choice for `length` in the original test.
-The test was called with `length = 0`, `length = 1` and `length = 500` and `length = 10000`.
+The test was called with `length` values of 0, 1, 500 and 10000.
 Notice the lack of any test with an array that has more than one element and would still fit on an 80 character command line.
 
 ### Tale 2: Total success, but still a failure
@@ -117,7 +117,7 @@ Even if unit tests are all sensible, they can still be confusing.
 In the exercise in question students had to write their own implementation of a linked list.
 This also included own implementations of the standard methods for Java-Objects such as `equals(Object)`, `hashCode()` and `toString()`.
 
-There were some unit tests that checked whether these methods where correctly implemented and other tests that *used* them to test the functionality of other methods as in the following example.
+There were some unit tests that checked whether these methods were correctly implemented and other tests that *used* them to test the functionality of other methods as in the following example.
 
 ```java
 ImmutableList<Integer> lst = new Cons<>(5, new Nil<>());
@@ -142,12 +142,12 @@ If this test fails, you may see some confusing error messages:
 
     This might hint at a missing or incorrect `equals` method, but this is not apparent for a programming novice.
 
-The problem here was that accidentally the tests for `toString` and `equals` where run last and the students had to scroll past several of these confusing messages to get some feedback that was actually helpful.
+The problem here was that accidentally the tests for `toString` and `equals` were run last and the students had to scroll past several of these confusing messages to get some feedback that was actually helpful.
 
 ## General rules for good unit tests
 
 Now that we have seen what can go wrong, it is time to think about what we can do better.
-Some of the following solutions where my own ideas, but some where also suggestions by my tutors and students and have already been implemented in my current algorithms and data structures course at the THM.
+Some of the following solutions were my own ideas, but some were also suggestions by my tutors and students and have already been implemented in my current algorithms and data structures course at the THM.
 
 ### Lessons from Tale 1
 
@@ -160,7 +160,7 @@ The thing with writing unit tests for educational purposes, however, is that you
 The obvious benefit of this approach is that you can test your sample solution while you build it, which gives you a far more realistic estimate of typical errors that students may run into than when you artificially add those errors to a working solution.
 Additionally, you are now able to directly assess the usefulness of the feedback that your tests provide.
 Do you have enough information to find the bug from the error message alone?
-If not before using the Debugger or printing additional information maybe have a look at your tests and see if *they* can be augmented to provide more feedback.
+If not, before using the Debugger or printing additional information, maybe have a look at your tests and see if *they* can be augmented to provide more feedback.
 
 #### Give more feedback than usual
 
@@ -172,7 +172,7 @@ Usually this will involve a formatted error message using basic methods like `as
 Additionally the error message itself can contain hints to what the test is actually about and what are common causes for failing, such as the following example:
 
 ```java
-double[][] content = new double[][]{{1}, {2}, {3}};
+double[][] content = new double[][]{ {1}, {2}, {3} };
 DoubleMatrix mat = new TwoDimDoubleMatrix(content);
 content[0][0] = 100;
 String msg = "The constructor of TwoDimDoubleMatrix seems to create an " +
@@ -200,7 +200,7 @@ Some of these mistakes may be avoided by a hint in the exercise text, others may
 
 If you can identify possible errors that a standard unit test will not catch, because they do not directly affect the result of methods but only the code structure or memory management, it may be helpful to add some guiding restrictions to the unit test
 
-For example, in some cases it may be interesting to do a very coarse performance check or add a timeout to the unit test to ensure that a solution is in $\mathcal{O}(n)$ and not in $\mathcal{O}(n^2)$.
+For example, in some cases it may be interesting to do a very coarse performance check or add a timeout to the unit test to ensure that a solution is in O(n) and not in O(n²).
 You can also use meta programming features such as the Java reflection API to check that a data structure only has fields with sensible types.
 If you are lucky, you may have also access to meta programming features or a library for static code analysis that provides access to the abstract syntax tree to allow things like white- or blacklisting calls to specific methods or classes.
 
@@ -208,7 +208,7 @@ If you are lucky, you may have also access to meta programming features or a lib
 
 #### Only test what is *essential* for a correct solution
 
-As always in computer programming, it is crucial to fully understand your problem domain and in this case it is crucial to have a very clear definition of what is an acceptable solution and what is not.
+As always in software design, it is crucial to fully understand your problem domain and in this case it is crucial to have a very clear definition of what is an acceptable solution and what is not.
 Unit tests in an educational setting should precisely test the features that are required for every possible solution that can be labeled "correct" and not more.
 
 Considering the example from Tale 3 this means that when you want your students to write a remove method for a binary search tree, you should test that the result contains all values that it previously contained, that it does not contain the removed value and that it is still a binary search tree - not more and not less.
@@ -246,11 +246,11 @@ If a test fails, it should be clear which method is responsible for that.
 You should avoid cases where an error in one method can result in the failure of the test for another method.
 This is of course not always possible or sensible.
 If your students write a data structure with getters and setters for internal variables, these methods will probably be called in most unit tests.
-For other methods, however, it will probably often be possible to avoid unnecessary dependencies by restricting oneself to use only this basic functionality of the class that is being tested.
+For other methods, however, it will probably often be possible to avoid unnecessary dependencies by restricting oneself to use only the basic functionality of the class that is being tested.
 
 ## Conclusion
 
 I think this article has shown both the good and the damage that unit tests can do in an educational setting.
 As always it is all about the context and more specifically about the quality of the feedback that you provide to your students.
 If done wrong, unit tests are annoying and unfair.
-If done right, unit tests can almost serve as a personal mentor that helps you to understand a problem, nudges you in the right direction and reassures you that your solution really is correct.
+If done right, unit tests can almost serve as a personal mentor that helps students to understand a problem, nudges them in the right direction and reassures them that their solution really is correct.
