@@ -34,7 +34,7 @@ final public class ToplevelFinal {
 }
 ```
 
-My first instinct was that the reason for this behavior of the JShell could be the semantics that every snippet is considered to be part of a class ([which is often the reason for confusing JShell behavior](jshell-post)).
+My first instinct was that the reason for this behavior of the JShell could be the semantics that every snippet is considered to be part of a class ([which is often the reason for confusing JShell behavior]({{ site.baseurl }}{% post_url 2017-12-15-jshell-peculiarities %})).
 However, a static inner class can also be declared as `final` without any problems:
 
 ```java
