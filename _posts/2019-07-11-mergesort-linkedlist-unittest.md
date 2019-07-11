@@ -40,7 +40,7 @@ Let's start by remembering the guidelines we established:
 8. Avoid dependencies between tests if possible
 
 For the discussion of the unit tests I will follow this structure and explain how I tried to implement each of these lessons.
-If you want to have a look at the result, you can [download the unit tests as JAR archive](AB3-MergeSortLinked-tests.jar).
+If you want to have a look at the result, you can [download the unit tests as JAR archive](/assets/code/AB3-MergeSortLinked-tests.jar).
 
 ### 1. Use test-driven design and look at your own mistakes
 
