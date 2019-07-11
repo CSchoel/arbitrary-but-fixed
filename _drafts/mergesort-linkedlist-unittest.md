@@ -8,9 +8,6 @@ categories:
     - teaching
 ---
 
-TODO: needs proof reading
-TODO: add tests as JAR for download
-
 Previously I talked about [guidelines for good unit tests in an educational setting]({{ site.baseurl }}{% post_url 2019-05-05-junit-for-students %}).
 In this post I mainly talked about cautionary tales, but this time I want to try to give you a positive example how these guidelines can be applied to increase the usefulness of a unit test both for students and for teachers.
 
@@ -43,12 +40,13 @@ Let's start by remembering the guidelines we established:
 8. Avoid dependencies between tests if possible
 
 For the discussion of the unit tests I will follow this structure and explain how I tried to implement each of these lessons.
+If you want to have a look at the result, you can [download the unit tests as JAR archive](AB3-MergeSortLinked-tests.jar).
 
 ### 1. Use test-driven design and look at your own mistakes
 
 OK, I admit: I did *not* use a fully test-driven approach as I should have.
 The reason for this is laziness and impatience.
-I wanted to see quickly if the exercise could work, but  as we will see later the full suite of unit tests was quite complex and took about 500 lines of code - compared to 50 lines of code that were required for a working solution.
+I quickly wanted to see if the exercise could work, but as we will see later the full suite of unit tests was quite complex and comprised about 500 lines of code - compared to 50 lines of code that were required for a working solution.
 What I *did* do however, was to implement a few rudimentary tests and take note of my mistakes:
 
 * My first approach did the split correctly, but failed to combine the sorted sublists and therefore just returned the minimum of the list.
@@ -74,8 +72,8 @@ This is where a *class invariant* comes in handy.
 Students should get a notice every time their resulting list hurts any of the following conditions:
 
 * **Link symmetry:** If a node a links to a node `a.next == b`, then it must hold that `b.prev == a`. Equivalently if `a.prev == b` then it must hold that `b.next == a`.
-* **First is first:** If `first != null` then ist must hold that `first.prev == null`.
-* **Last is last:** If `last != null` then ist must hold that `last.next == null`.
+* **First is first:** If `first != null` then it must hold that `first.prev == null`.
+* **Last is last:** If `last != null` then it must hold that `last.next == null`.
 * **First to last:** The node last must be reachable by following next links from first (and vice versa).
 
 ### 3. Provide a deep inspection of data structures in error messages
@@ -85,8 +83,8 @@ In my head or on paper I visualize correct and broken list structures as nodes w
 However, as the following example of an incorrect link shows, it is not easy do this visualization in a plain text message in an exception:
 
 ```verbatim
-      ________
-     ↓        |
+      _______
+     ↓       |
 a ⇄ b ⇄ c → d ⇄ e
 ```
 
@@ -143,13 +141,13 @@ protected String checkForward(DoublyLinkedNode<E> asFirst, DoublyLinkedNode<E> a
         if (cur == asLast) { sb.append("]"); }
         visited.add(cur);
         if (cur.next != null) {
-        sb.append(cur.next.prev == cur ? ARROW_BOTH : ARROW_RIGHT);
+            sb.append(cur.next.prev == cur ? ARROW_BOTH : ARROW_RIGHT);
         }
         cur = cur.next;
     }
     if (cur != null) { sb.append(INFINITY); }
     return sb.toString();
-    }
+}
 ```
 
 The key idea is that we keep track of visited nodes with a `HashSet` to avoid running in an infinite loop.
@@ -197,6 +195,8 @@ Fortunately for us, since Java 9 the default garbage collector is [G1](https://d
 So even if the memory can be freed right after the sort method is called, there will still be *some* objects left when we do our second call to `Runtime.getRuntime().freeMemory()`.
 
 With this technique the unit test was able to detect the O(n) dummy objects that I initially created, even if most of them where created in the first calls to the merge function on very small sub-lists and could have been garbage collected while the merge function worked upwards to larger chunks of the list.
+One can argue that this is a bit overzealous, because if there is at any time only one dummy object with active references the algorithm still operates in-place.
+However, I would argue that while such an algorithm meets the *theoretical* conditions for an in-place algorithm, it fails to meet the *practical* expectation that it will not lead to large amounts of memory allocation.
 
 Finally, the last restriction that we have to put into place concerns the type of algorithm used.
 A `sort()` method without any parameters does not leave any possibility to test what happens inside, but on the other hand, specifying an exact call structure for the merge function could be a little too restricting.
@@ -273,8 +273,26 @@ For example test 4 is all about call structure and not the class invariant, test
 Specifically I chose not to test the correctness of the sorted lists in test 11 and 12, because that is not the point of the tests.
 I also separated the speed and heap space tests to ensure that a student whose code is too slow but runs in-place also gets the right feedback.
 
+## Critical Evaluation
+
+I asked my students what they thought of the tests for this exercise and the results where mixed.
+Here are two representative entries from my feedback box:
+
+* > MergeSort was posed well.
+    > Despite the start and the adjustment being relatively hard, the exercise taught the handling of packages.
+    > Utterly pleased!
+
+* > The implementation through the interface and the restrictions established by the tests in my case posed more problems than the exercise itself.
+
+On the one hand the tests seemed to be helpful for some students and indeed I had no problem with plagiarism this time.
+On the other hand it seemed that some students had a hard time adjusting to the code framework that they had to use for this exercise.
+In particular they where confused by the concept of the listener and by the option to use a dummy element which was mentioned in the exercise text.
+In hindsight I have also to admit that my unit tests where still lacking some crucial examples such as lists that are sorted in reverse order.
+It seemed, however, that the tutors found the tests sufficient for grading as solutions that passed all tests also passed the manual inspection.
+
 ## Conclusion
 
 Again this post has become larger than originally anticipated.
 I hope it can give some inspiration how to implement the ideas from [my previous post]({{ site.baseurl }}{% post_url 2018-12-09-mergesort.de %}).
-All in all I am quite happy with the new version of the exercise and I am excited to receive feedback from my students.
+I see the critique from my students mostly not as a critique of the tests per se but more as a critique of previous exercises and programming courses that did not teach them the concept of listeners or how to program against a given code framework.
+All in all I am quite happy with the new version of the exercise and I will try to build more exercises of this type in the future.
