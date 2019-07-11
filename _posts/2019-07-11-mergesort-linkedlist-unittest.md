@@ -287,7 +287,7 @@ Here are two representative entries from my feedback box:
 On the one hand the tests seemed to be helpful for some students and indeed I had no problem with plagiarism this time.
 On the other hand it seemed that some students had a hard time adjusting to the code framework that they had to use for this exercise.
 In particular they where confused by the concept of the listener and by the option to use a dummy element which was mentioned in the exercise text.
-In hindsight I have also to admit that my unit tests where still lacking some crucial examples such as lists that are sorted in reverse order.
+In hindsight I also have to admit that my unit tests where still lacking some crucial examples such as lists that are sorted in reverse order.
 It seemed, however, that the tutors found the tests sufficient for grading as solutions that passed all tests also passed the manual inspection.
 
 ## Conclusion
