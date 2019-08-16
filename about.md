@@ -37,28 +37,40 @@ This data may only be used to contact the author of this website within the scop
 
 ### Disclaimer
 
-* §1 Haftung für Inhalte
+- §1 Content liability
 
-    Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+    The content of this website was created with utmost diligence.
+    However, I cannot guarantee for the correctness, completeness and topicality of its content.
 
-    Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei bekannt werden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+    According to § 7 Sect.1 TMG as a service provider I am responsible for my own content on this website according to general law.
+    According to §§ 8 to 10 TMG I am, however, not obliged to monitor transmitted or stored information from foreign sources or to search after circumstances that hint towards illegal actions.
+    Obligations to delete or block information in accordance to general law will remain unaffected.
+    However, a liability in this regard is only possible starting at the moment of conizanze of a violation of law.
+    When I learn about such infringements I will remove the respective content immediately.
 
-    Mit der Nutzung der Website des Anbieters kommt keinerlei Vertragsverhältnis zwischen dem Nutzer und dem Anbieter zustande. Insofern ergeben sich auch keinerlei vertragliche oder quasivertragliche Ansprüche gegen den Anbieter.
+    With the use of this website no contract is established between the user and the provider.
+    Therefore no contractual or quasi-contractual claims result against the provider.
 
-* §2 Haftung für Links
+- §2 Link liability
 
-    Unser Angebot enthält Links zu externen Webseiten Dritter (gekennzeichnet durch folgendes Icon : ), auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei bekannt werden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+    This website contains links to external websites of third parties (recognizable by the following icon).
+    Because we have no influence over the content of these websites we cannot guarantee for them.
+    The responsibility for the content of the linked sites always lies with the provider of mainainter of that site.
+    The linked sites have been reviewed for possible violations of law at the time the link was placed.
+    At this time no illegal content was identifiable.
+    A permanent monitoring of the content of linked sites cannot be deemed acceptable without tangible evidence of law infringement.
+    If I become aware of any infringements I will immediately remove the respective links.
 
-* §3 Urheberrecht
+- §3 Copyright
 
-    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+    Unless otherwise state within a post, I hereby release all my original content and work on this website to the public domain.
+    It may be freely downloaded, copied, modified and distributed for commercial as well as non-commercial use.
+    Content of third parties is labeled as such and is subject to the individual licenses and copyrights of said third parties.
 
-    Die Betreiber der Seiten sind bemüht, stets die Urheberrechte anderer zu beachten bzw. auf selbst erstellte sowie lizenzfreie Werke zurückzugreifen.
+- §4 Privacy
 
-* §4 Datenschutz
+    I hereby object to the use of my personal data, that is provided here in accordance to the German "Impressumspflicht", by third parties for the purpose of sending not explicitly requested advertisements and information material.
 
-    Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.
+- §4 Applicable law
 
-* §4 Anwendbares Recht
-
-    Es gilt ausschließlich das maßgebliche Recht der Bundesrepublik Deutschland.
+    The law of the Federal Republic of Germany shall apply exclusively.
