@@ -10,6 +10,17 @@ As a researcher in an interdisciplinary field, and generally curious person I te
 In this blog I want to shout my solutions to these challenges out into the world, hoping for some feedback.
 So if you have a question, or a better solution, or just want to chat with someone with similar interests, I am always happy if you drop me an email.
 
+This blog was created using [Jekyll](https://jekyllrb.com/) with the following plugins:
+
+- jekyll-feed
+- jekyll-email-protect
+- jekyll-sitemap
+- jekyll-seo-tag
+- jemoji
+
+It uses a modified version of the [Minima theme](https://github.com/jekyll/minima) with the fonts [Noto Sans](https://fonts.google.com/specimen/Noto+Sans), [Roboto](https://fonts.google.com/specimen/Roboto) and [Quicksand](https://fonts.google.com/specimen/Quicksand).
+The HTML contend is served via [GitHub Pages](https://pages.github.com/), the syntax highlighter is [Rouge](http://rouge.jneen.net/), Markdown parsing is provided by [kramdown](https://kramdown.gettalong.org/).
+
 ## Myself
 
 I got my Master's degree in computer science from the [Technical University Kaiserslautern](https://www.uni-kl.de/startseite/) with a focus on machine learning.
