@@ -48,6 +48,14 @@ a:hover {
 a:visited {
   color: darken($color-ocean, 10%);
 }
+// external links
+a[href^="http:"],a[href^="https:"] {
+  background-image:url('{{ site.baseurl }}/assets/pfeil2.png');
+  background-color: transparent;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  padding-right: 15px;
+}
 
 h1,h2,h3,h4,h5 {
   color: $color-ocean;

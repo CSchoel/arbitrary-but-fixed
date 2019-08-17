@@ -64,7 +64,7 @@ This data may only be used to contact the author of this website within the scop
 
 - §2 Link liability
 
-    This website contains links to external websites of third parties (recognizable by the following icon).
+    This website contains links to external websites of third parties (recognizable by the following icon ![external link]({{ site.baseurl }}/assets/pfeil2.png)).
     Because we have no influence over the content of these websites we cannot guarantee for them.
     The responsibility for the content of the linked sites always lies with the provider of mainainter of that site.
     The linked sites have been reviewed for possible violations of law at the time the link was placed.
