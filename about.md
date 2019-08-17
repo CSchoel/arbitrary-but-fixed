@@ -85,3 +85,5 @@ This data may only be used to contact the author of this website within the scop
 - §4 Applicable law
 
     The law of the Federal Republic of Germany shall apply exclusively.
+
+This disclaimer is based on templates from [eRecht24.de](http://www.e-recht24.de/) and [juraforum.de](http://www.juraforum.de/).
