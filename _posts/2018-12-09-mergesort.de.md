@@ -815,6 +815,8 @@ Hier werden im Wesentlichen drei Tricks kombiniert:
     Ich habe mir diesen Trick nicht selbst ausgedacht, sondern bin irgendwo im Internet bei meinen Recherchen darüber gestolpert.
     Leider weiß ich aber nicht mehr wo.
     Wer mir da also helfen kann, der schickt mir bitte eine Mail, damit ich die Quelle hier ergänzen kann (Hat schon was ironisches in einem Post über Plagiate, oder? :sweat_smile:).
+
+    *Edit: Ich habe die Quelle wiedergefunden. Es handelte sich um das [Buch "Algorithms" von Robert Sedgewick und Kevin Wayne](https://algs4.cs.princeton.edu/22mergesort/).*
 2. Die Grundidee von [Javabeginners](https://javabeginners.de/Algorithmen/Sortieralgorithmen/Mergesort.php) war gar nicht verkehrt.
     Das umgekehrte Kopieren der rechten Hälfte dient uns gewissermaßen als [Sentinel](https://en.wikipedia.org/wiki/Sentinel_value), der uns zwei Vergleiche in der inneren Schleife einspart.
     Da wir mit der Swap-Variante aus dem ersten Punkt aber schon alle Kopien vermieden haben, würden wir ja jetzt wieder Zusatzaufwand für das Umkehren der rechten Hälfte verbrauchen - Es sei denn, wir schreiben die Inhalte einfach schon in der richtigen Reihenfolge.
