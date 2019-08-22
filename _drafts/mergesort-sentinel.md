@@ -8,7 +8,8 @@ description: >
 categories: teaching java algorithms
 ---
 
-Since [my first post on merge sort]({{ site.baseurl }}{% post_url 2019-05-05-junit-for-students %}) I wanted to talk about a misleading suggestion that sometimes pops up in online discussion and is even mentioned in the [CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms): Speeding up merge sort by introducing a sentinel value.
+Since [my first post on merge sort]({{ site.baseurl }}{% post_url 2019-05-05-junit-for-students %}) I wanted to talk about a misleading suggestion that sometimes pops up in [online discussion](https://stackoverflow.com/questions/7969500/what-are-sentinel-in-c-language-i-was-learning-merge-sort-and-came-across-using) and is even mentioned in the [CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms): Speeding up merge sort by introducing a sentinel value.
+In this post I will explain why I think that this is almost never a good idea.
 
 The CLRS variant of the algorithm looks as follows:
 
@@ -38,7 +39,6 @@ Here the crucial part is `L[n1 + 1] ← ∞` and `R[n2 + 1] ← ∞`.
 If `i` reaches the end of the left array, `L[i]` will become ∞ and `L[i] ≤ R[j]` will always be false unless `R[j]` is also ∞, in which case the loop stops, because all elements from `L` and `R` have been processed.
 If `j` reaches the end of the right array, the behavior is similar.
 `R[j]` becomes ∞ and `L[i] ≤ R[j]` will be true for the remainder of the loop.
-
 Without the sentinel, the if condition would have to be `j > n2 or (i <= n1 and L[i] ≤ R[j])` requiring three instead of one comparative operation in the main loop.
 
 In theory this sounds like an easy way to improve the algorithm, but does it make sense in a practical application?
@@ -117,4 +117,4 @@ public static void merge(int[] ar, int[] aux, int from, int middle, int to) {
 }
 ```
 
-The resulting code is even shorter than the CLRS variant with sentinels.
+The resulting code is even shorter than the CLRS variant with sentinels. Sedgewick - Cormen 1:0. 😉
