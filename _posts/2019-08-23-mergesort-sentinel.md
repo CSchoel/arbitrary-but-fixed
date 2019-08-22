@@ -8,7 +8,7 @@ description: >
 categories: teaching java algorithms
 ---
 
-Since [my first post on merge sort]({{ site.baseurl }}{% post_url 2019-05-05-junit-for-students %}) I wanted to talk about a misleading suggestion that sometimes pops up in [online discussion](https://stackoverflow.com/questions/7969500/what-are-sentinel-in-c-language-i-was-learning-merge-sort-and-came-across-using) and is even mentioned in the [CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms): Speeding up merge sort by introducing a sentinel value.
+Since [my first post on merge sort]({{ site.baseurl }}{% post_url 2018-12-09-mergesort %}) I wanted to talk about a misleading suggestion that sometimes pops up in [online discussion](https://stackoverflow.com/questions/7969500/what-are-sentinel-in-c-language-i-was-learning-merge-sort-and-came-across-using) and is even mentioned in the [CLRS](https://en.wikipedia.org/wiki/Introduction_to_Algorithms): Speeding up merge sort by introducing a sentinel value.
 In this post I will explain why I think that this is almost never a good idea.
 
 The CLRS variant of the algorithm looks as follows:
