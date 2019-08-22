@@ -50,7 +50,9 @@ a:visited {
 }
 // external links
 a[href^="http:"],a[href^="https:"] {
-  background-image:url('{{ site.baseurl }}/assets/pfeil2.png');
+  background-image:url('{{ site.baseurl }}/assets/link_arrow_14.png');
+  background-image:url('{{ site.baseurl }}/assets/link_arrow.svg'),
+    linear-gradient(transparent, transparent);
   background-color: transparent;
   background-position: 100% 50%;
   background-repeat: no-repeat;
