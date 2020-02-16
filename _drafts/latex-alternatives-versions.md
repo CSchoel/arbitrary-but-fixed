@@ -2,33 +2,36 @@
 layout: post
 title:  "Latex Alternatives: Latex versions"
 description: >
-    Latex is not latex. There is MikTeX, LiveTex, Latex2e, pdflatex, Latex3, Xelatex, Lualatex, ... Aaaaah! If you are as confused as I was when I got into latex, this post is for you. 
+    LaTeX is not LaTeX. There is MikTeX, Live TeX, LaTeX2e, pdflaTeX, LaTeX3, XelaTeX, LualaTeX, ... Aaaaah! If you are as confused as I was when I got into laTeX, this post is for you.
 categories:
     - latex
     - latex alternatives
 ---
 
 Have you recently (or not so recently) started using LaTeX and wondered, whether you should be using MikTeX, Live TeX, LaTeX2e, pdfLaTeX, LaTeX3, XeLaTeX, LuaLaTeX (or maybe it's LuaTeX), or something else?
-If all those options don't make any sense to you and you don't feel much wiser after googling "Which LaTeX version should I use?" - or if exactly this search has brought you here - then this post is for you.
+If all those options don't make any sense to you and you don't feel much wiser after googling "Which LaTeX version should I use?", or if exactly this search has brought you here, then this post is for you.
+
+Here I will try to untangle all the different technicalities and confusions surrounding the ambiguous term "LaTeX version".
 
 ## TeX and LaTeX
 
 The first thing that may cause confusion is the distinction between TeX and LaTeX.
 In short, TeX is the actual *language* that we write our documents in.
-The TeX standard defines that things that start with a `\` are treated as command sequence, that curly braces `{}` group tokens together, basic rules of command expansion, and about 300 low-level commands called *primitives*.
+The TeX standard defines the basic concepts such as the facts that things that start with a `\` are treated as command sequence or that curly braces `{}` group tokens together, basic rules of command expansion, and about 300 low-level commands called *primitives*.
 Effectively, every TeX document is treated as a stream of tokens where some of these tokens are macros with special meaning.
 What makes this language extremely difficult to understand and parse is the fact that almost every syntactic aspect of the language can be changed from within a document.
 This is also the reason why seemingly every problem you may have with TeX documents can be solved with a few lines of cryptic code copied from Stack Overflow.
 
 As you may guess, nobody wants to write pure TeX. Even Donald Knuth did not intend that the language was used like this by end users.
-He defined another 600 more high-level commands which are now called "Plain TeX".
+He defined another 600 more high-level commands which are now called ["Plain TeX"](https://en.wikibooks.org/wiki/LaTeX/Plain_TeX).
 Yes, even the terms "TeX" and "Plain TeX" do not refer to the same thing.
 I know, its like nobody *wants* us to understand this system.
 
-But wait, it gets worse (and then better, trust me). Since plain TeX is still quite low-level, almost everybody uses additional *macro packages*. Here, there are effectively two choices, both of which are *compatible* with plain TeX (i.e. they include the plain TeX commands):
+But wait, it gets worse. Since Plain TeX is still quite low-level, almost everybody uses additional *macro packages*.
+Here, there are effectively two choices, both of which are *compatible* with Plain TeX (i.e. they include the Plain TeX commands):
 
-* *LaTeX* is the most widely used macro package. Its purpose is to provide high-level abstractions for the low-level TeX primitives and Plain TeX commands so that you can focus on defining the *content* of a document instead of its *layout*. This is where commands like `\documenttype`, `\usepackage` or `\section` are defined.
-* *ConTeXt* goes in the opposite direction, providing detailed commands for typesetting, which makes it more interesting for desktop publishing.
+* [*LaTeX*](https://www.latex-project.org/) is the most widely used macro package. Its purpose is to provide high-level abstractions for the low-level TeX primitives and Plain TeX commands so that you can focus on defining the *content* of a document instead of its *layout*. This is where commands like `\documenttype`, `\usepackage` or `\section` are defined.
+* [*ConTeXt*](https://wiki.contextgarden.net/What_is_ConTeXt) goes in the opposite direction, providing detailed commands for typesetting, which makes it more interesting for desktop publishing.
 
 In short you can say if LaTeX is an alternative to Microsoft Word, ConTeXt is an alternative to Adobe InDesign. If you want to *think* about your design, you may want to use ConTeXt.
 If you want to create beautiful documents without having to make every typographical decision by yourself, you will probably be better off with LaTeX.
@@ -50,15 +53,15 @@ I could also go into detail about versions of the actual *TeX language*, but as 
 Like all software, LaTeX is under continuous development.
 The main versions that people may refer to on the internet are:
 
-* *LaTeX2e* is the current version of latex.
+* *LaTeX2e* is the current version of LaTeX.
     It has been around since 1994, but still gets new features and bugfixes.
     This is most definitely the version you are already using.
 * *LaTeX3* is a new version of LaTeX with a lot of fundamental changes and improvements.
-    Development started in 1990, but there is still no official release. However, the most useful features slowly creep into *LaTeX2e* via the packages [`expl3`](https://ctan.org/pkg/expl3), which provides access to the low-level programming interface of LaTeX3, and the collection [`l3packages`](https://ctan.org/pkg/l3packages), which provides the higher-level commands that are interesting for end users. Although these packages are still labeled as "experimental" they are pretty stable.
+    Development started in 1990, but there is still no official stable release. However, the most useful features slowly creep into *LaTeX2e* via the packages [`expl3`](https://ctan.org/pkg/expl3), which provides access to the low-level programming interface of LaTeX3, and the collection [`l3packages`](https://ctan.org/pkg/l3packages), which provides the higher-level commands that are interesting for end users. Although these packages are still labeled as "experimental" they are pretty stable.
 
 Usually you will not have to worry about the LaTeX version at all, as you will be simply using the latest version of LaTeX2e shipped with your LaTeX distribution.
 If you [write a LaTeX package](https://en.wikibooks.org/wiki/LaTeX/Creating_Packages) yourself and you use some cutting-edge features, you may want to use the command `\NeedsTeXFormat{LaTeX2e}{YYYY/MM/DD}` where you can specify the minimum version of LaTeX2e that your package needs to run according to the date-based versioning scheme of LaTeX2e.
-As a side note the same holds true for packages, which can be [required to be of a certain minimum version](https://tex.stackexchange.com/questions/47743/require-a-certain-or-later-version-of-a-package) by a second optional argument to `\usepackage[options]{name}[YYYY/MM/DD]` or `\RequirePackage` respectively.
+As a side note, the same holds true for packages, which can be [required to be of a certain minimum version](https://tex.stackexchange.com/questions/47743/require-a-certain-or-later-version-of-a-package) by a second optional argument to `\usepackage[options]{name}[YYYY/MM/DD]` or `\RequirePackage` respectively.
 
 ## Typesetting engines that translate LaTeX documents
 
@@ -66,13 +69,13 @@ OK, so now we have a LaTeX document and we know what version of the LaTeX macro 
 Now we have to think about which engine we want to use to create our documents.
 A *LaTeX engine* is a piece of software that takes your LaTeX document as input and produces an output that is usually either a DVI or a PDF document.
 It does all the typesetting tasks like hyphenation, layout of mathematical formulas and so on.
-The *device independent file format* (DVI) is an intermediary format that is usually again translated to PostScript or PDF.
+The [*device independent file format* (DVI)](https://de.wikipedia.org/wiki/Device_independent_file_format) is an intermediary format that is usually again translated to PostScript or PDF.
 We will now look at the main engines available for LaTeX.
 
 * [*TeX*](https://ctan.org/pkg/tex) is not only the name of the language itself but also the name of the original engine written by Donald Knuth.
     It produces DVI images and is limited to 8-bit inputs, allowing 256 different characters in the text input.
 * [*e-TeX*](https://ctan.org/pkg/etex) is an extension of *TeX* that adds additional primitives to make the live of a TeX programmer easier.
-    Since 2017 LaTeX2e officially *requires* the use of e-TeX .
+    Since 2017 LaTeX2e officially *requires* the additional e-TeX primitives.
 * [*pdfTeX*](https://ctan.org/pkg/pdftex) is another extension of *TeX* that incorporates the e-TeX extensions and skips the intermediate DVI format to directly produce PDF documents.
     This is not only a convenience feature but it also allows to support some micro-typography features that make documents even more beautiful.
     pdfTeX is probably the most used TeX engine today.
@@ -101,7 +104,7 @@ When you have chosen a TeX engine that fits your needs, the next step is to find
     It is the default choice for all major Linux distributions.
     Although TeX Live includes it's own package manager `tlmgr`, it is highly recommended to let the package manager of your Linux distribution handle the selection and update of packages, because the different managers will not play nice together.
     There are usually a lot of packages named `texlive-something` from which you need to select what you want.
-    This can be a bit difficult, since you have to find out in which Tex Live package actually contains the LaTeX package that you currently want to install.
+    This can be a bit difficult, since you have to find out in which TeX Live package actually contains the LaTeX package that you currently want to install.
     From my experience this means that most users will just install `texlive-full`, giving them access to all LaTeX packages on [CTAN](https://ctan.org/) with the downside of having to install some 5 GB of LaTeX code, Fonts and binaries.
     Thankfully, on ArchLinux you can get that down to around 1.8 GB with the `texlive-most` package that should also contain everything you will probably ever need.
 * [MacTeX](http://www.tug.org/mactex/) contains a TeX Live system for macOS as well as some other Mac-specific utilities.
@@ -117,7 +120,7 @@ If you do not have any special requirements, just choose the default distributio
 I think posts about choices for the perfect LaTeX setup may become a series on this blog.
 In these posts I want to take you on the journey I made when I encountered the question which of the alternatives you should use, but I also want to give you my (subjective) conclusion as a short recommendation of what setup worked best for me.
 
-So for the question "Which version of LaTeX should I use?" I would give you the following advice:
+So for the question "Which version of LaTeX should I use?" I give you the following advice:
 
 1. Do not waste any thoughts on your version of the TeX language or the LaTeX macro package.
     You are already using the right versions.
