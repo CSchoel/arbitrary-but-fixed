@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Latex Alternatives: Latex versions"
+title:  "LaTeX Alternatives: LaTeX versions"
 description: >
     LaTeX is not LaTeX. There is MikTeX, Live TeX, LaTeX2e, pdflaTeX, LaTeX3, XelaTeX, LualaTeX, ... Aaaaah! If you are as confused as I was when I got into laTeX, this post is for you.
 categories:
