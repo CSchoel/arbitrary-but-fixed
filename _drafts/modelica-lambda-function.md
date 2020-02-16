@@ -1,0 +1,1 @@
+replaceable function + optional parameter = sowas wie lambdas (für fitting functions)
