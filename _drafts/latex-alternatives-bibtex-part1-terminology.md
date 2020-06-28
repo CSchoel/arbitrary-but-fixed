@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  "LaTeX Alternatives: BibTeX versions"
+title:  "LaTeX Alternatives: BibTeX Part 1, Terminology"
 description: >
-    BibTeX can be a curse and a blessing at the same time for each thesis and scientific paper. In particular, beginners may be confused by the choices and the subtle differences between what is a bib-file, BibTeX, BibLaTeX and Biber. As I did before with LaTeX versions, I want to add a little bit of clarity to this confusion around BibTeX.
+    BibTeX can be a curse and a blessing at the same time for each thesis and scientific paper.
+    In particular, beginners may be confused by the choices and the subtle differences between what is a bib-file, BibTeX, BibLaTeX and Biber.
+    This is part one of a series of posts that try to clarify the terminology and technological differences of tools related to BibTeX.
+    This part specifically deals with the ambiguous use of the term BibTeX.
 categories:
     - latex
     - latex alternatives
@@ -18,7 +21,7 @@ Should I care?
 Today we will try to shed a little bit of light on these questions as a followup to my recent [post about LaTeX versions]({% post_url 2020-02-16-latex-alternatives-versions %}).
 There already is [an excellent StackExchange answer](https://tex.stackexchange.com/a/25702) by Alan Munn that discusses this topic, but I will try to add a little bit of my own perspective and opinion to give you a specific guideline what I think should be the best choice for you depending on your situation.
 
-I originally planned this as one single post, but it turns out there is enough to say about BibTeX to make a miniseries out of this.
+I originally planned this as one single post, but it turns out there is enough to say about BibTeX to make a small series out of this.
 Therefore this post will only focus on the terminological confusions arount the term "BibTeX".
 
 ## BibTeX the file format vs BibTeX the software tool

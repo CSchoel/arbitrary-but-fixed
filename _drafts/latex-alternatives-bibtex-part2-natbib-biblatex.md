@@ -1,13 +1,19 @@
 ---
 layout: post
-title:  "LaTeX Alternatives: BibTeX versions"
+title:  "LaTeX Alternatives: BibTeX Part 2, Natbib vs BibLaTeX"
 description: >
-    BibTeX can be a curse and a blessing at the same time for each thesis and scientific paper. In particular, beginners may be confused by the choices and the subtle differences between what is a bib-file, BibTeX, BibLaTeX and Biber. As I did before with LaTeX versions, I want to add a little bit of clarity to this confusion around BibTeX.
+    BibTeX can be a curse and a blessing at the same time for each thesis and scientific paper.
+    In particular, beginners may be confused by the choices and the subtle differences between what is a bib-file, BibTeX, BibLaTeX and Biber.
+    This is part one of a series of posts that try to clarify the terminology and technological differences of tools related to BibTeX.
+    This part specifically deals with the LaTeX packages Natbib and BibLaTeX.
 categories:
     - latex
     - latex alternatives
     - bibtex
 ---
+
+In my [last post]({% post_url 2020-06-28-latex-alternatives-bibtex-part1-terminology %}) I tried to clear up some confusion around the use of the term "BibTeX" either referencing the reference management software accompanying and built into the LaTeX package or the file format used by this software.
+Today we continue the series on BibTeX by looking at the LaTeX commands that are available for handling citations and specifically at two packages that extend the basic capabilities of LaTeX in this regard.
 
 ## Natbib vs BibLaTeX
 
