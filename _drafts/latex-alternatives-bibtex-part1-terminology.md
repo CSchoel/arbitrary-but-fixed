@@ -18,6 +18,9 @@ Should I care?
 Today we will try to shed a little bit of light on these questions as a followup to my recent [post about LaTeX versions]({% post_url 2020-02-16-latex-alternatives-versions %}).
 There already is [an excellent StackExchange answer](https://tex.stackexchange.com/a/25702) by Alan Munn that discusses this topic, but I will try to add a little bit of my own perspective and opinion to give you a specific guideline what I think should be the best choice for you depending on your situation.
 
+I originally planned this as one single post, but it turns out there is enough to say about BibTeX to make a miniseries out of this.
+Therefore this post will only focus on the terminological confusions arount the term "BibTeX".
+
 ## BibTeX the file format vs BibTeX the software tool
 
 First of all we need to clear up some confusion about terminology again.
@@ -98,7 +101,7 @@ And this is the reason why the usual pipeline for compiling a LaTeX document wit
 So to sum up this means that we have a software tool called BibTeX that reads (among other files) reference information from a `.bib` file that is also often called a "BibTeX" file.
 What makes matters worse is that not everything that ends with `.bib` is designed to be used as input for BibTeX.
 Many different tools use this file format and sometimes allow different sets of entry types with different sets of mandatory and optional attributes.
-We will get more into detail about that in the next section when we talk about BibLaTeX.
+We will get more into detail about that in one of the followup posts where I discuss BibLaTeX.
 
 ## Natbib vs BibLaTeX
 
