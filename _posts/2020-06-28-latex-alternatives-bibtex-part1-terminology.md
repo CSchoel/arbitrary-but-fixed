@@ -56,10 +56,10 @@ It looks as follows:
 
 ```bibtex
 @techreport{patashnik1988,
-  title = {{{BibTeXing}}},
+  title = {% raw %}{{{BibTeXing}}}{% endraw %},
   author = {Patashnik, Oren},
   year = {1988},
-  institution = {{Comprehensive TeX Archive Network}},
+  institution = {% raw %}{{Comprehensive TeX Archive Network}}{% endraw %},
   number = {pkg/bibtex}
 }
 ```
@@ -86,7 +86,7 @@ The output of running `bibtex` once is then a `.bbl` file—you start to underst
 
 \bibitem{patashnik1988}
 Oren Patashnik.
-\newblock {{BibTeXing}}.
+\newblock {% raw %}{{BibTeXing}}{% endraw %}.
 \newblock Technical Report pkg/bibtex, {Comprehensive TeX Archive Network},
   1988.
 
