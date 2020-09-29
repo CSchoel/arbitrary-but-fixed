@@ -15,7 +15,7 @@ categories:
 - bibtex
 date: 2020-09-29 19:34 +0200
 ---
-In my small series on BibTeX I already covered confusions around the [use of the term "BibTeX"]({% post_url 2020-06-28-latex-alternatives-bibtex-part1-terminology %}) for either a tool or a file format as well as the packages [Natbib and BibLaTeX]({% post_url 2020-06-28-latex-alternatives-bibtex-part2-natbib-biblatex %}) that can facilitate the handling and styling of citations and bibliographies in LaTeX documents.
+In my small series on BibTeX I already covered confusions around the [use of the term "BibTeX"]({% post_url 2020-06-28-latex-alternatives-bibtex-part1-terminology %}) for either a tool or a file format as well as the packages [Natbib and BibLaTeX]({% post_url 2020-08-14-latex-alternatives-bibtex-part2-natbib-biblatex %}) that can facilitate the handling and styling of citations and bibliographies in LaTeX documents.
 Today we continue the series by looking at the BibTeX engine, its limitations, and the Biber engine as an alternative.
 
 ## BibTeX vs Biber
