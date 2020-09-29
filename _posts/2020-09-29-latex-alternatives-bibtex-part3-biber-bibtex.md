@@ -1,17 +1,20 @@
 ---
 layout: post
-title:  "LaTeX Alternatives: BibTeX Part 3, BibTeX vs Biber"
-description: >
-    BibTeX can be a curse and a blessing at the same time for each thesis and scientific paper.
-    In particular, beginners may be confused by the choices and the subtle differences between what is a bib-file, BibTeX, BibLaTeX and Biber.
-    This is part one of a series of posts that try to clarify the terminology and technological differences of tools related to BibTeX.
-    This part specifically deals with the difference between the BibTeX and the Biber engine for reference management.
-categories:
-    - latex
-    - latex alternatives
-    - bibtex
----
+title: 'LaTeX Alternatives: BibTeX Part 3, BibTeX vs Biber'
+description: 'BibTeX can be a curse and a blessing at the same time for each thesis
+  and scientific paper. In particular, beginners may be confused by the choices and
+  the subtle differences between what is a bib-file, BibTeX, BibLaTeX and Biber. This
+  is part one of a series of posts that try to clarify the terminology and technological
+  differences of tools related to BibTeX. This part specifically deals with the difference
+  between the BibTeX and the Biber engine for reference management.
 
+  '
+categories:
+- latex
+- latex alternatives
+- bibtex
+date: 2020-09-29 19:34 +0200
+---
 In my small series on BibTeX I already covered confusions around the [use of the term "BibTeX"]({% post_url 2020-06-28-latex-alternatives-bibtex-part1-terminology %}) for either a tool or a file format as well as the packages [Natbib and BibLaTeX]({% post_url 2020-06-28-latex-alternatives-bibtex-part2-natbib-biblatex %}) that can facilitate the handling and styling of citations and bibliographies in LaTeX documents.
 Today we continue the series by looking at the BibTeX engine, its limitations, and the Biber engine as an alternative.
 
