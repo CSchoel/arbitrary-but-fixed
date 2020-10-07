@@ -1,1 +1,0 @@
-HH-Modell mit echten elektrischen komponenten
