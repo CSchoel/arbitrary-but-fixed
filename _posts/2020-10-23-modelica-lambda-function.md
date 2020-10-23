@@ -1,16 +1,18 @@
 ---
 layout: post
-title:  "Emulating lambda expressions, and higher order functions in Modelica"
-description: >
-    Lambda expressions are a useful tool to customize a generic function by fixing some of the parameters with values from the current scope.
-    In mathematical modeling, this can be extremely useful to define instances of generic fitting functions that can be reused instead of duplicating the function equation.
-    This pattern is not directly supported in Modelica, but it can be emulated quite easily.
-date:   2020-10-07 20:33 +0100
-categories:
-    - modelica
-    - systems biology
----
+title: Emulating lambda expressions, and higher order functions in Modelica
+description: 'Lambda expressions are a useful tool to customize a generic function
+  by fixing some of the parameters with values from the current scope. In mathematical
+  modeling, this can be extremely useful to define instances of generic fitting functions
+  that can be reused instead of duplicating the function equation. This pattern is
+  not directly supported in Modelica, but it can be emulated quite easily.
 
+  '
+date: 2020-10-07 20:33 +0100
+categories:
+- modelica
+- systems biology
+---
 ## Lambda expressions help representing fitting functions
 
 Most mathematical models used in biology are fitted to experimental data by using generic fitting functions such as the exponential function or the [generalized logistic function](https://en.wikipedia.org/wiki/Generalised_logistic_function).
