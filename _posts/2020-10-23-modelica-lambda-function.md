@@ -8,7 +8,7 @@ description: 'Lambda expressions are a useful tool to customize a generic functi
   not directly supported in Modelica, but it can be emulated quite easily.
 
   '
-date: 2020-10-07 20:33 +0100
+date: 2020-10-23 20:50 +0100
 categories:
 - modelica
 - systems biology
