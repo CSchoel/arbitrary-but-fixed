@@ -4,7 +4,6 @@ title:  "Event synchronization in Modelica models with noise"
 description: >
     The Modelica standard library comes with basic noise models using pseudorandom numbers.
     They are easy to integrate into a model, but have some caveats when the sample period of the noise perfectly aligns with another event.
-date:   2020-10-23 19:21 +0100
 categories:
     - modelica
 ---
