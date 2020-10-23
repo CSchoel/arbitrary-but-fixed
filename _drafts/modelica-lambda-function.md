@@ -41,7 +41,7 @@ or even this, which is usually what you see in papers in systems biology
 1491 / (323.3 * exp(-77.52 * (v - v_eq + 0.0946)) + 1)
 ```
 
-Clearly this can become confusing very quickly if different variations of fitting functions are used and these fitting functions may appear in more complicated equations.
+Clearly, this can become confusing very quickly if different variations of fitting functions are used and these fitting functions may appear in more complicated equations.
 
 ## Emulating Lambda expressions in Modelica
 
