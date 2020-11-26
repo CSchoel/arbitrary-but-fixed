@@ -39,6 +39,7 @@ def plot_cadiff(fname_correct, fname_error, outname=None):
     fig.line("time", "ca_sub_con", line_width=2, color="deepskyblue", legend_label="correct", name="concentration", source=data_correct)
     fig.line("time", "ca_sub_con", line_width=2, color="firebrick", legend_label="with error", name="concentration", source=data_error)
     fig.legend.location = "center"
+    fig.min_border_right = 15
     if outname is None:
         bplt.show(fig)
     else:
