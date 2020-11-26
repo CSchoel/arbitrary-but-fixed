@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The pitfalls of using proper SI units: Nominal values and zero crossings in Modelica"
+title: "The pitfalls of using proper SI units: Nominal values in Modelica"
 description: >
     Using proper SI units without unit prefixes avoids order of magnitude errors and increases interoperability between models.
     However, they can also bring some pitfalls with them.
