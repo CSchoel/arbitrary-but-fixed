@@ -23,7 +23,9 @@ The first issue occurs only when you have extremely low variable values.
 In an electrophysiological model of the rabbit AV node, I needed to observe a an amount of $Ca^{2+}$ ions that could become as low as $10^{-21}$ mol, i.e. only a few hundred individual ions.
 I only noticed the resulting inaccuracies in the model, because I could compare it to a different version using concentrations instead of substance amounts.
 The concentrations remained on the order of $10^{-4} \frac{\text{mol}}{\text{m}^3}$, while otherwise representing the exact same biological system.
-If you compare the following two plots, you can see that the model using substance amounts shows an overshoot due to discretization errors.
+If you compare the two lines in the following plot, you can see that the model using substance amounts (red) shows an overshoot due to discretization errors.
+
+<div class="bokeh-container"><script src="/assets/img/cadiff.js" id="efe8a911-901c-429b-a668-7e17a5bf1aa1"></script></div>
 
 ## Managing discretization errors in solvers
 
