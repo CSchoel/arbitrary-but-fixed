@@ -1,13 +1,15 @@
 ---
 layout: post
-title:  "Event synchronization in Modelica models with noise"
-description: >
-    The Modelica standard library comes with basic noise models using pseudorandom numbers.
-    They are easy to integrate into a model, but have some caveats when the sample period of the noise perfectly aligns with another event.
-categories:
-    - modelica
----
+title: Event synchronization in Modelica models with noise
+description: 'The Modelica standard library comes with basic noise models using pseudorandom
+  numbers. They are easy to integrate into a model, but have some caveats when the
+  sample period of the noise perfectly aligns with another event.
 
+  '
+categories:
+- modelica
+date: 2020-11-26 23:29 +0100
+---
 ## Noise in the Modelica Standard Library
 
 Recently, I wanted to extend my implementation of a [model of the human baroreflex](https://github.com/CSchoel/shm) with a noise term using Gaussian white noise.
