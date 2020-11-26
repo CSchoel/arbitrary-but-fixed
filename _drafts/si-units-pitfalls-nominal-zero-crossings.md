@@ -28,7 +28,7 @@ If you compare the following two plots, you can see that the model using substan
 In solvers with adaptive step sizes, such as DASSL and CVODE, these discretization errors are controlled by setting a `tolerance` parameter, which defines a relative tolerance ensuring that
 
 $$
-\frac{|\text{approximated} - \text{accurate}|}{\min(|\text{approximated}|, |\text{accurate}|)} < \text{tolerance}
+\frac{|\text{approximated} - \text{accurate}|}{\max(|\text{approximated}|, |\text{accurate}|)} < \text{tolerance}
 $$
 
 where `approximated` is the value obtained with a high step size (i.e. low accuracy) and `accurate` is the value obtained with a lower step size (i.e. higher accuracy).
@@ -41,25 +41,15 @@ $$
 $$
 
 with `relTol` being the relative tolerance and `absTol` being the absolute tolerance.
-To reduce this to a single check, we can transform the first condition to
+As a side note, this is equivalent to the behavior of the function `math.isclose()` in the Python standard library.
+The corresponding [PEP 485](https://www.python.org/dev/peps/pep-0485/) is an interesting read, which explains, for example, why using the maximum instead of the minimum has benefits in certain corner cases.
 
-$$
-|\text{approximated} - \text{accurate}| < \text{relTol} \cdot \max(|\text{approximated}|, |\text{accurate}|)
-$$
-
-and then use the maximum instead of the logical or
-
-$$
-|\text{approximated} - \text{accurate}| < \max(\text{relTol} \cdot \max(|\text{approximated}|, |\text{accurate}|), \text{absTol})
-$$
-
-with `relTol` being the relative tolerance and `absTol` being the absolute tolerance.
 The question that remains is how to choose `absTol`, because unlike for `relTol`, it is not sensible to use a single value for all variables, since different variables may have different orders of magnitude.
-Here, the solution is to annotate the variables in question with a "nominal" value that defines the usual order of magnitude that this variable will attain.
+Here, the solution is to annotate the variables in question with a *nominal* value that defines the usual order of magnitude that this variable will attain.
 The absolute tolerance can then, for example, be computed for each variable as
 
 $$
-\text{absTol} = \text{nominal} * \text{relTol} / 100
+\text{absTol} = \text{nominal} \cdot \text{relTol} / 100
 $$
 
 In a concrete example in Modelica this nominal value may be given as follows:
@@ -68,7 +58,17 @@ In a concrete example in Modelica this nominal value may be given as follows:
 Modelica.SIUnits.AmountOfSubstance ca(nominal = 1e-21);
 ```
 
-This tells the solver to use
+This tells the solver to use a smaller absolute tolerance for the variable `ca` than for other variables, which by default have a nominal value of 1.
+In most models, it should suffice to determine the nominal value of connector variables, since nominal values are propagated to other variables as far as possible.
+For example, if we introduce two additional variables like this
+
+```modelica
+Modelica.SIUnits.Volume vol(nominal = 1e-17);
+Modelica.SIUnits.Concentration ca_con = ca / vol;
+```
+
+then `ca_con` will have a nominal value of $10^{-21} / 10^{-17} = 10^{-4}$.
+If you want, you can use [this example model](https://github.com/CSchoel/inamo/blob/main/bugreports/CaDiffusionSimple.mo) to examine the difference between using the nominal value `1e-21` for the two variables ending with `_amount` and simply using the default value of 1.
 
 ## Keeping zero crossings in the tolerance
 
