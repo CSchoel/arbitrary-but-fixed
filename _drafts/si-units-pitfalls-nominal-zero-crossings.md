@@ -8,7 +8,7 @@ description: >
 categories:
 - modelica
 - dynamical systems
-# TODO: use MathJax, because GitHub pages does not allow other renderers
+math: true
 ---
 
 Using SI units in a mathematical model is good, using them without unit prefixes ("kilo", "milli", ...) is even better, because it means that two separately developed models are more likely to be compatible with each other.
