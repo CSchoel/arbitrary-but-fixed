@@ -37,7 +37,20 @@ The solution is then to use an additional absolute tolerance that can be used to
 The check then becomes
 
 $$
-\frac{|\text{approximated} - \text{accurate}|}{\min(|\text{approximated}|, |\text{accurate}|)} < \text{relTol} \vee |\text{approximated} - \text{accurate}| < \text{absTol}
+\frac{|\text{approximated} - \text{accurate}|}{\max(|\text{approximated}|, |\text{accurate}|)} < \text{relTol} \vee |\text{approximated} - \text{accurate}| < \text{absTol}
+$$
+
+with `relTol` being the relative tolerance and `absTol` being the absolute tolerance.
+To reduce this to a single check, we can transform the first condition to
+
+$$
+|\text{approximated} - \text{accurate}| < \text{relTol} \cdot \max(|\text{approximated}|, |\text{accurate}|)
+$$
+
+and then use the maximum instead of the logical or
+
+$$
+|\text{approximated} - \text{accurate}| < \max(\text{relTol} \cdot \max(|\text{approximated}|, |\text{accurate}|), \text{absTol})
 $$
 
 with `relTol` being the relative tolerance and `absTol` being the absolute tolerance.
