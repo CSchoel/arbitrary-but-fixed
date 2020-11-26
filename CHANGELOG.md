@@ -10,10 +10,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- support for rendering equations with MathJax
+
 ### Changed
 
 ### Fixed
 
 ## [0.1.0] - 2017-09-10
+
 ### Added
+
 - initial release including own css style
