@@ -4,7 +4,7 @@ title: "The pitfalls of using proper SI units: Nominal values and zero crossings
 description: >
     Using proper SI units without unit prefixes avoids order of magnitude errors and increases interoperability between models.
     However, they can also bring some pitfalls with them.
-    In this post I explain how to avoid those in Modelica by using nominal values and paying special attention to zero crossings.
+    In this post I explain how to avoid one of these pitfalls in Modelica by using nominal values.
 categories:
 - modelica
 - dynamical systems
@@ -15,15 +15,17 @@ Using SI units in a mathematical model is good, using them without unit prefixes
 Additionally, it avoids all kinds of order of magnitude errors that can occur because of missing or wrong conversion factors.
 Modelica facilitates this with the [`SIUnits` package](https://build.openmodelica.org/Documentation/Modelica.SIunits.html) in the Modelica Standard Library, which defines all SI units defined in the [ISO 31](https://en.wikipedia.org/wiki/ISO_31) standard.
 However, I recently noticed that there are also some pitfalls connected to having extreme differences in the order of magnitude of variable values in your model.
-In this post I want to highlight two such issues and give you a recipe how to solve them in a Modelica model.
+In this post I want to highlight one such issue and give you a recipe how to solve it in a Modelica model.
 
-## Using nominal values to avoid inaccuracies
+## Discretization inaccuracies for variables with small order of magnitude
 
 The first issue occurs only when you have extremely low variable values.
 In an electrophysiological model of the rabbit AV node, I needed to observe a an amount of $Ca^{2+}$ ions that could become as low as $10^{-21}$ mol, i.e. only a few hundred individual ions.
 I only noticed the resulting inaccuracies in the model, because I could compare it to a different version using concentrations instead of substance amounts.
 The concentrations remained on the order of $10^{-4} \frac{\text{mol}}{\text{m}^3}$, while otherwise representing the exact same biological system.
 If you compare the following two plots, you can see that the model using substance amounts shows an overshoot due to discretization errors.
+
+## Managing discretization errors in solvers
 
 In solvers with adaptive step sizes, such as DASSL and CVODE, these discretization errors are controlled by setting a `tolerance` parameter, which defines a relative tolerance ensuring that
 
@@ -43,6 +45,8 @@ $$
 with `relTol` being the relative tolerance and `absTol` being the absolute tolerance.
 As a side note, this is equivalent to the behavior of the function `math.isclose()` in the Python standard library.
 The corresponding [PEP 485](https://www.python.org/dev/peps/pep-0485/) is an interesting read, which explains, for example, why using the maximum instead of the minimum has benefits in certain corner cases.
+
+## Nominal values to the rescue
 
 The question that remains is how to choose `absTol`, because unlike for `relTol`, it is not sensible to use a single value for all variables, since different variables may have different orders of magnitude.
 Here, the solution is to annotate the variables in question with a *nominal* value that defines the usual order of magnitude that this variable will attain.
@@ -69,6 +73,3 @@ Modelica.SIUnits.Concentration ca_con = ca / vol;
 
 then `ca_con` will have a nominal value of $10^{-21} / 10^{-17} = 10^{-4}$.
 If you want, you can use [this example model](https://github.com/CSchoel/inamo/blob/main/bugreports/CaDiffusionSimple.mo) to examine the difference between using the nominal value `1e-21` for the two variables ending with `_amount` and simply using the default value of 1.
-
-## Keeping zero crossings in the tolerance
-
