@@ -1,16 +1,18 @@
 ---
 layout: post
-title: "The pitfalls of using proper SI units: Zero crossings in OpenModelica"
-description: >
-    Using proper SI units without unit prefixes avoids order of magnitude errors and increases interoperability between models.
-    However, they can also bring some pitfalls with them.
-    In this post I explain how to avoid those in OpenModelica by paying special attention to zero crossings.
+title: 'The pitfalls of using proper SI units: Zero crossings in OpenModelica'
+description: 'Using proper SI units without unit prefixes avoids order of magnitude
+  errors and increases interoperability between models. However, they can also bring
+  some pitfalls with them. In this post I explain how to avoid those in OpenModelica
+  by paying special attention to zero crossings.
+
+  '
 categories:
 - modelica
 - dynamical systems
 math: true
+date: 2021-01-19 19:25 +0100
 ---
-
 In light of my [recent post about pitfalls with using proper SI units in mathematical models]({{ site.baseurl }}{% link _drafts/si-units-pitfalls-nominal-values.md %}), I want to highlight another of these issues, which is probably specific to OpenModelica.
 As mentioned in the previous post, it is indeed a very good idea to use SI units, preferrably without unit prefixes, in a mathematical model and Modelica provides excellent support for those with the [`Modelica.SIUnits` package](https://build.openmodelica.org/Documentation/Modelica.SIunits.html).
 However, there are some peculiarities when one ventures beyond the kilo and the milli down to the pico or possibly even zepto.
