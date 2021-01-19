@@ -13,7 +13,7 @@ categories:
 math: true
 date: 2021-01-19 19:25 +0100
 ---
-In light of my [recent post about pitfalls with using proper SI units in mathematical models]({{ site.baseurl }}{% link _drafts/si-units-pitfalls-nominal-values.md %}), I want to highlight another of these issues, which is probably specific to OpenModelica.
+In light of my [recent post about pitfalls with using proper SI units in mathematical models]({% post_url 2020-12-23-si-units-pitfalls-nominal-values %}), I want to highlight another of these issues, which is probably specific to OpenModelica.
 As mentioned in the previous post, it is indeed a very good idea to use SI units, preferrably without unit prefixes, in a mathematical model and Modelica provides excellent support for those with the [`Modelica.SIUnits` package](https://build.openmodelica.org/Documentation/Modelica.SIunits.html).
 However, there are some peculiarities when one ventures beyond the kilo and the milli down to the pico or possibly even zepto.
 
@@ -68,7 +68,7 @@ This is because its values lie below the absolute tolerance value, which is $\te
 
 ## Keeping zero crossings within the tolerance
 
-In [the last post]({{ site.baseurl }}{% link _drafts/si-units-pitfalls-nominal-values.md %}), we learned that the solution for this situation should be to assign a nominal value to `componentX.i`.
+In [the last post]({% post_url 2020-12-23-si-units-pitfalls-nominal-values %}), we learned that the solution for this situation should be to assign a nominal value to `componentX.i`.
 We can do this by changing the component definition to
 
 ```modelica
