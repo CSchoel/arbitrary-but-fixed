@@ -11,7 +11,7 @@ categories:
 
 ## A bit of context
 
-Recently I began dabbling more and more with continuous integration and deployment for my research projects.
+Recently, I began dabbling more and more with continuous integration and deployment for my research projects.
 This also included the need to generate GitHub releases from a GitHub Actions script due to two reasons:
 
 * [Zenodo](https://zenodo.org/), which I use to archive my work and make it citeable, can automatically archive every GitHub release of your project, but it must be a full release, not just a tag.
@@ -22,7 +22,7 @@ However, I was left with one problem: What do I put in the release body?
 
 ## The problem
 
-The most obvious solution for releases targeted at Zenodo seemed to just include the `README.md` using the `body_path` parameter instead of adding the release text statically with the `body` parameter.
+The most obvious solution for releases targeted at Zenodo seemed to just include the `README.md` using the `body_path` parameter instead of adding the release text statically with the `body` parameter, since the Zenodo release might be the first impression of the project that a visitor gets.
 However, throwing copies of the whole `README.md` around each time a new release is created is both a bit verbose and also unhelpful, if you really just want to know what's new in the current release.
 
 I already do [keep a changelog](https://keepachangelog.com/en/1.0.0/), but, again, using the whole `CHANGELOG.md` in `body_path` seems equally overkill.
@@ -30,7 +30,7 @@ I also do not want to make the changelog layout any more complicated, as I barel
 
 So we are left with the following requirements for our automatically generated release body:
 
-* Include a brief explanation what the project is about. This is required for Zenodo, as the latest release note might be the first impression that users get from the project.
+* Include a brief explanation what the project is about.
 * Add the relevant sections from the `CHANGELOG.md` without changing anything about the layout of the file.
 * If possible, the solution should work for any repository, so that I can simply slap this on all of my projects without wasting much thought about it.
 
@@ -43,7 +43,7 @@ Therefore, I chose the boring solution of just adding a `RELEASE_HEAD.md` to the
 
 The next step is to get the relevant part of the `CHANGELOG.md`.
 Fortunately, if you follow the proposed structure on [keepachangelog.com](https://keepachangelog.com/en/1.0.0/), this part is quite easy to identify:
-It will start at a line starting with `## [X.Y.Z]` and end at the next line that starts with `## ` (notice the space after the hashes, `X.Y.Z` is the version number of the current release).
+It will start at a line starting with `## [X.Y.Z]`, where `X.Y.Z` is the version number of the current release, and end at the next line that starts with `## ` (notice the space after the hashes).
 Let's call these lines `start` and `end` to make the `sed` command that we are concocting a little easier to understand.
 
 The simplest version of the command that I stumbled upon through Google was
@@ -70,6 +70,7 @@ The result can finally be piped into `head -n -2` and then be appended to our co
 Of course, we also need to automatically find the current version tag, but fortunately this is available (with a little extra work) in the environment variable `GITHUB_REF`.
 The relevant parts of the resulting GitHub Actions script look as follows:
 
+{% raw %}
 ```yaml
 - name: Set env # required to get 'vX.Y.Z' instead of 'refs/tag/vX.Y.Z'
   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
@@ -92,6 +93,12 @@ The relevant parts of the resulting GitHub Actions script look as follows:
     draft: true
     prerelease: false
 ```
+{% endraw %}
 
-This script just assumes that your headings in `CHANGELOG.md` will have the form `## [X.Y.Z]` (optionally followed by something else), your version tags have the form `vX.Y.Z`, and your repository contains a file called `RELEASE_HEAD.md`.
-Otherwise it should be pretty much universally applicable.
+This script just makes the following assumptions:
+
+* Your headings in `CHANGELOG.md` will have the form `## [X.Y.Z]` (optionally followed by something else)
+* Your version tags have the form `vX.Y.Z`.
+* Your repository contains a file called `RELEASE_HEAD.md`.
+
+Otherwise, it should be pretty much universal.
