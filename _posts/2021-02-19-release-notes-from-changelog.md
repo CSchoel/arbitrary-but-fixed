@@ -7,8 +7,8 @@ description: |
 categories:
 - DevOps
 - shell
+date: 2021-02-19 21:13 +0100
 ---
-
 ## A bit of context
 
 Recently, I began dabbling more and more with continuous integration and deployment for my research projects.
