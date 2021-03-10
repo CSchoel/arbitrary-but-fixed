@@ -11,10 +11,6 @@ categories:
     - machine learning
 ---
 
-<!-- From kNN to jMeans: just slap j random vectors with class 1 to j in the kNN -->
-
-<!-- Why large amounts of data?: Because when your feature vector grows by one bit, you halve the percentage of the feature space that your samples cover. -->
-
 ## Why write a post about AI?
 
 There are already countless answers to the question "What is artificial intelligence?" - most of them written by people that are far more experienced and/or intelligent than I am.
@@ -34,26 +30,52 @@ All those highly successful and widely used AI systems are programs that make pr
 Take the example
 
 <!--
-- Netflix recommendations as 0/1 problem: will like / won't like
-- 1st Idea: Neighbors may want to watch the same movies
-- 2nd Idea: Use more than one neighbor
+NOTE: Maybe this should be an ipython notebook?
+  - or each post should be accompanied by one?
 
-- the more data the better
+Examples (should be applications of AI that everyone is familiar with)
 
-- how to assess performance: separate knowledge base into test and train set
+- Spam filter (0 = no spam, 1 = spam)
+  - transformation of email to (relative) word counts
+    - easier first step: just set of words (there/not there)
+    - even easier: just select 5 words, which seem important
+  - "distance" = percentage of words occurring in both e-mails
+- Netflix recommendations (0 = won't like, 1 = will like)
+
+
+Topics (each could be one post):
+
+- 1-NN
+- k-NN
+- Data: More is better
+  - show performance gain with increasing amount of data
+  - feature vector grows by one bit => percentage of feature space covered by samples is halved
+  - => massive amounts of data required for complex problems
+- Performance metrics
+  - accuracy
+  - precition/recall
+  - sensitivity/specificity
+  - f-measure
+  - confusion matrix
+- The problem of Generalization vs Overfitting
+  - separate knowledge base into test and train set
   - only result on unseen data is interesting
-
-- bias
-
+  - what is truly unseen? (unseen date?, unseen sender?, ...)
+  - think about variance to be expected in real world vs variance in training set
+- Bias (never trust your data)
+  - uneven distribution of samples per class
+  - what if we filter out E-mails from dyslexics or foreign speakers?
+  - who decides what is spam? (Ground truth)
 - local vs global optimum: k as (hyper)-parameter
   - increase by one until result becomes worse again
-
-- neural networks are more sophisticated better classifiers, but still classifiers
-  - thousands to millions of parameters
-  - hundreds of thousands of features
-
-mustererkennung statt echter intelligenz
-wo wird das ausgeführt?
-abstraktionsvermögen / generalisierung / extrapolation
-
+- unsupervised learning with kMeans
+  - From kNN to jMeans: just slap j random vectors with class 1 to j in the kNN
+- ANNs for dummies
+- similarities between ANNs and kNN
+  - both are classifiers (input vector -> class)
+  - both rely on data
+- differences between ANNs and kNN
+  - number of parameters/features
+  - black box
+  - training effort / required hardware
 -->
