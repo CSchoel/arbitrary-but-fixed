@@ -1,11 +1,14 @@
 ---
 layout: post
-title:  "How to get a git commit hash from a tree hash"
-description: >
-    Julia uses git tree hashes to designate the version of a package in a git repository. What are those and how can we find the commit hash to identify the version on GitHub?
-categories: git julia
----
+title: How to get a git commit hash from a tree hash
+description: 'Julia uses git tree hashes to designate the version of a package in
+  a git repository. What are those and how can we find the commit hash to identify
+  the version on GitHub?
 
+  '
+categories: git julia
+date: 2021-03-18 23:18 +0100
+---
 ## Git commit hashes
 
 You probably know that git uses SHA-1 hashes to identify a commit along with its full history of commits.
