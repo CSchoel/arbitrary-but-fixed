@@ -44,7 +44,7 @@ As it turns out, acting "intelligent" is quite hard for a machine.
 
 The basic idea of AI is that this elusive "intelligence" can be harnessed from existing data.
 Each time you flag an email as spam, leave it in your inbox, or rescue that email address validation link from your spam folder, you generate examples of the human decisions that an AI spam filter should mimic.
-These examples contain two components: An email, and a *label*, which is the result of your decision if that mail was either "spam" or "not spam" (i.e. "ham").
+These examples contain two components: An email, and a *label*, which is the result of your decision if that mail was either "spam" or "not spam" (also called "ham").
 It is important to have this label, because this is where information about "intelligence" is stored.
 
 ## Comparing emails
@@ -52,7 +52,7 @@ It is important to have this label, because this is where information about "int
 Once we have a set of labeled data, we can rephrase our initial task from "classify whether this email is spam or not" to "decide the label of this email like humans did in these previous examples".
 This is, of course, still not understandable for a machine.
 For some spam mails, a lookup in our data set might be enough, because we already received the exact same email, but usually there is a little variance in spam in order to avoid detection by such simple means.
-Therefore, we cannot avoid some form of uncertainty and as we all learned in school, uncertainty can best be tackled by statistics.
+Therefore, we cannot avoid dealing with some form of uncertainty and as we all learned in school, uncertainty can best be tackled by statistics.
 For our task this means that we do not look for exact matches in the database, but rather for *similar* emails and we have to find some kind of statistic calculations that expresses the similarity of two emails as a number.
 Expressing similarity between texts is in itself a highly complex task that requires a lot of intelligence, but there is a simple approach that we can take as first approximation:
 Just count the number of words that both emails have in common.
@@ -63,21 +63,33 @@ Consider this example:
 
 Subject: The Guardian Nigeria
 
-I just learned that Nigeria has a newspaper called "The Guardian Nigeria". You don't find Prince Harry on the front page here, but you sure do find him: https://guardian.ng/tag/prince-harry/ :D
+I just learned that Nigeria has a newspaper called "The Guardian Nigeria".
+You don't find Prince Harry on the front page here, but you sure do find
+him: https://guardian.ng/tag/prince-harry/ :D
 
 
-[Database entry 1 (spam):]
+[Database entry 1:]
 
+Label: spam
 Subject: Need trustworthy business partner
 
-I am Mohammed Abacha, prince of Nigeria. I am the son of the late Nigerian Head of State who died on the 8th of June 1998. I have secretly deposited the sum of $30,000,000.00 with a security firm abroad. I shall be grateful if you could receive this fund into your Bank account for safekeeping.
+I am Mohammed Abacha, prince of Nigeria. I am the son of the late Nigerian
+Head of State who died on the 8th of June 1998. I have secretly deposited
+the sum of $30,000,000.00 with a security firm abroad. I shall be grateful
+if you could receive this fund into your Bank account for safekeeping.
 
 
-[Database entry 2 (ham):]
+[Database entry 2:]
 
+Label: ham
 Subject: The tabloids are at it again
 
-This is a great one: Woman&home titles "Meghan Markle and Prince Harry weren't in 'great shape' mentally - reveals Tom Bradby who interviewed them on Africa tour". And in that SAME article talking about mental health, they end with "In other royal news, the Duchess of Cambridge stuns in red as she steps out in London to promote photography book launch." Can you believe it?! In other news ;), how are things in Nigeria?
+This is a great one: Woman&home titles "Meghan Markle and Prince Harry
+weren't in 'great shape' mentally - reveals Tom Bradby who interviewed them
+on Africa tour". And in that SAME article talking about mental health, they
+end with "In other royal news, the Duchess of Cambridge stuns in red as she
+steps out in London to promote photography book launch." Can you believe
+it?! In other news ;), how are things in Nigeria?
 ```
 
 In this example, our simple algorithm would find the following sets of matching words (assuming we split by punctuation and whitespace and transform letters to lowercase).
@@ -111,7 +123,7 @@ This algorithmic definition can directly be translated into code that can be und
 We therefore have turned the instruction for the human task "decide whether this email is spam or not" into a set of instructions for a machine that can now mimic human decisions—we have created our first actual artificial intelligence.
 There is, of course, a lot of room for improvement and we will discuss some approaches in the next posts.
 However, if we generalize our approach by replacing the term "maximum number of matching words" with "maximum similarity" or "minimum distance", we obtain the so-called *nearest neighbor* algorithm.
-This algorithm is a standard tool in any AI researcher's inventory and its extensions, the [*k-nearest neighbors*](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) algorithm often already is surprisingly accurate for many complex tasks.
+This algorithm is a standard tool in any AI researcher's inventory and its extension, the [*k-nearest neighbors*](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) algorithm often already is surprisingly accurate even for complex tasks.
 
 If you could follow my explanation to this point, let me congratulate you and formally bestow you the title "apprentice AI researcher".
 If not, I would be very grateful if you could send me an email and tell me which parts you did not understand—ideally with a suggestion of how the text could be improved.
