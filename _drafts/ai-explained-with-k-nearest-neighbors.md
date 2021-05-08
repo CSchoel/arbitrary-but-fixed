@@ -47,7 +47,7 @@ Each time you flag an email as spam, leave it in your inbox, or rescue that emai
 These examples contain two components: An email, and a *label*, which is the result of your decision if that mail was either "spam" or "not spam" (i.e. "ham").
 It is important to have this label, because this is where information about "intelligence" is stored.
 
-## My first AI algorithm
+## Comparing emails
 
 Once we have a set of labeled data, we can rephrase our initial task from "classify whether this email is spam or not" to "decide the label of this email like humans did in these previous examples".
 This is, of course, still not understandable for a machine.
@@ -61,18 +61,35 @@ Consider this example:
 ```
 [Email that should be classified:]
 
-Subject: Prince Harry
+Subject: The Guardian Nigeria
+
+I just learned that Nigeria has a newspaper called "The Guardian Nigeria". You don't find Prince Harry on the front page here, but you sure do find him: https://guardian.ng/tag/prince-harry/ :D
 
 
 [Database entry 1 (spam):]
 
-Subject:
+Subject: Need trustworthy business partner
+
+I am Mohammed Abacha, prince of Nigeria. I am the son of the late Nigerian Head of State who died on the 8th of June 1998. I have secretly deposited the sum of $30,000,000.00 with a security firm abroad. I shall be grateful if you could receive this fund into your Bank account for safekeeping.
 
 
 [Database entry 2 (ham):]
 
-Subject:
+Subject: The tabloids are at it again
+
+This is a great one: Woman&home titles "Meghan Markle and Prince Harry weren't in 'great shape' mentally - reveals Tom Bradby who interviewed them on Africa tour". And in that SAME article talking about mental health, they end with "In other royal news, the Duchess of Cambridge stuns in red as she steps out in London to promote photography book launch." Can you believe it?! In other news ;), how are things in Nigeria?
 ```
+
+In this example, our simple algorithm would find the following sets of matching words (assuming we split by punctuation and whitespace and transform letters to lowercase).
+
+```
+Matches entry 1: ["the", "nigeria", "i", "a", "you", "prince", "on"]
+Matches entry 2: ["the", "nigeria", "that", "a", "you", "prince", "harry", "on"]
+```
+
+with this, we have seven matches for database entry one and eight matches for database entry two.
+Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection algorithm will correctly copy this label for our friend's email about the Guardian Nigeria.
+As it turns out, `"harry"` was our savior after all.
 
 
 <!--
