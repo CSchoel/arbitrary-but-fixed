@@ -13,23 +13,99 @@ categories:
 
 ## Why write a post about AI?
 
-There are already countless answers to the question "What is artificial intelligence?" - most of them written by people that are far more experienced and/or intelligent than I am.
+There are already countless answers to the question "What is artificial intelligence?" - most of them written by people that are far more experienced than I am.
 So why write the umpteenth blog post about it?
 The honest answer is that I tried to find a good post about the topic online and was disappointed with the search results.
 For my taste they were either too shallow to produce real understanding, leaving the reader with a large list of half-explained terms, or too technical to be approachable, focusing only on the tools and application that the writer is most enthusiastic about.
 
-In this post I want to try to bridge that gap by using (and to some extend abusing) the example of a very simple AI algorithm.
-At the end of this text I want you to truly and fully understand this algorithm so that you are able to use this understanding as a proxy for understanding other AI algorithms and approaches - and this should be true whether you are a computer scientist, a hairdresser, a physician or a baker.
+This post is the first in a series with which I hope to bridge that gap by using (and to some extend abusing) the example of a very simple AI algorithm.
+At the end of this first post I want you to truly and fully understand this algorithm whether you are a computer scientist, a hairdresser, a physician or a baker.
+With the following posts I want to enable you to use this simple algorithm as a proxy for understanding other AI algorithms, approaches, and general questions and issues.
 
 ## What is AI?
 
 I could start this section by introducing a lot of fancy words that describe different kinds of artificial intelligence (AI) to carefully contrast the term with other related terms such as "machine learning" and with more philosophical approaches.
-Instead I will just assume that for the layman AI means "the stuff that companies like Google do that detects faces, plays chess, drives cars, recommends movies on Netflix and powers Alexa and Siri".
+Instead I will just assume that for the layperson AI means "the stuff that companies like Google do that detects faces, plays chess, drives cars, recommends movies on Netflix and powers Alexa and Siri".
 
-All those highly successful and widely used AI systems are programs that make predictions or guesses about unseen data based on a knowledge base of existing data.
-Take the example
+All those highly successful and widely used AI systems are programs that make predictions or guesses about some real-world problem based on a set of existing examples.
+These predictions and guesses should be "intelligent" in the sense that they emulate the choices a skilled human being would make.
+
+## A typical AI problem
+
+To make this a little more concrete, think about your mail inbox and that handsome Nigerian prince that wants to share his inherited fortune with you.
+Most humans know that mails from handsome Nigerian princes are usually just scams to get your money (sorry to all honest Nigerian princes out there 😆), but how do we teach this knowledge to a machine?
+After all we do not want to delete all those emails by ourselves!
+There are a lot of ways to do this.
+For example, we could set up a rule to delete all mails that contain the words "Nigerian" and "prince".
+But what if you want to talk to your Nigerian friend about Prince Harry and the latest gossip about the British royals?
+This example shows that such simple keyword-based rules are not "intelligent" at all, but rather stupid.
+I am sure most of you will easily recall a moment where your spam filter accidentally flagged an email that was obviously not spam - or the other way around.
+As it turns out, acting "intelligent" is quite hard for a machine.
+
+The basic idea of AI is that this elusive "intelligence" can be harnessed from existing data.
+Each time you flag an email as spam, leave it in your inbox, or rescue that email address validation link from your spam folder, you generate examples of the human decisions that an AI spam filter should mimic.
+These examples contain two components: An email, and a *label*, which is the result of your decision if that mail was either "spam" or "not spam" (i.e. "ham").
+It is important to have this label, because this is where information about "intelligence" is stored.
+
+## My first AI algorithm
+
+Once we have a set of labeled data, we can rephrase our initial task from "classify whether this email is spam or not" to "decide the label of this email like humans did in these previous examples".
+This is, of course, still not understandable for a machine.
+For some spam mails, a lookup in our data set might be enough, because we already received the exact same email, but usually there is a little variance in spam in order to avoid detection by such simple means.
+Therefore, we cannot avoid some form of uncertainty and as we all learned in school, uncertainty can best be tackled by statistics.
+For our task this means that we do not look for exact matches in the database, but rather for *similar* emails and we have to find some kind of statistic calculations that expresses the similarity of two emails as a number.
+Expressing similarity between texts is in itself a highly complex task that requires a lot of intelligence, but there is a simple approach that we can take as first approximation:
+Just count the number of words that both emails have in common.
+Consider this example:
+
+```
+[Email that should be classified:]
+
+Subject: Prince Harry
+
+
+[Database entry 1 (spam):]
+
+Subject:
+
+
+[Database entry 2 (ham):]
+
+Subject:
+```
+
 
 <!--
+Obtaining *labeled* data is the most crucial and often difficult part of AI.
+It is relatively easy to get large amounts of data (although in the case of collecting private or work emails from other people there are already a lot of privacy concerns to consider), but *labeling* this data is tedious and painstaking work.
+Since we want to mimic human intelligence, we need a human to decide the correct label for each and every item in our dataset, and even 
+
+
+- data = previous decisions
+- prediction task becomes "decide like in previous examples"
+- previous examples will not match exactly
+- => some form of uncertainty / statistics is required
+- one idea: find most similar case and copy decision
+- what makes emails similar?
+- problem: for automatic decisions we need a number
+- naive approach: count number of matching words
+- more matching words => more similar
+- show example
+- algorithm NN:
+  - store all examples in a database
+  - for each example in the database
+    - calculate number of words matching with current email
+  - find email with maximum number of matching words
+  - copy label of that email and report it as result
+- this algorithm is actually used in AI
+- and it's not that bad
+- just slow, but this can be alleviated with smart databases
+- pseudocode example
+-->
+
+<!--
+TODO: Look on Kaggle for better example? Expert-system?
+
 NOTE: Maybe this should be an ipython notebook?
   - or each post should be accompanied by one?
 
