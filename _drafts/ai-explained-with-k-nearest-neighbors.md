@@ -91,6 +91,31 @@ with this, we have seven matches for database entry one and eight matches for da
 Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection algorithm will correctly copy this label for our friend's email about the Guardian Nigeria.
 As it turns out, `"harry"` was our savior after all.
 
+## My first AI algorithm
+
+With this example, we have defined our first AI algorithm.
+In fact, let's look a little closer at the word "algorithm".
+It is used a lot in conjunction with AI or with any complex automated system—often to the point that it sounds a little arcane and ominous.
+However, at the end of the day any algorithm is nothing more than a formal set of instructions that have to be carried out to calculate a result.
+Our algorithm in this article could be described as follows:
+
+1. At the beginning, set the maximum number of matching words to zero
+2. For all labeled emails in the database:
+    1. Calculate the number of matching words between the input email and the database email
+    2. If that number is higher than the current maximum
+        1. update the maximum number of matching words
+        2. store the label of the database email as result
+3. Output the label currently stored as result
+
+This algorithmic definition can directly be translated into code that can be understood by a computer.
+We therefore have turned the instruction for the human task "decide whether this email is spam or not" into a set of instructions for a machine that can now mimic human decisions—we have created our first actual artificial intelligence.
+There is, of course, a lot of room for improvement and we will discuss some approaches in the next posts.
+However, if we generalize our approach by replacing the term "maximum number of matching words" with "maximum similarity" or "minimum distance", we obtain the so-called *nearest neighbor* algorithm.
+This algorithm is a standard tool in any AI researcher's inventory and its extensions, the [*k-nearest neighbors*](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) algorithm often already is surprisingly accurate for many complex tasks.
+
+If you could follow my explanation to this point, let me congratulate you and formally bestow you the title "apprentice AI researcher".
+If not, I would be very grateful if you could send me an email and tell me which parts you did not understand—ideally with a suggestion of how the text could be improved.
+
 
 <!--
 Obtaining *labeled* data is the most crucial and often difficult part of AI.
