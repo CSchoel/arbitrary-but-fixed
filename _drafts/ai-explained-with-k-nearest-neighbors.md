@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Explaining AI with the k-nearest neighbors algorithm"
+title:  "Explaining AI for laypersons using the k-nearest neighbors algorithm"
 description: >
     Today the term artificial intelligence (AI) is ubiquitous.
     It is easy to marvel at the achievements of the latest Google project or to quiver in fear before the scenarios invoked by singularity doomsday priests.
@@ -13,33 +13,33 @@ categories:
 
 ## Why write a post about AI?
 
-There are already countless answers to the question "What is artificial intelligence?" - most of them written by people that are far more experienced than I am.
+There are already countless answers to the question "What is artificial intelligence?"—most of them written by people that are far more experienced than I am.
 So why write the umpteenth blog post about it?
-The honest answer is that I tried to find a good post about the topic online and was disappointed with the search results.
-For my taste they were either too shallow to produce real understanding, leaving the reader with a large list of half-explained terms, or too technical to be approachable, focusing only on the tools and application that the writer is most enthusiastic about.
+The answer is that I tried to find a good introductory text about the topic for my students online and was disappointed with the search results.
+For my taste, they were either too shallow to produce real understanding, leaving the reader with a large list of half-explained terms, or too technical to be approachable, focusing only on the tools and applications that the writer is most enthusiastic about.
 
-This post is the first in a series with which I hope to bridge that gap by using (and to some extend abusing) the example of a very simple AI algorithm.
-At the end of this first post I want you to truly and fully understand this algorithm whether you are a computer scientist, a hairdresser, a physician or a baker.
-With the following posts I want to enable you to use this simple algorithm as a proxy for understanding other AI algorithms, approaches, and general questions and issues.
+This post is the first in a series with which I hope to bridge that gap by using (and to some extent abusing) the example of a very simple AI algorithm.
+At the end of this first post, I want you to truly and fully understand this algorithm whether you are a computer scientist, a hairdresser, a physician or a baker.
+With the whole series, I want to enable you to use this simple algorithm as a proxy for understanding other AI algorithms, approaches, and general questions and issues.
 
 ## What is AI?
 
 I could start this section by introducing a lot of fancy words that describe different kinds of artificial intelligence (AI) to carefully contrast the term with other related terms such as "machine learning" and with more philosophical approaches.
-Instead I will just assume that for the layperson AI means "the stuff that companies like Google do that detects faces, plays chess, drives cars, recommends movies on Netflix and powers Alexa and Siri".
+Instead, I will just assume that for the layperson AI means "the stuff that companies like Google do that detects faces, plays chess, drives cars, recommends movies on Netflix, and powers Alexa and Siri".
 
 All those highly successful and widely used AI systems are programs that make predictions or guesses about some real-world problem based on a set of existing examples.
 These predictions and guesses should be "intelligent" in the sense that they emulate the choices a skilled human being would make.
 
 ## A typical AI problem
 
-To make this a little more concrete, think about your mail inbox and that handsome Nigerian prince that wants to share his inherited fortune with you.
-Most humans know that mails from handsome Nigerian princes are usually just scams to get your money (sorry to all honest Nigerian princes out there 😆), but how do we teach this knowledge to a machine?
+To make this a little more concrete, think about your mail inbox and that nice Nigerian prince that wants to share his inherited fortune with you.
+Most humans know that mails from nice Nigerian princes are usually just scams to get your money (sorry to all honest Nigerian princes out there 🙈), but how do we teach this knowledge to a machine?
 After all we do not want to delete all those emails by ourselves!
 There are a lot of ways to do this.
 For example, we could set up a rule to delete all mails that contain the words "Nigerian" and "prince".
 But what if you want to talk to your Nigerian friend about Prince Harry and the latest gossip about the British royals?
 This example shows that such simple keyword-based rules are not "intelligent" at all, but rather stupid.
-I am sure most of you will easily recall a moment where your spam filter accidentally flagged an email that was obviously not spam - or the other way around.
+I am sure most of you will easily recall a moment where your spam filter accidentally flagged an email that was obviously not spam—or the other way around.
 As it turns out, acting "intelligent" is quite hard for a machine.
 
 The basic idea of AI is that this elusive "intelligence" can be harnessed from existing data.
@@ -53,21 +53,13 @@ Once we have a set of labeled data, we can rephrase our initial task from "class
 This is, of course, still not understandable for a machine.
 For some spam mails, a lookup in our data set might be enough, because we already received the exact same email, but usually there is a little variance in spam in order to avoid detection by such simple means.
 Therefore, we cannot avoid dealing with some form of uncertainty and as we all learned in school, uncertainty can best be tackled by statistics.
-For our task this means that we do not look for exact matches in the database, but rather for *similar* emails and we have to find some kind of statistic calculations that expresses the similarity of two emails as a number.
+For our task this means that we do not look for exact matches in the database, but rather for *similar* emails, and we have to find some kind of statistic calculations that expresses the similarity of two emails as a number.
 Expressing similarity between texts is in itself a highly complex task that requires a lot of intelligence, but there is a simple approach that we can take as first approximation:
 Just count the number of words that both emails have in common.
+
 Consider this example:
 
 ```
-[Email that should be classified:]
-
-Subject: The Guardian Nigeria
-
-I just learned that Nigeria has a newspaper called "The Guardian Nigeria".
-You don't find Prince Harry on the front page here, but you sure do find
-him: https://guardian.ng/tag/prince-harry/ :D
-
-
 [Database entry 1:]
 
 Label: spam
@@ -90,6 +82,16 @@ on Africa tour". And in that SAME article talking about mental health, they
 end with "In other royal news, the Duchess of Cambridge stuns in red as she
 steps out in London to promote photography book launch." Can you believe
 it?! In other news ;), how are things in Nigeria?
+
+
+[New email:]
+
+Label: ???
+Subject: The Guardian Nigeria
+
+I just learned that Nigeria has a newspaper called "The Guardian Nigeria".
+You don't find Prince Harry on the front page here, but you sure do find
+him: https://guardian.ng/tag/prince-harry/ :D
 ```
 
 In this example, our simple algorithm would find the following sets of matching words (assuming we split by punctuation and whitespace and transform letters to lowercase).
@@ -99,7 +101,7 @@ Matches entry 1: ["the", "nigeria", "i", "a", "you", "prince", "on"]
 Matches entry 2: ["the", "nigeria", "that", "a", "you", "prince", "harry", "on"]
 ```
 
-with this, we have seven matches for database entry one and eight matches for database entry two.
+With this, we have seven matches for database entry one and eight matches for database entry two.
 Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection algorithm will correctly copy this label for our friend's email about the Guardian Nigeria.
 As it turns out, `"harry"` was our savior after all.
 
@@ -108,7 +110,7 @@ As it turns out, `"harry"` was our savior after all.
 With this example, we have defined our first AI algorithm.
 In fact, let's look a little closer at the word "algorithm".
 It is used a lot in conjunction with AI or with any complex automated system—often to the point that it sounds a little arcane and ominous.
-However, at the end of the day any algorithm is nothing more than a formal set of instructions that have to be carried out to calculate a result.
+However, at the end of the day an *algorithm* is nothing more than a formal set of instructions that have to be carried out to calculate a result.
 Our algorithm in this article could be described as follows:
 
 1. At the beginning, set the maximum number of matching words to zero
@@ -121,12 +123,21 @@ Our algorithm in this article could be described as follows:
 
 This algorithmic definition can directly be translated into code that can be understood by a computer.
 We therefore have turned the instruction for the human task "decide whether this email is spam or not" into a set of instructions for a machine that can now mimic human decisions—we have created our first actual artificial intelligence.
-There is, of course, a lot of room for improvement and we will discuss some approaches in the next posts.
+There is, of course, a lot of room for improvement, and we will discuss some approaches in the next posts.
 However, if we generalize our approach by replacing the term "maximum number of matching words" with "maximum similarity" or "minimum distance", we obtain the so-called *nearest neighbor* algorithm.
 This algorithm is a standard tool in any AI researcher's inventory and its extension, the [*k-nearest neighbors*](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) algorithm often already is surprisingly accurate even for complex tasks.
 
+This also highlights a curious fact about this algorithm:
+Notice that the instructions do not contain any information describing the nature of what a spam email actually looks like.
+We could use the very same algorithm to distinguish between "work" and "private" mail, by simply using a different database with a different set of labels.
+The algorithm itself is very generic and all the "intelligence" comes from the data.
+This is true for almost any artificial intelligence currently out there on the consumer market.
+Sef-driving cars drive based on sensory data collected from humans driving these vehicles in test scenarios;
+Alexa's and Siri's speech recognition is based on human speech samples that were manually transcribed by other humans;
+And maybe the fact that computers can beat top-level players at chess isn't that mind-boggling anymore when you consider that those computers were able to use data from thousands of the world's best chess players—probably even including the very players they were able to beat.
+
 If you could follow my explanation to this point, let me congratulate you and formally bestow you the title "apprentice AI researcher".
-If not, I would be very grateful if you could send me an email and tell me which parts you did not understand—ideally with a suggestion of how the text could be improved.
+If not, I would be very grateful if you could email me and tell me which parts you did not understand—ideally with a suggestion of how the text could be improved.
 
 
 <!--
