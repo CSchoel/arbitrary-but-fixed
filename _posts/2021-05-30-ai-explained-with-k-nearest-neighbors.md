@@ -1,16 +1,19 @@
 ---
 layout: post
-title:  "Explaining AI for laypersons using the k-nearest neighbors algorithm"
+title: Explaining AI for laypersons using the k-nearest neighbors algorithm
 description: >
-    Today the term artificial intelligence (AI) is ubiquitous.
-    It is easy to marvel at the achievements of the latest Google project or to quiver in fear before the scenarios invoked by singularity doomsday priests.
-    Probably only a very small proportion of the population actually has a realistic impression of what AI is and what it can and cannot do.
-    With this post I want to make my contribution to change that using an AI algorithm that is so simple that everyone can understand it.
+  Today the term artificial intelligence (AI) is ubiquitous. It is easy
+  to marvel at the achievements of the latest Google project or to quiver in fear
+  before the scenarios invoked by singularity doomsday priests. Probably only a very
+  small proportion of the population actually has a realistic impression of what AI
+  is and what it can and cannot do. With this post I want to make my contribution
+  to change that using an AI algorithm that is so simple that everyone can understand
+  it.
 categories:
-    - artificial intelligence
-    - machine learning
+- artificial intelligence
+- machine learning
+date: 2021-05-30 20:38 +0200
 ---
-
 ## Why write a post about AI?
 
 There are already countless answers to the question "What is artificial intelligence?"—most of them written by people that are far more experienced than I am.
