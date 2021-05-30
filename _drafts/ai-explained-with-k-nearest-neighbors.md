@@ -134,7 +134,7 @@ The algorithm itself is very generic and all the "intelligence" comes from the d
 This is true for almost any artificial intelligence currently out there on the consumer market.
 Sef-driving cars drive based on sensory data collected from humans driving these vehicles in test scenarios;
 Alexa's and Siri's speech recognition is based on human speech samples that were manually transcribed by other humans;
-And maybe the fact that computers can beat top-level players at chess isn't that mind-boggling anymore when you consider that those computers were able to use data from thousands of the world's best chess players—probably even including the very players they were able to beat.
+and maybe the fact that computers can beat top-level players at chess isn't that mind-boggling anymore when you consider that those computers were able to use data from thousands of the world's best chess players—probably even including the very players they were able to beat.
 
 If you could follow my explanation to this point, let me congratulate you and formally bestow you the title "apprentice AI researcher".
 If not, I would be very grateful if you could email me and tell me which parts you did not understand—ideally with a suggestion of how the text could be improved.
