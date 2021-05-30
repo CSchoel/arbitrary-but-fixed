@@ -34,7 +34,7 @@ These predictions and guesses should be "intelligent" in the sense that they emu
 
 To make this a little more concrete, think about your mail inbox and that nice Nigerian prince that wants to share his inherited fortune with you.
 Most humans know that mails from nice Nigerian princes are usually just scams to get your money (sorry to all honest Nigerian princes out there 🙈), but how do we teach this knowledge to a machine?
-After all we do not want to delete all those emails by ourselves!
+After all we do not want to delete all those spam emails by ourselves!
 There are a lot of ways to do this.
 For example, we could set up a rule to delete all mails that contain the words "Nigerian" and "prince".
 But what if you want to talk to your Nigerian friend about Prince Harry and the latest gossip about the British royals?
