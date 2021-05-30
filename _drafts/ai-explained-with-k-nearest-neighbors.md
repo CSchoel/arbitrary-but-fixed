@@ -125,7 +125,7 @@ This algorithmic definition can directly be translated into code that can be und
 We therefore have turned the instruction for the human task "decide whether this email is spam or not" into a set of instructions for a machine that can now mimic human decisions—we have created our first actual artificial intelligence.
 There is, of course, a lot of room for improvement, and we will discuss some approaches in the next posts.
 However, if we generalize our approach by replacing the term "maximum number of matching words" with "maximum similarity" or "minimum distance", we obtain the so-called *nearest neighbor* algorithm.
-This algorithm is a standard tool in any AI researcher's inventory and its extension, the [*k-nearest neighbors*](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) algorithm often already is surprisingly accurate even for complex tasks.
+This algorithm is a standard tool in any AI researcher's inventory and if you do not only look at the single closest match but at the *k* closest matches (*k* just being any number like 5 or 100) you get the [*k-nearest neighbors*](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) algorithm, which often already is surprisingly accurate even for complex tasks.
 
 This also highlights a curious fact about this algorithm:
 Notice that the instructions do not contain any information describing the nature of what a spam email actually looks like.
