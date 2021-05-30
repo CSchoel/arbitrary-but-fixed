@@ -18,9 +18,9 @@ So why write the umpteenth blog post about it?
 The answer is that I tried to find a good introductory text about the topic for my students online and was disappointed with the search results.
 For my taste, they were either too shallow to produce real understanding, leaving the reader with a large list of half-explained terms, or too technical to be approachable, focusing only on the tools and applications that the writer is most enthusiastic about.
 
-This post is the first in a series with which I hope to bridge that gap by using (and to some extent abusing) the example of a very simple AI algorithm.
-At the end of this first post, I want you to truly and fully understand this algorithm whether you are a computer scientist, a hairdresser, a physician or a baker.
-With the whole series, I want to enable you to use this simple algorithm as a proxy for understanding other AI algorithms, approaches, and general questions and issues.
+This post is the first in a series with which I hope to bridge that gap by using (and to some extent abusing) the example of a very simple AI.
+At the end of this first post, I want you to truly and fully understand how this AI works whether you are a computer scientist, a hairdresser, a physician or a baker.
+With the whole series, I want to enable you to use the simple method behind it as a proxy for understanding other AI systems, approaches, and general questions and issues.
 
 ## What is AI?
 
