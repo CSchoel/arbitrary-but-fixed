@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Explaining AI for laypersons using the k-nearest neighbors algorithm
+title: Explaining artificial intelligence for laypersons using the k-nearest neighbors algorithm
 description: >
   Today the term artificial intelligence (AI) is ubiquitous. It is easy
   to marvel at the achievements of the latest Google project or to quiver in fear
@@ -14,14 +14,14 @@ categories:
 - machine learning
 date: 2021-05-30 20:38 +0200
 ---
-## Why write a post about AI?
+## Why write a post about artificial intelligence?
 
 There are already countless answers to the question "What is artificial intelligence?"—most of them written by people that are far more experienced than I am.
 So why write the umpteenth blog post about it?
 The answer is that I tried to find a good introductory text about the topic for my students online and was disappointed with the search results.
 For my taste, they were either too shallow to produce real understanding, leaving the reader with a large list of half-explained terms, or too technical to be approachable, focusing only on the tools and applications that the writer is most enthusiastic about.
 
-This post is the first in a series with which I hope to bridge that gap by using (and to some extent abusing) the example of a very simple AI.
+This post is the first in a series with which I hope to bridge that gap by using (and to some extent abusing) the example of a very simple artificial intelligence (AI).
 At the end of this first post, I want you to truly and fully understand how this AI works whether you are a computer scientist, a hairdresser, a physician or a baker.
 With the whole series, I want to enable you to use the simple method behind it as a proxy for understanding other AI systems, approaches, and general questions and issues.
 
@@ -108,7 +108,6 @@ With this, we have seven matches for database entry one and eight matches for da
 Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection AI will correctly copy this label for our friend's email about the Guardian Nigeria.
 As it turns out, `"harry"` was our savior after all.
 
-<!-- TODO: introduce acronym AI -->
 <!-- TODO: algorithm part not understanable enough -->
 <!--   - Steps hard to follow -->
 
