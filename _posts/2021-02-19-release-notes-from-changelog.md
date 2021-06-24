@@ -102,3 +102,8 @@ This script just makes the following assumptions:
 * Your repository contains a file called `RELEASE_HEAD.md`.
 
 Otherwise, it should be pretty much universal.
+
+## Update
+
+This post has led to the development of a GitHub Action that performs this task for you.
+It can be found at [CSchoel/release-notes-from-changelog/actions](https://github.com/CSchoel/release-notes-from-changelog/actions).
