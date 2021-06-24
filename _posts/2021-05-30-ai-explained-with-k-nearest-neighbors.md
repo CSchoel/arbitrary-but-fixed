@@ -7,7 +7,7 @@ description: >
   before the scenarios invoked by singularity doomsday priests. Probably only a very
   small proportion of the population actually has a realistic impression of what AI
   is and what it can and cannot do. With this post I want to make my contribution
-  to change that using an AI algorithm that is so simple that everyone can understand
+  to change that using an AI that is so simple that everyone can understand
   it.
 categories:
 - artificial intelligence
@@ -97,7 +97,7 @@ You don't find Prince Harry on the front page here, but you sure do find
 him: https://guardian.ng/tag/prince-harry/ :D
 ```
 
-In this example, our simple algorithm would find the following sets of matching words (assuming we split by punctuation and whitespace and transform letters to lowercase).
+In this example, our simple AI would find the following sets of matching words (assuming we split by punctuation and whitespace and transform letters to lowercase).
 
 ```
 Matches entry 1: ["the", "nigeria", "i", "a", "you", "prince", "on"]
@@ -105,7 +105,7 @@ Matches entry 2: ["the", "nigeria", "that", "a", "you", "prince", "harry", "on"]
 ```
 
 With this, we have seven matches for database entry one and eight matches for database entry two.
-Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection algorithm will correctly copy this label for our friend's email about the Guardian Nigeria.
+Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection AI will correctly copy this label for our friend's email about the Guardian Nigeria.
 As it turns out, `"harry"` was our savior after all.
 
 ## My first AI algorithm
