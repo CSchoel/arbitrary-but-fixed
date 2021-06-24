@@ -116,18 +116,27 @@ As it turns out, `"harry"` was our savior after all.
 With this example, we have defined our first AI algorithm.
 In fact, let's look a little closer at the word "algorithm".
 It is used a lot in conjunction with AI or with any complex automated system—often to the point that it sounds a little arcane and ominous.
-However, at the end of the day an *algorithm* is nothing more than a formal set of instructions that have to be carried out to calculate a result.
+However, at the end of the day an *algorithm* is nothing more than a formal set of instructions that have to be carried out to calculate a result based on some input data.
 Our algorithm in this article could be described as follows:
 
-1. At the beginning, set the maximum number of matching words to zero
-2. For all labeled emails in the database:
-    1. Calculate the number of matching words between the input email and the database email
-    2. If that number is higher than the current maximum
-        1. update the maximum number of matching words
-        2. store the label of the database email as result
-3. Output the label currently stored as result
+### Algorithm: Simple spam detector
 
-This algorithmic definition can directly be translated into code that can be understood by a computer.
+Inputs:
+* `Database`: list of labeled emails
+* `Query`: unlabeled email that should be classified
+
+Result:
+* `Label`: the most fitting label for the query (either "spam" or "ham")
+
+Steps:
+1. For all labeled emails in the database, calculate the number of matching words between that email and the query.
+2. Find the database entry with the maximum number of matching words.
+3. Output the label attached to this database entry.
+
+Usually, algorithmic definitions tend to be a bit more detailed and technical, but the phrases that we used here like "for all entries in a database" or "find the maximum" are universal and simple enough that they can be directly translated into code that can be understood by a computer.
+The only remaining "difficult" part is the term "number of matching words".
+We will translate this into a more detailed algorithmic form in one of the next posts, but for now let's just accept that it too can be made understandable to a computer.
+
 We therefore have turned the instruction for the human task "decide whether this email is spam or not" into a set of instructions for a machine that can now mimic human decisions—we have created our first actual artificial intelligence.
 There is, of course, a lot of room for improvement, and we will discuss some approaches in the next posts.
 However, if we generalize our approach by replacing the term "maximum number of matching words" with "maximum similarity" or "minimum distance", we obtain the so-called *nearest neighbor* algorithm.
