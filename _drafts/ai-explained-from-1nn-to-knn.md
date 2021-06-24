@@ -4,6 +4,7 @@ title: 'AI for laypersons: From one to k nearest neighbors'
 description: >
   In the first post of the 'AI for laypersons' series, I introduced a very simple AI based on the nearest neighbor algorithm.
   In this post, I want to elaborate on this first example to arrive at a fully-fledged algorithm that is actually used for solving AI problems in the real world.
+math: true
 categories:
 - artificial intelligence
 - machine learning
@@ -89,8 +90,14 @@ In fact, we do just that, but we take the square of the differences before we do
 Before you get flashbacks to your last math lesson, let's just do a quick example:
 
 $$
-a = (1, 2, 3)\\
-b = (5, 2, 4)\\
+a = (1, 2, 3)
+$$
+
+$$
+b = (5, 2, 4)
+$$
+
+$$
 edist(a, b) = (1-5)^2 + (2-2)^2 + (3-4)^2 = 16 + 0 + 1 = 17
 $$
 
@@ -129,8 +136,11 @@ Data: [1, 1, 1]
 All the gossip is gone, but our classification still works:
 
 $$
-edist(entry1, query) = (1-1)^2 + (1-1)^2 + (0-1)^2 = 0 + 0 + 1 = 1\\
-edits(entry2, query) = (1-1)^2 + (1-1)^2 + (1-1)^2 = 0 + 0 + 0 = 0\\
+edist(entry1, query) = (1-1)^2 + (1-1)^2 + (0-1)^2 = 0 + 0 + 1 = 1
+$$
+
+$$
+edits(entry2, query) = (1-1)^2 + (1-1)^2 + (1-1)^2 = 0 + 0 + 0 = 0
 $$
 
 Entry 2 has the minimum euclidean distance and therefore we decide to correctly label the email of our friend from Nigeria about the Guarian Nigeraia as "ham".
