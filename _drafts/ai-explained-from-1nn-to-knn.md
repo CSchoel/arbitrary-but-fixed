@@ -155,7 +155,23 @@ Steps:
 3. Count how often each possible label occurs within these k nearest neighbors.
 4. Output the label with the highest voting count.
 
+The main change is that we now not only keep one nearest neighbor, but the k nearest neighbors.
+As it is often with neighbors, they do not have to agree on a single decision.
+We now can have k conflicting labels from which we have to choose one.
+This is done by a so-called majority voting, in which each neighbor casts a vote for their label, and we then select the label that received the most votes.
+Of course, we have to break ties somehow, but these details are not important for the general idea of the algorithm.
 
+The beauty of this variant of the nearest neighbors algorithm is that it protects us against bad apples in our data.
+Since the labels stem from human decisions, they are subject to human error.
+In fact, even without errors, there may be instances of "exceptional" samples - for example, a "ham" email that is surrounded by "spam" emails.
+An example could be a system administrator that receives a forwarded spam email of an employee who wants to know whether the spam email is malicious.
+The email itself is not spam, but it *contains* a full spam email in verbatim.
+What is the "correct" label in this case?
+
+Real world problems are full of these examples and therefore the k-nearest neighbor algorithm offers some welcome robustness.
+If the sysadmin mail sits in the database with the "ham" label, and our AI is asked to classify a new spam email that is very similar to the forwarded spam, it may find that its nearest neighbor is sysadmin mail and falsely output the "ham" label.
+A 5-nearest neighbor classifier would instead see that while there is one very close example of "ham", there are also four examples of "spam" that are only a little more distant.
+Through majority voting, it would correctly label the newly received spam email as "spam".
 
 ## Remarks about real-world application
 
