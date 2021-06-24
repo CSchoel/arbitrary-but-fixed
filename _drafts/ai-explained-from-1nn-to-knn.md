@@ -33,8 +33,13 @@ Steps:
 
 This kind of human-readable algorithm description is called "pseudocode", because it is not quite real code, but also more formal and precise than our messy everyday language.
 There are no rules for writing pseudocode, other than that it should be free of any ambiguities and make it obvious how to derive real machine-readable code from it.
-Now as a layperson you may be asking what is "real code", and depending on who you ask, you might get quite different opinions.
-Here, I will again use the simple definition that code is "text that a programmer has to type in order to produce an executable application".
+For human understandability, our above definition is perfectly fine, but it still contains some ambiguities: It does not tell us how to calculate the number of matching words or how to find the maximum of a list.
+As stated in the first post, I want you to understand every detail of this algorithm, which is why we need to go a little deeper.
+I promise you this kind of "detailed pseudocode" is the most technical description of an algorithm that we will use in this whole series and I will try to introduce it step by step.
+
+You may be asking, how detailed we need to get.
+Like with any text, the level of detail of pseudocode always depends on the intended audience.
+Since this is a post for laypersons, I want to get as close to "real code", as in "text that a programmer has to type in order to produce an executable application" as possible.
 Today's programmers have powerful libraries at hand that can perform such complex tasks like "download a file", or "show a button with the text 'OK' on the screen" with a single command.
 However, for tasks where no library exists - such as developing fancy new spam detectors - they have to use the basic building blocks of programming languages.
 In essence these are the following three concepts:
@@ -43,11 +48,16 @@ In essence these are the following three concepts:
 * Branch between two alternative sets of instructions based on some numerical comparison of values (equal, less, greater, ...)
 * Repeat a set of instructions in a loop until some condition is satisfied (e.g. the end of a list has been reached)
 
+We will try to use not much more than this. For example, we could 
 
 
 ## Getting more generic
 
 ## From 1 to k
+
+## Remarks about real-world application
+
+Speedup using k-d-trees: Like flipping through telephone book or looking at map
 
 <!--
 NOTE: Maybe this should be an ipython notebook?
