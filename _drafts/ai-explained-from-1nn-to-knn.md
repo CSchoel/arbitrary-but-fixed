@@ -136,6 +136,9 @@ $$
 Entry 2 has the minimum euclidean distance and therefore we decide to correctly label the email of our friend from Nigeria about the Guarian Nigeraia as "ham".
 Only this time, our saviour is not `"harry"`, but the last `1` in the query data (which of course is just `"harry"` in disguise 😉).
 
+This representation of text as numbers already hints at a more sophisticated version of our spam detector:
+Instead of just using the index list to store whether a word is present (1) or not (0), we could also store the *count* how often the word was found, which would enable us to distinguish between frequent words, which are probably important for the message content, and infrequent words, which might only be anecdotal references.
+
 ## From 1 to k
 
 Now that you know all about n-dimensional euclidean distances and can shine with your knowledge at any dinner table, the only step that remains is to make the step from 1 to k neighbors:
@@ -175,7 +178,21 @@ Through majority voting, it would correctly label the newly received spam email 
 
 ## Remarks about real-world application
 
-Speedup using k-d-trees: Like flipping through telephone book or looking at map
+I have already hinted at the fact that the k-nearest neighbor (k-NN) algorithm is part of every AI researchers toolkit.
+That is mainly, because it is extremely simple to write up a k-NN algorithm for almost any problem and therefore get a first glimpse at what can be achieved with a given data set.
+If a k-NN classifier performs reasonably well, there is hope that a more sophisticated algorithm will perform even better.
+If, however, it does not pick up any usable pattern, there may be a problem with the data itself.
+
+Apart from a quick diagnostic tool, a k-NN classifier can also simply be "good enough" for a problem and with a clever implementation there are surprisinly many instances where choosing a more sophisticated classifier yields little to no improvement.
+However, such a "clever" implementation has to iron out several issues in our current definition that have to do with large databases:
+
+* Since we only need to keep the k minimal distances in mind, there is no need to actually *store* the calculated distances for each sample in the database.
+* In the majority voting, we also do not have to store counts for every possible lables, but just for the labels that have at least one vote.
+* The major downside of the k-NN algorithm is that is becomes slow with large databases, because calculating the distance to millions of entries is time-consuming.
+    This can be counteracted by a smarter way of organizing the database.
+    Instead of just a list of samples, it can be structured for easier access, much like a telephone book or a map. If you search for a restaurant in London, you do not have to start from the arctic, circling your way around the globe towards the antarctic, but you can use the nature of your query to quickly narrow down the search space. Similarly, you would not start at the front of a telephone book when you search for a "Zacharias Ziegler" or a "Madison Meriwether".
+    For data that is a large list of numbers, there is a standard solution that is called a [k-d tree](https://en.wikipedia.org/wiki/K-d_tree).
+    Although it is quite involved and most certainly beyond the scope of this article, I have to drop a link here, because it is such a game changer for the speed achievable with a k-NN algorithm.
 
 <!--
 NOTE: Maybe this should be an ipython notebook?
