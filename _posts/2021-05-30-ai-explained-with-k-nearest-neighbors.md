@@ -108,9 +108,6 @@ With this, we have seven matches for database entry one and eight matches for da
 Since the second entry has more matching words and was labeled as "ham" in the database, our spam detection AI will correctly copy this label for our friend's email about the Guardian Nigeria.
 As it turns out, `"harry"` was our savior after all.
 
-<!-- TODO: algorithm part not understanable enough -->
-<!--   - Steps hard to follow -->
-
 ## My first AI algorithm
 
 With this example, we have defined our first AI algorithm.
