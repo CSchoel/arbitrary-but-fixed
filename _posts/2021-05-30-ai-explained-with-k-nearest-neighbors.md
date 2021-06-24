@@ -153,3 +153,11 @@ and maybe the fact that computers can beat top-level players at chess isn't that
 
 If you could follow my explanation to this point, let me congratulate you and formally bestow you the title "apprentice AI researcher".
 If not, I would be very grateful if you could email me and tell me which parts you did not understand—ideally with a suggestion of how the text could be improved.
+
+## Edits and Acknowledgements
+
+Since it was first published, this article has undergone the following changes due to reader feedback:
+
+* Properly introduced the acronym AI (thanks to Franzi)
+* Removed mentions of the word "algorithm" before it was explained (thanks to Fabi)
+* Re-wrote the algorithmic definition, removing unnecessary low-level detail and adding context (thanks to Franzi)
