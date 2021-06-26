@@ -158,7 +158,7 @@ This representation of text as numbers already hints at a more sophisticated ver
 Instead of just using the index list to store whether a word is present (1) or not (0), we could also store the *count* how often the word was found, which would enable us to distinguish between frequent words, which are probably important for the message content, and infrequent words, which might only be anecdotal references.
 To not put undue emphasis on common but "uninteresting" words like "a" or "the", we would then ignore these words and do not use them to build our index lists.
 As already mentioned, most if not all search engines perform this kind of indexing and distance calculation.
-In fact, we could turn our nearest neighbor spam detection algorithm into a search engine, by using a short search string as query instead of a full email and outputting the nearest neighbor itself instead of its label.
+In fact, we could turn our nearest neighbor spam detection algorithm into a search engine, by using a short search string as query instead of a full email and outputting the email text itself instead of its label.
 
 ## From 1 to k
 
