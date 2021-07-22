@@ -19,13 +19,16 @@ For our spam detection algorithm this looked as follows:
 ### Algorithm: Simple spam detector
 
 Inputs:
+
 * `Database`: list of labeled emails
 * `Query`: unlabeled email that should be classified
 
 Output:
+
 * `Label`: the most fitting label for the query (either "spam" or "ham")
 
 Steps:
+
 1. For all labeled emails in the database, calculate the number of matching words between that email and the query.
 2. Find the database entry with the maximum number of matching words.
 3. Output the label attached to this database entry.
@@ -37,13 +40,16 @@ As already hinted at in the previous post, we can transform this description int
 ### Algorithm: Nearest neighbor classifier
 
 Inputs:
+
 * `Database`: list of labeled samples
 * `Query`: unlabeled sample that should be classified
 
 Output:
+
 * `Label`: the most fitting label for the query (any of the labels in the database)
 
 Steps:
+
 1. For all labeled samples in the database, calculate the distance between that sample and the query.
 2. Find the database entry with the minimum distance to the query.
 3. Output the label attached to this database entry.
@@ -167,13 +173,16 @@ Now that you know all about euclidean distances in  n-dimensional space and can 
 ### Algorithm: K-nearest neighbors classifier
 
 Inputs:
+
 * `Database`: list of labeled samples
 * `Query`: unlabeled sample that should be classified
 
 Output:
+
 * `Label`: the most fitting label for the query (any of the labels in the database)
 
 Steps:
+
 1. For all labeled samples in the database, calculate the distance between that sample and the query.
 2. Find the k database entries with the least distance to the query.
 3. Count how often each possible label occurs within these k nearest neighbors.
@@ -233,7 +242,14 @@ Examples (should be applications of AI that everyone is familiar with)
 Topics (each could be one post):
 
 - 1-NN
-- k-NN
+- MNIST (recognition)
+  - introduce MNIST problem
+  - analogy with spam detection: count number of matching pixels instead of matching words
+- Stock market prediction (prediction)
+  - prediction problem
+  - "distance" of two lists of integers (~> euclidean distance)
+  - heterogeneous data (take date into account for summer/winter changes)
+- k-NN (optional)
 - Data: More is better
   - show performance gain with increasing amount of data
   - feature vector grows by one bit => percentage of feature space covered by samples is halved
@@ -265,4 +281,5 @@ Topics (each could be one post):
   - number of parameters/features
   - black box
   - training effort / required hardware
+
 -->
