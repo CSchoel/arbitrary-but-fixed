@@ -21,7 +21,7 @@ For our spam detection algorithm we needed to find the database entry that has t
 Then we could just look up whether that database email was considered "spam" or "ham" and copy the same label for our output.
 
 This algorithm was effective, but it only detected spam, so how could we possibly use it as a proxy for understanding all the different and complex AI systems out there?
-Well, in fact the *nearest neighbor* algorithm that we used for our spam detection AI, can be applied to a wide range of problems.
+Well, in fact the *nearest neighbor* algorithm that we used as the basis for our spam detection AI, can be applied to a wide range of problems.
 In this post, I want to show you how it can be used for a problem that has nothing at all to do with spam detection, and that is image recognition.
 
 ## A new task: Image recognition
@@ -226,8 +226,7 @@ Steps:
 3. Output the label attached to this database entry.
 
 
-### From spam to images
-
+There are a few things that we have to change to make this work with images.
 First, we have different inputs and outputs now.
 The `Database` is now a list of labeled images, where the label is the digit shown in the image.
 The `Query` is an unlabeled image that has to be recognized.
@@ -294,3 +293,32 @@ Matches for entry 2:
 ```
 
 Since database entry 2 has more matching pixels than database entry 1, our AI correctly chooses to copy the label of entry 2 and decides that the query image is a seven and not a one.
+
+Now that we know that our idea works, the only thing that is left to do is to turn it into a new formal algorithm description:
+
+### Algorithm: Simple digit recognizer
+
+Inputs:
+
+* `Database`: list of labeled images
+* `Query`: unlabeled image that should be recognized
+
+Output:
+
+* `Label`: the most fitting label for the query (0-9)
+
+Steps:
+
+1. For all labeled images in the database, calculate the number of matching pixels between that image and the query.
+2. Find the database entry with the maximum number of matching pixels.
+3. Output the label attached to this database entry.
+
+As you can see, we only hat to change a few words.
+The resulting algorithm is still a nearest neighbor algorithm, it only needed to be adapted to find "neighbors" of *images* instead of *emails*.
+
+Again, we have turned the human task "recognize the handwritten number in this image" into a set of instructions for a machine that is now able to mimic this human decision-making process and thus can be considered an AI.
+This also means that all implications that we have drawn for the spam detection algorithm are also valid for image recognition tasks.
+The facial recognition algorithm that tags people in Facebook photos follows the same basic laws as our digit recognition AI: It can only recognize new images based on existing images in its database.
+For example, if the database has too few images of women or black people, the AI will be sexist or racist, providing a better service to white males, which are better represented in the dataset.
+Of course, Facebook uses more complicated algorithms than the nearest neighbor approach, but no amount of math can change the fact that any AI will only be as good as the data it has been trained on.
+We will go into detail on this issue in one of the next posts, but first we will take a little more time to explore the variety of possible application areas of the nearest neighbor algorithm.
