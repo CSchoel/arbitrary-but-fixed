@@ -224,3 +224,73 @@ Steps:
 1. For all labeled emails in the database, calculate the number of matching words between that email and the query.
 2. Find the database entry with the maximum number of matching words.
 3. Output the label attached to this database entry.
+
+
+### From spam to images
+
+First, we have different inputs and outputs now.
+The `Database` is now a list of labeled images, where the label is the digit shown in the image.
+The `Query` is an unlabeled image that has to be recognized.
+And finally, the output is again a `Label`, but instead of only two options we now have to choose one of ten different labels that correspond to the ten digits from zero to nine.
+
+Moving to the steps of the algorithm, the "number of matching words" is, of course, meaningless for images.
+However, we can match something else to find the "nearest neighbor" of an image: The pixels.
+We can count the number of matching *pixels* by moving through both pictures at the same time, starting at the top left, and moving in "reading" order from left to right and from top to bottom.
+Every time the pixels at corresponding positions of the two images match, we increase the count of matching pixels by one.
+When we reach the bottom right of the image, we will have the total number of matching pixels between both images.
+
+To see that this works, let's look at a small example with tiny 3x4 pixel images:
+
+```verbatim
+[Database entry 1:]
+
+Label: 1
+
+0 1 0
+0 1 0
+0 1 0
+0 1 0
+
+
+[Database entry 2:]
+
+Label: 7
+
+1 1 1
+0 0 1
+0 0 1
+0 0 1
+
+
+[Query image:]
+
+1 1 1
+0 0 1
+0 1 0
+1 0 0
+```
+
+We have two images in the database of the digits one and seven, both consisting of straight lines.
+The query image that we want to know about is another seven, but this time with a slanted lower line.
+Our AI now compares the query image to both database images to find the following:
+
+```verbatim
+Matches for entry 1:
+0 1 0     1 1 1      x ✓ x
+0 1 0  =  0 0 1  ->  ✓ x x
+0 1 0     0 1 0      ✓ ✓ ✓
+0 1 0     1 0 0      x x ✓
+
+  Total number of matching pixels: 6
+
+
+Matches for entry 2:
+1 1 1     1 1 1      ✓ ✓ ✓
+0 0 1  =  0 0 1  ->  ✓ ✓ ✓
+0 0 1     0 1 0      ✓ x x
+0 0 1     1 0 0      x ✓ x
+
+  Total number of matching pixels: 8
+```
+
+Since database entry 2 has more matching pixels than database entry 1, our AI correctly chooses to copy the label of entry 2 and decides that the query image is a seven and not a one.
