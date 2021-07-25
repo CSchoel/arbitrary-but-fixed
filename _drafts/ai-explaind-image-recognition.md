@@ -36,7 +36,7 @@ Steps:
 2. Find the database entry with the maximum number of matching words.
 3. Output the label attached to this database entry.
 
-## A new problem: Image recognition
+## A new task: Image recognition
 
 Now we want to apply the same idea to a new problem:
 Imagine you work in mail distribution center and have to find a way to sort letters by the handwritten zip codes on letter envelopes.
@@ -157,9 +157,61 @@ Some examples may look like this (which are converted samples from an actual AI 
 ![MNIST_bw_9_6895](/assets/img/MNIST/MNIST_bw_9_6895.png)
 ![MNIST_bw_9_7952](/assets/img/MNIST/MNIST_bw_9_7952.png)
 
-Each of these is a 28x28 pixel image.
-The word *pixel* originates from "PICture ELement", which is a fitting description:
-If we look at one of the images at a larger scale and draw a regular grid on it, we can see that the image is mande up of squares of identical sizes arranged in 28 rows and 28 columns.
-Since we only use a black and white image and not a grayscale image, each pixel can only be either white or black.
+The "intelligent" decision we are looking for in this situation is to take one of these images and recognize which number is shown on it.
+For most of the above examples, this would be simple for a human, but there are also some instances that are a little more tricky:
+
+* ![MNIST_bw_7_1260](/assets/img/MNIST/MNIST_bw_7_1260.png) could be both a 1 or a 7.
+* ![MNIST_bw_3_4990](/assets/img/MNIST/MNIST_bw_3_4990.png) is somewhere between a 2 and a 3.
+* ![MNIST_bw_8_947](/assets/img/MNIST/MNIST_bw_8_947.png) might be confused for a 9 instead of an 8.
+
+
+## How computers see images
+
+In order to automate this digit recognition task, we need to know how images are represented in a computer.
+You probably already know this, but to start from the beginning: Digital images are made up of small squares with uniform color and size, which are called *pixels* (short for "picture element").
+To build up a whole image, these pixels are arranged in a regular grid of rows and columns.
+The images above all have 28 rows and 28 columns of pixels, which each can be either fully black or fully white.
+Let's scale up one of these images to ten times it's size to actually see the pixels.
 
 ![Enlarged version of MNIST_bw_1_3906](/assets/img/MNIST/MNIST_bw_1_3906_280x280.png)
+
+Now we are still talking about images in terms of colors and geometric terms instead of text or numbers that a computer can read and manipulate.
+One simple way of storing the above image in a machine-readable format is to create a text file and write a zero for each white pixel and a one for each black pixel, arranged in rows and columns and separated by spaces:
+
+```
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 1 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+
+If you squint your eyes a little, you can even still see the picture, but now it is just a bunch of zeros and ones.
+This image format is called a [Portable BitMap (PBM)](https://en.wikipedia.org/wiki/Netpbm#PBM_example), and it can actually be read by open-source image editing tools like [GIMP](https://www.gimp.org/).
+If you want to, you can try it out by downloading [the above PBM image](/assets/img/MNIST/MNIST_bw_1_3906.pbm).
+
+The image formats that you are used to, like JPEG, PNG, or GIF, are much more complicated, but this is just because they are designed to save storage space.
+Whenever images are displayed on the screen or opened in an image editor, it is in some bitmap-like format.
