@@ -17,28 +17,15 @@ tags:
 
 In the [last post]({% post_url 2021-05-30-ai-explained-with-k-nearest-neighbors %}) we constructed our very first AI algorithm that was able to mimic the human decision whether a newly received email is unwanted "spam" or benign "ham".
 We also established that the technical term "algorithm" actually only means a step-by-step description of how to translate input values into output values.
-For our spam detection algorithm this looked as follows:
+For our spam detection algorithm we needed to find the database entry that has the maximum number of matching words between itself and the email that needs to be decided upon.
+Then we could just look up whether that database email was considered "spam" or "ham" and copy the same label for our output.
 
-### Algorithm: Simple spam detector
-
-Inputs:
-
-* `Database`: list of labeled emails
-* `Query`: unlabeled email that should be classified
-
-Output:
-
-* `Label`: the most fitting label for the query (either "spam" or "ham")
-
-Steps:
-
-1. For all labeled emails in the database, calculate the number of matching words between that email and the query.
-2. Find the database entry with the maximum number of matching words.
-3. Output the label attached to this database entry.
+This algorithm was effective, but it only detected spam, so how could we possibly use it as a proxy for understanding all the different and complex AI systems out there?
+Well, in fact the *nearest neighbor* algorithm that we used for our spam detection AI, can be applied to a wide range of problems.
+In this post, I want to show you how it can be used for a problem that has nothing at all to do with spam detection, and that is image recognition.
 
 ## A new task: Image recognition
 
-Now we want to apply the same idea to a new problem:
 Imagine you work in mail distribution center and have to find a way to sort letters by the handwritten zip codes on letter envelopes.
 This can and has for a long time been done by manual labor, but I imagine this is not anybody's dream job.
 Instead, it would be nice if we could just pass the mail through a scanner, and then use a computer program to automatically extract the zip code from the scanner image.
@@ -215,3 +202,25 @@ If you want to, you can try it out by downloading [the above PBM image](/assets/
 
 The image formats that you are used to, like JPEG, PNG, or GIF, are much more complicated, but this is just because they are designed to save storage space.
 Whenever images are displayed on the screen or opened in an image editor, it is in some bitmap-like format.
+
+## Comparing images
+
+Not that we know how to read images into a computer program, we can start thinking about how to adjust our nearest neighbor algorithm to cope with 28x28 pixel images of digits.
+First, let's start by revisiting our spam detection algorithm:
+
+### Algorithm: Simple spam detector
+
+Inputs:
+
+* `Database`: list of labeled emails
+* `Query`: unlabeled email that should be classified
+
+Output:
+
+* `Label`: the most fitting label for the query (either "spam" or "ham")
+
+Steps:
+
+1. For all labeled emails in the database, calculate the number of matching words between that email and the query.
+2. Find the database entry with the maximum number of matching words.
+3. Output the label attached to this database entry.
