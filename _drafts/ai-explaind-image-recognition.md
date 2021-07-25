@@ -322,3 +322,5 @@ The facial recognition algorithm that tags people in Facebook photos follows the
 For example, if the database has too few images of women or black people, the AI will be sexist or racist, providing a better service to white males, which are better represented in the dataset.
 Of course, Facebook uses more complicated algorithms than the nearest neighbor approach, but no amount of math can change the fact that any AI will only be as good as the data it has been trained on.
 We will go into detail on this issue in one of the next posts of the series, but first we will take a little more time to explore the variety of possible application areas of the nearest neighbor algorithm.
+
+<!-- TODO: Maybe could use a little more humor/connection to the postal service example -->
