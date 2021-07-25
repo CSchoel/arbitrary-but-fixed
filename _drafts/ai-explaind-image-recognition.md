@@ -158,7 +158,7 @@ In order to automate this digit recognition task, we need to know how images are
 You probably already know this, but to start from the beginning: Digital images are made up of small squares with uniform color and size, which are called *pixels* (short for "picture element").
 To build up a whole image, these pixels are arranged in a regular grid of rows and columns.
 The images above all have 28 rows and 28 columns of pixels, which each can be either fully black or fully white.
-Let's scale up one of these images to ten times it's size to actually see the pixels.
+Let's scale up one of these images to ten times its size to actually see the pixels.
 
 ![Enlarged version of MNIST_bw_1_3906](/assets/img/MNIST/MNIST_bw_1_3906_280x280.png)
 
@@ -198,7 +198,7 @@ One simple way of storing the above image in a machine-readable format is to cre
 
 If you squint your eyes a little, you can even still see the picture, but now it is just a bunch of zeros and ones.
 This image format is called a [Portable BitMap (PBM)](https://en.wikipedia.org/wiki/Netpbm#PBM_example), and it can actually be read by open-source image editing tools like [GIMP](https://www.gimp.org/).
-If you want to, you can try it out by downloading [the above PBM image](/assets/img/MNIST/MNIST_bw_1_3906.pbm).
+If you want to, you can try it out by downloading [the above image in PBM format](/assets/img/MNIST/MNIST_bw_1_3906.pbm).
 
 The image formats that you are used to, like JPEG, PNG, or GIF, are much more complicated, but this is just because they are designed to save storage space.
 Whenever images are displayed on the screen or opened in an image editor, it is in some bitmap-like format.
@@ -292,7 +292,7 @@ Matches for entry 2:
   Total number of matching pixels: 8
 ```
 
-Since database entry 2 has more matching pixels than database entry 1, our AI correctly chooses to copy the label of entry 2 and decides that the query image is a seven and not a one.
+Since database entry 2 has more matching pixels than database entry 1, our AI chooses to copy the label of entry 2 and correctly decides that the query image is a seven and not a one.
 
 Now that we know that our idea works, the only thing that is left to do is to turn it into a new formal algorithm description:
 
@@ -321,4 +321,4 @@ This also means that all implications that we have drawn for the spam detection 
 The facial recognition algorithm that tags people in Facebook photos follows the same basic laws as our digit recognition AI: It can only recognize new images based on existing images in its database.
 For example, if the database has too few images of women or black people, the AI will be sexist or racist, providing a better service to white males, which are better represented in the dataset.
 Of course, Facebook uses more complicated algorithms than the nearest neighbor approach, but no amount of math can change the fact that any AI will only be as good as the data it has been trained on.
-We will go into detail on this issue in one of the next posts, but first we will take a little more time to explore the variety of possible application areas of the nearest neighbor algorithm.
+We will go into detail on this issue in one of the next posts of the series, but first we will take a little more time to explore the variety of possible application areas of the nearest neighbor algorithm.
