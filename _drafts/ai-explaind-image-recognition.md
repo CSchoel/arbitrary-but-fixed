@@ -321,7 +321,7 @@ This also means that all implications that we have drawn for the spam detection 
 In particular, the "intelligence" of the algorithm still only comes from having good samples in the database that represent the set of possible inputs well.
 While the recognition of the slanted seven worked out fine in our simplified example, a database featuring larger images should definitely include both straight and slanted sevens, and possibly also sevens with an additional horizontal bar in the center.
 If it does not have enough of these examples, some sevens could be falsely recognized as ones or fours.
-This could result in a delay in package delivery, as the package would initially end up in the wrong district, but real-world examples of image recognition systems based on too simple datasets can have far worse outcomes:
+In our mail distribution center setting, this could result in a delay in package delivery, as the package would initially end up in the wrong district, but real-world examples of image recognition systems based on too simple datasets can have far worse outcomes:
 If you have dark skin, you have a [tenfold chance to be misidentified](https://www.wired.com/story/best-algorithms-struggle-recognize-black-faces-equally/) by state-of-the-art facial recognition software.
 This can lead to you not being able to pass through biometric passport validation at the airport or even a false identification as a criminal.
 A major source for this problem is likely the fact that the databases used to train these algorithms can have as much as 80% light-skinned persons.
