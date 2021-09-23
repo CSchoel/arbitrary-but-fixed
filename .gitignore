@@ -7,3 +7,6 @@ Gemfile.lock
 # LaTeX-output
 out
 *.pdf
+
+# Feedback
+feedback
