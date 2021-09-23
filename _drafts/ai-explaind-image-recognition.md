@@ -205,7 +205,7 @@ Whenever images are displayed on the screen or opened in an image editor, it is 
 
 ## Comparing images
 
-Not that we know how to read images into a computer program, we can start thinking about how to adjust our nearest neighbor algorithm to cope with 28x28 pixel images of digits.
+Now that we know how represent images in a format that can be understood by a computer program, we can start thinking about how to adjust our nearest neighbor algorithm to cope with 28x28 pixel images of digits.
 First, let's start by revisiting our spam detection algorithm:
 
 ### Algorithm: Simple spam detector
@@ -233,7 +233,7 @@ The `Query` is an unlabeled image that has to be recognized.
 And finally, the output is again a `Label`, but instead of only two options we now have to choose one of ten different labels that correspond to the ten digits from zero to nine.
 
 Moving to the steps of the algorithm, the "number of matching words" is, of course, meaningless for images.
-However, we can match something else to find the "nearest neighbor" of an image: The pixels.
+However, we can match something else to find the "nearest neighbor" of an image: the pixels.
 We can count the number of matching *pixels* by moving through both pictures at the same time, starting at the top left, and moving in "reading" order from left to right and from top to bottom.
 Every time the pixels at corresponding positions of the two images match, we increase the count of matching pixels by one.
 When we reach the bottom right of the image, we will have the total number of matching pixels between both images.
@@ -318,9 +318,14 @@ The resulting algorithm is still a nearest neighbor algorithm, it only needed to
 
 Again, we have turned the human task "recognize the handwritten number in this image" into a set of instructions for a machine that is now able to mimic this human decision-making process and thus can be considered an AI.
 This also means that all implications that we have drawn for the spam detection algorithm are also valid for image recognition tasks.
-The facial recognition algorithm that tags people in Facebook photos follows the same basic laws as our digit recognition AI: It can only recognize new images based on existing images in its database.
-For example, if the database has too few images of women or black people, the AI will be sexist or racist, providing a better service to white males, which are better represented in the dataset.
-Of course, Facebook uses more complicated algorithms than the nearest neighbor approach, but no amount of math can change the fact that any AI will only be as good as the data it has been trained on.
+In particular, the "intelligence" of the algorithm still only comes from having good samples in the database that represent the set of possible inputs well.
+While the recognition of the slanted seven worked out fine in our simplified example, a database featuring larger images should definitely include both straight and slanted sevens, and possibly also sevens with an additional horizontal bar in the center.
+If it does not have enough of these examples, some sevens could be falsely recognized as ones or fours.
+This could result in a delay in package delivery, as the package would initially end up in the wrong district, but real-world examples of image recognition systems based on too simple datasets can have far worse outcomes:
+If you have dark skin, you have a [tenfold chance to be misidentified](https://www.wired.com/story/best-algorithms-struggle-recognize-black-faces-equally/) by state-of-the-art facial recognition software.
+This can lead to you not being able to pass through biometric passport validation at the airport or even a false identification as a criminal.
+A major source for this problem is likely the fact that the databases used to train these algorithms can have as much as 80% light-skinned persons.
+Of course these systems use more complicated algorithms than our nearest neighbor approach, but as in cooking, it is all about the ingredients.
+If you give a bunch of moldy vegetables to a Michelin star chef and to a home-cook, the chef might be able to produce a more tolerable looking dish than the home-cook, but you probably would not want to eat either one.
+This problem is endearingly called [garbage in, garbage out](https://en.wikipedia.org/wiki/Garbage_in,_garbage_out).
 We will go into detail on this issue in one of the next posts of the series, but first we will take a little more time to explore the variety of possible application areas of the nearest neighbor algorithm.
-
-<!-- TODO: Maybe could use a little more humor/connection to the postal service example -->
