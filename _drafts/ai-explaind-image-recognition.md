@@ -329,3 +329,9 @@ Of course these systems use more complicated algorithms than our nearest neighbo
 If you give a bunch of moldy vegetables to a Michelin star chef and to a home-cook, the chef might be able to produce a more tolerable looking dish than the home-cook, but you probably would not want to eat either one.
 This problem is endearingly called [garbage in, garbage out](https://en.wikipedia.org/wiki/Garbage_in,_garbage_out).
 We will go into detail on this issue in one of the next posts of the series, but first we will take a little more time to explore the variety of possible application areas of the nearest neighbor algorithm.
+
+## Edits and Acknowledgements
+
+Since it was first published, this article has undergone the following changes due to reader feedback:
+
+* Added more detailed explanation of "garbage in, garbage out" (thanks to Annina)
