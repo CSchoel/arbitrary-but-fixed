@@ -249,17 +249,18 @@ Topics (each could be one post):
   - prediction problem
   - "distance" of two lists of integers (~> euclidean distance)
   - heterogeneous data (take date into account for summer/winter changes)
-- k-NN (optional)
-- Data: More is better
-  - show performance gain with increasing amount of data
-  - feature vector grows by one bit => percentage of feature space covered by samples is halved
-  - => massive amounts of data required for complex problems
 - Performance metrics
   - accuracy
   - precition/recall
   - sensitivity/specificity
   - f-measure
   - confusion matrix
+- Data: More is better
+  - show performance gain with increasing amount of data
+  - feature vector grows by one bit => percentage of feature space covered by samples is halved
+  - => massive amounts of data required for complex problems
+- k-NN (optional)
+  - k as means against overfitting!
 - The problem of Generalization vs Overfitting
   - separate knowledge base into test and train set
   - only result on unseen data is interesting
