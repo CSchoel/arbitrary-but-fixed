@@ -1,16 +1,17 @@
 ---
 layout: post
-title: 'Allowing copy and paste shortcuts in disabled (read-only) text widget in Tcl/Tk'
-description: >
-    The shortcuts CTRL-C and CTRL-V should work in every Tk text widget whether it is disabled or not.
-    However, a disabled "read-only" text widget currently allows these copy-paste shortcuts on some
-    but not all platforms.
+title: Allowing copy and paste shortcuts in disabled (read-only) text widget in Tcl/Tk
+description: 'The shortcuts CTRL-C and CTRL-V should work in every Tk text widget
+  whether it is disabled or not. However, a disabled "read-only" text widget currently
+  allows these copy-paste shortcuts on some but not all platforms.
+
+  '
 tags:
 - tcl/tk
 - Python
 - GUI
+date: 2021-11-21 18:05 +0100
 ---
-
 ## The Problem
 
 I wanted to write a simple Tk application that would assist my students in running unit tests for their exercises in an introductory Python course.
