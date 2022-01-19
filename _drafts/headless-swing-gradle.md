@@ -84,6 +84,7 @@ Maybe `xvfb-run` only works with programs that actually ask for a display or the
 Nope!
 None of this is true.
 The only downside of using `xvfb-run` for the whole gradle task is that the framebuffer will exist for a slightly longer duration than it is needed.
+In addition, there is no option in gradle for JUnit tests that could alter the call to the JVM beyond setting system properties and other JVM args.
 So in the sense of simplicity over premature optimization you can quote me on this: "You likely *do* want to run a gradle task through Xvfb." 😉
 
 ### Don't blindly use examples from man pages
@@ -124,3 +125,6 @@ Which would look like this in a GitHub actions workflow:
 - name: Tear down xvfb
   run: killall Xvfb
 ```
+
+By the way, there is a [bug report](https://bugs.freedesktop.org/show_bug.cgi?id=17453) for the misleading line in the man page, which was opened in 2008 and lead to a change in the man page that was implemented in 2018.
+Such is the way of low-priority issues, I guess.
