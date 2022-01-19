@@ -61,7 +61,7 @@ Surely Linux programmers have found some way to run X11-applications on a headle
 Right!
 There is the [X virtual framebuffer (Xvfb)](https://linux.die.net/man/1/xvfb), which holds an image buffer in memory that behaves like an X server display but does not require an actual display device.
 
-Xvfb comes with a simple tool `xvfb-run`, which runs a single command with such a Xvfb server and closes the server right after the command exits.
+Xvfb comes with a simple tool `xvfb-run`, which runs a single command with such an Xvfb server and closes the server right after the command exits.
 The solution for my GitHub workflow was therefore simply to install the `xvfb` package using `apt install xvfb` and then exchanging `./gradlew build` with `xvfb-run ./gradlew build`.
 Works like a charm. 🎉
 
