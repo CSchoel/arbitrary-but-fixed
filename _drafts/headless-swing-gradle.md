@@ -86,10 +86,10 @@ None of this is true.
 The only downside of using `xvfb-run` for the whole gradle task is that the framebuffer will exist for a slightly longer duration than it is needed.
 So in the sense of simplicity over premature optimization you can quote me on this: "You likely *do* want to run a gradle task through Xvfb." 😉
 
-### Don't blindly use examples from manpages
+### Don't blindly use examples from man pages
 
 Due to the aforementioned Ask Ubuntu answer, I first tried to avoid `xvfb-run` and instead set up xvfb manually.
-The first example in the manpage for xvfb (or at least the version that is [posted on die.net](https://linux.die.net/man/1/xvfb)) is the following:
+The first example in the man page for xvfb (or at least the version that is [online on die.net](https://linux.die.net/man/1/xvfb)) is the following:
 
 ```bash
 Xvfb :1 -screen 0 1600x1200x32
