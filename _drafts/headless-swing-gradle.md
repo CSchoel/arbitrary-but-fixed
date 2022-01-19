@@ -108,7 +108,7 @@ If, for some reason, you want to set up `Xvfb` manually without `xvfb-run`, you 
 
 ```bash
 export DISPLAY=:1
-Xvfb :1 -screen 0 1600x1200x16 &
+Xvfb :1 -screen 0 1600x1200x24 &
 # your call using the Xvfb display goes here
 killall Xvfb
 ```
@@ -117,7 +117,7 @@ Which would look like this in a GitHub actions workflow:
 
 ```yaml
 - name: Setup xvfb for screen 0
-  run: Xvfb :1 -screen 0 1600x1200x16 &
+  run: Xvfb :1 -screen 0 1600x1200x24 &
 - run: # your program call goes here
   env:
     DISPLAY: :1
