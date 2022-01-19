@@ -51,7 +51,7 @@ The term "headless" means that no display device is attached to the machine that
 ## Solution 1: Avoid code that can throw java.awt.HeadlessException
 
 Searching for the term "headless" in the [Oracle documentation](https://www.oracle.com/technical-resources/articles/javase/headless.html) reveals that this affects all graphical components except for `Canvas`, `Panel`, and `Image`.
-My simple test for drawing a rectangle on a `JPanel` could therefore also be performed in headless mode if I skip the creation of the `JFrame` in which the panel is displayed.
+My simple test for drawing a rectangle on a `JPanel` could therefore also be performed in headless mode if I skipped the creation of the `JFrame` in which the panel is displayed.
 However, I also plan to add fancier tests down the road, which will involve simulating user input through [`java.awt.Robot`](https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/java/awt/Robot.html), so this was not an option for me.
 
 ## Solution 2: Create a dummy display
