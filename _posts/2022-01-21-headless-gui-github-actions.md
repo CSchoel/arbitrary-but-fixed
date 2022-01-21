@@ -1,10 +1,13 @@
 ---
 layout: post
-title: How to run unit tests for GUIs on GitHub actions
-description: >
-    Continuous integration servers are typically headless, meaning that they do not have a display attached.
-    If you try to run any program that creates a GUI, you will get errors such as Java's java.awt.HeadlessException.
-    This post tells you how to avoid that for Gradle tests with JUnit involving Java Swing applications in a GitHub actions workflow.
+title: How to run headless unit tests for GUIs on GitHub actions
+description: 'Continuous integration servers are typically headless, meaning that
+  they do not have a display attached. If you try to run any program that creates
+  a GUI, you will get errors such as Java''s java.awt.HeadlessException. This post
+  tells you how to avoid that for Gradle tests with JUnit involving Java Swing applications
+  in a GitHub actions workflow.
+
+  '
 tags:
 - headless
 - swing
@@ -13,14 +16,14 @@ tags:
 - junit
 - continuous integration
 - gui
+date: 2022-01-21 19:08 +0100
 ---
-
 ## The problem: Headless GUI testing
 
 Building unit tests for GUIs is not entirely straightforward.
 Usually, you want to separate your application logic from your GUI as much as possible precisely because this makes the code easier to test and debug.
 However, what if the graphical display *is* the main part of the application?
-This is true for [FCanvas](https://github.com/CSchoel/fcanvas/), a project that I started in my first years of teaching at the THM and now recently uploaded to GitHub.
+This is true for [FCanvas](https://github.com/CSchoel/fcanvas/), a project that I started in my first years of teaching at the THM in 2013 and now recently uploaded to GitHub.
 FCanvas is a library that allows programming novices to draw on a canvas and create simple animations, so the core functionality is closely tied to what can be seen on the canvas.
 
 While brushing the dust off the project I also wanted to add a few unit tests to ensure that none of my refactoring attempts would introduce any bugs or visual glitches.
@@ -57,7 +60,7 @@ However, I also plan to add fancier tests down the road, which will involve simu
 ## Solution 2: Create a dummy display
 
 Instead, I searched for a way to fix the issue on the side of the operating system.
-Surely Linux programmers have found some way to run X11-applications on a headless server, right?
+Surely the Linux community has found some way to run X11-applications on a headless server, right?
 Right!
 There is the [X virtual framebuffer (Xvfb)](https://linux.die.net/man/1/xvfb), which holds an image buffer in memory that behaves like an X server display but does not require an actual display device.
 
@@ -77,15 +80,15 @@ Searching for the terms "xvfb" and "gradle" leads to [an Ask Ubuntu answer](http
 
 The context is using `xvfb-run` for a `gradle run` configuration, not for `gradle test` or `gradle build`.
 In that context the suggestion is somewhat sensible: Gradle *itself* does not need the display, only the sub-process that it starts does.
-Nonetheless, I thought that there might be some deeper meaning to why simply using `xvfb-run` directly with gradle would be a bad idea (the answer unfortunately does not explain this).
+Nonetheless, I thought that there might be some deeper meaning to why simply using `xvfb-run` directly with Gradle would be a bad idea (the Ask Ubuntu post unfortunately does not explain this).
 Maybe the display is not properly passed through to sub-processes?
 Maybe `xvfb-run` only works with programs that actually ask for a display or there is some other incompatibility with the `gradle` executable?
 
 Nope!
 None of this is true.
-The only downside of using `xvfb-run` for the whole gradle task is that the framebuffer will exist for a slightly longer duration than it is needed.
-In addition, there is no option in gradle for JUnit tests that could alter the call to the JVM beyond setting system properties and other JVM args.
-So in the sense of simplicity over premature optimization you can quote me on this: "You likely *do* want to run a gradle task through Xvfb." 😉
+The only downside of using `xvfb-run` for the whole Gradle task is that the framebuffer will exist for a slightly longer duration than it is needed.
+In contrast to `gradle run`, there also simply is no option in Gradle to alter the call used to start the unit tests beyond setting system properties and other JVM args.
+So in the sense of simplicity over premature optimization you can quote me on this: "You likely *do* want to run a Gradle task through Xvfb." 😉
 
 ### Don't blindly use examples from man pages
 
