@@ -55,8 +55,6 @@ To earn money with stock trading, you have to buy a stock when it has a low valu
 The core question we have to ask is therefore: "What will the price of the stock be next week?"
 This prediction of a future trend is the inherent risk in stock trading and the attack point that we want to tackle with our AI.
 
-[^1]: If you are as unfamiliar with stock market terms as me before I wrote this post: A company's stock encompasses an arbitrary number of shares (some companies could have a total of 1000 shares, others a total of 50000), which represent a share (hence the name) of the company itself.
-
 ## Data series as database entries
 
 The first difference that you might notice between this task and the previous ones is that our dataset is no longer composed of individual items that are independent of each other.
@@ -151,3 +149,7 @@ For this, we basically have two possible approaches:
 2. We can simply run our algorithm multiple times.
   If we predicted the value 59 for the history [50, 54, 60], we can then see what our AI yields for the new query [54, 60, 59].
   This does not require to change the algorithm or to acquire more data, but it also means that our errors will accumulate, and our predictions will get increasingly unreliable the longer the desired output.
+
+---
+
+[^1]: If you are as unfamiliar with stock market terms as me before I wrote this post: A company's stock encompasses an arbitrary number of shares (some companies could have a total of 1000 shares, others a total of 50000), which represent a share (hence the name) of the company itself.
