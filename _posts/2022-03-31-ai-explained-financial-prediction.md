@@ -1,18 +1,18 @@
 ---
 layout: post
 title: 'AI for laypersons: Stock price prediction with nearest neighbors'
-description: 'In the first post of the ''AI for laypersons'' series, I introduced
-  a very simple AI based on the nearest neighbor algorithm. In this post, I want to
-  show that the same idea can also be applied to prediction tasks such as the
-  prediction of stock prices.'
+description: In the first post of the 'AI for laypersons' series, I introduced a very
+  simple AI based on the nearest neighbor algorithm. In this post, I want to show
+  that the same idea can also be applied to prediction tasks such as the prediction
+  of stock prices.
 categories:
 - AI for laypersons
 tags:
 - artificial intelligence
 - machine learning
 - image recognition
+date: 2022-03-31 21:48 +0200
 ---
-
 <!--
 Stock market prediction (prediction)
   - prediction problem
