@@ -11,7 +11,6 @@ tags:
 - artificial intelligence
 - machine learning
 - image recognition
-math: true
 ---
 
 <!--
