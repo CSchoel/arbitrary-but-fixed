@@ -33,7 +33,7 @@ In this post, I want to give another example of the broad applicability of this 
 ## A new task: Stock market prediction
 
 Today I will teach you how to get rich quick—just kidding, *please do not use the techniques presented here for actual stock trading*.
-That being said, it *is* interesting to think about the problem how one could predict the price of a stock on the following day given the price history over the last five, ten, or five hundred days.
+That being said, it *is* interesting to think about the problem how one could predict the price of a stock on the following day or in the following week given the price history.
 After all, very real money is being made with artificial intelligence in this area.
 
 Our data might look as follows:
@@ -48,10 +48,10 @@ Our data might look as follows:
 |2022-04-05|58|
 
 In this case we see the price of a single share of a company's stock[^1] change from week to week.
-I have chosen weeks instead of days here because this allows us always have the same step size between two data points even when markets are closed on the weekend.
+I have chosen weeks instead of days here because then we do not have to consider that markets are closed on the weekend.
 In principle, however, we could also formulate this problem for daily or monthly prices.
 
-To earn money with stock trading, you have to buy a stock when it has a low value and then sell it when its value has risen.
+To earn money with stock trading, you have to buy shares of a stock when they have a low value and then sell them when their value has risen.
 The core question we have to ask is therefore: "What will the price of the stock be next week?"
 This prediction of a future trend is the inherent risk in stock trading and the attack point that we want to tackle with our AI.
 
@@ -71,46 +71,43 @@ We can then split the data series into subseries of four successive weeks, where
 | 54, 60, 59 | 57 |
 | 60, 59, 57 | 58 |
 
-In this table I have let the individual histories overlap (week 1–3, week 2–3, and week 3-4) to obtain as many database entries as possible.
+In this table I have used overlapping individual histories (week 1–3, week 2–4, and week 3-5) to obtain as many database entries as possible.
 
 ## Neighbors of data series
 
-Now that we know how our database entries look the question remains how to determine the similarity between two of these entries in order to find our beloved nearest neighbors.
-To do this, let's imagine the numbers 50, 54, and 60 were not values of a share across three successive weeks but instead x-,y-, and z-coordinates in a three-dimensional coordinate system.
-For this case you can look up the answer, which is called the Euclidean distance, in a math textbook of your choice or [on Wikipedia](https://en.wikipedia.org/wiki/Euclidean_distance#Higher_dimensions):
+Now that we know how our database entries look, the question remains how to determine the similarity between two of these entries in order to find our beloved nearest neighbors.
+In our previous examples, we always just counted the number of matching items (words, pixels) between the two database entries.
+Since our database entries now consist of arbitrary numbers, that does not work anymore.
+Instead, we have to calculate how close these numbers are to each other.
+The easiest way to do so is to take the absolute difference between them, that is, subtract the one from the other and if the result is negative, just flip the sign to obtain a positive number.
+For example, the individual differences between the numbers in the first two database entries would look like this:
 
-$$
-d(p,q) = \sqrt{ (p_1 - q_1)^2 + (p_2 - q_2)^2 + (p_3 - q_3)^2 }
-$$
+| | Entry 1 | Entry 2 | Abs. diff. |
+|-| ------- | ------- | ---------- |
+| last week | 50 | 54 | \|50 - 54\| = \|-4\| = 4 |
+| 2nd last week | 54 | 60 | \|54 - 60\| = \|-6\| = 6 |
+| 3rd last week | 60 | 59 | \|60 - 59\| = \|1\| = 1
 
-Here $p = (p_1, p_2, p_3)$ is the first point and $q = (q_1, q_2, q_3)$ is the second point between which the distance should be taken.
-So if we would like to calculate the distance between our first two database entries, we would do the following:
+The smaller these differences are, the higher the similarity between the two entries.
+However, each difference still consists of three numbers.
+Is a difference of (4, 6, 1) larger or smaller than a difference of (3, 5, 2)?
+To answer this problem we need to condense the difference down to a single number, for example by simply taking the sum of the individual differences.
+For our example, we can then say that 4 + 6 + 1 = 11 is indeed larger than 3 + 5 + 2 = 10.
 
-$$
-\begin{align}
-d(e_1, e_2) & = \sqrt{(50-54)^2 + (54-60)^2 + (60-59)^2} \\
-& = \sqrt{-4^2 + -6^2 + 1^2} \\
-& = \sqrt{16 + 36 + 1} \\
-& = \sqrt{53} \\
-& \approx 7.28
-\end{align}
-$$
-
-Having exactly three values is convenient here to be able to visualize what is actually happening, but the Euclidean distance can be used for an arbitrary number of coordinates (i.e. in more than three dimensions).
-If a fourth coordinate is added, an additional term $(p_4 - q_4)^2$ enters under the square root and this can be repeated for a fifth, sixth and even more dimensions.
-You do not have to understand the specifics of this, just that there is a mathematical formula that we can now use to calculate the distance between two database entries that consist of a fixed number of numerical values.
+In a real application, one would use more complex formulas such as the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance#Higher_dimensions), but for our purposes this simple sum of differences is perfectly fine.
 
 ## Predicting numbers instead of classes
 
-In the previous section I have put the term "label" in quotes, since we actually do not want to predict distinct labels (such as "ham", "spam", "digit 1", or "digit 2") but an arbitrary number.
-Next week the share value could drop to zero, or it could double or quadruple.
+When discussing our database format, I have put the term "label" in quotes, since we actually do not want to predict distinct labels (such as "ham", "spam", "digit 1", or "digit 2") but an arbitrary number.
+After a week the share value could drop to zero, or it could double or quadruple.
 While some answers are of course more probable than others, the theoretical number of possibilities is endless.
 
 How can we deal with this infinite number of possible labels?
 The answer is surprisingly simple: We do the same as before.
-Once we have found the nearest neighbor to a given series of share values, we again simply copy the share value at the fourth week as our prediction.
+Once we have found the nearest neighbor to a given series of share values, we simply copy the share value at the fourth week as our prediction.
 
 This has the disadvantage that we will never produce any numbers that are not already in the database, but this can be compensated by having a really large database with a good coverage of different cases, which we would need anyway to make good predictions.
+Alternatively, we could also store trends (by how much did the value rise/fall between weeks) instead of absolute values, which would also allow us to predict an infinitely rising or falling trend, but for now we just want a simple solution that works.
 
 ## Putting together the algorithm
 
@@ -120,7 +117,7 @@ With this, we have all the information that we need to build an AI using the nea
 
 Inputs:
 
-* `Database`: list of three-week share value histories
+* `Database`: list of three-week share value histories with separate fourth-week value
 * `Query`: a three-week share value history
 
 Output:
@@ -129,14 +126,17 @@ Output:
 
 Steps:
 
-1. For all histories in the database, calculate the Euclidean distance between that history and the query.
-2. Find the database entry with the smallest distance.
+1. For all histories in the database, calculate the sum of absolute differences between that history and the query.
+2. Find the database entry with the smallest sum of differences.
 3. Output the fourth-week value attached to this database entry.
 
 Again, we have successfully converted the human task "Find the share price that this stock will have next week." into a set of instructions that can be automatically performed by a computer.
-While you will definitely not get rich quick with this particular algorithm, real trading algorithms do follow the same principle to get as much information out of existing historical data in order to predict share values in the future—and they are as susceptible to unforeseen patterns that do not appear in their dataset.
+While you will definitely not get rich quick with this particular algorithm, real trading algorithms do follow the same principle to get as much information out of existing historical data in order to predict share values in the future—and they are as susceptible to unforeseen patterns that do not appear in their database.
 
-If you imagine a much more sophisticated algorithm than this one running on years and years of data from thousands of stocks, maybe also analyzing twitter statements about the companies and the behavior of other traders and then making sub-second decisions, it is easy to see why high-frequency trading is so effective at making the rich even richer and why people who do not have access to these algorithms tend to lose out in comparison.
+If you imagine a much more sophisticated algorithm than this one running on years and years of data from thousands of stocks, maybe also analyzing the behavior of other traders and then making sub-second decisions, it is easy to see why high-frequency trading is so effective at making the rich even richer and why people who do not have access to these tools tend to lose out in comparison.
+
+To paint a less bleak picture, we have unlocked a whole new class of problems that we can now tackle with our AI approach, namely all problems that require us to predict a numeric value that depends on a list of other numeric values.
+This general task is called [regression analysis](https://en.wikipedia.org/wiki/Regression_analysis), and it can also, for example, be used to predict crop yield in agriculture or the effect of medication on blood pressure based on patient-specific data.
 
 ## Beyond one week
 
@@ -149,6 +149,12 @@ For this, we basically have two possible approaches:
 2. We can simply run our algorithm multiple times.
   If we predicted the value 59 for the history [50, 54, 60], we can then see what our AI yields for the new query [54, 60, 59].
   This does not require to change the algorithm or to acquire more data, but it also means that our errors will accumulate, and our predictions will get increasingly unreliable the longer the desired output.
+
+## Next steps
+
+We have now seen that the nearest neighbor algorithm is very flexible and in principle behaves similar to state-of-the-art machine learning approaches across a large variety of tasks.
+To dive deeper into the core principles of artificial intelligence, we just need to take one additional step moving from one to an arbitrary number k of neighbors to obtain the k-nearest neighbor algorithm.
+This will be established in the next post in this series.
 
 ---
 
