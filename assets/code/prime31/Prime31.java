@@ -34,14 +34,16 @@ public class Prime31 {
         return result;
     }
 
-    public static <A> int countCollisions(int prime, List<A[]> objects) {
+    public static <A> int countCollisions(int prime, boolean second, List<A[]> objects) {
         Set<Integer> codes = new HashSet<>();
         int collisions = 0;
         int exp = (int) Math.round(Math.ceil(Math.log(objects.size()) / Math.log(2)));
         int buckets = 1 << exp;
         for (A[] o: objects) {
             Integer c = hashCodeP(prime, o);
-            c = hash(c); // apply second hash from HashMap impl
+            if (second) {
+                c = hash(c); // apply second hash from HashMap impl
+            }
             int b = c % buckets;
             if (codes.contains(b)) {
                 collisions++;
@@ -77,9 +79,10 @@ public class Prime31 {
     public static void main(String[] args) {
         List<Integer[]> points = generatePoints();
         for (int p: primes) {
-            int cPoints = countCollisions(p, points);
-            int cPointsS = countCollisions(p, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
-            System.out.println(String.format("%6d: %6d %6d", p, cPoints, cPointsS));
+            int cPoints = countCollisions(p, true, points);
+            int cPointsString = countCollisions(p, true, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
+            int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
+            System.out.println(String.format("%6d: %6d %6d %6d", p, cPoints, cPointsString, cPointsCustom));
         }
     }
 }
