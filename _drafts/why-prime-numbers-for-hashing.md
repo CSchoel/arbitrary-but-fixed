@@ -36,6 +36,14 @@ public static int hashCode(Object a[]) {
 }
 ```
 
+<!--
+Possible tests:
+- words (german / english)
+- dates (as three integers)
+- colors (as ARGB, but with A = 0 and with shortened hex code)
+- points (two ints within 1024 x 786)
+-->
+
 And that is where we have our question for today: Why does the function look like this? Why the magic number 31, and why the successive multiplication of the whole result by that number?
 
 ## Non-Answers
