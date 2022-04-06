@@ -34,8 +34,9 @@ public class Prime31 {
     public static <A> int countCollisions(int prime, List<A[]> objects) {
         Set<Integer> codes = new HashSet<>();
         int collisions = 0;
-        int buckets = (int) Math.round(Math.ceil(Math.log(objects.size()) / Math.log(2)));
-        for (Object[] o: objects) {
+        int exp = (int) Math.round(Math.ceil(Math.log(objects.size()) / Math.log(2)));
+        int buckets = 1 << exp;
+        for (A[] o: objects) {
             int b = hashCodeP(prime, o) % buckets;
             if (codes.contains(b)) {
                 collisions++;
