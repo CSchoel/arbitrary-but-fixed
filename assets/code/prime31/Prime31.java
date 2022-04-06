@@ -76,8 +76,10 @@ public class Prime31 {
 
     public static void main(String[] args) {
         for (int p: primes) {
-            int cPoints = countCollisions(p, generatePoints());
-            System.out.println(String.format("%6d: %6d", p, cPoints));
+            List<Integer[]> points = generatePoints();
+            int cPoints = countCollisions(p, points);
+            int cPointsS = countCollisions(p, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
+            System.out.println(String.format("%6d: %6d %6d", p, cPoints, cPointsS));
         }
     }
 }
