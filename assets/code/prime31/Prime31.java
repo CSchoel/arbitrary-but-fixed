@@ -1,3 +1,5 @@
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -56,7 +58,11 @@ public class Prime31 {
             int y = r.nextInt(768);
             points.add(new Point(x, y));
         }
-        return points.stream().map(p -> new Integer[]{p.x, p.y}).toList();
+        List<Integer[]> lst = points.stream().map(p -> new Integer[]{p.x, p.y}).toList();
+        lst = new ArrayList<>(lst);
+        Collections.sort(lst, Comparator.comparing(p -> p[1]));
+        Collections.sort(lst, Comparator.comparing(p -> p[0]));
+        return lst;
     }
 
     public static void main(String[] args) {
