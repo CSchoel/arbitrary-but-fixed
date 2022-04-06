@@ -40,7 +40,9 @@ public class Prime31 {
         int exp = (int) Math.round(Math.ceil(Math.log(objects.size()) / Math.log(2)));
         int buckets = 1 << exp;
         for (A[] o: objects) {
-            int b = hashCodeP(prime, o) % buckets;
+            Integer c = hashCodeP(prime, o);
+            c = hash(c); // apply second hash from HashMap impl
+            int b = c % buckets;
             if (codes.contains(b)) {
                 collisions++;
             }
@@ -64,6 +66,12 @@ public class Prime31 {
         Collections.sort(lst, Comparator.comparing(p -> p[1]));
         Collections.sort(lst, Comparator.comparing(p -> p[0]));
         return lst;
+    }
+
+    // copied from java.util.HashMap
+    static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
     public static void main(String[] args) {
