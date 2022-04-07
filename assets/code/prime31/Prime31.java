@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -70,6 +72,22 @@ public class Prime31 {
         return lst;
     }
 
+    public static List<Integer[]> generateDates() {
+        Set<LocalDate> dates = new HashSet<>();
+        Random r = new Random();
+        while(dates.size() < 1000) {
+            int year = 2013 + r.nextInt(10);
+            int month = 1 + r.nextInt(12);
+            YearMonth ym = YearMonth.of(year, month);
+            int day = 1 + r.nextInt(ym.lengthOfMonth());
+            dates.add(ym.atDay(day));
+        }
+        List<Integer[]> lst = dates.stream()
+            .map(x -> new Integer[]{x.getYear(), x.getMonthValue(), x.getDayOfMonth()})
+            .toList();
+        return lst;
+    }
+
     // copied from java.util.HashMap
     static final int hash(Object key) {
         int h;
@@ -78,11 +96,17 @@ public class Prime31 {
 
     public static void main(String[] args) {
         List<Integer[]> points = generatePoints();
+        List<Integer[]> dates = generateDates();
         for (int p: primes) {
             int cPoints = countCollisions(p, true, points);
             int cPointsString = countCollisions(p, true, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
             int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
-            System.out.println(String.format("%6d: %6d %6d %6d", p, cPoints, cPointsString, cPointsCustom));
+            int cDates = countCollisions(p, true, dates);
+            String msg = String.format(
+                "%6d: %6d %6d %6d %4d", p,
+                cPoints, cPointsString, cPointsCustom, cDates
+            );
+            System.out.println(msg);
         }
     }
 }
