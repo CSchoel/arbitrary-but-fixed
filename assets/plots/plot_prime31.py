@@ -1,6 +1,7 @@
 import pathlib
 from bokeh.plotting import figure, show
 from bokeh.models import FactorRange
+from bokeh.transform import dodge
 import numpy as np
 import pandas as pd
 import itertools as it
@@ -17,8 +18,8 @@ def plot_prime31():
     #     f.line("prime", e, source=data)
     x = [(str(p), e) for p, e in it.product(data["prime"], experiments)]
     y = sum([tuple(v) for v in data[experiments].values], ())
-    f = figure(x_range=FactorRange(*x), title="Collision probabilities for different primes", x_axis_label='prime', y_axis_label='collisions [%]')
-    f.vbar(x=x, top=y)
+    f = figure(x_range=[str(x) for x in data["prime"]], title="Collision probabilities for different primes", x_axis_label='prime', y_axis_label='collisions [%]')
+    f.vbar(x=dodge("prime", 0.0, range=f.x_range), top="english", source=data)
     show(f)
 
 if __name__ == "__main__":
