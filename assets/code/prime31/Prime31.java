@@ -126,15 +126,17 @@ public class Prime31 {
             int cPointsString = countCollisions(p, true, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
             int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
             int cDates = countCollisions(p, true, dates);
+            int cDatesString = countCollisions(p, true, dates.stream().map(d -> new String[]{String.format("%d-%02d-%02d", d[0], d[1], d[2])}).toList());
             int cEnglish = countCollisions(p, true, wordsE);
             int cGerman = countCollisions(p, true, wordsG);
             t = System.nanoTime() - t;
             String msg = String.format(
-                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", p,
+                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", p,
                 100.0 * cPoints / points.size(),
                 100.0 * cPointsString / points.size(),
                 100.0 * cPointsCustom / points.size(),
                 100.0 * cDates / dates.size(),
+                100.0 * cDatesString / dates.size(),
                 100.0 * cEnglish / wordsE.size(),
                 100.0 * cGerman / wordsG.size(),
                 1.0 * t / 1000_000
