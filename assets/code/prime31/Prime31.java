@@ -1,9 +1,11 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -92,11 +94,15 @@ public class Prime31 {
         return lst;
     }
 
-    public static List<Character[]> generateWords(String fname) {
+    public static List<Character[]> generateWords(String fname) throws IOException {
         Path p = Paths.get(fname);
         List<Character[]> lst = Files.lines(p)
-            .map(x -> x.split(";")[x.contains("; ;") ? 2 : 1].toCharArray())
-            .toList();
+            .map(x ->
+                x.split(";")[x.contains("; ;") ? 2 : 1]
+                    .chars()
+                    .mapToObj(c -> Character.valueOf((char) c))
+                    .toArray(Character[]::new)
+            ).toList();
         return lst;
     }
 
@@ -106,7 +112,7 @@ public class Prime31 {
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<Integer[]> points = generatePoints();
         List<Integer[]> dates = generateDates();
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
