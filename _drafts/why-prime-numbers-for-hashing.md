@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Explaining default hash functions including the use of the prime number 31 in the String and Arrays classes in Java
+title: Explaining default hash functions including the huse of the prime number 31 in the String and Arrays classes in Java
 description: >
     Ever looked at default implementations of hash functions and wondered: Why prime numbers? Why 31 specifically? And why do we multiply multiple times with the same prime number? If so, this post is for you.
 tags:
@@ -10,7 +10,7 @@ tags:
 - hash table
 ---
 
-## Prerequisites
+## Prerequisites: What is a hash table?
 
 A hash table allows storing and retrieving values, which are identified by associated keys.
 They are the data structure behind the types that we known as map, dict, or hash.
