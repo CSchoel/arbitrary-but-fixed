@@ -1,7 +1,6 @@
 import pathlib
 from bokeh.plotting import figure, show
-from bokeh.models import FactorRange
-from bokeh.transform import dodge
+from bokeh.palettes import Bokeh7
 import numpy as np
 import pandas as pd
 import itertools as it
@@ -12,14 +11,13 @@ def plot_prime31():
     """
     Plots 2D scatter plot of successive values in sample data
     """
+    colors = Bokeh7
     data = pd.read_csv(cwd / "prime31.csv", delimiter=";")
     experiments = [x for x in data.columns.values if x not in ["prime", "time"]]
-    # for e in experiments:
-    #     f.line("prime", e, source=data)
-    x = [(str(p), e) for p, e in it.product(data["prime"], experiments)]
-    y = sum([tuple(v) for v in data[experiments].values], ())
-    f = figure(x_range=[str(x) for x in data["prime"]], title="Collision probabilities for different primes", x_axis_label='prime', y_axis_label='collisions [%]')
-    f.vbar(x=dodge("prime", 0.0, range=f.x_range), top="english", source=data)
+    f = figure(x_range=(2, 500), title="Collision probabilities for different primes", x_axis_label='prime', y_axis_label='collisions [%]')
+    for e, c in zip(experiments, Bokeh7):
+        f.line("prime", e, color=c, source=data)
+
     show(f)
 
 if __name__ == "__main__":
