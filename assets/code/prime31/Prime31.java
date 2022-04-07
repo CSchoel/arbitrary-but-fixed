@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -118,6 +120,8 @@ public class Prime31 {
         List<Integer[]> dates = generateDates();
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
+        StringBuilder output = new StringBuilder();
+        output.append("prime;points raw;points string;points custom;dates raw;dates string;english;german;time\n");
         for (int p: primes) {
             // NOTE: this is not how you do accurate time measurements in java
             //       => do not take this measure too seriously
@@ -130,8 +134,8 @@ public class Prime31 {
             int cEnglish = countCollisions(p, true, wordsE);
             int cGerman = countCollisions(p, true, wordsG);
             t = System.nanoTime() - t;
-            String msg = String.format(
-                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", p,
+            Object[] data = {
+                p,
                 100.0 * cPoints / points.size(),
                 100.0 * cPointsString / points.size(),
                 100.0 * cPointsCustom / points.size(),
@@ -140,8 +144,20 @@ public class Prime31 {
                 100.0 * cEnglish / wordsE.size(),
                 100.0 * cGerman / wordsG.size(),
                 1.0 * t / 1000_000
+            }
+            String msg = String.format(
+                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", data
             );
+            String line = String.format(
+                "%d;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.3f\n", data
+            );
+            output.append(line);
             System.out.println(msg);
         }
+        Path outfile = Paths.get("assets/code/plots/prime31.csv");
+        Files.write(
+            outfile,
+            output.toString().getBytes(StandardCharsets.UTF_8)
+        );
     }
 }
