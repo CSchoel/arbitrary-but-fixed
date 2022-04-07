@@ -114,11 +114,7 @@ public class Prime31 {
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
-    public static void main(String[] args) throws IOException {
-        List<Integer[]> points = generatePoints();
-        List<Integer[]> dates = generateDates();
-        List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
-        List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
+    public static void runTests(List<Integer[]> points, List<Integer[]> dates, List<Character[]> wordsE, List<Character[]> wordsG) throws IOException {
         StringBuilder output = new StringBuilder();
         output.append("prime;points raw;points string;points custom;dates raw;dates string;english;german;time\n");
         for (int p: primes) {
@@ -158,5 +154,15 @@ public class Prime31 {
             outfile,
             output.toString().getBytes(StandardCharsets.UTF_8)
         );
+    }
+
+    public static void main(String[] args) throws IOException {
+        List<Integer[]> points = generatePoints();
+        List<Integer[]> dates = generateDates();
+        List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
+        List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
+        runTests(points, dates, wordsE, wordsG);
+        // run twice to avoid measurement erro from JVM warmup
+        runTests(points, dates, wordsE, wordsG);
     }
 }
