@@ -75,8 +75,8 @@ public class Prime31 {
     public static List<Integer[]> generateDates() {
         Set<LocalDate> dates = new HashSet<>();
         Random r = new Random();
-        while(dates.size() < 1000) {
-            int year = 2013 + r.nextInt(10);
+        while(dates.size() < 10000) {
+            int year = 1983 + r.nextInt(40);
             int month = 1 + r.nextInt(12);
             YearMonth ym = YearMonth.of(year, month);
             int day = 1 + r.nextInt(ym.lengthOfMonth());
@@ -103,7 +103,7 @@ public class Prime31 {
             int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
             int cDates = countCollisions(p, true, dates);
             String msg = String.format(
-                "%6d: %6d %6d %6d %4d", p,
+                "%6d: %6d %6d %6d %5d", p,
                 cPoints, cPointsString, cPointsCustom, cDates
             );
             System.out.println(msg);
