@@ -97,9 +97,10 @@ public class Prime31 {
     public static List<Character[]> generateWords(String fname) throws IOException {
         Path p = Paths.get(fname);
         List<Character[]> lst = Files.lines(p)
-            .map(x ->
-                x.split(";")[x.contains("; ;") ? 2 : 1]
-                    .chars()
+            .map(x -> x.split(";"))
+            .map(ar -> ar[1].charAt(0) == '\u00a0' ? ar[2] : ar[1])
+            .map(s ->
+                s.chars()
                     .mapToObj(c -> Character.valueOf((char) c))
                     .toArray(Character[]::new)
             ).toList();
