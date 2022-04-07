@@ -1,13 +1,12 @@
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -144,7 +143,7 @@ public class Prime31 {
                 100.0 * cEnglish / wordsE.size(),
                 100.0 * cGerman / wordsG.size(),
                 1.0 * t / 1000_000
-            }
+            };
             String msg = String.format(
                 "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", data
             );
@@ -154,7 +153,7 @@ public class Prime31 {
             output.append(line);
             System.out.println(msg);
         }
-        Path outfile = Paths.get("assets/code/plots/prime31.csv");
+        Path outfile = Paths.get("assets/plots/prime31.csv");
         Files.write(
             outfile,
             output.toString().getBytes(StandardCharsets.UTF_8)
