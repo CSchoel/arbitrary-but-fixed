@@ -1,3 +1,6 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -89,6 +92,14 @@ public class Prime31 {
         return lst;
     }
 
+    public static List<Character[]> generateWords(String fname) {
+        Path p = Paths.get(fname);
+        List<Character[]> lst = Files.lines(p)
+            .map(x -> x.split(";")[x.contains("; ;") ? 2 : 1].toCharArray())
+            .toList();
+        return lst;
+    }
+
     // copied from java.util.HashMap
     static final int hash(Object key) {
         int h;
@@ -98,17 +109,23 @@ public class Prime31 {
     public static void main(String[] args) {
         List<Integer[]> points = generatePoints();
         List<Integer[]> dates = generateDates();
+        List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
+        List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
         for (int p: primes) {
             int cPoints = countCollisions(p, true, points);
             int cPointsString = countCollisions(p, true, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
             int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
             int cDates = countCollisions(p, true, dates);
+            int cEnglish = countCollisions(p, true, wordsE);
+            int cGerman = countCollisions(p, true, wordsG);
             String msg = String.format(
-                "%6d: %4.1f %4.1f %4.1f %4.1f", p,
+                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f", p,
                 100.0 * cPoints / points.size(),
                 100.0 * cPointsString / points.size(),
                 100.0 * cPointsCustom / points.size(),
-                100.0 * cDates / dates.size()
+                100.0 * cDates / dates.size(),
+                100.0 * cEnglish / wordsE.size(),
+                100.0 * cGerman / wordsG.size()
             );
             System.out.println(msg);
         }
