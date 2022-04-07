@@ -1,7 +1,5 @@
-from bokeh.plotting import figure, show
-from bokeh.models.formatters import DatetimeTickFormatter
 import pathlib
-import datetime
+from bokeh.plotting import figure, show
 import numpy as np
 import pandas as pd
 
