@@ -104,8 +104,11 @@ public class Prime31 {
             int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
             int cDates = countCollisions(p, true, dates);
             String msg = String.format(
-                "%6d: %6d %6d %6d %5d", p,
-                cPoints, cPointsString, cPointsCustom, cDates
+                "%6d: %4.1f %4.1f %4.1f %4.1f", p,
+                100.0 * cPoints / points.size(),
+                100.0 * cPointsString / points.size(),
+                100.0 * cPointsCustom / points.size(),
+                100.0 * cDates / dates.size()
             );
             System.out.println(msg);
         }
