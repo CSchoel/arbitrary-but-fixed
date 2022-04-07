@@ -119,6 +119,8 @@ public class Prime31 {
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
         for (int p: primes) {
+            // NOTE: this is not how you do accurate time measurements in java
+            //       => do not take this measure too seriously
             long t = System.nanoTime();
             int cPoints = countCollisions(p, true, points);
             int cPointsString = countCollisions(p, true, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
