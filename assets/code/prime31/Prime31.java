@@ -119,20 +119,23 @@ public class Prime31 {
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
         for (int p: primes) {
+            long t = System.nanoTime();
             int cPoints = countCollisions(p, true, points);
             int cPointsString = countCollisions(p, true, points.stream().map(x -> new String[]{String.format("(%d, %d)", (Object[])x)}).toList());
             int cPointsCustom = countCollisions(p, false, points.stream().map(x -> new Integer[]{x[1] * 1024 + x[0]}).toList());
             int cDates = countCollisions(p, true, dates);
             int cEnglish = countCollisions(p, true, wordsE);
             int cGerman = countCollisions(p, true, wordsG);
+            t = System.nanoTime() - t;
             String msg = String.format(
-                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f", p,
+                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", p,
                 100.0 * cPoints / points.size(),
                 100.0 * cPointsString / points.size(),
                 100.0 * cPointsCustom / points.size(),
                 100.0 * cDates / dates.size(),
                 100.0 * cEnglish / wordsE.size(),
-                100.0 * cGerman / wordsG.size()
+                100.0 * cGerman / wordsG.size(),
+                1.0 * t / 1000_000
             );
             System.out.println(msg);
         }
