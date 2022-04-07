@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why do we use prime numbers in hash functions?
+title: Explaining default hash functions including the use of the prime number 31 in the String and Arrays classes in Java
 description: >
     Ever looked at default implementations of hash functions and wondered: Why prime numbers? Why 31 specifically? And why do we multiply multiple times with the same prime number? If so, this post is for you.
 tags:
@@ -13,7 +13,23 @@ tags:
 ## Prerequisites
 
 A hash table allows storing and retrieving values, which are identified by associated keys.
+They are the data structure behind the types that we known as map, dict, or hash.
+The main idea of a hash table is to calculate an integer value for each key that can be used to determine the index where the associated value should be stored in an array.
+This magic integer is called a hash and the array structure in which the values are stored is sometimes called a table - hence the name hash table.
+Since the number of elements to be stored is usually smaller than the maximum integer value, the actual array index is determined by using the modulo operation to obtain `index = hash(key) % size`.
 
+The main difficulty in finding a good `hash()` function is that the range of available hashes is limited by the number of possible (positive) integer values while the theoretical number of possible key objects is often infinite or at least much larger.
+Take the example of using strings as keys: A string can have aribitrary length, but there are only 2<sup>31</sup> possible different results of `hash(s)`.
+This implies that *some* Strings will need to have the exact same hash value and will therefore be put into the same index in the hash table, even though they are completely different.
+Even if two different strings have a different hash value, they can still end up with the same index through the modulo operation.
+For example, lets say the string `"foo"` has a hash of 5 and the string `"bar"` has a hash of 9.
+If both strings are put into a hash table of size 4, they both are assigned the index 1 since `5 % 4 = 1` and `9 % 4 = 1`.
+
+There are different possibilities to solve these collisions, the most common of which is called *separate chaining*.
+It works by actually storing a linked list in each of the entries of the array and chaining the values that are assigned to the same index in this list.
+Each time you retrieve a value from the hash table you then have to do a sequential search in this "bucket" of values.
+Regardless of which mechanism is used to avoid collisions, a high number of collisions in a hash table will mean more searching and therefore a slower access to the individual values.
+A good hash function is therefore one that minimizes collisions by spreading out hash values as uniformly as possible across the integer value range, avoiding any clusters of similar keys that end up with the same hash value.
 
 ## The Question
 
