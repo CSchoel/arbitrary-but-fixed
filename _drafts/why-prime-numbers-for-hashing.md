@@ -33,24 +33,46 @@ A good hash function is therefore one that minimizes collisions by spreading out
 
 ## The Question
 
-In order to use a new custom data type as key in a hash function, we need to know how to calculate the hash code of an instance of that data type.
-Finding a good hash function is hard, and usually the best bet is to resort to using predefined functions in the standard library to just combine hash codes of the more primitive values that make up the state of the object.
+To use a particular data type as a key in a hash table, we need a hash function for that particular data type.
+Finding a good hash function is hard, and usually the best bet is to resort to using predefined functions in the standard library.
+However, it is never a good idea to blindly trust an algorithm without having a general understanding how it works and why we should use it in place of other alternatives.
+At the very least, this knowledge will help to anticipate and debug issues that may occur in our application.
 
-In Java, the standard way is to use `Objects.hashCode(Object ...)`, which redirects calls to `Arrays.hashCode(Object[])`:
+In Java, two methods are therefore of particular interest:
 
-```java
-public static int hashCode(Object a[]) {
-    if (a == null)
-        return 0;
+* `String.hashCode()` implements the hashing function for the data type `String`, which is both often used as key for hash tables and is very flexible since it can have an arbitrary length.
+    Ignoring particularities like internal caching of hash codes and the Java 9 feature to compact strings to store them in latin-1 encoding if possible, we arrive at `StringUTF16.hashCode(byte[])`:
 
-    int result = 1;
+    ```java
+    public static int hashCode(byte[] value) {
+        int h = 0;
+        int length = value.length >> 1; // two bytes per character
+        for (int i = 0; i < length; i++) {
+            h = 31 * h + getChar(value, i);
+        }
+        return h;
+    }
+    ```
+* `Objects.hash(Object ...)` is a helper method for Java developers who want to overwrite `Object.hashCode()` for their custom data types.
+    Instead of creating a hashing function from scratch, developers can simply pass all components of the object that are relevant for equality as argument to the helper method.
+    It then delegates its work to `Arrays.hashCode(Object[])`:
 
-    for (Object element : a)
-        result = 31 * result + (element == null ? 0 : element.hashCode());
+    ```java
+    public static int hashCode(Object a[]) {
+        if (a == null)
+            return 0;
 
-    return result;
-}
-```
+        int result = 1;
+
+        for (Object element : a)
+            result = 31 * result + (element == null ? 0 : element.hashCode());
+
+        return result;
+    }
+    ```
+
+As you can see, both methods essentially use the same idea of multiplying the parts of the objects successively with the value 31.
+So our questions for today are: Why the successive multiplication? And why the magic number 31?
 
 <!--
 Possible tests:
@@ -89,8 +111,6 @@ Tests
 - https://blog.birost.com/a?ID=01800-b514fa4b-3924-499a-81de-7430e470fea7
 - https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247490895&idx=3&sn=e732a4dfc36e68a4685a737b10eef88f&chksm=eb539879dc24116f350d3c31adba9281efe11e93252d1532a50f406d01030eb23349bd389a44&scene=21#wechat_redirect
 -->
-
-And that is where we have our question for today: Why does the function look like this? Why the magic number 31, and why the successive multiplication of the whole result by that number?
 
 ## Non-Answers
 
