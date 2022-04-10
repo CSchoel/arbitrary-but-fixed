@@ -71,8 +71,11 @@ In Java, two methods are therefore of particular interest:
     }
     ```
 
-As you can see, both methods essentially use the same idea of multiplying the parts of the objects successively with the value 31.
-So our questions for today are: Why the successive multiplication? And why the magic number 31?
+As you can see, both methods essentially use the same idea of multiplying the parts of the objects successively with the prime number 31.
+So our questions for today are:
+Why the successive multiplication?
+Is it important that 31 is a prime number?
+And why the magic number 31 in particular?
 
 <!--
 Possible tests:
@@ -116,10 +119,20 @@ Tests
 
 I noticed that searching for this question online yields a lot of answers which are either false, incomplete, or assume too much mathematical background knowledge. Examples include...
 
-* ... suggesting that we use a [prime number as the *bucket size* of the hash table](https://programming.guide/prime-numbers-in-hash-tables.html), which is cumbersome since hash tables would need a list of prime numbers to choose their bucket size from;
-* ... capitulating before the question and stating that "The advantage of using a prime is less clear, but it is traditional.", which is [apparently true for *Effective Java 2nd Edition*](https://stackoverflow.com/a/3613764)
+* ... suggesting that [the multiplication is important since it scales up values](https://programming.guide/prime-numbers-in-hash-tables.html), which is moot since scaling a number that is distributed over a small range of possible values does not increase that number of possible values;
+* ... using phrases like ["because of the nature of maths"](https://stackoverflow.com/questions/1145217/why-should-hash-functions-use-a-prime-number-modulus) in the explanation;
+* ... saying that actually [larger primes are better, because they are less likely to produce collisions with small numbers](https://stackoverflow.com/questions/1835976/what-is-a-sensible-prime-for-hashcode-calculation), which ignores the fact that the modulo operation can also introduce collisions even if the hash codes of all keys in the hash table are unique; 
+* ... suggesting that we use a [prime number as the *bucket size* of the hash table](https://theknowledgeburrow.com/why-are-prime-numbers-better-for-hashing/), which is cumbersome since hash tables would need a list of prime numbers to choose their bucket size from;
+* ... capitulating before the question, stating that "The value 31 was chosen because it is an odd prime." (any prime other than two is odd) and "The advantage of using a prime is less clear, but it is traditional." as is [true for *Effective Java 2nd Edition*](https://www.google.de/books/edition/Effective_Java/ka2VUBqHiWkC?hl=en&gbpv=1&dq=prime%20traditional&pg=PA48&printsec=frontcover&bsq=prime%20traditional), which sadly is one of the [most cited](https://stackoverflow.com/a/3613764) [references](https://stackoverflow.com/a/299748) [on the topic](https://www.baeldung.com/java-hashcode);
+* ... explainig the choice of 31 with the fact that [multiplication with 31 can be expressed as a bit shift and a subtraction](https://www.baeldung.com/java-hashcode), which has some truth in it but still does not explain why 31 and not another Mersenne prime like 127, or 8191, which have the same property;
 * ... just stating that it is good to [keep the number of prime factors low to avoid collisions](https://medium.com/swlh/why-should-the-length-of-your-hash-table-be-a-prime-number-760ec65a75d1);
-* ... stating that [31 is chosen because it is close to the number of letters in the latin alphabet](https://www.geeksforgeeks.org/string-hashing-using-polynomial-rolling-hash-function/), which is utter nonsense;
-* ... claiming that the [product of a prime with any other number has the best chance of being unique](https://computinglife.wordpress.com/2008/11/20/why-do-hash-functions-use-prime-numbers/), whatever that means;
+* ... stating that [31 is chosen because it is close to the number of letters in the latin alphabet](https://www.geeksforgeeks.org/string-hashing-using-polynomial-rolling-hash-function/) or [because it is close to the 32 bits of the int data type](https://yeahexp.com/why-does-string-hashcode-in-java-use-31-as-multiplier/), which both is utter nonsense;
+* or claiming that the [product of a prime with any other number has the best chance of being unique](https://computinglife.wordpress.com/2008/11/20/why-do-hash-functions-use-prime-numbers/), whatever that means.
 
-Best answer: https://stackoverflow.com/questions/3613102/why-use-a-prime-number-in-hashcode
+All these non-answers serve to show that this is an area where computer scientists tend to be out of their comfort zone, because it involves number theory, i.e. hardcore math.
+I do not think that anyone in the above examples is to blame for not knowing a better answer.
+After all, they are programmers and computer scientists and not mathematicians, but I do question the hubris of giving such shallow answers instead of owning up to the fact that you just do not know.
+Put this way, the answer from *Effective Java* might be the most honest one.
+
+As a teacher at the THM, I wanted to do better for my students and therefore did the only thing that came to my mind after the internet and books failed me: ask a mathematician.
+The following explanation is therefore fully owed to Prof. Dr. Bettina Just, who sacrificed her coffee break to draw a few numbers on a whiteboard and thoroughly explain the use of prime numbers for hashing right on the spot without even having to look up a single bit of information.
