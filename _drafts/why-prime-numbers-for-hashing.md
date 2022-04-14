@@ -31,7 +31,7 @@ Each time you retrieve a value from the hash table you then have to do a sequent
 Regardless of which mechanism is used to avoid collisions, a high number of collisions in a hash table will mean more searching and therefore a slower access to the individual values.
 A good hash function is therefore one that minimizes collisions by spreading out hash values as uniformly as possible across the integer value range, avoiding any clusters of similar keys that end up with the same hash value.
 
-## The Question
+## The question
 
 To use a particular data type as a key in a hash table, we need a hash function for that particular data type.
 Finding a good hash function is hard, and usually the best bet is to resort to using predefined functions in the standard library.
@@ -115,16 +115,16 @@ Tests
 - https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247490895&idx=3&sn=e732a4dfc36e68a4685a737b10eef88f&chksm=eb539879dc24116f350d3c31adba9281efe11e93252d1532a50f406d01030eb23349bd389a44&scene=21#wechat_redirect
 -->
 
-## Non-Answers
+## Non-answers
 
 I noticed that searching for this question online yields a lot of answers which are either false, incomplete, or assume too much mathematical background knowledge. Examples include...
 
 * ... suggesting that [the multiplication is important since it scales up values](https://programming.guide/prime-numbers-in-hash-tables.html), which is moot since scaling a number that is distributed over a small range of possible values does not increase that number of possible values;
-* ... using phrases like ["because of the nature of maths"](https://stackoverflow.com/questions/1145217/why-should-hash-functions-use-a-prime-number-modulus) in the explanation;
+* ... using phrases like ["because of the nature of maths"](https://stackoverflow.com/q/1145217) in the explanation;
 * ... saying that actually [larger primes are better, because they are less likely to produce collisions with small numbers](https://stackoverflow.com/questions/1835976/what-is-a-sensible-prime-for-hashcode-calculation), which ignores the fact that the modulo operation can also introduce collisions even if the hash codes of all keys in the hash table are unique; 
 * ... suggesting that we use a [prime number as the *bucket size* of the hash table](https://theknowledgeburrow.com/why-are-prime-numbers-better-for-hashing/), which is cumbersome since hash tables would need a list of prime numbers to choose their bucket size from;
-* ... capitulating before the question, stating that "The value 31 was chosen because it is an odd prime." (any prime other than two is odd) and "The advantage of using a prime is less clear, but it is traditional." as is [true for *Effective Java 2nd Edition*](https://www.google.de/books/edition/Effective_Java/ka2VUBqHiWkC?hl=en&gbpv=1&dq=prime%20traditional&pg=PA48&printsec=frontcover&bsq=prime%20traditional), which sadly is one of the [most cited](https://stackoverflow.com/a/3613764) [references](https://stackoverflow.com/a/299748) [on the topic](https://www.baeldung.com/java-hashcode);
-* ... explainig the choice of 31 with the fact that [multiplication with 31 can be expressed as a bit shift and a subtraction](https://www.baeldung.com/java-hashcode), which has some truth in it but still does not explain why 31 and not another Mersenne prime like 127, or 8191, which have the same property;
+* ... capitulating before the question, stating that "The value 31 was chosen because it is an odd prime." (all primes other than two are odd) and "The advantage of using a prime is less clear, but it is traditional." as is [true for *Effective Java 2nd Edition*](https://www.google.de/books/edition/Effective_Java/ka2VUBqHiWkC?hl=en&gbpv=1&dq=prime%20traditional&pg=PA48&printsec=frontcover&bsq=prime%20traditional), which sadly is one of the [most cited](https://stackoverflow.com/a/3613764) [references](https://stackoverflow.com/a/299748) [on the topic](https://www.baeldung.com/java-hashcode);
+* ... explainig the choice of 31 with the fact that [multiplication with 31 can be expressed as a bit shift and a subtraction](https://www.baeldung.com/java-hashcode), which has some truth in it but still does not explain why 31 and not another Mersenne prime like 127 or 8191, which have the same property;
 * ... just stating that it is good to [keep the number of prime factors low to avoid collisions](https://medium.com/swlh/why-should-the-length-of-your-hash-table-be-a-prime-number-760ec65a75d1);
 * ... stating that [31 is chosen because it is close to the number of letters in the latin alphabet](https://www.geeksforgeeks.org/string-hashing-using-polynomial-rolling-hash-function/) or [because it is close to the 32 bits of the int data type](https://yeahexp.com/why-does-string-hashcode-in-java-use-31-as-multiplier/), which both is utter nonsense;
 * or claiming that the [product of a prime with any other number has the best chance of being unique](https://computinglife.wordpress.com/2008/11/20/why-do-hash-functions-use-prime-numbers/), whatever that means.
@@ -134,5 +134,59 @@ I do not think that anyone in the above examples is to blame for not knowing a b
 After all, they are programmers and computer scientists and not mathematicians, but I do question the hubris of giving such shallow answers instead of owning up to the fact that you just do not know.
 Put this way, the answer from *Effective Java* might be the most honest one.
 
+There *are* also good answers that explain parts of the problem really well:
+
+* The StackOverflow user advait shows an example how a [prime modulus yields a more uniform distribution than a non-prime modulus](https://stackoverflow.com/a/3613423).
+* [Steve Jessop](https://stackoverflow.com/a/1147232) and [ILMTitan](https://stackoverflow.com/a/3613382) clarify that the mathematical property that we want does not require either the multiplication factor or the number of buckets to be prime, but just that both are coprime, meaning that they have orthogonal prime factorizations, i.e. no common divisor other than 1.
+* [JohnZaj](https://stackoverflow.com/a/300111) gives a reference to an experiment testing which multiplication factors result in the least collisions for a list of 50,000 English words, in which 31 is one of the winners.
+* [David Ongaro](https://stackoverflow.com/a/35304979) and [Flow](https://stackoverflow.com/a/44508855) both demonstrate that they have mastered necromany to level 100 by conjuring up an [old JDK bug report](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4045622) in which Joshua Bloch explains his reasoning for choosing the prime 31 in the implementation of `String.hashCode()`, which turns out to be part empirical testing and part literature research.
+* [coolblog](https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247490895&idx=3&sn=e732a4dfc36e68a4685a737b10eef88f&chksm=eb539879dc24116f350d3c31adba9281efe11e93252d1532a50f406d01030eb23349bd389a44&scene=21#wechat_redirect) published a Chinese blog article in which they perform an experiment using 230,000 english words, also finding that 31 as a multiplier gives good results.
+
+
+However, I did not find any single source that pieces these bits of information together to a fully comprehensive answer.
+
+## Ask a mathematician
+
 As a teacher at the THM, I wanted to do better for my students and therefore did the only thing that came to my mind after the internet and books failed me: ask a mathematician.
-The following explanation is therefore fully owed to Prof. Dr. Bettina Just, who sacrificed her coffee break to draw a few numbers on a whiteboard and thoroughly explain the use of prime numbers for hashing right on the spot without even having to look up a single bit of information.
+The following explanation is therefore fully owed to Prof. Dr. Bettina Just, who sacrificed her coffee break to change my view of prime numbers in hashing forever by drawing a few numbers on a whiteboard from the top of her head.
+Any errors and obscurities in this explanation of course remain entirely my own.
+
+Let's start by what Prof. Just wrote on the whiteboard on that fateful day:
+
+| x| x * 5| x * 7|
+|-:|-----:|-----:|
+|1|5|7|
+|2|10|14|
+|3|15|21|
+|4|20|28|
+|5|25|35|
+|6|30|42|
+|7|35|49|
+|8|40|56|
+|9|45|63|
+
+The thing that you should note is what the multiplication with 5 and 7 does to *the last digit* of x, i.e. the result of x % 10.
+For the factor 5, which is *not* coprime to the modulus 10, the last digit can only be either 0 or 5.
+For 7, which *is* coprime to 10, we get all the values we had before from 1 to 9—just in a different order.
+
+It turns out that this is a general mathematical property that is true for all sets of coprime numbers.
+I will not pretend to understand the deeper mathematical reason behind this or attempt to provide a proof here.
+Instead I will just leave you with [this StackExchange question](https://math.stackexchange.com/questions/3619509/coprime-group-element-multiplication), and the reference to [Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem), which I believe implies this unnamed theorem, and which is interestingly also central for the [RSA algorithm](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) used for encrypted communication.
+More important than the mathematical origins however, let's try to state our key theorem in a more understandable way:
+
+> Theorem: If a and n are coprime, then multiplying all possible (nonzero) values of x % n = 1, 2, 3, ...., n-1 with a yields a permutation of these values.
+
+Or in even less mathematical terms:
+
+> Multiplying x with a number a that shares no divisors with n "shuffles" the possible outcomes of x % n.
+
+Going back to our hash function, this means that multiplying a key value with a number coprime to the number of buckets will never make the distribution of values to buckets less uniform.
+Ok, this means that we do no harm with the multiplication, but what *good* does it actually do?
+
+## Benefits of polynomial rolling hashes
+
+The algorithm that we see both in `String.hashCode()` and `Objects.hash(Object...)` is called a [polynomial rolling hash](https://en.wikipedia.org/wiki/Rolling_hash#Polynomial_rolling_hash).
+
+## History of 31
+
+## Bonus: Evaluating different primes
