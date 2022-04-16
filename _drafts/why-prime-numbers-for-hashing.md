@@ -186,6 +186,66 @@ Ok, this means that we do no harm with the multiplication, but what *good* does 
 ## Benefits of polynomial rolling hashes
 
 The algorithm that we see both in `String.hashCode()` and `Objects.hash(Object...)` is called a [polynomial rolling hash](https://en.wikipedia.org/wiki/Rolling_hash#Polynomial_rolling_hash).
+It is used to calculate hashes of composite objects in a way that each component has an equally important influence on the hash value.
+To understand how it does this and why this is imporant, we first look at the following prototype:
+
+```java
+public static void hash(int[] data, int p) {
+    hash = 1
+    for(int x: data) {
+        hash = hash * p + x;
+    }
+}
+```
+
+At first glance it is odd that the whole `hash` is successively multiplied with `p`, but this becomes easier to see if we write down the result for `data.length = 3`:
+
+```java
+hash(data) = ((1 * p + data[0]) * p + data[1]) * p + data[2]
+           = data[2] + p * data[1] + p * p data[0] + p * p * p
+```
+
+So what `hash(int[], int)` is doing is actually just building a polynomial in which the elements of `data` are the coefficients and `p` is the base.
+We could write this in a more straightforward way, but exponentiation is more expensive than multiplication and since hash tables are often used for performance reasons and we have to build a hash each time we retrieve a value from the table, it is a good idea to save a little time here.
+
+So why are polynomials a good idea here?
+To understand this, it is a good idea to first look at the most naive solution we could think of.
+Essentially, we want to reduce an array of numbers to a single number.
+So why not just take the sum of the elements?
+
+The main issue here is that addition is a commutative operation. a + b is the same as b + a, which means that the order of the elements does not matter for the end result.
+If we think about hashing strings, all anagrams will collide with each other, since, for example, the string "one" will have the same hash value as the string "neo".
+Additionally, if the range of possible values for the individual elements is smaller than the range of integers, a sum does not grow quickly enough to yield a good distribution of hash values across the integer range.
+This is again the case for strings.
+For ASCII strings of length 4, we have 128 possible characters, with a maximum sum of 4 · 127 = 508, but we have 128<sup>4</sup> = 268,435,456 possible four-character strings, which means an expected collision rate of at least 1 - 508 / 268,435,456 = 99.9998%.
+
+This is where the polynomial rolling hash comes in.
+By using polynomials, we both avoid the commutativity of addition because each summand is multiplied with a different value before summation, and even when the data only consists of very small values, the exponentiation quickly spreads these values over the integer range.
+
+Now for the choice of `p`, remember our theorem:
+
+> Multiplying x with a number a that shares no divisors with n "shuffles" the possible outcomes of x % n.
+
+Here, `p` is the factor a and the amount of buckets in the hash table is n.
+To choose a good value for `p`, we have to know how the scaling of the hash table is implemented.
+If we don't, the safest bet is a prime number, since it will not share any divisors other than itself with any other number.
+
+Since we are in Java, can look up the implementation of `HashMap<K,V>`, which always uses powers of two as the table length.
+The reason for this is that instead of using the modulo operator we can just calculate `(n - 1) & h` when `h`is the hash value.
+Since n = 2<sup>e</sup>, the binary representation of  `n - 1` are zeros followed by a series of `e` ones and the bitwise and operator gives us just the last `e` bits of the hash.
+
+This also means that the only restriction we have to follow for `p` is that it cannot be even.
+All od numbers will be coprime to 2<sup>e</sup> for all e.
+
+## Remaining sources of collisions
+
+By now we have ensured that neither the multiplicative factor nor the table size may introduce any particular pattern of collisions.
+Assuming a uniform distribution of the content of the `data` array across the possible number of options (be it 128 ASCII chars, 2<sup>16</sup> UTF-16 chars, or 2<sup>32</sup> integers), this would give us a perfect hash function with minimal collisions.
+
+However, in reality our data may have any kind of nasty patterns that can complicate things.
+The letter 'e' is far more likely to occur in an english text than the letter 'k', which might make the prime 101 a bad choice since `(int) 'e' == 101`.
+For texts in other languages the probability distribution might be similar or entirely different.
+And what about other kinds of data such as file system paths, points in a 2D coordinate system, or dates?
 
 ## History of 31
 
