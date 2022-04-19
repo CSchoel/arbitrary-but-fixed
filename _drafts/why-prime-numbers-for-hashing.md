@@ -242,11 +242,37 @@ All od numbers will be coprime to 2<sup>e</sup> for all e.
 By now we have ensured that neither the multiplicative factor nor the table size may introduce any particular pattern of collisions.
 Assuming a uniform distribution of the content of the `data` array across the possible number of options (be it 128 ASCII chars, 2<sup>16</sup> UTF-16 chars, or 2<sup>32</sup> integers), this would give us a perfect hash function with minimal collisions.
 
+The only remaining point of concern is our data itself.
+If we would start with `hash = 0` instead of `hash = 1`, we would be able to easily produce collisions if all `data` always only contained values that were divisible by two.
+By starting with `hash = 1` we add the summand p<sup>data.length</sup> to the calculation, which cannot be divisible by two.
+
 However, in reality our data may have any kind of nasty patterns that can complicate things.
-The letter 'e' is far more likely to occur in an english text than the letter 'k', which might make the prime 101 a bad choice since `(int) 'e' == 101`.
+At this point we have left the area of easily *predictable* patterns that may cause collisions, but we cannot rule out the existance of *unpredictable* patterns unless we run tests with a particular `p` and a particular data set that is representative of real world applications.
+
+Just to give you an example of what kind of patterns we might be talking about, the letter 'e' is far more likely to occur in an english text than the letter 'k'.
 For texts in other languages the probability distribution might be similar or entirely different.
 And what about other kinds of data such as file system paths, points in a 2D coordinate system, or dates?
+All of these are not uniformely distributed by any means, so some choices for `p` might work well and others quite poorly.
 
 ## History of 31
+
+This brings us to the magic number 31.
+As already hinted at, you can read up the whole history of how this number was proposed by Joschua Bloch in an [old JDK bug report](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4045622).
+In short, there are two main arguments: One is the previous use of 31 by other programmers, and the other is a test performed by Mr. Bloch.
+
+The references for the choice of the number 31 go back to Kerninghan and Ritchies "The C programming language", but when Bloch called them and asked them about its origin, neither of the authors could remember it.
+
+Since Bloch was aware that 31 was by far not the only candidate, he performed tests evaluating collision probabilities with the following kind of data:
+
+* A list of 50,000 english words,
+* all file system paths found in `/foo/bar`,
+* and something else.
+
+The composite number 33 performed better than the prime 31, but since Bloch was unsure about the mathematical foundations, he was more comfortable choosing the candidate that was indeed a prime number.
+
+Let's put aside for a minute that this testing procedure leads to a preferential treatment of English speaking countries over others and Linux users over Windows users, and just acknowledge that choosing any single number that would work well for all application scenarios across all existing and future Java applications is an extremely hard problem.
+It may very well be that choosing a number that "works well enough" for some popular applications might be the best that J. Bloch could do in this situation.
+
+However, while this is true for `String.hashCode()` it *does* seem that the 31 was copied over to `Object.hash()` without much thought or testing.
 
 ## Bonus: Evaluating different primes
