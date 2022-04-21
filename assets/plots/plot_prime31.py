@@ -2,7 +2,7 @@ import pathlib
 import math
 from bokeh.plotting import figure, show
 from bokeh.palettes import Category10_10
-from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.models import ColumnDataSource, HoverTool, Span
 import numpy as np
 import pandas as pd
 import itertools as it
@@ -32,8 +32,8 @@ def plot_prime31():
             ("test name", "@name"),
             ("factor", "@factor"),
             ("collisions", "@collisions"),
-            ("is prime?", "@prime"),
-            ("is_mersenne?", "@mersenne")
+            #("is prime?", "@prime"),
+            #("is_mersenne?", "@mersenne")
         ],
     )
     hover = f.select(type=HoverTool)
@@ -41,9 +41,17 @@ def plot_prime31():
 
     primes = { x for x in data["prime"] if is_prime(x) }
     mersennes = { x for x in primes if is_mersenne(x) }
-    barargs = dict(width=0.1, top=100, bottom=0, alpha=0.5, color=(100, 100, 100))
-    f.vbar(x=list(primes), legend_label="prime", **barargs)
-    f.vbar(x=list(mersennes), legend_label="mersenne", **barargs)
+    #barargs = dict(width=0.1, top=100, bottom=0, alpha=0.5, color=(100, 100, 100))
+    #f.vbar(x=list(primes), legend_label="prime", **barargs)
+    #f.vbar(x=list(mersennes), legend_label="mersenne", **barargs)
+    for p in primes:
+        f.add_layout(Span(
+            location=p,
+            dimension="height",
+            line_dash="dashed" if p not in mersennes else "solid",
+            line_width=1,
+            line_color=(150,150,150)
+        ))
 
     for e, c in zip(experiments, colors):
         ds = ColumnDataSource({
