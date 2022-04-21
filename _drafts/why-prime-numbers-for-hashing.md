@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Explaining default hash functions including the huse of the prime number 31 in the String and Arrays classes in Java
+title: Why 31? — Explaining the use of prime numbers in Java hash functions
 description: >
     Ever looked at default implementations of hash functions and wondered: Why prime numbers? Why 31 specifically? And why do we multiply multiple times with the same prime number? If so, this post is for you.
 tags:
@@ -13,13 +13,13 @@ tags:
 ## Prerequisites: What is a hash table?
 
 A hash table allows storing and retrieving values, which are identified by associated keys.
-They are the data structure behind the types that we known as map, dict, or hash.
+They are the data structure behind the types that we know as map, dict, or hash.
 The main idea of a hash table is to calculate an integer value for each key that can be used to determine the index where the associated value should be stored in an array.
-This magic integer is called a hash and the array structure in which the values are stored is sometimes called a table - hence the name hash table.
-Since the number of elements to be stored is usually smaller than the maximum integer value, the actual array index is determined by using the modulo operation to obtain `index = hash(key) % size`.
+This magic integer is called a hash and the array structure in which the values are stored is sometimes called a table—hence the name hash table.
+Since the number of elements we want to store is usually smaller than the maximum integer value, the actual array index is determined by using the modulo operation to obtain `index = hash(key) % size`.
 
 The main difficulty in finding a good `hash()` function is that the range of available hashes is limited by the number of possible (positive) integer values while the theoretical number of possible key objects is often infinite or at least much larger.
-Take the example of using strings as keys: A string can have aribitrary length, but there are only 2<sup>31</sup> possible different results of `hash(s)`.
+Take the example of using strings as keys: A string `s` can have aribitrary length, but there are only 2<sup>31</sup> possible different results of `hash(s)`.
 This implies that *some* Strings will need to have the exact same hash value and will therefore be put into the same index in the hash table, even though they are completely different.
 Even if two different strings have a different hash value, they can still end up with the same index through the modulo operation.
 For example, lets say the string `"foo"` has a hash of 5 and the string `"bar"` has a hash of 9.
@@ -166,22 +166,24 @@ Let's start by what Prof. Just wrote on the whiteboard on that fateful day:
 |9|45|63|
 
 The thing that you should note is what the multiplication with 5 and 7 does to *the last digit* of x, i.e. the result of x % 10.
-For the factor 5, which is *not* coprime to the modulus 10, the last digit can only be either 0 or 5.
+For the factor 5, which is *not* coprime to the modulus 10, the last digit can only be either 0 or 5 meaning that we lost some diversity.
 For 7, which *is* coprime to 10, we get all the values we had before from 1 to 9—just in a different order.
 
-It turns out that this is a general mathematical property that is true for all sets of coprime numbers.
+It turns out that this is a general mathematical property that is true whenever the multiplicative factor and the modulus are coprime.
 I will not pretend to understand the deeper mathematical reason behind this or attempt to provide a proof here.
 Instead I will just leave you with [this StackExchange question](https://math.stackexchange.com/questions/3619509/coprime-group-element-multiplication), and the reference to [Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem), which I believe implies this unnamed theorem, and which is interestingly also central for the [RSA algorithm](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) used for encrypted communication.
-More important than the mathematical origins however, let's try to state our key theorem in a more understandable way:
+Putting aside the mathematical origins, let's try to state our key theorem in a more understandable way:
 
-> Theorem: If a and n are coprime, then multiplying all possible (nonzero) values of x % n = 1, 2, 3, ...., n-1 with a yields a permutation of these values.
+> Theorem: If a and n are coprime, then multiplying all possible (nonzero) values of x % n = 1, 2, 3, ...., n-1 with a and again applying the modulus n to the result yields a permutation of these values.
 
 Or in even less mathematical terms:
 
 > Multiplying x with a number a that shares no divisors with n "shuffles" the possible outcomes of x % n.
 
-Going back to our hash function, this means that multiplying a key value with a number coprime to the number of buckets will never make the distribution of values to buckets less uniform.
+Going back to our hash function, this means that multiplying a key value with a number coprime to the number of buckets will never make the distribution of values into buckets less uniform.
+
 Ok, this means that we do no harm with the multiplication, but what *good* does it actually do?
+To explore this question, we must first take a look at the algorithm in which this multiplication takes place.
 
 ## Benefits of polynomial rolling hashes
 
@@ -206,10 +208,10 @@ hash(data) = ((1 * p + data[0]) * p + data[1]) * p + data[2]
 ```
 
 So what `hash(int[], int)` is doing is actually just building a polynomial in which the elements of `data` are the coefficients and `p` is the base.
-We could write this in a more straightforward way, but exponentiation is more expensive than multiplication and since hash tables are often used for performance reasons and we have to build a hash each time we retrieve a value from the table, it is a good idea to save a little time here.
+We could write this in a more straightforward way, but exponentiation is more expensive than multiplication and since hash tables are often used for performance reasons and we have to build a hash each time we retrieve a value from the table, we want to save a little time here.
 
-So why are polynomials a good idea here?
-To understand this, it is a good idea to first look at the most naive solution we could think of.
+So why are polynomials a good idea?
+To understand this, let us first look at the most naive solution we could think of.
 Essentially, we want to reduce an array of numbers to a single number.
 So why not just take the sum of the elements?
 
@@ -217,7 +219,7 @@ The main issue here is that addition is a commutative operation. a + b is the sa
 If we think about hashing strings, all anagrams will collide with each other, since, for example, the string "one" will have the same hash value as the string "neo".
 Additionally, if the range of possible values for the individual elements is smaller than the range of integers, a sum does not grow quickly enough to yield a good distribution of hash values across the integer range.
 This is again the case for strings.
-For ASCII strings of length 4, we have 128 possible characters, with a maximum sum of 4 · 127 = 508, but we have 128<sup>4</sup> = 268,435,456 possible four-character strings, which means an expected collision rate of at least 1 - 508 / 268,435,456 = 99.9998%.
+For ASCII strings of length 4, we have 128 possible characters with a maximum sum of 4 · 127 = 508, but we have 128<sup>4</sup> = 268,435,456 possible four-character strings, which means an expected collision rate of at least 1 - 508 / 268,435,456 = 99.9998%.
 
 This is where the polynomial rolling hash comes in.
 By using polynomials, we both avoid the commutativity of addition because each summand is multiplied with a different value before summation, and even when the data only consists of very small values, the exponentiation quickly spreads these values over the integer range.
@@ -230,8 +232,8 @@ Here, `p` is the factor a and the amount of buckets in the hash table is n.
 To choose a good value for `p`, we have to know how the scaling of the hash table is implemented.
 If we don't, the safest bet is a prime number, since it will not share any divisors other than itself with any other number.
 
-Since we are in Java, can look up the implementation of `HashMap<K,V>`, which always uses powers of two as the table length.
-The reason for this is that instead of using the modulo operator we can just calculate `(n - 1) & h` when `h`is the hash value.
+Since we are in Java, we can look up the implementation of `HashMap<K,V>`, which always uses powers of two as the table length.
+The reason for this is that instead of using the modulo operator we can just calculate `(n - 1) & h` when `h` is the hash value.
 Since n = 2<sup>e</sup>, the binary representation of  `n - 1` are zeros followed by a series of `e` ones and the bitwise and operator gives us just the last `e` bits of the hash.
 
 This also means that the only restriction we have to follow for `p` is that it cannot be even.
@@ -243,11 +245,12 @@ By now we have ensured that neither the multiplicative factor nor the table size
 Assuming a uniform distribution of the content of the `data` array across the possible number of options (be it 128 ASCII chars, 2<sup>16</sup> UTF-16 chars, or 2<sup>32</sup> integers), this would give us a perfect hash function with minimal collisions.
 
 The only remaining point of concern is our data itself.
-If we would start with `hash = 0` instead of `hash = 1`, we would be able to easily produce collisions if all `data` always only contained values that were divisible by two.
+Remember that multiplication with a number coprime to the number of buckets does not make the spread across buckets *worse*, but it also cannot do anything if the spread was already bad *before* the multiplication.
+For example, if we would start with `hash = 0` instead of `hash = 1`, we would be able to easily produce collisions if all elements of `data` were divisible by two for all or at least many of the elements that we want to store.
 By starting with `hash = 1` we add the summand p<sup>data.length</sup> to the calculation, which cannot be divisible by two.
 
-However, in reality our data may have any kind of nasty patterns that can complicate things.
-At this point we have left the area of easily *predictable* patterns that may cause collisions, but we cannot rule out the existance of *unpredictable* patterns unless we run tests with a particular `p` and a particular data set that is representative of real world applications.
+At this point we have ruled out easily *predictable* patterns of our data that may cause collisions, but in real data there might be all kinds of *unpredictable* patterns.
+Unless we run tests with a particular `p` and a particular data set that is representative of real world applications, we cannot be sure that the hash function really works well for our use case.
 
 Just to give you an example of what kind of patterns we might be talking about, the letter 'e' is far more likely to occur in an english text than the letter 'k'.
 For texts in other languages the probability distribution might be similar or entirely different.
@@ -258,21 +261,50 @@ All of these are not uniformely distributed by any means, so some choices for `p
 
 This brings us to the magic number 31.
 As already hinted at, you can read up the whole history of how this number was proposed by Joschua Bloch in an [old JDK bug report](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4045622).
-In short, there are two main arguments: One is the previous use of 31 by other programmers, and the other is a test performed by Mr. Bloch.
+In short, there are two main arguments: One is the previous use of 31 by other programmers, and the other is a test performed by Bloch himself.
 
 The references for the choice of the number 31 go back to Kerninghan and Ritchies "The C programming language", but when Bloch called them and asked them about its origin, neither of the authors could remember it.
 
 Since Bloch was aware that 31 was by far not the only candidate, he performed tests evaluating collision probabilities with the following kind of data:
 
-* A list of 50,000 english words,
-* all file system paths found in `/foo/bar`,
-* and something else.
+> * All of the words and phrases with entries in Merriam-Webster's 2nd Int'l Unabridged Dictionary (311,141 strings, avg length 10 chars).
+> * All of the strings in /bin/*, /usr/bin/*, /usr/lib/*, /usr/ucb/* and /usr/openwin/bin/*  (66,304 strings, avg length 21 characters).
+> * A list of URLs gathered by a web-crawler that ran for several hours last night (28,372 strings, avg length 49 characters).
 
-The composite number 33 performed better than the prime 31, but since Bloch was unsure about the mathematical foundations, he was more comfortable choosing the candidate that was indeed a prime number.
+The composite number 33 performed a little better than the prime 31, but since Bloch was unsure about the mathematical foundations, he was more comfortable choosing the candidate that was indeed a prime number.
 
 Let's put aside for a minute that this testing procedure leads to a preferential treatment of English speaking countries over others and Linux users over Windows users, and just acknowledge that choosing any single number that would work well for all application scenarios across all existing and future Java applications is an extremely hard problem.
-It may very well be that choosing a number that "works well enough" for some popular applications might be the best that J. Bloch could do in this situation.
+It may very well be that choosing a number that "works well enough" for some popular applications might be the best that Bloch could do in this situation.
 
 However, while this is true for `String.hashCode()` it *does* seem that the 31 was copied over to `Object.hash()` without much thought or testing.
+After all, we should assume different patterns to occur in arbitrary composite objects than in strings, which are heavily shaped by natural and formal languages.
 
 ## Bonus: Evaluating different primes
+
+Other people have already tried to come up with "better" primes than 31.
+In general I find the quest for the best prime number for a general hash function moot, because—as explained earlier—different application scenarios will have different patterns leading to a different performance of individual prime numbers.
+
+However, there are a few questions left that still tickled me:
+
+* Do larger prime numbers really perform better than smaller ones?
+* Do Mersenne primes perform better in speed and/or collision avoidance than other primes?
+* Will the prime 31 perform as well for strings in other languages as it does for English?
+
+So in a small myth busting experiment, I put together a few very small test cases which I think are fairly realistic keys for a hash table:
+
+* The 1000 most common English words
+* The 1000 most common German words
+* 100000 random pixels in a 1024x768 pixel image consisting of two integers for the x- and y-coordinate
+* the same pixels, but converted to strings of the form `"(x, y)"`
+* 10000 random dates between 1983 and 2022 consisting of three integers for year, month, and day
+* the same dates, but converted to strings in ISO 8601 format (`"YYYY-MM-DD"`).
+
+To make the comparison as realistic as possible, I calculated the number of buckets as the lowest power of two such that the stored values fill only 75% of the available space at maximum.
+In Java this is assured by the "load factor" in the HashMap implementation.
+I also did not use the polynomial rolling hash directly, but applied a second hash function that XORs the hash with itself shifted by 16 bits to the right as in the protected method `HashMap.hash(Object)`.
+Unlike Bloch, I did not calculate the average number of items per bucket in the hash table but the collision percentage, because this allows comparison across different tests with different table sizes.
+
+I also performed a very crude performance test by running the whole simulation once to ensure that the JVM is warmed up and then taking time measures with `System.nanoTime()`, since I did not want to set up a [JMH](https://github.com/openjdk/jmh) project for such a small test.
+
+Let's have a first look at the prime values below 50 to see how the prime 31 performs in comparison to its direct neighbors:
+
