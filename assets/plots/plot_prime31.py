@@ -39,6 +39,8 @@ def plot_prime31():
             ("factor", "@factor"),
             ("collisions", "@collisions{0.0}%"),
         ],
+        x_range=(min(data["prime"]),max(data["prime"])),
+        y_range=(0, 100)
     )
     hover = f.select(type=HoverTool)
     hover.names = experiments
