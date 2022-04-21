@@ -59,7 +59,10 @@ def plot_prime31():
             line_color=(150,150,150)
         ))
 
-    f.varea("prime", y1=0, y2="time", source=data, y_range_name="time_range", alpha=0.3, legend_label="time")
+    f.varea(
+        "prime", y1=0, y2="time", source=data,
+        y_range_name="time_range", alpha=0.2, legend_label="time"
+    )
 
     for e, c in zip(experiments, colors):
         ds = ColumnDataSource({
