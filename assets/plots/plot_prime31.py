@@ -45,7 +45,7 @@ def plot_prime31():
     )
     hover = f.select(type=HoverTool)
     hover.names = experiments
-    f.extra_y_ranges = dict(time_range=Range1d(50,100))
+    f.extra_y_ranges = dict(time_range=Range1d(55,100))
     f.add_layout(LinearAxis(y_range_name="time_range", axis_label="time [ms]"), "right")
 
     primes = { x for x in data["prime"] if is_prime(x) }
@@ -59,6 +59,8 @@ def plot_prime31():
             line_color=(150,150,150)
         ))
 
+    f.varea("prime", y1=0, y2="time", source=data, y_range_name="time_range", alpha=0.3, legend_label="time")
+
     for e, c in zip(experiments, colors):
         ds = ColumnDataSource({
             'factor': data["prime"],
@@ -68,7 +70,6 @@ def plot_prime31():
             'mersenne': [x in mersennes for x in data["prime"]]
         })
         f.line("factor", "collisions", color=c, source=ds, legend_label=e, line_width=2, name=e)
-    f.line("prime", "time", source=data)
     show(f)
 
 if __name__ == "__main__":
