@@ -299,6 +299,8 @@ So in a small myth busting experiment, I put together a few very small test case
 * 10000 random dates between 1983 and 2022 consisting of three integers for year, month, and day
 * the same dates, but converted to strings in ISO 8601 format (`"YYYY-MM-DD"`).
 
+For the pixel example I also assessed the performance of a custom hash function that just adds the coordinates after shifting the y coordinate left by 10 bits, effectively just enumerating the pixels line by line.
+
 To make the comparison as realistic as possible, I calculated the number of buckets as the lowest power of two such that the stored values fill only 75% of the available space at maximum.
 In Java this is assured by the "load factor" in the HashMap implementation.
 I also did not use the polynomial rolling hash directly, but applied a second hash function that XORs the hash with itself shifted by 16 bits to the right as in the protected method `HashMap.hash(Object)`.
@@ -308,3 +310,32 @@ I also performed a very crude performance test by running the whole simulation o
 
 Let's have a first look at the prime values below 50 to see how the prime 31 performs in comparison to its direct neighbors:
 
+<div class="bokeh-container"><script src="/assets/img/prime31_0_50.js" id="c305ecd8-29e3-4dc1-8c32-5e3499f6f48e"></script></div>
+
+The dotted vertical lines show prime numbers and the solid vertical lines indicate the Mersenne primes 3, 7, and 31.
+The colored lines represent the different test scenarios and the faded area in the background is the result of the crude performance test.
+
+We can see a few things here that were expected and also a few that were surprising.
+For one, the prime 31 seems to be neither a particularly bad nor a particularly good candidate for our test cases.
+If we had to determine a "winner" in this range, it would probably be the prime 29 due to its exceptional performance for the date test.
+
+Both the raw versions of the date and points tests show symptoms of having a too narrow value range when the multiplicative factor is small.
+Most surprisingly, converting dates and points to strings yields much better hashing performance in both cases.
+Even the custom idea of just enumerating pixels performs well but still worse than the string variant.
+Memo to myself: Stop scolding students for implementing `hashCode()` as `return this.toString().hashCode()`.
+
+Another result that is surprising at first glance is that we actually don't see more collisions for even factors as we would have predicted.
+However, this can be explained by the second hash function applied by `HashMap`, which unfortunately makes our results less predictable.
+I have run the test without it and the result is indeed much more jagged with worse performance for even factors.
+
+Finally, there is no noticeable performance gain in terms of computation speed when using Mersenne primes.
+This can be explained by the fact that the Java compiler does not automatically perform the required optimization step to transform the multiplication into a shift and subtract operation.
+Looking a little closer into this, there is a [JDK bug report about changing the code to improve the performance of `String.hashCode()`](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6506618), but it turns out that the performance gain on modern machines is a whooping 0.01%.
+Myth busted!
+
+The only myth that remains is that larger primes would perform significantly better.
+For this, let's redo this calculation around the other Mersenne primes within the integer range: 127, 8191, 131071, 524287, and 2147483647.
+
+
+
+And for good measure one that is quite large but not near any power of two:
