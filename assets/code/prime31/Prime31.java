@@ -114,10 +114,18 @@ public class Prime31 {
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
-    public static void runTests(List<Integer[]> points, List<Integer[]> dates, List<Character[]> wordsE, List<Character[]> wordsG) throws IOException {
+    public static void runTests(
+        int from,
+        int to,
+        List<Integer[]> points,
+        List<Integer[]> dates,
+        List<Character[]> wordsE,
+        List<Character[]> wordsG
+    ) throws IOException {
         StringBuilder output = new StringBuilder();
         output.append("prime;points raw;points string;points custom;dates raw;dates string;english;german;time\n");
-        for (int p: primes) {
+        // for (int p: primes) {
+        for(int p = from; p <= to; p+=1) {
             // NOTE: this is not how you do accurate time measurements in java
             //       => do not take this measure too seriously
             long t = System.nanoTime();
@@ -149,7 +157,7 @@ public class Prime31 {
             output.append(line);
             System.out.println(msg);
         }
-        Path outfile = Paths.get("assets/plots/prime31.csv");
+        Path outfile = Paths.get(String.format("assets/plots/prime31_%d_%d.csv", from, to));
         Files.write(
             outfile,
             output.toString().getBytes(StandardCharsets.UTF_8)
@@ -161,8 +169,9 @@ public class Prime31 {
         List<Integer[]> dates = generateDates();
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
-        runTests(points, dates, wordsE, wordsG);
-        // run twice to avoid measurement erro from JVM warmup
-        runTests(points, dates, wordsE, wordsG);
+        runTests(1, 50, points, dates, wordsE, wordsG);
+        // run twice to avoid measurement error from JVM warmup
+        runTests(1, 50, points, dates, wordsE, wordsG);
+        int x = "foo".hashCode();
     }
 }
