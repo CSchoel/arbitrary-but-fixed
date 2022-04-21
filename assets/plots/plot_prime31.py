@@ -2,7 +2,7 @@ import pathlib
 import math
 from bokeh.plotting import figure, show
 from bokeh.palettes import Category10_10
-from bokeh.models import ColumnDataSource, HoverTool, Span
+from bokeh.models import ColumnDataSource, HoverTool, Span, Range1d, LinearAxis
 import numpy as np
 import pandas as pd
 import itertools as it
@@ -40,10 +40,13 @@ def plot_prime31():
             ("collisions", "@collisions{0.0}%"),
         ],
         x_range=(min(data["prime"]),max(data["prime"])),
-        y_range=(0, 100)
+        y_range=(0, 100),
+        active_scroll="wheel_zoom"
     )
     hover = f.select(type=HoverTool)
     hover.names = experiments
+    f.extra_y_ranges = dict(time_range=Range1d(50,100))
+    f.add_layout(LinearAxis(y_range_name="time_range", axis_label="time [ms]"), "right")
 
     primes = { x for x in data["prime"] if is_prime(x) }
     mersennes = { x for x in primes if is_mersenne(x) }
@@ -65,6 +68,7 @@ def plot_prime31():
             'mersenne': [x in mersennes for x in data["prime"]]
         })
         f.line("factor", "collisions", color=c, source=ds, legend_label=e, line_width=2, name=e)
+    f.line("prime", "time", source=data)
     show(f)
 
 if __name__ == "__main__":
