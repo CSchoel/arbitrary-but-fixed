@@ -10,10 +10,16 @@ import itertools as it
 cwd = pathlib.Path(__file__).parent
 
 def is_prime(n):
+    """
+    Naive primality test
+    """
     divisors = [i for i in range(2, int(math.sqrt(n)) + 1) if n % i == 0]
     return len(divisors) == 0
 
 def is_mersenne(n):
+    """
+    Tests if 32-bit integer n is a Mersenne prime
+    """
     mps = { 3, 7, 31, 127, 8191, 131071, 524287, 2147483647 }
     return n in mps
 
@@ -32,8 +38,6 @@ def plot_prime31():
             ("test name", "@name"),
             ("factor", "@factor"),
             ("collisions", "@collisions{0.0}%"),
-            #("is prime?", "@prime"),
-            #("is_mersenne?", "@mersenne")
         ],
     )
     hover = f.select(type=HoverTool)
@@ -41,9 +45,6 @@ def plot_prime31():
 
     primes = { x for x in data["prime"] if is_prime(x) }
     mersennes = { x for x in primes if is_mersenne(x) }
-    #barargs = dict(width=0.1, top=100, bottom=0, alpha=0.5, color=(100, 100, 100))
-    #f.vbar(x=list(primes), legend_label="prime", **barargs)
-    #f.vbar(x=list(mersennes), legend_label="mersenne", **barargs)
     for p in primes:
         f.add_layout(Span(
             location=p,
