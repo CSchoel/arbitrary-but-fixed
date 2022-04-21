@@ -14,7 +14,12 @@ def plot_prime31():
     colors = Category10_10
     data = pd.read_csv(cwd / "prime31.csv", delimiter=";")
     experiments = [x for x in data.columns.values if x not in ["prime", "time"]]
-    f = figure(x_range=(2, 500), title="Collision probabilities for different primes", x_axis_label='prime', y_axis_label='collisions [%]')
+    f = figure(
+        title="Collision probabilities for different primes",
+        x_axis_label='prime',
+        y_axis_label='collisions [%]',
+        tooltips=[("factor", "@prime"), ("collisions", "@collisions")],
+    )
     for e, c in zip(experiments, colors):
         f.line("prime", e, color=c, source=data, legend_label=e, line_width=2)
 
