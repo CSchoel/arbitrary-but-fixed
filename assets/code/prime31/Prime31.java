@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
@@ -156,6 +157,7 @@ public class Prime31 {
             );
             output.append(line);
             System.out.println(msg);
+            if (p == Integer.MAX_VALUE) { break; }; // avoid overflow
         }
         Path outfile = Paths.get(String.format("assets/plots/prime31_%d_%d.csv", from, to));
         Files.write(
@@ -172,6 +174,15 @@ public class Prime31 {
         runTests(1, 50, points, dates, wordsE, wordsG);
         // run twice to avoid measurement error from JVM warmup
         runTests(1, 50, points, dates, wordsE, wordsG);
+        // test around all mersenne primes in int range
+        runTests(127 - 25, 127 + 25, points, dates, wordsE, wordsG);
+        runTests(8191 - 25, 8191 + 25, points, dates, wordsE, wordsG);
+        runTests(131071 - 25, 131071 + 25, points, dates, wordsE, wordsG);
+        runTests(524287 - 25, 524287 + 25, points, dates, wordsE, wordsG);
+        runTests(2147483647 - 50, 2147483647, points, dates, wordsE, wordsG);
+        // test around a large prime that is nowhere near power of 2
+        // 25165824 = (2^24 + 2^25) / 2
+        runTests(25165824 - 25, 25165824 + 25, points, dates, wordsE, wordsG);
         int x = "foo".hashCode();
     }
 }
