@@ -38,10 +38,13 @@ def plot_prime31():
     )
     hover = f.select(type=HoverTool)
     hover.names = experiments
+
     primes = { x for x in data["prime"] if is_prime(x) }
     mersennes = { x for x in primes if is_mersenne(x) }
-    primedata = ColumnDataSource({"x": list(primes)})
-    f.vbar(x=list(primes), width=0.3, top=100, bottom=0, legend_label="prime")
+    barargs = dict(width=0.1, top=100, bottom=0, alpha=0.5, color=(100, 100, 100))
+    f.vbar(x=list(primes), legend_label="prime", **barargs)
+    f.vbar(x=list(mersennes), legend_label="mersenne", **barargs)
+
     for e, c in zip(experiments, colors):
         ds = ColumnDataSource({
             'factor': data["prime"],
@@ -51,7 +54,6 @@ def plot_prime31():
             'mersenne': [x in mersennes for x in data["prime"]]
         })
         f.line("factor", "collisions", color=c, source=ds, legend_label=e, line_width=2, name=e)
-    print(primes)
     show(f)
 
 if __name__ == "__main__":
