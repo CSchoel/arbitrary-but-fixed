@@ -31,7 +31,7 @@ def plot_prime31():
         tooltips=[
             ("test name", "@name"),
             ("factor", "@factor"),
-            ("collisions", "@collisions"),
+            ("collisions", "@collisions{0.0}%"),
             #("is prime?", "@prime"),
             #("is_mersenne?", "@mersenne")
         ],
