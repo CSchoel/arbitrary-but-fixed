@@ -99,8 +99,6 @@ public class Prime31 {
     public static List<Character[]> generateWords(String fname) throws IOException {
         Path p = Paths.get(fname);
         List<Character[]> lst = Files.lines(p)
-            .map(x -> x.split(";"))
-            .map(ar -> ar[1].charAt(0) == '\u00a0' ? ar[2] : ar[1])
             .map(s ->
                 s.chars()
                     .mapToObj(c -> Character.valueOf((char) c))
@@ -121,7 +119,8 @@ public class Prime31 {
         List<Integer[]> points,
         List<Integer[]> dates,
         List<Character[]> wordsE,
-        List<Character[]> wordsG
+        List<Character[]> wordsG,
+        List<Character[]> wordsR
     ) throws IOException {
         StringBuilder output = new StringBuilder();
         output.append("prime;points raw;points string;points custom;dates raw;dates string;english;german;time\n");
@@ -137,6 +136,7 @@ public class Prime31 {
             int cDatesString = countCollisions(p, true, dates.stream().map(d -> new String[]{String.format("%d-%02d-%02d", d[0], d[1], d[2])}).toList());
             int cEnglish = countCollisions(p, true, wordsE);
             int cGerman = countCollisions(p, true, wordsG);
+            int cRussian = countCollisions(p, true, wordsR);
             t = System.nanoTime() - t;
             Object[] data = {
                 p,
@@ -147,13 +147,14 @@ public class Prime31 {
                 100.0 * cDatesString / dates.size(),
                 100.0 * cEnglish / wordsE.size(),
                 100.0 * cGerman / wordsG.size(),
+                100.0 * cRussian / wordsR.size(),
                 1.0 * t / 1000_000
             };
             String msg = String.format(
-                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", data
+                "%6d: %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %4.1f %7.3f", data
             );
             String line = String.format(
-                "%d;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.3f\n", data
+                "%d;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.1f;%.3f\n", data
             );
             output.append(line);
             System.out.println(msg);
@@ -171,22 +172,22 @@ public class Prime31 {
         List<Integer[]> dates = generateDates();
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
+        List<Character[]> wordsR = generateWords("assets/code/prime31/most_common_russian.csv");
         int x = 0b01010101010101010101010101010101;
         Random r = new Random(31);
         x = r.nextInt(Integer.MAX_VALUE / 4, Integer.MAX_VALUE / 2);
-        runTests(x - 25, x + 25, points, dates, wordsE, wordsG);
-        runTests(1, 50, points, dates, wordsE, wordsG);
+        runTests(x - 25, x + 25, points, dates, wordsE, wordsG, wordsR);
+        runTests(1, 50, points, dates, wordsE, wordsG, wordsR);
         // run twice to avoid measurement error from JVM warmup
-        runTests(1, 50, points, dates, wordsE, wordsG);
+        runTests(1, 50, points, dates, wordsE, wordsG, wordsR);
         // test around all mersenne primes in int range
-        runTests(127 - 25, 127 + 25, points, dates, wordsE, wordsG);
-        runTests(8191 - 25, 8191 + 25, points, dates, wordsE, wordsG);
-        runTests(131071 - 25, 131071 + 25, points, dates, wordsE, wordsG);
-        runTests(524287 - 25, 524287 + 25, points, dates, wordsE, wordsG);
-        runTests(2147483647 - 50, 2147483647, points, dates, wordsE, wordsG);
+        runTests(127 - 25, 127 + 25, points, dates, wordsE, wordsG, wordsR);
+        runTests(8191 - 25, 8191 + 25, points, dates, wordsE, wordsG, wordsR);
+        runTests(131071 - 25, 131071 + 25, points, dates, wordsE, wordsG, wordsR);
+        runTests(524287 - 25, 524287 + 25, points, dates, wordsE, wordsG, wordsR);
+        runTests(2147483647 - 50, 2147483647, points, dates, wordsE, wordsG, wordsR);
         // test around a large prime that is nowhere near power of 2
         // 25165824 = (2^24 + 2^25) / 2
-        runTests(25165824 - 25, 25165824 + 25, points, dates, wordsE, wordsG);
-        int x = "foo".hashCode();
+        runTests(25165824 - 25, 25165824 + 25, points, dates, wordsE, wordsG, wordsR);
     }
 }
