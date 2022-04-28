@@ -234,10 +234,10 @@ If we don't, the safest bet is a prime number, since it will not share any divis
 
 Since we are in Java, we can look up the implementation of `HashMap<K,V>`, which always uses powers of two as the table length.
 The reason for this is that instead of using the modulo operator we can just calculate `(n - 1) & h` when `h` is the hash value.
-Since n = 2<sup>e</sup>, the binary representation of  `n - 1` are zeros followed by a series of `e` ones and the bitwise and operator gives us just the last `e` bits of the hash.
+Since n = 2<sup>e</sup>, the binary representation of `n - 1` are zeros followed by a series of `e` ones and the bitwise and operator gives us just the last `e` bits of the hash.
 
 This also means that the only restriction we have to follow for `p` is that it cannot be even.
-All od numbers will be coprime to 2<sup>e</sup> for all e.
+All odd numbers will be coprime to 2<sup>e</sup> for all e.
 
 ## Remaining sources of collisions
 
