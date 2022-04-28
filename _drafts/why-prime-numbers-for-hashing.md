@@ -349,4 +349,4 @@ For this, let's redo this calculation around the other Mersenne primes within th
 
 And for good measure one that is quite large but not near any power of two:
 
-<div class="bokeh-container"><script src="/assets/img/prime31_993922790_993922840.js" id="prime31_993922790_993922840"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_28739431_28739481.js" id="prime31_28739431_28739481"></script></div>
