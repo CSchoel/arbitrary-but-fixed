@@ -19,7 +19,7 @@ This magic integer is called a hash and the array structure in which the values 
 Since the number of elements we want to store is usually smaller than the maximum integer value, the actual array index is determined by using the modulo operation to obtain `index = hash(key) % size`.
 
 The main difficulty in finding a good `hash()` function is that the range of available hashes is limited by the number of possible (positive) integer values while the theoretical number of possible key objects is often infinite or at least much larger.
-Take the example of using strings as keys: A string `s` can have aribitrary length, but there are only 2<sup>31</sup> possible different results of `hash(s)`.
+Take the example of using strings as keys: A string `s` can have aribitrary length, but there are only 2<sup>32</sup> possible different results of `hash(s)`.
 This implies that *some* Strings will need to have the exact same hash value and will therefore be put into the same index in the hash table, even though they are completely different.
 Even if two different strings have a different hash value, they can still end up with the same index through the modulo operation.
 For example, lets say the string `"foo"` has a hash of 5 and the string `"bar"` has a hash of 9.
@@ -33,7 +33,7 @@ A good hash function is therefore one that minimizes collisions by spreading out
 
 ## The question
 
-To use a particular data type as a key in a hash table, we need a hash function for that particular data type.
+To use a data type as a key in a hash table, we need a hash function for that particular data type.
 Finding a good hash function is hard, and usually the best bet is to resort to using predefined functions in the standard library.
 However, it is never a good idea to blindly trust an algorithm without having a general understanding how it works and why we should use it in place of other alternatives.
 At the very least, this knowledge will help to anticipate and debug issues that may occur in our application.
@@ -131,7 +131,8 @@ I noticed that searching for this question online yields a lot of answers which 
 
 All these non-answers serve to show that this is an area where computer scientists tend to be out of their comfort zone, because it involves number theory, i.e. hardcore math.
 I do not think that anyone in the above examples is to blame for not knowing a better answer.
-After all, they are programmers and computer scientists and not mathematicians, but I do question the hubris of giving such shallow answers instead of owning up to the fact that you just do not know.
+After all, they are programmers and computer scientists and not mathematicians, but I do question the lack of curiosity that leads to such shallow answers being given and accepted.
+You cannot learn anything if you do not acknowledge the gaps in your knowledge first.
 Put this way, the answer from *Effective Java* might be the most honest one.
 
 There *are* also good answers that explain parts of the problem really well:
@@ -222,7 +223,7 @@ This is again the case for strings.
 For ASCII strings of length 4, we have 128 possible characters with a maximum sum of 4 · 127 = 508, but we have 128<sup>4</sup> = 268,435,456 possible four-character strings, which means an expected collision rate of at least 1 - 508 / 268,435,456 = 99.9998%.
 
 This is where the polynomial rolling hash comes in.
-By using polynomials, we both avoid the commutativity of addition because each summand is multiplied with a different value before summation, and even when the data only consists of very small values, the exponentiation quickly spreads these values over the integer range.
+By using polynomials, we both avoid the commutativity of addition, because each summand is multiplied with a different value before summation, and even when the data only consists of very small values, the exponentiation quickly spreads these values over the integer range.
 
 Now for the choice of `p`, remember our theorem:
 
@@ -246,10 +247,10 @@ Assuming a uniform distribution of the content of the `data` array across the po
 
 The only remaining point of concern is our data itself.
 Remember that multiplication with a number coprime to the number of buckets does not make the spread across buckets *worse*, but it also cannot do anything if the spread was already bad *before* the multiplication.
-For example, if we would start with `hash = 0` instead of `hash = 1`, we would be able to easily produce collisions if all elements of `data` were divisible by two for all or at least many of the elements that we want to store.
+For example, if we would start with `hash = 0` instead of `hash = 1`, we would be able to easily produce collisions if all elements of `data` were divisible by two for all or at least many of the keys that we want to store.
 By starting with `hash = 1` we add the summand p<sup>data.length</sup> to the calculation, which cannot be divisible by two.
 
-At this point we have ruled out easily *predictable* patterns of our data that may cause collisions, but in real data there might be all kinds of *unpredictable* patterns.
+At this point we have ruled out the most easily *predictable* patterns of our data that may cause collisions, but in real data there might be all kinds of *unpredictable* patterns.
 Unless we run tests with a particular `p` and a particular data set that is representative of real world applications, we cannot be sure that the hash function really works well for our use case.
 
 Just to give you an example of what kind of patterns we might be talking about, the letter 'e' is far more likely to occur in an english text than the letter 'k'.
@@ -278,6 +279,9 @@ It may very well be that choosing a number that "works well enough" for some pop
 
 However, while this is true for `String.hashCode()` it *does* seem that the 31 was copied over to `Object.hash()` without much thought or testing.
 After all, we should assume different patterns to occur in arbitrary composite objects than in strings, which are heavily shaped by natural and formal languages.
+
+Performing a bit of necromancy myself, I could indeed find other old JDK bug reports, which report bad performance of `Arrays.hashCode()` for [small arrays](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8134141) and for [arrays only containing the values 0 and -1](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6530203).
+This was acknowledged by the Java developers, but no change was implemented since the internal algorithm is already fully specified in the documentation of the Java API and thus some applications might rely on this specific implementation.
 
 ## Bonus: Evaluating different primes
 
@@ -319,6 +323,7 @@ The colored lines represent the different test scenarios and the faded area in t
 We can see a few things here that were expected and also a few that were surprising.
 For one, the prime 31 seems to be neither a particularly bad nor a particularly good candidate for our test cases.
 If we had to determine a "winner" in this range, it would probably be the prime 29 due to its exceptional performance for the date test.
+However, if you care more about Russian than about English or German, you might also be interested in the prime 41.
 
 Both the raw versions of the date and points tests show symptoms of having a too narrow value range when the multiplicative factor is small.
 Most surprisingly, converting dates and points to strings yields much better hashing performance in both cases.
@@ -326,7 +331,7 @@ Even the custom idea of just enumerating pixels performs well but still worse th
 Memo to myself: Stop scolding students for implementing `hashCode()` as `return this.toString().hashCode()`!
 
 Another result that is surprising at first glance is that we actually don't see more collisions for even factors as we would have predicted.
-However, this can be explained by the second hash function applied by `HashMap`, which unfortunately makes our results less predictable.
+This can be explained by the second hash function applied by `HashMap`, which unfortunately makes our results less predictable.
 I have run the test without it and the result is indeed much more jagged with worse performance for even factors.
 
 Finally, there is no noticeable performance gain in terms of computation speed when using Mersenne primes.
@@ -350,3 +355,27 @@ For this, let's redo this calculation around the other Mersenne primes within th
 And for good measure one that is quite large but not near any power of two, which I chose by calling `new Random(31).nextInt(1 << 15, 1 << 25)`. (The 31 is only in there for funsies, because I needed some number to fix the seed of the random number generator.)
 
 <div class="bokeh-container"><script src="/assets/img/prime31_28739431_28739481.js" id="prime31_28739431_28739481"></script></div>
+
+Apparently, Mersenne primes are not only *not better*, but actually worse than other primes.
+It seems like there is some kind of "gravity well" around powers of two, which drags the adjacent Mersenne primes into the performance abyss along with them.
+I suspect that this has something to do with the fact that all values in this area will have a quite large number of zeros in their binary representation.
+The effect we see is, however, extremely dependent on the test case.
+For the raw date and point tests it is much more pronounced than for words, and for the string version of points and dates it does not occur at all.
+
+In this regard, Mersenne primes might have been a poor choice to look at the effect of the size of the multiplicative factor on the collision performance, but the last test of a pseudorandomly generated number shows that there are fluctuations everywhere and that the only effect of size that we can reliably determine is that there are some use cases where extremely small and extremely large multiplicative factors perform equally badly.
+Therefore: "Large numbers are better" myth (mostly) busted!
+
+That being said, I have no good explanation for many of the observed phenomena in this test.
+Maybe I chose weird test cases, maybe I have some bugs in my simulation?
+If you want, you can [have a look at the source code](https://github.com/CSchoel/arbitrary-but-fixed/tree/main/assets/code/prime31).
+I would be grateful to hear if you found any errors, but currently I think the most likely explanation is the one I gave earlier:
+Finding a multiplicative factor that performs well for all test cases is extremely hard and predicting which patterns will occur in the keys of hash tables is next to impossible.
+After all, I bet you could think of at least a dozen other test cases that would be interesting to investigate right now.
+
+What do we take away from this?
+I would suggest four things:
+
+* It's always more complicated than you think at first glance.
+* In Java, it seems to be OK if not outright beneficial to implement hash functions based on String representations of objects.
+* Sometimes, rolling a die is the best way to avoid running into patterns that degenerate algorithmic performance.
+* If you really want to know if your hash function performs well for your application scenario, test it with data that is representative of this scenario.
