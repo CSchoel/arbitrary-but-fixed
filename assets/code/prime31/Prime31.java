@@ -173,10 +173,6 @@ public class Prime31 {
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
         List<Character[]> wordsR = generateWords("assets/code/prime31/most_common_russian.csv");
-        int x = 0b01010101010101010101010101010101;
-        Random r = new Random(31);
-        x = r.nextInt(1 << 15, 1 << 25);
-        runTests(x - 25, x + 25, points, dates, wordsE, wordsG, wordsR);
         runTests(1, 50, points, dates, wordsE, wordsG, wordsR);
         // run twice to avoid measurement error from JVM warmup
         runTests(1, 50, points, dates, wordsE, wordsG, wordsR);
@@ -186,8 +182,9 @@ public class Prime31 {
         runTests(131071 - 25, 131071 + 25, points, dates, wordsE, wordsG, wordsR);
         runTests(524287 - 25, 524287 + 25, points, dates, wordsE, wordsG, wordsR);
         runTests(2147483647 - 50, 2147483647, points, dates, wordsE, wordsG, wordsR);
-        // test around a large prime that is nowhere near power of 2
-        // 25165824 = (2^24 + 2^25) / 2
-        runTests(25165824 - 25, 25165824 + 25, points, dates, wordsE, wordsG, wordsR);
+        // test around a large number that is nowhere near power of 2
+        Random r = new Random(31);
+        int x = r.nextInt(1 << 15, 1 << 25);
+        runTests(x - 25, x + 25, points, dates, wordsE, wordsG, wordsR);
     }
 }
