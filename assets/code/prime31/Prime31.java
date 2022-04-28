@@ -123,7 +123,7 @@ public class Prime31 {
         List<Character[]> wordsR
     ) throws IOException {
         StringBuilder output = new StringBuilder();
-        output.append("prime;points raw;points string;points custom;dates raw;dates string;english;german;time\n");
+        output.append("prime;points raw;points string;points custom;dates raw;dates string;english;german;russian;time\n");
         // for (int p: primes) {
         for(int p = from; p <= to; p+=1) {
             // NOTE: this is not how you do accurate time measurements in java
