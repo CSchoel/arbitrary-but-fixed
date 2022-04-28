@@ -310,7 +310,7 @@ I also performed a very crude performance test by running the whole simulation o
 
 Let's have a first look at the prime values below 50 to see how the prime 31 performs in comparison to its direct neighbors:
 
-<div class="bokeh-container"><script src="/assets/img/prime31_1_50.js" id="ee71275b-4438-410e-ba7a-2b0f99d24a8e"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_1_50.js" id="prime31_1_50"></script></div>
 
 The dotted vertical lines show prime numbers and the solid vertical lines indicate the Mersenne primes 3, 7, and 31.
 The colored lines represent the different test scenarios and the faded area in the background is the result of the crude performance test.
@@ -336,16 +336,16 @@ Myth busted!
 The only myth that remains is that larger primes would perform significantly better.
 For this, let's redo this calculation around the other Mersenne primes within the integer range: 127, 8191, 131071, 524287, and 2147483647.
 
-<div class="bokeh-container"><script src="/assets/img/prime31_102_152.js" id="e2be3485-abab-4aaf-a2e7-8a292ad628f2"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_102_152.js" id="prime31_102_152"></script></div>
 
-<div class="bokeh-container"><script src="/assets/img/prime31_8166_8216.js" id="53276d3a-350b-49e3-8dbc-8b52314416aa"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_8166_8216.js" id="prime31_8166_8216"></script></div>
 
-<div class="bokeh-container"><script src="/assets/img/prime31_131046_131096.js" id="07ea6290-e3d4-4708-8119-936d3856720a"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_131046_131096.js" id="prime31_131046_131096"></script></div>
 
-<div class="bokeh-container"><script src="/assets/img/prime31_524262_524312.js" id="29a36fa3-8f79-4485-95fd-2f78eae9e828"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_524262_524312.js" id="prime31_524262_524312"></script></div>
 
-<div class="bokeh-container"><script src="/assets/img/prime31_2147483597_2147483647.js" id="e25420f0-7fc0-4489-adb3-7dd3605d668c"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_2147483597_2147483647.js" id="prime31_2147483597_2147483647"></script></div>
 
 And for good measure one that is quite large but not near any power of two:
 
-<div class="bokeh-container"><script src="/assets/img/prime31_25165799_25165849.js" id="5a0068ca-f0bb-4a0a-b10b-93ca902900dc"></script></div>
+<div class="bokeh-container"><script src="/assets/img/prime31_993922790_993922840.js" id="prime31_993922790_993922840"></script></div>

@@ -1,5 +1,6 @@
 import pathlib
 import math
+import re
 from bokeh.plotting import figure, show
 from bokeh.palettes import Category10_10
 from bokeh.models import ColumnDataSource, HoverTool, Span, Range1d, LinearAxis
@@ -81,6 +82,9 @@ def plot_prime31(fname, outname=None):
     else:
         js, tag = autoload_static(f, CDN, outname)
         outpath = pathlib.Path(outname)
+        jsid = re.search(r'id="([^"]+)"', tag).group(1)
+        js = js.replace(jsid, outpath.stem)
+        tag = tag.replace(jsid, outpath.stem)
         outpath.write_text(js, encoding="utf-8")
         print(tag)
 
