@@ -3,7 +3,7 @@ import math
 import re
 from bokeh.plotting import figure, show
 from bokeh.palettes import Category10_10
-from bokeh.models import ColumnDataSource, HoverTool, Span, Range1d, LinearAxis
+from bokeh.models import ColumnDataSource, HoverTool, Span, Range1d, LinearAxis, NumeralTickFormatter
 from bokeh.embed import autoload_static
 from bokeh.resources import CDN
 import numpy as np
@@ -47,9 +47,10 @@ def plot_prime31(fname, outname=None):
         y_range=(0, 100),
         active_scroll="wheel_zoom"
     )
+    f.xaxis.formatter = NumeralTickFormatter(format="0,0", language="en")
     hover = f.select(type=HoverTool)
     hover.names = experiments
-    f.extra_y_ranges = dict(time_range=Range1d(55,100))
+    f.extra_y_ranges = dict(time_range=Range1d(50,100))
     f.add_layout(LinearAxis(y_range_name="time_range", axis_label="time [ms]"), "right")
 
     primes = { x for x in data["prime"] if is_prime(x) }
