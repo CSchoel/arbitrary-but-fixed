@@ -175,7 +175,7 @@ public class Prime31 {
         List<Character[]> wordsR = generateWords("assets/code/prime31/most_common_russian.csv");
         int x = 0b01010101010101010101010101010101;
         Random r = new Random(31);
-        x = r.nextInt(Integer.MAX_VALUE / 4, Integer.MAX_VALUE / 2);
+        x = r.nextInt(1 << 15, 1 << 25);
         runTests(x - 25, x + 25, points, dates, wordsE, wordsG, wordsR);
         runTests(1, 50, points, dates, wordsE, wordsG, wordsR);
         // run twice to avoid measurement error from JVM warmup
