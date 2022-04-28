@@ -171,6 +171,10 @@ public class Prime31 {
         List<Integer[]> dates = generateDates();
         List<Character[]> wordsE = generateWords("assets/code/prime31/most_common_english.csv");
         List<Character[]> wordsG = generateWords("assets/code/prime31/most_common_german.csv");
+        int x = 0b01010101010101010101010101010101;
+        Random r = new Random(31);
+        x = r.nextInt(Integer.MAX_VALUE / 4, Integer.MAX_VALUE / 2);
+        runTests(x - 25, x + 25, points, dates, wordsE, wordsG);
         runTests(1, 50, points, dates, wordsE, wordsG);
         // run twice to avoid measurement error from JVM warmup
         runTests(1, 50, points, dates, wordsE, wordsG);
