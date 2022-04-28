@@ -280,7 +280,7 @@ It may very well be that choosing a number that "works well enough" for some pop
 However, while this is true for `String.hashCode()` it *does* seem that the 31 was copied over to `Object.hash()` without much thought or testing.
 After all, we should assume different patterns to occur in arbitrary composite objects than in strings, which are heavily shaped by natural and formal languages.
 
-Performing a bit of necromancy myself, I could indeed find other old JDK bug reports, which report bad performance of `Arrays.hashCode()` for [small arrays](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8134141) and for [arrays only containing the values 0 and -1](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6530203).
+Performing a bit of necromancy myself, I could indeed find other old JDK bug reports, which report bad performance of `Arrays.hashCode(long[])` for [small arrays](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8134141) and for [arrays only containing the values 0 and -1](https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6530203).
 This was acknowledged by the Java developers, but no change was implemented since the internal algorithm is already fully specified in the documentation of the Java API and thus some applications might rely on this specific implementation.
 
 ## Bonus: Evaluating different primes
