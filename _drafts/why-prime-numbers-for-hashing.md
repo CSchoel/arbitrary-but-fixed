@@ -292,8 +292,9 @@ However, there are a few questions left that still tickled me:
 
 So in a small myth busting experiment, I put together a few very small test cases which I think are fairly realistic keys for a hash table:
 
-* The 1000 most common English words
-* The 1000 most common German words
+* [The 1000 most common English words](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/PG/2006/04/1-10000)
+* [The 1000 most common German words](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/A_Frequency_Dictionary_of_German)
+* [The 1000 most common Russian words](https://en.wiktionary.org/wiki/Appendix:Frequency_dictionary_of_the_modern_Russian_language_(the_Russian_National_Corpus)/1)
 * 100000 random pixels in a 1024x768 pixel image consisting of two integers for the x- and y-coordinate
 * the same pixels, but converted to strings of the form `"(x, y)"`
 * 10000 random dates between 1983 and 2022 consisting of three integers for year, month, and day
