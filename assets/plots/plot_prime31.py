@@ -3,6 +3,8 @@ import math
 from bokeh.plotting import figure, show
 from bokeh.palettes import Category10_10
 from bokeh.models import ColumnDataSource, HoverTool, Span, Range1d, LinearAxis
+from bokeh.embed import autoload_static
+from bokeh.resources import CDN
 import numpy as np
 import pandas as pd
 import itertools as it
@@ -23,16 +25,17 @@ def is_mersenne(n):
     mps = { 3, 7, 31, 127, 8191, 131071, 524287, 2147483647 }
     return n in mps
 
-def plot_prime31():
+def plot_prime31(fname, outname=None):
     """
     Plots 2D scatter plot of successive values in sample data
     """
     colors = Category10_10
-    data = pd.read_csv(cwd / "prime31.csv", delimiter=";")
+    data = pd.read_csv(fname, delimiter=";")
     experiments = [x for x in data.columns.values if x not in ["prime", "time"]]
     f = figure(
-        title="Collision probabilities for different primes",
-        x_axis_label='prime',
+        title="Collision probabilities for different multiplicative factors in a"+
+              "\nrolling polynomial hash for Java's HashMap implementation",
+        x_axis_label='multiplicative factor',
         y_axis_label='collisions [%]',
         tooltips=[
             ("test name", "@name"),
@@ -73,7 +76,15 @@ def plot_prime31():
             'mersenne': [x in mersennes for x in data["prime"]]
         })
         f.line("factor", "collisions", color=c, source=ds, legend_label=e, line_width=2, name=e)
-    show(f)
+    if outname is None:
+        show(f)
+    else:
+        js, tag = autoload_static(f, CDN, outname)
+        outpath = pathlib.Path(outname)
+        outpath.write_text(js, encoding="utf-8")
+        print(tag)
 
 if __name__ == "__main__":
-    plot_prime31()
+    for df in cwd.glob("prime31*.csv"):
+        print(df)
+        plot_prime31(df, outname=f"assets/img/{df.stem}.js")
