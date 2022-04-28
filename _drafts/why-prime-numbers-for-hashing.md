@@ -323,7 +323,7 @@ If we had to determine a "winner" in this range, it would probably be the prime 
 Both the raw versions of the date and points tests show symptoms of having a too narrow value range when the multiplicative factor is small.
 Most surprisingly, converting dates and points to strings yields much better hashing performance in both cases.
 Even the custom idea of just enumerating pixels performs well but still worse than the string variant.
-Memo to myself: Stop scolding students for implementing `hashCode()` as `return this.toString().hashCode()`.
+Memo to myself: Stop scolding students for implementing `hashCode()` as `return this.toString().hashCode()`!
 
 Another result that is surprising at first glance is that we actually don't see more collisions for even factors as we would have predicted.
 However, this can be explained by the second hash function applied by `HashMap`, which unfortunately makes our results less predictable.
@@ -347,6 +347,6 @@ For this, let's redo this calculation around the other Mersenne primes within th
 
 <div class="bokeh-container"><script src="/assets/img/prime31_2147483597_2147483647.js" id="prime31_2147483597_2147483647"></script></div>
 
-And for good measure one that is quite large but not near any power of two:
+And for good measure one that is quite large but not near any power of two, which I chose by calling `new Random(31).nextInt(1 << 15, 1 << 25)`. (The 31 is only in there for funsies, because I needed some number to fix the seed of the random number generator.)
 
 <div class="bokeh-container"><script src="/assets/img/prime31_28739431_28739481.js" id="prime31_28739431_28739481"></script></div>
