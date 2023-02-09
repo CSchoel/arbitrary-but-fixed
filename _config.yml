@@ -16,15 +16,16 @@
 title: Arbitrary but fixed
 logo: assets/arbitrary_but_fixed.png
 author: Christopher Schölzel
-email: christopher.schoelzel@mni.thm.de
+email: christopher.schoelzel@mailbox.org
 description: > # this means to ignore newlines until "baseurl:"
-  In this blog I share fixes to problems that I encounter on the way to my PhD.
+  In this blog I share fixes to problems that I encounter in my work
+  as an AI engineer or in my private projects.
   Topics are arbitrary, but somewhat centered around computer science
   and systems biology.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.arbitrary-but-fixed.net" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
-github_username:  CSchoel
+github_username: CSchoel
 rg_username: Christopher_Schoelzel2
 rg_displayname: C. Schölzel
 lang: en
@@ -51,8 +52,6 @@ exclude:
   - resources
   - Gemfile
   - CHANGELOG.md
-
-
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

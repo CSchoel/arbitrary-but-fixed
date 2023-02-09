@@ -6,8 +6,8 @@ permalink: /about/
 
 ## The blog
 
-As a researcher in an interdisciplinary field, and generally curious person I tend to run into interesting and sometimes exotic <del>problems</del> challenges.
-In this blog I want to shout my solutions to these challenges out into the world, hoping for some feedback.
+As an AI engineer with a background in academia, and generally curious person, I tend to run into interesting and sometimes exotic <del>problems</del> challenges.
+In this blog, I want to shout my solutions to these challenges out into the world, hoping for some feedback.
 So if you have a question, or a better solution, or just want to chat with someone with similar interests, I am always happy if you drop me an email.
 
 This blog was created using [Jekyll](https://jekyllrb.com/) with the following plugins:
@@ -24,12 +24,13 @@ The HTML contend is served via [GitHub Pages](https://pages.github.com/), the sy
 ## Myself
 
 I got my Master's degree in computer science from the [Technical University Kaiserslautern](https://www.uni-kl.de/startseite/) with a focus on machine learning.
-Currently, I am a teacher and PhD student at the [Technische Hochschule Mittelhessen](http://thm.de) - a university of applied sciences in Gießen (Germany) - where I study the benefits of the language [Modelica](http://modelica.org/) for the modeling of complex biological systems.
+After that I was a teacher and did my PhD at the bioinformatics department of the [Technische Hochschule Mittelhessen](http://thm.de) - a University of Applied Sciences in Gießen (Germany).
+Today, I work as an AI engineer at [LanguageTool](https://languagetool.org/).
 
-For me, a good day is a day where I learned something new.
-Therefore I tend to have quite a large pile of side projects both related to my work and my personal interests.
+For me, a good day is a day when I learned something new.
+Therefore, I tend to have quite a large pile of side projects, both related to my work and my personal interests.
 
-In this blog you may read stories from both my research and my spare time.
+In this blog, you may read stories from both my work life and my spare time.
 
 ---
 
@@ -38,9 +39,8 @@ In this blog you may read stories from both my research and my spare time.
 ### Person responsible
 
 Christopher Schölzel<br/>
-Technische Hochschule Mittelhessen<br/>
-Wiesenstraße 14<br/>
-35390 Gießen, Germany<br/>
+Kanalstraße 32<br/>
+48147 Münster, Germany<br/>
 Email : <span id="mail">{{ site.email | encode_email }}</span>
 <script type="text/javascript">mail.innerText=unescape(mail.innerText)</script>
 
@@ -51,26 +51,26 @@ This data may only be used to contact the author of this website within the scop
 - §1 Content liability
 
     The content of this website was created with utmost diligence.
-    However, I cannot guarantee for the correctness, completeness and topicality of its content.
+    However, I cannot guarantee for the correctness, completeness, and topicality of its content.
 
-    According to § 7 Sect.1 TMG as a service provider I am responsible for my own content on this website according to general law.
-    According to §§ 8 to 10 TMG I am, however, not obliged to monitor transmitted or stored information from foreign sources or to search after circumstances that hint towards illegal actions.
+    According to § 7 Sect.1 TMG as a service provider I am responsible for my content on this website according to general law.
+    According to §§ 8 to 10 TMG, I am, however, not obliged to monitor transmitted or stored information from foreign sources or to search after circumstances that hint towards illegal actions.
     Obligations to delete or block information in accordance to general law will remain unaffected.
-    However, a liability in this regard is only possible starting at the moment of conizanze of a violation of law.
-    When I learn about such infringements I will remove the respective content immediately.
+    However, a liability in this regard is only possible starting at the moment of cognizance of a violation of law.
+    When I learn about such infringements, I will remove the respective content immediately.
 
-    With the use of this website no contract is established between the user and the provider.
-    Therefore no contractual or quasi-contractual claims result against the provider.
+    With the use of this website, no contract is established between the user and the provider.
+    Therefore, no contractual or quasi-contractual claims result against the provider.
 
 - §2 Link liability
 
     This website contains links to external websites of third parties (recognizable by the following icon ![external link]({{ site.baseurl }}/assets/link_arrow_14.png).
-    Because we have no influence over the content of these websites we cannot guarantee for them.
-    The responsibility for the content of the linked sites always lies with the provider of mainainter of that site.
+    Because we have no influence over the content of these websites, we cannot guarantee for them.
+    The responsibility for the content of the linked sites always lies with the provider of maintainer of that site.
     The linked sites have been reviewed for possible violations of law at the time the link was placed.
-    At this time no illegal content was identifiable.
+    At this time, no illegal content was identifiable.
     A permanent monitoring of the content of linked sites cannot be deemed acceptable without tangible evidence of law infringement.
-    If I become aware of any infringements I will immediately remove the respective links.
+    If I become aware of any infringements, I will immediately remove the respective links.
 
 - §3 Copyright
 
@@ -80,7 +80,7 @@ This data may only be used to contact the author of this website within the scop
 
 - §4 Privacy
 
-    I hereby object to the use of my personal data, that is provided here in accordance to the German "Impressumspflicht", by third parties for the purpose of sending not explicitly requested advertisements and information material.
+    I hereby object to the use of my personal data, that is provided here in accordance to the German "Impressumspflicht", by third parties for sending advertisements and information material.
 
 - §4 Applicable law
 
