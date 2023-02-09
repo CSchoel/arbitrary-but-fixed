@@ -10,16 +10,6 @@ tags:
 - machine learning
 date: 2023-02-09 20:40 +0100
 ---
-<!--
-- Performance metrics
-  - accuracy instead of manual inspection
-  - importance of a train/test split
-  - error types: TP, TN, FP, FN
-  - precition/recall to distinguish between error types
-  - sensitivity/specificity
-  - f-measure?
-  - confusion matrix
--->
 
 ## Accuracy
 
