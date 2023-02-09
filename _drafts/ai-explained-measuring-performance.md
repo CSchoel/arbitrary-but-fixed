@@ -25,7 +25,7 @@ tags:
 Think about a very simple AI that classifies emails into benign "ham" or unwanted "spam", very much like the one we built in a [previous article]({% post_url 2021-05-30-ai-explained-with-k-nearest-neighbors %}):
 How do we measure how good our AI performs?
 
-Up until now, we just looked at a few examples manually and determined whether we felt that the outcome was correct.
+Until now, we just looked at a few examples manually and determined whether we felt that the outcome was correct.
 This works if our question is just "Can the AI distinguish between a typical 'Nigerian prince' spam mail and a genuine mail to a friend from Nigeria?".
 But what if the question becomes "Can the AI detect all kinds of typical spam mails that are in my inbox?" or if we also want to check for the kind of spam our friends and colleagues are getting?
 The more general we want our AI to be, the more examples we will need to check.
@@ -35,19 +35,19 @@ This is the same kind of labeled data that we needed for building our AI in the 
 To distinguish both datasets, we will call the data we use for testing the *test set*.
 
 Having this data lets us rephrase the question to "What percentage of these examples does the AI get right?".
-This measure is called *accuracy* and it can be calculated simply like this:
+This measure is called *accuracy*, and it can be calculated simply like this:
 
 1. Classify all example emails in the test set with the spam detection AI.
 2. Count how often the AI outputs the right choice of "spam" or "not spam".
 3. Divide that number by the total number of examples in the test set.
 
-The possible outcomes are between 0 (the AI does not get any of the examples right → 0 % accuracy) and 1 (the AI gets every example right → 100% accuracy).
+The possible outcomes are between 0 (the AI does not get any of the examples right → 0% accuracy) and 1 (the AI gets every example right → 100% accuracy).
 In general, an AI with 80% accuracy is better than an AI with 70% accuracy, for example.
 
 ## A cautionary note about data separation
 
 In the previous example, I just assumed that we do not use the *same* data for building the AI and for testing it.
-Let's have a quick look at why we do this and what will go wrong if we fail to separate between *training* and *test* data:
+Let's have a brief look at why we do this and what will go wrong if we fail to separate between *training* and *test* data:
 
 Remember the instructions for our spam detection AI:
 
@@ -56,7 +56,7 @@ Remember the instructions for our spam detection AI:
 > 3. Output the label attached to this database entry.
 
 What happens if we try to classify an email that was already in the database?
-Well, the maximum possible number of matching words between one text and another is of coure _all_ the words in the text.
+Well, the maximum possible number of matching words between one text and another is of course _all_ the words in the text.
 So if we ask the AI for the best label for an entry that it has already stored in its database, it will always find the exact copy of that entry and output the label attached to that copy.
 In other words: If we use our _training_ data to calculate accuracy, we will end up with 100% accuracy.
 Always.
@@ -72,15 +72,15 @@ Can there still be differences between them?
 
 Well, let's have a look at the different _kinds_ of errors our AI can make by going through all possibilities:
 
-* _True positive_: If it classifies a mail as spam that actually was a spam mail, thats good. No error here.
-* _False positive_: If it classifies a mail as spam that actually was not spam, thats one error to make. The AI was too eager in finding spam.
+* _True positive_: If it classifies a mail as spam that actually was a spam mail, that's good. No error here.
+* _False positive_: If it classifies a mail as spam that actually was not spam, that's one error to make. The AI was too eager in finding spam.
 * _False negative_: If it classifies a mail as not spam that actually was spam, that is also an error, but in the opposite direction. It was too lazy and did not catch all the spam mails.
 * _True negative_: If it classifies a mail as not spam that actually was not spam, that's fine again.
 
-So we end up with two kinds of errors: "eagerness errors" and "laziness errors".
-As you may already noticed, one of the two is a little more dangerous:
+So, we end up with two kinds of errors: "eagerness errors" and "laziness errors".
+As you may have noticed, one of the two is a little more dangerous:
 Being too lazy just means we still have to delete a few spam mails ourselves.
-Being too _eager_ might mean that a mail from our Nigerian friend or maybe from the company in Nigeria where we applied for a job lands in the spam folder and we might never notice it.
+Being too _eager_ might mean that a mail from our Nigerian friend or maybe from the company in Nigeria where we applied for a job lands in the spam folder, and we might never notice it.
 
 This leads to two new questions about the AI's performance:
 
@@ -99,45 +99,45 @@ As you might already have guessed, they can be calculated as follows:
 **Recall**
 
 1. Count the number of emails that get a "spam" label from the AI and actually are spam.
-2. Count the number of emails that are spam, regardless of whether or not the AI classifies them as such.
+2. Count the number of emails that are spam, regardless of whether the AI classifies them as such.
 3. Divide the number from step 1 by the number of step 2.
 
-To put it in simple terms, higher precision means less eagerness errors and higher recall means less lazyness errors.
+To put it in simple terms, higher precision means less eagerness errors and higher recall means less laziness errors.
 
-Precision and recall are, however not the only measures that help to distinguish between those two kinds of errors.
+Precision and recall are, however, not the only measures that help to distinguish between those two kinds of errors.
 Imagine a medical setting where you test for a disease like COVID-19:
 On the one hand, you want to know how good the test is at detecting sick people as sick.
 But on the other hand, you also want to know how good it is at detecting _healthy_ people as healthy.
 
-For the first part, you can just use recall, because that is exactly what recall measures: The percentage of all sick people that will test positive.
+For the first part, you can just use recall because that is exactly what recall measures: The percentage of all sick people that will test positive.
 In this setting, this is called _sensitivity_, however, because it measures how _sensitive_ the test is to finding the disease.
 
 For the second part, we use a different measure that we call _specificity_.
 
 **Specificity**
 
-1. Count the number of healthy people that are tested negative.
-2. Count the number of healthy people in the whole test group, regardless of wether they wer tested negative.
+1. Count the number of healthy people who are tested negative.
+2. Count the number of healthy people in the whole test group, regardless of whether they were tested negative.
 3. Divide the number from step 1 by the number of step 2.
 
-Again, you can think of a test that is more _specific_ of having less eagerness errors and a test that is more _sensitive_ of having less lazyness errors.
+Again, you can think of a test that is more _specific_ of having less eagerness errors and a test that is more _sensitive_ of having less laziness errors.
 It is just a slightly different definition and terminology that helps to make the right decisions in a medical setting.
 
-It is important to note here that both for precision and recall and for sensitvitiy and specificity, only knowing _one_ of these two measures will tell you nothing about the actual quality of the AI or COVID test.
+It is important to note here that both for precision and recall and for sensitivity and specificity, only knowing _one_ of these two measures will tell you nothing about the actual quality of the AI or COVID-19 test.
 This is because you can easily cheat them by just classifying every sample as spam/sick (100% recall, 100% sensitivity) or classifying every as no spam/healthy (100% specificity).
 Precision is a little harder to trick, since we would divide by zero if we classify every sample as spam.
-However, that just means we need to find that one spam mail that we are really sure about and we still can get 100% precision.
+However, that just means we need to find that one spam mail that we are really sure about, and we still can get 100% precision.
 
 ## Dealing with more than two categories
 
-Until now we only looked at the spam example, where there was only a yes/no decision to make by our AI.
+Until now, we only looked at the spam example, where there was only a yes/no decision to make by our AI.
 How about the [image classification task]({% post_url 2021-09-23-ai-explained-image-recognition %}) where we tried to recognize handwritten digits from 0 to 9?
 Here, we have ten possible classification outcomes and ten possible _true_ labels.
 
 We can still calculate the overall accuracy, which tells us how close we are to our goal in a single number.
 We can also calculate precision and recall for each digit, which will tell us which digit we recognize too often or too seldom.
 However, there is a new question that becomes interesting: "Which digit is confused with which?".
-If our AI somtimes confuses a 1 with a 7 or an 8 with a 0, that might be acceptable, but if it starts confusing a 4 and a 1 really often, something weird is going on.
+If our AI sometimes confuses a 1 with a 7 or an 8 with a 0, that might be acceptable, but if it starts confusing a 4 and a 1 really often, something weird is going on.
 
 To diagnose these issues, we can just count:
 
@@ -150,21 +150,28 @@ To diagnose these issues, we can just count:
 7. ...
 
 And so on. This gives us 100 numbers for all the ten times ten possible outcomes.
-To visualize this, you can build what is called a _confusion_ matrix that puts the label predicted by the AI on the columns and the true class label on the rows of a table.
+To visualize this, you can build what is called a _confusion matrix_ that puts the label predicted by the AI (`p:`) on the columns and the true class label (`t:`) on the rows of a table.
 The result looks like this.
 
-| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | 
-| 0 | 967 |    1 |    1 |    2 |    0 |    1 |    5 |    0 |    2 |    1 |
-| 1 | 0   | 1126 |    3 |    1 |    0 |    1 |    1 |    0 |    3 |    0 |
-| 2 | 3   |    2 | 1001 |    8 |    1 |    0 |    3 |    6 |    8 |    0 |
-| 3 | 0   |    0 |    1 | 1002 |    0 |    1 |    0 |    1 |    5 |    0 |
-| 4 | 3   |    1 |    2 |    2 |  955 |    2 |    6 |    1 |    3 |    7 |
-| 5 | 3   |    1 |    0 |   37 |    1 |  833 |    9 |    0 |    6 |    2 |
-| 6 | 4   |    3 |    1 |    1 |    1 |    3 |  941 |    0 |    4 |    0 |
-| 7 | 2   |    9 |    8 |    5 |    0 |    0 |    0 |  988 |    8 |    8 |
-| 8 | 3   |    1 |    3 |   10 |    3 |    2 |    2 |    3 |  946 |    1 |
-| 9 | 3   |    8 |    0 |   10 |    8 |    8 |    1 |    4 |    5 |  962 |
+|      |  p:0 |  p:1 |  p:2 |  p:3 |  p:4 |  p:5 |  p:6 |  p:7 |  p:8 |  p:9 |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+|  t:0 |  967 |    1 |    1 |    2 |    0 |    1 |    5 |    0 |    2 |    1 |
+|  t:1 |    0 | 1126 |    3 |    1 |    0 |    1 |    1 |    0 |    3 |    0 |
+|  t:2 |    3 |    2 | 1001 |    8 |    1 |    0 |    3 |    6 |    8 |    0 |
+|  t:3 |    0 |    0 |    1 | 1002 |    0 |    1 |    0 |    1 |    5 |    0 |
+|  t:4 |    3 |    1 |    2 |    2 |  955 |    2 |    6 |    1 |    3 |    7 |
+|  t:5 |    3 |    1 |    0 |   37 |    1 |  833 |    9 |    0 |    6 |    2 |
+|  t:6 |    4 |    3 |    1 |    1 |    1 |    3 |  941 |    0 |    4 |    0 |
+|  t:7 |    2 |    9 |    8 |    5 |    0 |    0 |    0 |  988 |    8 |    8 |
+|  t:8 |    3 |    1 |    3 |   10 |    3 |    2 |    2 |    3 |  946 |    1 |
+|  t:9 |    3 |    8 |    0 |   10 |    8 |    8 |    1 |    4 |    5 |  962 |
 
+For this particular classifier, we can see that the most common mistake is to predict a 3 (`p:3`) for images that actually showed a 5 (`t:5`).
+If we roughly calculate the sum over the rows, we can also see that the dataset used for the test contained fewer examples for the digit 5 than for the digit 3.
+If the same was true for the training data, this might already indicate why the AI makes exactly this kind of mistake.
+It could be that it just hasn't seen enough examples of the digit 3.
+When it is in doubt, it errs on the side of the class label that is more likely to occur in the data.
+
+As you can see, confusion matrices may be confusing (heh) to look at at first, but they can tell you a lot about the performance of an AI that is supposed to classify data into multiple options.
 
 ## Final remarks
