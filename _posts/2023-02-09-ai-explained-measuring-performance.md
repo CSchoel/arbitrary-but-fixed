@@ -1,13 +1,14 @@
 ---
 layout: post
 title: 'AI for laypersons: Measuring classification performance'
-description: In this post you will learn how to measure the performance
-  of an AI that classifies text or images into categories.
+description: In this post you will learn how to measure the performance of an AI that
+  classifies text or images into categories.
 categories:
 - AI for laypersons
 tags:
 - artificial intelligence
 - machine learning
+date: 2023-02-09 20:40 +0100
 ---
 <!--
 - Performance metrics
