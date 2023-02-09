@@ -166,6 +166,7 @@ The result looks like this.
 |  t:8 |    3 |    1 |    3 |   10 |    3 |    2 |    2 |    3 |  946 |    1 |
 |  t:9 |    3 |    8 |    0 |   10 |    8 |    8 |    1 |    4 |    5 |  962 |
 
+To look for mistakes, we search for the largest numbers outside the diagonal, since the diagonal shows us the samples that were classified _correctly_.
 For this particular classifier, we can see that the most common mistake is to predict a 3 (`p:3`) for images that actually showed a 5 (`t:5`).
 If we roughly calculate the sum over the rows, we can also see that the dataset used for the test contained fewer examples for the digit 5 than for the digit 3.
 If the same was true for the training data, this might already indicate why the AI makes exactly this kind of mistake.
@@ -175,3 +176,14 @@ When it is in doubt, it errs on the side of the class label that is more likely 
 As you can see, confusion matrices may be confusing (heh) to look at at first, but they can tell you a lot about the performance of an AI that is supposed to classify data into multiple options.
 
 ## Final remarks
+
+Let's sum up what we have learned:
+
+* There are automatic measures that can tell you how good an AI is.
+* Some of these measures (_accuracy_) are just one number, others are number pairs (_recall/precision_, _sensitivity/specificity_).
+    Never trust anyone, who just boasts a high score in _one_ of the numbers belonging to a pair!
+* When you want to look at what kind of errors an AI used for classification makes in detail, you can build a _confusion matrix_.
+* It's important not to test an AI on the data it has already seen when it was trained, since that makes it easy for the AI to cheat.
+
+Even if you won't remember any more details from this post than those bullet points, you are already in a powerful position to judge AI systems.
+You know what numbers to look out for, be suspicious if they are not or only partly reported, and can compare different AIs with each other based on those numbers.
