@@ -97,6 +97,7 @@ Time for another example: Let's calculate how a user-defined amount of money gro
        WORKING-STORAGE SECTION.
        01 balance PICTURE s9(7)V99.
        PROCEDURE DIVISION.
+       calculate-interest.
            DISPLAY "Please enter starting balance:"
            ACCEPT balance.
            PERFORM 10 TIMES
@@ -104,3 +105,166 @@ Time for another example: Let's calculate how a user-defined amount of money gro
                DISPLAY "New balance: " balance
            END-PERFORM.
 ```
+
+### Hierarchy
+
+You probably already noticed in the hello world example that COBOL code has a document-like hierarchy.
+There are `DIVISION`s, and `SECTION`s that seem to structure the code.
+In fact, there are the following hierarchical levels:
+
+* Divisions
+* Sections
+* Paragraphs
+* Sentences
+* Statements
+
+Divisions, sections, and paragraphs have pre-defined names and structures, with the exception of sections and paragraphs in the `PROCEDURE DIVISION`, which can be named freely by the programmer.
+Sentences are groups of statements (which again have pre-defined structures) that are terminated with a dot.
+One effect of this hierarchy is that the definition of variables (which are called _data items_ in COBOL) in the `WORKING-STORAGE SECTION` of the `DATA DIVISON` is separated from the code in the `PROCEDURE DIVISION`.
+
+### Data items
+
+The `WORKING-STORAGE SECTION` looks bizarre from the standpoint of modern programming languages:
+
+```cobol
+      * level             signed
+      * |   name          |digit
+      * |   |             || 7 times
+      * |   |             || | decimal point
+      * |   |             || | |
+       01 balance PICTURE s9(7)V99.
+```
+
+The number in the beginning is called the level.
+A level of 01 designates an elementary data item.
+A higher number would be used for an aggregate data item that belongs to a group item of the next lower level above it.
+This allows to define and reference nested data types of arbitrary complexity.
+We'll go into a bit more detail about that later.
+
+The name of the data item is pretty self-explanatory, but the `PICTURE` seems weird again.
+COBOL actually never forces you to think in binary or any low-level data types for that matter.
+Instead, you define your data types by their "picture", i.e. by the format how you would write them in a text file.
+The syntax for this picture part almost looks like a form of proto-regex:
+
+* `s` denotes a sign (either the character `+` or `-`).
+* `9` denotes a single decimal digit.
+* `(7)` repeats the character in front of it 7 times.
+* `V` denotes where the decimal point is placed.
+
+With that, the picture `s9(7)V99` stands for a signed 7-figure number with two decimal places - a pretty reasonable data item for the account balance of most people.
+
+### Procedures
+
+Our example program has a single procedure defined by the named paragraph `calculate-interest`.
+Naming the paragraph is only necessary if we aim to call it as a subprocedure later in the code.
+By default, the first paragraph (named or unnamed) of the `PROCEDURE DIVISION` will be called as the main procedure.
+
+Inside a procedure, you can create sentences out of an arbitrary number of statements.
+The statements that we use here are:
+
+* `DISPLAY some-value some-other-value ...` to display an arbitrary number of values as a concatenated string on the terminal.
+* `ACCEPT data-item` to read user input and store it in a data item. Note how the `PICTURE` definition of that item gives you input validation for free.
+* `PERFORM 10 TIMES [...] END PERFORM` to repeat the statements in `[...]` in a loop.
+* `MULTIPLY x BY y GIVING z` to multiply the value of `x` by `y` and store the result in `z`.
+
+As already mentioned, COBOL uses many more keywords and statements than most modern programming languages, so learning to program in COBOL consists largely of searching for the right keywords and associated statements.
+There are also the classical named functions that we are more used to, but those will be covered in the next section.
+
+## Solving a non-trivial problem in COBOL
+
+This solves the first part of [day 2 from Advent of Code 2024](https://adventofcode.com/2024/day/2).
+
+```cobol
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. AoC-2024-Day2.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT input-file
+           ASSIGN TO "input"
+           ORGANIZATION IS LINE SEQUENTIAL.
+       DATA DIVISION.
+       FILE SECTION.
+       FD input-file.
+       01 input-file-line PICTURE x(1024).
+       WORKING-STORAGE SECTION.
+       01 FILLER PICTURE a.
+           88 at-eof VALUE 'Y' FALSE 'N'.
+       01 line-cursor PICTURE 999.
+       01 previous-line-cursor PICTURE 999.
+       01 number-pair.
+           02 previous PICTURE 999.
+           02 current PICTURE 999.
+       01 line-length PICTURE 999.
+       01 FILLER PICTURE a.
+           88 all-increasing VALUE 'Y' FALSE 'N'.
+       01 FILLER PICTURE a.
+           88 all-decreasing VALUE 'Y' FALSE 'N'.
+       01 safe-count PICTURE 999.
+       01 difference-safe PICTURE a.
+           88 difference-is-safe VALUE 'Y' FALSE 'N'.
+       01 difference PICTURE 999.
+       PROCEDURE DIVISION.
+       parse-file.
+           OPEN INPUT input-file.
+           PERFORM UNTIL at-eof
+               READ input-file INTO input-file-line
+               AT END
+                   SET at-eof TO TRUE
+               NOT AT END
+                   PERFORM process-line
+               END-READ
+           END-PERFORM.
+           DISPLAY "Total count of safe sequences: " safe-count.
+           CLOSE input-file.
+           STOP RUN.
+       process-line.
+           MOVE FUNCTION LENGTH(FUNCTION TRIM(input-file-line))
+           TO line-length.
+           MOVE 1 TO line-cursor.
+           SET all-increasing TO TRUE.
+           SET all-decreasing TO TRUE.
+           SET difference-is-safe TO TRUE.
+           PERFORM UNTIL line-cursor GREATER line-length
+               MOVE line-cursor TO previous-line-cursor
+               PERFORM read-next-number
+               PERFORM check-if-increasing
+               PERFORM check-if-decreasing
+               PERFORM check-difference
+           END-PERFORM.
+           IF (all-increasing OR all-decreasing) AND difference-is-safe
+               ADD 1 to safe-count.
+       read-next-number.
+           MOVE current TO previous.
+           UNSTRING input-file-line
+           DELIMITED BY " " INTO current
+           WITH POINTER line-cursor.
+       check-if-increasing.
+           IF previous-line-cursor IS GREATER THAN 1
+           AND previous IS GREATER THAN current
+               SET all-increasing TO FALSE.
+       check-if-decreasing.
+           IF previous-line-cursor IS GREATER THAN 1
+           AND previous IS LESS THAN current
+               SET all-decreasing TO FALSE.
+       check-difference.
+           COMPUTE difference EQUAL FUNCTION ABS(previous - current).
+           IF previous-line-cursor IS GREATER THAN 1
+           AND (
+               difference IS LESS THAN 1
+               OR difference IS GREATER THAN 3
+           )
+               SET difference-is-safe TO FALSE.
+```
+
+### Reading an input file
+
+### Defining a condition name
+
+### Defining a group item
+
+### Calling a subprocedure
+
+### Overview of program logic
+
+## Learnings and outlook
