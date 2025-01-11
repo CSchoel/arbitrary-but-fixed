@@ -156,7 +156,7 @@ With that, the picture `s9(7)V99` stands for a signed 7-figure number with two d
 ### Procedures
 
 Our example program has a single procedure defined by the named paragraph `calculate-interest`.
-Naming the paragraph is only necessary if we aim to call it as a subprocedure later in the code.
+Naming the paragraph is only necessary if we aim to call it as a procedure later in the code.
 By default, the first paragraph (named or unnamed) of the `PROCEDURE DIVISION` will be called as the main procedure.
 
 Inside a procedure, you can create sentences out of an arbitrary number of statements.
@@ -172,7 +172,14 @@ There are also the classical named functions that we are more used to, but those
 
 ## Solving a non-trivial problem in COBOL
 
-This solves the first part of [day 2 from Advent of Code 2024](https://adventofcode.com/2024/day/2).
+We could end our quick-start instructions here, but I think the step from a toy example to one that solves an actual non-trivial task still brings a lot of insights with a good cost-benefit ratio.
+The following COBOL program solves the first part of [day 2 from Advent of Code 2024](https://adventofcode.com/2024/day/2).
+
+The problem we want to solve is to read a text file with a list of numbers on each line, separated by spaces and count how many of those are "safe".
+A list is safe if:
+
+* The numbers are sorted in ascending or descending order.
+* And the absolute difference between adjacent numbers is between 1 and 3 (inclusive).
 
 ```cobol
        IDENTIFICATION DIVISION.
@@ -259,12 +266,141 @@ This solves the first part of [day 2 from Advent of Code 2024](https://adventofc
 
 ### Reading an input file
 
+The first challenge that we haven't tackled yet is file access.
+The definition of what file is accessed is handleed in the `INPUT-OUTPUT SECTION` of the `ENVIRONMENT DIVISION`:
+
+```cobol
+       FILE-CONTROL.
+           SELECT input-file
+           ASSIGN TO "input"
+           ORGANIZATION IS LINE SEQUENTIAL.
+```
+
+All of this is pretty straightforward:
+We give our file the name `input-file`, provide the file name on the local file system (`"input"`), and tell COBOL that it should read the file line by line.
+If you're wondering "how else would I read a file?", consider that COBOL mostly operates on fixed-length records.
+This has the benefit of allowing random access to files, skipping to the nth record in the file in O(1) instead of having to read O(n) variable-width lines.
+In that regard, our file structure is the worst case scenario from an efficiency perspective.
+
+There is one more part of the definition in the `FILE SECTION` of the `DATA DIVISION` that is a little less straightforward:
+
+```cobol
+       FD input-file.
+       01 input-file-line PICTURE x(1024).       
+```
+
+Here, we first define what type of tile `input-file` is.
+The type `FD` designates a normal file used for reading and writing data.
+Another alternative would be `FS`, which designates a file that is used as a working memory area for COBOL's sorting and merging functionality.
+The next line, defines a data item that represents one record from the file.
+As our file has `ORGANIZATION IS LINE SEQUENTIAL`, we effectively define what data type should be used for reading a line.
+As we want to be agnostic about line size and content, we just pick 1024 alphanumerical characters.
+The downside of this is obviously that if a line is less than 1024 characters long, we will still fill 1024 bytes of memory padded with spaces.
+
+The code for actually reading a line from the file has again an interesting property:
+
+```cobol
+       READ input-file INTO input-file-line
+       AT END
+           SET at-eof TO TRUE
+       NOT AT END
+           PERFORM process-line
+       END-READ
+```
+
+As you can see, the `READ` statement has an option to execute other statements depending on whether there was something to read or we already reached the end of the file.
+Here, we use this to set the condition `at-eof`, which controls the outer loop of the program.
+But more on conditions in the next section.
+
 ### Defining a condition name
+
+Let's look a bit closer at the definition of `at-eof`:
+
+```cobol
+       01 FILLER PICTURE a.
+           88 at-eof VALUE 'Y' FALSE 'N'.
+```
+
+The first thing that's new is the `FILLER` in place of the name of the top-level data item.
+This is just a way of saying that we will never access that data item itself, so it doesn't need a name.
+We still need to give it a picture, which is just one alphabetic character.
+
+Now it gets interesting: The second line defines a subitem with level 88.
+Normally, you can only use levels 01 through 49, but there are a few special levels in COBOL.
+Level 88 is used for defining so-called "condition names", which can be used as booleans.
+If set to `TRUE`, a condition name will assume the value given after `VALUE` (or the first possible value in case a range of values is specified instead).
+If set to `FALSE`, it assumes the value given after `FALSE`.
+So essentially, we have an alphabetic data item that can either be `Y` or `N`, but we can use `at-eof` directly in place of a condition in an `IF` or `UNTIL`, and we can assign it to `TRUE` or `FALSE` with the `SET` statement.
 
 ### Defining a group item
 
-### Calling a subprocedure
+We've seen the special level 88 for condition names, but we haven't seen a true group item yet:
+
+```cobol
+       01 number-pair.
+           02 previous PICTURE 999.
+           02 current PICTURE 999.
+```
+
+Here, `number-pair` is a group item and `previous` and `current` are its subitems.
+The level `02` for the subitems is arbitrary.
+The only rule is that the level has to be larger than the parent item and both subitems have to have the same level.
+With this, we have a `number-pair` consiting of two numbers.
+If we wanted to swap pairs around as a whole, we could access `number-pair` directly, but for the purpose of this task we actually don't need that.
+I just created the group item for learning purposes.
+You can access the subitems just by their name, but in case you would have subitems with the same name in differently named group items, you could also reference them explicitly as `previous OF number-pair`, for example.
+
+### Calling a procedure
+
+In the code for reading a line from our file, you might have already noticed the `PERFORM process-line` statement.
+This is how you call a procedure in COBOL.
+As long as it's in the same file, there is no need to pass any arguments, as all data is shared between procedures.
+This makes it harder to track which procedure is responsible for changing which data items, but it allows you to divide your code into procedures at virtually zero cost:
+Just add one line in Area A that introduces a new paragraph and thus gives the procedure a name.
+
+In this program, we make heavy use of this feature to make the code more readable.
+For example, consider the loop over the numbers in a line:
+
+```cobol
+           PERFORM UNTIL line-cursor GREATER line-length
+               MOVE line-cursor TO previous-line-cursor
+               PERFORM read-next-number
+               PERFORM check-if-increasing
+               PERFORM check-if-decreasing
+               PERFORM check-difference
+           END-PERFORM.
+```
+
+If all the procedures were written out here instead of calling them, the code would become quite convoluted.
+There is the downside of losing track where the data item `line-cursor` in the loop condition is changed, but to some degree such problems can be alleviated by choosing speaking names for the procedures.
+
+As you might have noticed, procedures are not the only way of breaking down code into smaller elements.
+COBOL has functions, which are called similar to how we are used to in modern languages.
+For example, `FUNCTION TRIM(input-file-line)` calls the function `TRIM` and passes `input-file-line` as an argument.
+You can, of course, define your own functions in COBOL, but this is beyond the scope of this quick start guide.
 
 ### Overview of program logic
 
+With all the syntactic peculiarities out of the way, let's briefly discuss what the program actually does:
+
+* The main loop `PERFORM UNTIL at-eof` just ensures that `process-line` is called for each line in the input file.
+* `process-line` reads the numbers found in the line one by one into the `number-pair` data item to check for each pair whether one of the safety conditions is violated.
+* `read-next-number` advances the `line-cursor` by reading the next number in the line and storing it in `current` while saving the previous content of `current` in `previous` to do the comparions later on.
+  * I admit that it took me a while to find out that `UNSTRING` is the statement I needed here.
+* `check-if-increasing` and `check-if-decreasing` update the data items `all-increasing` and `all-decreasing` if they find a pair of numbers that violates the condition that the numbers in the line are sorted in ascending or descending order respectively.
+* `check-difference` calculates the absolute difference between the numbers in the pair and sets `difference-is-safe` to false if the difference is too small or too large.
+* Based on the values of `all-increasing`, `all-decreasing`, and `difference-is-safe`, the counter `safe-count` is incremented if the line violated none of the safety conditions.
+* At the very end, we use `DISPLAY` to print the final value of `safe-count` and thus solve the Advent of Code exercise.
+
 ## Learnings and outlook
+
+So, what have we learned?
+By this point, you are no more of a COBOL expert than I am.
+You understood a very basic program that can be solved with a handful of lines in Python or Ruby, and we haven't even touched on any advanced concepts such as copybooks, tables, or sorting.
+However, I hope that now that the very basic questions are out of the way, you are able to dig into the [GnuCOBOL Programmer's Guide](https://gnucobol.sourceforge.io/HTML/gnucobpg.html) or your COBOL manual of choice to find the statements you need for your program.
+And I hope that this will be much quicker for you than if you had to start reading that fine but long document from the beginning.
+
+Alternatively (or maybe additionally), I hope you just had a bit of fun with a quirky old language and maybe learned to appreciate where it got its quirks from.
+Maybe COBOL doesn't look so much like a dragon now but more like a bear.
+Sure, it can still kill you, and you might not want to get _too_ close to it, but you can see how it has its place in nature.
+If you just let it sleep and don't disturb it too much, it'll probably be okay.
