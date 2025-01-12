@@ -407,6 +407,13 @@ If you just let it sleep and don't disturb it too much, it'll probably be okay.
 
 <div id="punchcards"></div>
 
+<input type="text" value="000001 Hello world!" id="pc_text" oninput="updatePunchcard();"/>
+<select id="pc_key_punch" oninput="updatePunchcard();">
+    <option value="IBM_029_EL">IBM 029 arrangement EL</option>
+    <option value="IBM_029_H">IBM 029 arrangement H</option>
+</select>
+<input type="checkbox" checked=1 id="pc_text" oninput="updatePunchcard();"/> Show text
+
 <script>
 // Reference for IBM 029 card punch, arrangement EL:
 // http://bitsavers.informatik.uni-stuttgart.de/pdf/ibm/punchedCard/Keypunch/029/GA24-3332-6_Reference_Manual_Model_29_Card_Punch_Jun70.pdf
@@ -465,14 +472,15 @@ function punch(row, column) {
     var h = 15;
     return `<rect height="${h}" width="${w}" x="${x}" y="${y}" style="fill-opacity:0.5"/>`
 }
-function punchcard(content, punches_by_char) {
+function punchcard(content, punches_by_char, show_text) {
     var svg_header = '<svg width="740" height="327" xmlns="http://www.w3.org/2000/svg">'
     var svg_content = '<image height="327" width="740" href="/assets/img/IBM5081_1000.png" />'
     for(var i = 0; i < content.length; i++) {
         var c = content[i];
-        // TODO: Print characters on top of card
-        var text_x = hole_coordinates(0, i)[0] + 0.5;
-        svg_content += `<text x=${text_x} y=13 style="font-size:8px;">${c.toUpperCase()}</text>`
+        if (show_text) {
+            var text_x = hole_coordinates(0, i)[0] + 0.5;
+            svg_content += `<text x=${text_x} y=13 style="font-size:8px;">${c.toUpperCase()}</text>`
+        }
         for(const p of punches_by_char[c.toUpperCase()]) {
             svg_content += punch(p, i);
         }
@@ -480,6 +488,18 @@ function punchcard(content, punches_by_char) {
     var svg_footer = "</svg>"
     return svg_header + svg_content + svg_footer;
 }
-pc = document.getElementById("punchcards");
-pc.innerHTML = punchcard("000001 Hello world!", IBM_029_EL_punches_by_char)
+function updatePunchcard() {
+    pc = document.getElementById("punchcards");
+    pc_text = document.getElementById("pc_text");
+    pc_key_punch = document.getElementById("pc_key_punch");
+    pc_text = document.getElementById("pc_text")
+    var punches_by_char = {};
+    if (pc_key_punch.value == "IBM_029_EL") {
+        punches_by_char = IBM_029_EL_punches_by_char;
+    } else if (pc_key_punch.value == "IBM_029_H") {
+        punches_by_char = IBM_029_H_punches_by_char;
+    }
+    pc.innerHTML = punchcard(pc_text.value, punches_by_char, pc_text.checked)
+}
+updatePunchcard();
 </script>
