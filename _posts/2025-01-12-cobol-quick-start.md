@@ -1,19 +1,19 @@
 ---
 layout: post
-title:  "COBOL quick start guide"
-description: >
-    Ever wondered what all the fuss is about with COBOL? Why it is regarded as
-    such an obscure language that's difficult to learn and responsible for
-    legacy code that virtually nobody can maintain today? Or maybe you are like
-    me and read a book about Grace Hopper and now want to take a peak at how
-    programming looked like during her time? Either way, this is the post for
-    you.
-tags:
-    - COBOL
-    - teaching
-lang: en
----
+title: COBOL quick start guide
+description: 'Ever wondered what all the fuss is about with COBOL? Why it is regarded
+  as such an obscure language that''s difficult to learn and responsible for legacy
+  code that virtually nobody can maintain today? Or maybe you are like me and read
+  a book about Grace Hopper and now want to take a peak at how programming looked
+  like during her time? Either way, this is the post for you.
 
+  '
+tags:
+- COBOL
+- teaching
+lang: en
+date: 2025-01-12 19:24 +0100
+---
 <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/dark.min.css">
 <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
 <script type="text/javascript"
