@@ -412,7 +412,7 @@ If you just let it sleep and don't disturb it too much, it'll probably be okay.
     <option value="IBM_029_EL">IBM 029 arrangement EL</option>
     <option value="IBM_029_H">IBM 029 arrangement H</option>
 </select>
-<input type="checkbox" checked=1 id="pc_text" oninput="updatePunchcard();"/> Show text
+<input type="checkbox" checked=1 id="pc_print" oninput="updatePunchcard();"/> Print text
 
 <script>
 // Reference for IBM 029 card punch, arrangement EL:
@@ -492,14 +492,14 @@ function updatePunchcard() {
     pc = document.getElementById("punchcards");
     pc_text = document.getElementById("pc_text");
     pc_key_punch = document.getElementById("pc_key_punch");
-    pc_text = document.getElementById("pc_text")
+    pc_print = document.getElementById("pc_print");
     var punches_by_char = {};
     if (pc_key_punch.value == "IBM_029_EL") {
         punches_by_char = IBM_029_EL_punches_by_char;
     } else if (pc_key_punch.value == "IBM_029_H") {
         punches_by_char = IBM_029_H_punches_by_char;
     }
-    pc.innerHTML = punchcard(pc_text.value, punches_by_char, pc_text.checked)
+    pc.innerHTML = punchcard(pc_text.value, punches_by_char, pc_print.checked)
 }
 updatePunchcard();
 </script>
