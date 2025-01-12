@@ -407,8 +407,8 @@ If you just let it sleep and don't disturb it too much, it'll probably be okay.
 
 <div id="punchcards"></div>
 
-<input type="text" value="000001 Hello world!" id="pc_text" oninput="updatePunchcard();"/>
-<select id="pc_key_punch" oninput="updatePunchcard();">
+Code <input type="text" value="000001 Hello world!" id="pc_text" oninput="updatePunchcard();"/>
+Card punch <select id="pc_key_punch" oninput="updatePunchcard();">
     <option value="IBM_029_EL">IBM 029 arrangement EL</option>
     <option value="IBM_029_H">IBM 029 arrangement H</option>
 </select>
@@ -481,8 +481,13 @@ function punchcard(content, punches_by_char, show_text) {
             var text_x = hole_coordinates(0, i)[0] + 0.5;
             svg_content += `<text x=${text_x} y=13 style="font-size:8px;">${c.toUpperCase()}</text>`
         }
-        for(const p of punches_by_char[c.toUpperCase()]) {
-            svg_content += punch(p, i);
+        if (c.toUpperCase() in punches_by_char) {
+            for(const p of punches_by_char[c.toUpperCase()]) {
+                svg_content += punch(p, i);
+            }
+        } else {
+            // mark column red to signal error
+            svg_content += `<rect x=${hole_coordinates(0, i)[0]} y=0 height=327 width=6 fill="red"/>`
         }
     }
     var svg_footer = "</svg>"
