@@ -407,7 +407,7 @@ If you just let it sleep and don't disturb it too much, it'll probably be okay.
 
 <div id="punchcards"></div>
 
-Code <input type="text" value="000001 Hello world!" id="pc_text" oninput="updatePunchcard();"/>
+Code <input type="text" value="000001 Hello world!" id="pc_text" oninput="updatePunchcard();" style="width:300px;"/>
 Card punch <select id="pc_key_punch" oninput="updatePunchcard();">
     <option value="IBM_029_EL">IBM 029 arrangement EL</option>
     <option value="IBM_029_H">IBM 029 arrangement H</option>
@@ -476,6 +476,7 @@ function punch(row, column) {
     return `<rect height="${h}" width="${w}" x="${x}" y="${y}" style="fill-opacity:0.5"/>`
 }
 function punchcard(content, punches_by_char, show_text) {
+    content = content.substring(0,80);
     var svg_header = '<svg width="740" height="327" xmlns="http://www.w3.org/2000/svg">'
     var svg_content = '<image height="327" width="740" href="/assets/img/IBM5081_1000.png" />'
     for(var i = 0; i < content.length; i++) {
