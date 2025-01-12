@@ -36,7 +36,7 @@ Whatever your angle is, I assume you have a reason for being here, so I won't ja
 
 A lot of people have written amazing and detailed COBOL guides and here I am, having solved one exercise of [Advent of Code](https://adventofcode.com/) 2024 in COBOL.
 Why should you listen to me introducing a language I barely know?
-The short answer is that the COBOL guides I found value precision and proper contextualization over speed.
+Well, the COBOL guides I found value precision and proper contextualization over speed.
 This is the opposite: If you want to spend no less than 30 minutes but be able to write a rudimentary COBOL program after that, I'm here for you.
 
 ## Hello world
@@ -95,7 +95,7 @@ Card punch <select id="pc_key_punch" oninput="updatePunchcard();">
     <option value="IBM_029_H">IBM 029 arrangement H</option>
 </select>
 <input type="checkbox" checked=1 id="pc_print" oninput="updatePunchcard();"/> Print text
-<input type="button" value="Download" onclick="downloadPunchcard();"/>
+<!--<input type="button" value="Download" onclick="downloadPunchcard();"/>-->
 </div>
 <script>
 updatePunchcard();
@@ -197,7 +197,7 @@ There are also the classical named functions that we are more used to, but those
 We could end our quick-start instructions here, but I think the step from a toy example to one that solves an actual non-trivial task still brings a lot of insights with a good cost-benefit ratio.
 The following COBOL program solves the first part of [day 2 from Advent of Code 2024](https://adventofcode.com/2024/day/2).
 
-The problem we want to solve is to read a text file with a list of numbers on each line, separated by spaces and count how many of those are "safe".
+For this exercise, we have to read a text file with a list of numbers on each line, separated by spaces and count how many of those are "safe".
 A list is safe if:
 
 * The numbers are sorted in ascending or descending order.
@@ -313,7 +313,7 @@ There is one more part of the definition in the `FILE SECTION` of the `DATA DIVI
 
 Here, we first define what type of tile `input-file` is.
 The type `FD` designates a normal file used for reading and writing data.
-Another alternative would be `FS`, which designates a file that is used as a working memory area for COBOL's sorting and merging functionality.
+Another alternative would be `SD`, which designates a file that is used as a working memory area for COBOL's sorting and merging functionality.
 The next line, defines a data item that represents one record from the file.
 As our file has `ORGANIZATION IS LINE SEQUENTIAL`, we effectively define what data type should be used for reading a line.
 As we want to be agnostic about line size and content, we just pick 1024 alphanumerical characters.
@@ -350,7 +350,7 @@ We still need to give it a picture, which is just one alphabetic character.
 Now it gets interesting: The second line defines a subitem with level 88.
 Normally, you can only use levels 01 through 49, but there are a few special levels in COBOL.
 Level 88 is used for defining so-called "condition names", which can be used as booleans.
-If set to `TRUE`, a condition name will assume the value given after `VALUE` (or the first possible value in case a range of values is specified instead).
+If set to `TRUE`, a condition name will assume the value given after `VALUE` (or the first possible value in case a range of values is specified there).
 If set to `FALSE`, it assumes the value given after `FALSE`.
 So essentially, we have an alphabetic data item that can either be `Y` or `N`, but we can use `at-eof` directly in place of a condition in an `IF` or `UNTIL`, and we can assign it to `TRUE` or `FALSE` with the `SET` statement.
 

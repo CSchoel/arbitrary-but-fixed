@@ -61,7 +61,8 @@ function punch(row, column) {
 function punchcard(content, punches_by_char, show_text) {
     content = content.substring(0,80);
     var svg_header = '<svg width="740" height="327" xmlns="http://www.w3.org/2000/svg">'
-    var svg_content = '<image height="327" width="740" href="/assets/img/IBM5081_1000.png" />'
+    console.log(background_image_url);
+    var svg_content = `<image height="327" width="740" href="${background_image_url}" />`
     for(var i = 0; i < content.length; i++) {
         var c = content[i];
         if (show_text) {
@@ -80,6 +81,21 @@ function punchcard(content, punches_by_char, show_text) {
     var svg_footer = "</svg>"
     return svg_header + svg_content + svg_footer;
 }
+/*
+function base64background() {
+    var image = document.createElement("img")
+    image.src = "/assets/img/IBM5081_1000.png" 
+    var canvas = document.createElement("canvas");
+    canvas.width = image.width;
+    canvas.height = image.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(image, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    console.log(dataURL);
+    return dataURL;
+}*/
+// var background_image_url = base64background();
+var background_image_url = "/assets/img/IBM5081_1000.png";
 function updatePunchcard() {
     pc = document.getElementById("punchcards");
     pc_text = document.getElementById("pc_text");
@@ -93,6 +109,7 @@ function updatePunchcard() {
     }
     pc.innerHTML = punchcard(pc_text.value, punches_by_char, pc_print.checked)
 }
+/*
 function downloadPunchcard() {
     pc = document.getElementById("punchcards");
     var svgBlob = new Blob([pc.innerHTML], {type:"image/svg+xml;charset=utf-8"});
@@ -100,4 +117,4 @@ function downloadPunchcard() {
     var downloadLink = document.createElement("a");
     downloadLink.href = svgUrl;
     downloadLink.click();
-}
+}*/
