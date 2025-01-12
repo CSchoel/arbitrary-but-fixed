@@ -23,6 +23,7 @@ lang: en
 hljs.configure({languages:["cobol"], cssSelector:"code.language-cobol"})
 hljs.highlightAll();
 </script>
+<script type="text/javascript" src="/assets/js/punchcard.js"></script>
 
 ## Why COBOL?
 
@@ -78,6 +79,27 @@ The only things _we_ need to remember now are these:
 * Column 7 can be used to designate a line as a comment (`*`) or code that's only used for debugging (`d`). There are a few other symbols that appear here, but they are not relevant for this guide.
 * Actual code starts in Area A (column 8), or sometimes Area B (column 12).
 * Code must end on column 72. Everyting beyond that will be ignored.
+
+Side note: If you're weird like me and this makes you want to dive deeper into how punchcards worked, feel free to have some fun with this interactive editor for IBM 5081 punch cards:
+
+<div id="punchcard-editor" style="margin-bottom:8pt;">
+<div id="punchcards"></div>
+<div style="font-size:8pt;margin-bottom:8pt;">
+Image: Douglas W. Jones, <a href="https://homepage.divms.uiowa.edu/~jones/cards/collection/i-onefield.shtml#IBM5081">Punched Card Collection</a>, University of Iowa, Department of Computer Science.<br/>
+Character arrangement: <a href="https://archive.org/details/bitsavers_ibmpunched33326ReferenceManualModel29CardPunchJun7_8896656/page/n39/mode/2up">Reference Manual: IBM 29 Card Punch, 7. ed, IBM 1970.</a>
+</div>
+
+Code <input type="text" value="000004     DISPLAY 'Hello World!'.                                      HELLO" id="pc_text" oninput="updatePunchcard();" style="width:300px;"/>
+Card punch <select id="pc_key_punch" oninput="updatePunchcard();">
+    <option value="IBM_029_EL">IBM 029 arrangement EL</option>
+    <option value="IBM_029_H">IBM 029 arrangement H</option>
+</select>
+<input type="checkbox" checked=1 id="pc_print" oninput="updatePunchcard();"/> Print text
+<input type="button" value="Download" onclick="downloadPunchcard();"/>
+</div>
+<script>
+updatePunchcard();
+</script>
 
 ## COBOL syntax
 
@@ -404,111 +426,3 @@ Alternatively (or maybe additionally), I hope you just had a bit of fun with a q
 Maybe COBOL doesn't look so much like a dragon now but more like a bear.
 Sure, it can still kill you, and you might not want to get _too_ close to it, but you can see how it has its place in nature.
 If you just let it sleep and don't disturb it too much, it'll probably be okay.
-
-<div id="punchcards"></div>
-
-Code <input type="text" value="000001 Hello world!" id="pc_text" oninput="updatePunchcard();" style="width:300px;"/>
-Card punch <select id="pc_key_punch" oninput="updatePunchcard();">
-    <option value="IBM_029_EL">IBM 029 arrangement EL</option>
-    <option value="IBM_029_H">IBM 029 arrangement H</option>
-</select>
-<input type="checkbox" checked=1 id="pc_print" oninput="updatePunchcard();"/> Print text
-
-<script>
-// Reference for IBM 029 card punch, arrangement EL and H:
-// http://bitsavers.informatik.uni-stuttgart.de/pdf/ibm/punchedCard/Keypunch/029/GA24-3332-6_Reference_Manual_Model_29_Card_Punch_Jun70.pdf
-var IBM_029_EL_punches_by_char = {}
-var IBM_029_H_punches_by_char = {}
-// digits
-for(var i=0; i <=9; i++) {
-    IBM_029_EL_punches_by_char[i] = [i];
-}
-// latin alphabet
-for(var i=1; i <=9; i++) {
-    IBM_029_EL_punches_by_char["ABCDEFGHI"[i-1]] = [-2, i];
-    IBM_029_EL_punches_by_char["JKLMNOPQR"[i-1]] = [-1, i];
-    if (i == 1) { continue; }
-    IBM_029_EL_punches_by_char["STUVWXYZ"[i-2]] = [0, i];
-}
-for(var k of Object.keys(IBM_029_EL_punches_by_char)) {
-    IBM_029_H_punches_by_char[k] = IBM_029_EL_punches_by_char[k];
-}
-// Special characters (EL)
-IBM_029_EL_punches_by_char["&"] = [-2]
-IBM_029_EL_punches_by_char["-"] = [-1]
-IBM_029_EL_punches_by_char["/"] = [0, 1]
-for(var i=-2; i <= 1; i++) {
-    var extra = i == 1 ? [] : [i];
-    IBM_029_EL_punches_by_char[".$,#"[i+2]] = [8, 3].concat(extra);
-    IBM_029_EL_punches_by_char["<*%@"[i+2]] = [8, 4].concat(extra);
-    IBM_029_EL_punches_by_char["¢! :"[i+2]] = [8, 2].concat(extra);
-    IBM_029_EL_punches_by_char["()_'"[i+2]] = [8, 5].concat(extra);
-    IBM_029_EL_punches_by_char["+;>="[i+2]] = [8, 6].concat(extra);
-    IBM_029_EL_punches_by_char['|¬?"'[i+2]] = [8, 7].concat(extra);
-}
-// Special characters (H)
-IBM_029_H_punches_by_char["+"] = [-2]
-IBM_029_H_punches_by_char["-"] = [-1]
-IBM_029_H_punches_by_char["/"] = [0, 1]
-for(var i=-2; i <= 1; i++) {
-    var extra = i == 1 ? [] : [i];
-    IBM_029_H_punches_by_char[".$,="[i+2]] = [8, 3].concat(extra);
-    IBM_029_H_punches_by_char[")*('"[i+2]] = [8, 4].concat(extra);
-}
-// space
-IBM_029_EL_punches_by_char[" "] = []
-IBM_029_H_punches_by_char[" "] = []
-function hole_coordinates(row, column) {
-    var x = 22.5;
-    var dx = 8.715;
-    var y = 69;
-    var dy = 25.17;
-    x += column * dx;
-    y += row * dy;
-    return [x, y];
-}
-function punch(row, column) {
-    var coords = hole_coordinates(row, column);
-    var x = coords[0];
-    var y = coords[1];
-    var w = 6;
-    var h = 15;
-    return `<rect height="${h}" width="${w}" x="${x}" y="${y}" style="fill-opacity:0.5"/>`
-}
-function punchcard(content, punches_by_char, show_text) {
-    content = content.substring(0,80);
-    var svg_header = '<svg width="740" height="327" xmlns="http://www.w3.org/2000/svg">'
-    var svg_content = '<image height="327" width="740" href="/assets/img/IBM5081_1000.png" />'
-    for(var i = 0; i < content.length; i++) {
-        var c = content[i];
-        if (show_text) {
-            var text_x = hole_coordinates(0, i)[0] + 0.5;
-            svg_content += `<text x=${text_x} y=13 style="font-size:8px;">${c.toUpperCase()}</text>`
-        }
-        if (c.toUpperCase() in punches_by_char) {
-            for(const p of punches_by_char[c.toUpperCase()]) {
-                svg_content += punch(p, i);
-            }
-        } else {
-            // mark column red to signal error
-            svg_content += `<rect x=${hole_coordinates(0, i)[0]} y=0 height=327 width=6 fill="red"/>`
-        }
-    }
-    var svg_footer = "</svg>"
-    return svg_header + svg_content + svg_footer;
-}
-function updatePunchcard() {
-    pc = document.getElementById("punchcards");
-    pc_text = document.getElementById("pc_text");
-    pc_key_punch = document.getElementById("pc_key_punch");
-    pc_print = document.getElementById("pc_print");
-    var punches_by_char = {};
-    if (pc_key_punch.value == "IBM_029_EL") {
-        punches_by_char = IBM_029_EL_punches_by_char;
-    } else if (pc_key_punch.value == "IBM_029_H") {
-        punches_by_char = IBM_029_H_punches_by_char;
-    }
-    pc.innerHTML = punchcard(pc_text.value, punches_by_char, pc_print.checked)
-}
-updatePunchcard();
-</script>
