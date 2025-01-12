@@ -415,7 +415,7 @@ Card punch <select id="pc_key_punch" oninput="updatePunchcard();">
 <input type="checkbox" checked=1 id="pc_print" oninput="updatePunchcard();"/> Print text
 
 <script>
-// Reference for IBM 029 card punch, arrangement EL:
+// Reference for IBM 029 card punch, arrangement EL and H:
 // http://bitsavers.informatik.uni-stuttgart.de/pdf/ibm/punchedCard/Keypunch/029/GA24-3332-6_Reference_Manual_Model_29_Card_Punch_Jun70.pdf
 var IBM_029_EL_punches_by_char = {}
 var IBM_029_H_punches_by_char = {}
@@ -455,6 +455,9 @@ for(var i=-2; i <= 1; i++) {
     IBM_029_H_punches_by_char[".$,="[i+2]] = [8, 3].concat(extra);
     IBM_029_H_punches_by_char[")*('"[i+2]] = [8, 4].concat(extra);
 }
+// space
+IBM_029_EL_punches_by_char[" "] = []
+IBM_029_H_punches_by_char[" "] = []
 function hole_coordinates(row, column) {
     var x = 22.5;
     var dx = 8.715;
