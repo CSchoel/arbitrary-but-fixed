@@ -1,14 +1,16 @@
 ---
 title: Implementing Python decorators with parameters and type hints
 lang: en
-description: >
-     Have you wondered how Python libraries can provide decorators which can both be used with and without parameters?
-     I haven't. Until I tried to implement one myself.
-categories:
-    - python
-    - type system
----
+description: 'Have you wondered how Python libraries can provide decorators which
+  can both be used with and without parameters? I haven''t. Until I tried to implement
+  one myself.
 
+  '
+categories:
+- python
+- type system
+date: 2025-12-18 22:09 +0100
+---
 Python decorators are a mighty tool to create frameworks and hide the complexity of using them.
 From built-ins like `@dataclass` and `@classmethod` to pytest's `@fixture` or pydantic's `@field_validator`, we use them regularly, but we rarely have to think about how they work exactly.
 
