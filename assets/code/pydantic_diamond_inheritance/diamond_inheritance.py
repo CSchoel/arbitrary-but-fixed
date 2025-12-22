@@ -10,11 +10,11 @@ class BaseBC(BaseModel):
     c: int
 
 
-class Xa(BaseA):
+class Xa(BaseModel):
     a: int = 1
 
 
-class Ybc(BaseBC):
+class Ybc(BaseModel):
     b: int = 2
     c: int = 3
 
@@ -26,14 +26,17 @@ class BaseABC(BaseA, BaseBC):
     pass
 
 
-class SurfaceABC(Xa, Ybc, BaseABC):
-    pass
-
-
 class Base(BaseModel):
     a: int
     b: int
     c: int
+
+    def sum(self) -> int:
+        return self.a + self.b + self.c
+
+
+class SurfaceABC(Xa, Ybc, Base):
+    pass
 
 
 class X(Base):
